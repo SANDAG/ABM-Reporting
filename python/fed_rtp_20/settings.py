@@ -10,8 +10,8 @@ template_protect = False
 template_password = ""
 
 # set SQL Server connection attributes
-server = "${database_server}"
-database = "${database_name}"
+server = "socioeca8"
+database = "abm_2_reporting"
 
 
 # initialize dictionary to hold ad-hoc queries to run
@@ -95,7 +95,7 @@ fed_rtp_20_pm = [
      "sheets": ["Master"] * 7 +
                ["Main 8 Table"] * 3,
      "rows": list(range(37, 44)) +
-             list(range(8, 11))},
+             list(range(12, 15))},
     # Performance Measure 2a - Work
     {"sp": "[fed_rtp_20].[sp_pm_2a]",
      "args": "@scenario_id=?,@update=1,@silent=0,@uats=0,@work=1",
@@ -112,7 +112,7 @@ fed_rtp_20_pm = [
      "sheets": ["Master"] * 7 +
                ["Main 8 Table"] * 3,
      "rows": list(range(29, 36)) +
-             list(range(12, 15))},
+             list(range(8, 11))},
     # Performance Measure 2a - UATS x Work
     {"sp": "[fed_rtp_20].[sp_pm_2a]",
      "args": "@scenario_id=?,@update=1,@silent=0,@uats=1,@work=1",
@@ -299,7 +299,7 @@ fed_rtp_20_pm = [
                  "Percentage of Household Income Spent on Transportation Costs - Non-Senior"],
      "sheets": ["Master"] * 7 +
                ["Additional PM Table"] +
-               ["Social Equity PM Table"],
+               ["Social Equity PM Table"] * 7,
      "rows": list(range(237, 244)) +
              [17] +
              list(range(28, 35))},
