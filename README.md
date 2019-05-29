@@ -2,7 +2,7 @@
 
 The ABM-Reporting repository houses all general reporting procedures for the Activity-Based model that do not require or have not yet been migrated to their own self-contained repositories. For example, this repository contains procedures to output datasets for the 2020 Federal Regional Transportation Plan but does not contain anything related to the [Benefit-Cost Tool](https://github.com/SANDAG/bca) as that exists in its own repository.
 
-This repository's release branches are tagged with the [Activity-Based Model Software](https://github.com/SANDAG/ABM) version it relies on and is compatible with.
+This repository's release branches are tagged with the [Activity-Based Model Software](https://github.com/SANDAG/ABM) version they rely on and are compatible with.
 
 
 ## Contents
