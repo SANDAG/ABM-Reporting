@@ -233,7 +233,7 @@ fed_rtp_20_pm = [
                  "Average Direct to Work Travel Time - Non-Minority - Bike",
                  "Average Direct to Work Travel Time - Non-Minority - Walk"],
      "sheets": ["Master"] * 35 +
-               ["Additional PM Table"] * 7 +
+               ["Additional PM Table"] * 6 +
                ["Social Equity PM Table"] * 24,
      "rows": list(range(193, 200)) +
              list(range(200, 207)) +
@@ -288,15 +288,25 @@ fed_rtp_20_pm = [
                  "Percentage of Household Income Spent on Transportation Costs - Minority",
                  "Percentage of Household Income Spent on Transportation Costs - Non-Minority",
                  "Percentage of Household Income Spent on Transportation Costs - Senior",
+                 "Percentage of Household Income Spent on Transportation Costs - Non-Senior",
+                 "Percentage of Household Income Spent on Transportation Costs - Total",
+                 "Percentage of Household Income Spent on Transportation Costs - Total",
+                 "Percentage of Household Income Spent on Transportation Costs - Low Income",
+                 "Percentage of Household Income Spent on Transportation Costs - Non-Low Income",
+                 "Percentage of Household Income Spent on Transportation Costs - Minority",
+                 "Percentage of Household Income Spent on Transportation Costs - Non-Minority",
+                 "Percentage of Household Income Spent on Transportation Costs - Senior",
                  "Percentage of Household Income Spent on Transportation Costs - Non-Senior"],
      "sheets": ["Master"] * 7 +
-               ["Additional PM Table"],
+               ["Additional PM Table"] +
+               ["Social Equity PM Table"],
      "rows": list(range(237, 244)) +
-             [17]},
+             [17] +
+             list(range(28, 35))},
     # Performance Measure H
     {"sp": "[fed_rtp_20].[sp_pm_H]",
      "args": "@scenario_id=?,@update=1,@silent=0",
-     "metrics": ["Average Travel Time"],
+     "metrics": ["Average Travel Time"] * 2,
      "sheets": ["Master"] +
                ["Additional PM Table"],
      "rows": [252] + [20]},
@@ -313,7 +323,7 @@ fed_rtp_20_pm = [
                  "Percentage of Population Engaging in Transportation-Related Physical Activity - Total"],
      "sheets": ["Master"] * 7 +
                ["Additional PM Table"],
-     "rows": list(range(252, 259)) +
+     "rows": list(range(253, 260)) +
              [21]},
     # Performance Measure J
     {"sp": "[fed_rtp_20].[sp_pm_J]",

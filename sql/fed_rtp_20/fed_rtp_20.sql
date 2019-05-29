@@ -1514,7 +1514,6 @@ revisions:
                                                     'PM10 BW')
                         THEN [RunningExhaust].[Value]
                         ELSE 0 END) AS [Value_PM10]
-            ,SUM([RunningExhaust].[Value]) AS [Value]
         FROM
 	        [ctemfac_2017].[dbo].[RunningExhaust]
         INNER JOIN
@@ -1558,7 +1557,6 @@ revisions:
                                                     'PM10 BW')
                         THEN [TireBrakeWear].[Value]
                         ELSE 0 END) AS [Value_PM10]
-            ,SUM([TireBrakeWear].[Value]) AS [Value]
 	    FROM
 		    [ctemfac_2017].[dbo].[TireBrakeWear]
 	    INNER JOIN
@@ -1601,7 +1599,6 @@ revisions:
                                                     'PM10 BW')
                         THEN [IdlingExhaust].[Value]
                         ELSE 0 END) AS [Value_PM10]
-            ,SUM([IdlingExhaust].[Value]) AS [Value]
 	    FROM
 		    [ctemfac_2017].[dbo].[IdlingExhaust]
 	    INNER JOIN
@@ -2457,9 +2454,9 @@ AS
 /**	
 summary:   >
     Federal RTP 2020 Performance Measure 2A, Percent of person-trips by mode
-    with option to filter to work purpose trips (defined as direct home-work
-    or work-home trips where the mode is determined by the SANDAG tour journey
-    mode hierarchy) and/or to trip origins/destinations within the City of
+    with option to filter to work purpose trips (defined as outbound work tour
+    where the mode is determined by the SANDAG tour journey mode hierarchy)
+    and/or to trip origins/destinations within the City of
     San Diego Urban Area Transit Strategy (UATS) districts for a given ABM
     scenario.
 
@@ -2470,10 +2467,12 @@ summary:   >
 filters:   >
     [model_trip].[model_trip_description] IN ('Individual', 'Internal-External','Joint')
         ABM resident sub-models
-    [purpose_trip_origin].[purpose_trip_origin_description] = ('Home', 'Work')
-        part of AND condition used if option selected to filter trips to work purpose only
-    [purpose_trip_destination].[purpose_trip_destination_description] = ('Home', 'Work')
-        part of AND condition used if option selected to filter trips to work purpose only
+    [tour].[tour_category] = 'Mandatory'
+         part of AND condition used if option selected to filter trips to
+         outbound work-tour destination only
+    [purpose_trip_destination].[purpose_trip_destination_description] = 'Work'
+        part of AND condition used if option selected to filter trips to
+        outbound work-tour destination only
     [geography_trip_origin].[trip_origin_mgra_13] satisfies condition
         [UATS2014_DISSOLVED].[Shape].STContains([MGRA13_WEIGHTEDCENTROID].[Shape]) = 1
         part of OR condition used if option selected to filter trips to UATS
@@ -2549,145 +2548,200 @@ BEGIN
 	     ON [UATS2014_DISSOLVED].[Shape].STContains([MGRA13_WEIGHTEDCENTROID].[Shape]) = 1');
 
 
-    -- get person trips by mode
-    -- for resident models only (Individual, Internal-External, Joint)
-    -- potentially filtered by direct home-work, work-home purpose
-    -- use SANDAG tour journey mode hierarchy if work purpose switch selected
-    -- Series 13 MGRA in UATS district
+    -- create table variable to hold result set
     DECLARE @aggregated_trips TABLE (
 	    [mode_aggregate_description] nchar(15) NOT NULL,
-	    [person_trips] float NOT NULL
-    )
+	    [person_trips] float NOT NULL)
 
-    INSERT INTO @aggregated_trips
-    SELECT
-	    ISNULL(CASE    WHEN @work = 0 THEN
-                         CASE    WHEN [mode_trip].[mode_aggregate_trip_description] IN
-                                   ('School Bus',
-                                    'Taxi',
-                                    'Heavy Heavy Duty Truck',
-                                    'Light Heavy Duty Truck',
-                                    'Medium Heavy Duty Truck',
-                                    'Parking Lot',
-                                    'Pickup/Drop-off',
-                                    'Rental car',
-                                    'Shuttle/Van/Courtesy Vehicle')
-                                  THEN 'Other'
-                                  ELSE [mode_trip].[mode_aggregate_trip_description]
-                                  END
-                       WHEN @work = 1 THEN
-                         CASE    WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN
-                                   ('School Bus',
-                                    'Taxi',
-                                    'Heavy Heavy Duty Truck',
-                                    'Light Heavy Duty Truck',
-                                    'Medium Heavy Duty Truck',
-                                    'Parking Lot',
-                                    'Pickup/Drop-off',
-                                    'Rental car',
-                                    'Shuttle/Van/Courtesy Vehicle')
-                                  THEN 'Other'
-                                  ELSE [fn_resident_tourjourney_mode].[mode_aggregate_description]
-                                  END
-               ELSE 'Error' END, 'Total') AS [mode_aggregate_description]
-	    ,SUM(ISNULL([weight_person_trip], 0)) AS [person_trips]
-    FROM
-	    [fact].[person_trip]
-    INNER JOIN
-	    [dimension].[model_trip]
-    ON
-	    [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
-    INNER JOIN
-	    [dimension].[mode_trip]
-    ON
-	    [person_trip].[mode_trip_id] = [mode_trip].[mode_trip_id]
-    INNER JOIN
-        [report].[fn_resident_tourjourney_mode](@scenario_id)
-    ON
-        [person_trip].[scenario_id] = [fn_resident_tourjourney_mode].[scenario_id]
-        AND [person_trip].[tour_id] = [fn_resident_tourjourney_mode].[tour_id]
-        AND [person_trip].[inbound_id] = [fn_resident_tourjourney_mode].[inbound_id]
-    INNER JOIN
-	    [dimension].[purpose_trip_origin]
-    ON
-	    [person_trip].[purpose_trip_origin_id] = [purpose_trip_origin].[purpose_trip_origin_id]
-    INNER JOIN
-	    [dimension].[purpose_trip_destination]
-    ON
-	    [person_trip].[purpose_trip_destination_id] = [purpose_trip_destination].[purpose_trip_destination_id]
-    INNER JOIN
-	    [dimension].[geography_trip_origin]
-    ON
-	    [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
-    INNER JOIN
-	    [dimension].[geography_trip_destination]
-    ON
-	    [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
-    LEFT OUTER JOIN -- keep as outer join since where clause is	OR condition
-	    @uats_mgras AS [uats_mgras_origin_xref]
-    ON
-	    [geography_trip_origin].[trip_origin_mgra_13] = [uats_mgras_origin_xref].[mgra]
-    LEFT OUTER JOIN -- keep as outer join since where clause is OR condition
-	    @uats_mgras AS [uats_mgras_dest_xref]
-    ON
-	    [geography_trip_destination].[trip_destination_mgra_13] = [uats_mgras_dest_xref].[mgra]
-    WHERE
-	    [person_trip].[scenario_id] = @scenario_id
-	    AND [model_trip].[model_trip_description] IN ('Individual',
-												      'Internal-External', -- can use external TAZs but they will not be in UATS districts
-												      'Joint') -- resident models only
-	    AND (
-                (@work = 1
-                 AND (  -- direct Home-Work or Work-Home trips
-                    ([purpose_trip_origin].[purpose_trip_origin_description] = 'Home'
-                      AND [purpose_trip_destination].[purpose_trip_destination_description] = 'Work')
-                    OR
-                    ([purpose_trip_origin].[purpose_trip_origin_description] = 'Work'
-                      AND [purpose_trip_destination].[purpose_trip_destination_description] = 'Home')
+
+    -- if work option is not selected
+    -- get person trips by mode
+    -- for resident models only (Individual, Internal-External, Joint)
+    -- filtered by origin or destination in UATS district if option selected
+    IF(@work = 0)
+    BEGIN
+        INSERT INTO @aggregated_trips
+        SELECT
+	        ISNULL(CASE WHEN [mode_trip].[mode_aggregate_trip_description] IN
+                            ('School Bus',
+                             'Taxi',
+                             'Heavy Heavy Duty Truck',
+                             'Light Heavy Duty Truck',
+                             'Medium Heavy Duty Truck',
+                             'Parking Lot',
+                             'Pickup/Drop-off',
+                             'Rental car',
+                             'Shuttle/Van/Courtesy Vehicle')
+                        THEN 'Other'
+                        ELSE [mode_trip].[mode_aggregate_trip_description]
+                        END, 'Total') AS [mode_aggregate_description]
+	        ,SUM(ISNULL([weight_person_trip], 0)) AS [person_trips]
+        FROM
+	        [fact].[person_trip]
+        INNER JOIN
+	        [dimension].[model_trip]
+        ON
+	        [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+        INNER JOIN
+	        [dimension].[mode_trip]
+        ON
+	        [person_trip].[mode_trip_id] = [mode_trip].[mode_trip_id]
+        INNER JOIN
+	        [dimension].[geography_trip_origin]
+        ON
+	        [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+        INNER JOIN
+	        [dimension].[geography_trip_destination]
+        ON
+	        [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+        LEFT OUTER JOIN -- keep as outer join since where clause is	OR condition
+	        @uats_mgras AS [uats_mgras_origin_xref]
+        ON
+	        [geography_trip_origin].[trip_origin_mgra_13] = [uats_mgras_origin_xref].[mgra]
+        LEFT OUTER JOIN -- keep as outer join since where clause is OR condition
+	        @uats_mgras AS [uats_mgras_dest_xref]
+        ON
+	        [geography_trip_destination].[trip_destination_mgra_13] = [uats_mgras_dest_xref].[mgra]
+        WHERE
+	        [person_trip].[scenario_id] = @scenario_id
+            -- resident models only
+	        AND [model_trip].[model_trip_description] IN ('Individual',
+												          'Internal-External',
+												          'Joint')
+            -- if UATS districts option selected only count trips
+            -- originating and ending in UATS mgras
+	        AND (
+                    (@uats = 1
+                     AND (
+                        [uats_mgras_origin_xref].[mgra] IS NOT NULL
+                        AND [uats_mgras_dest_xref].[mgra] IS NOT NULL
+                        )
                       )
-                 )
-			    OR @work = 0
-                ) -- if work trips then filter by direct home-work or work-home trips
-	    AND (
-                (@uats = 1
-                 AND (
-                    [uats_mgras_origin_xref].[mgra] IS NOT NULL
-                    AND [uats_mgras_dest_xref].[mgra] IS NOT NULL
+			        OR @uats = 0
                     )
-                  )
-			    OR @uats = 0
-                ) -- if UATS districts option selected only count trips originating and ending in UATS mgras
-    GROUP BY
-	    CASE    WHEN @work = 0 THEN
-                         CASE    WHEN [mode_trip].[mode_aggregate_trip_description] IN
-                                   ('School Bus',
-                                    'Taxi',
-                                    'Heavy Heavy Duty Truck',
-                                    'Light Heavy Duty Truck',
-                                    'Medium Heavy Duty Truck',
-                                    'Parking Lot',
-                                    'Pickup/Drop-off',
-                                    'Rental car',
-                                    'Shuttle/Van/Courtesy Vehicle')
-                                  THEN 'Other'
-                                  ELSE [mode_trip].[mode_aggregate_trip_description]
-                                  END
-                       WHEN @work = 1 THEN
-                         CASE    WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN
-                                   ('School Bus',
-                                    'Taxi',
-                                    'Heavy Heavy Duty Truck',
-                                    'Light Heavy Duty Truck',
-                                    'Medium Heavy Duty Truck',
-                                    'Parking Lot',
-                                    'Pickup/Drop-off',
-                                    'Rental car',
-                                    'Shuttle/Van/Courtesy Vehicle')
-                                  THEN 'Other'
-                                  ELSE [fn_resident_tourjourney_mode].[mode_aggregate_description]
-                                  END
-               ELSE 'Error' END
-    WITH ROLLUP
+        GROUP BY
+	        CASE WHEN [mode_trip].[mode_aggregate_trip_description] IN
+                     ('School Bus',
+                      'Taxi',
+                      'Heavy Heavy Duty Truck',
+                      'Light Heavy Duty Truck',
+                      'Medium Heavy Duty Truck',
+                      'Parking Lot',
+                      'Pickup/Drop-off',
+                      'Rental car',
+                      'Shuttle/Van/Courtesy Vehicle')
+                 THEN 'Other'
+                 ELSE [mode_trip].[mode_aggregate_trip_description]
+                 END
+        WITH ROLLUP
+    END
+
+
+    -- if work option is selected
+    -- get outbound work tour journeys
+    -- for resident models only (Individual, Internal-External, Joint)
+    -- filtered by tour origin or tour destination in UATS district if option selected
+    -- mode is determined by the SANDAG tour mode hierarchy
+    -- person trip weight set to final work destinating person trip weight
+    IF(@work = 1)
+    BEGIN
+        INSERT INTO @aggregated_trips
+        SELECT
+            ISNULL(CASE WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN
+                            ('School Bus',
+                             'Taxi',
+                             'Heavy Heavy Duty Truck',
+                             'Light Heavy Duty Truck',
+                             'Medium Heavy Duty Truck',
+                             'Parking Lot',
+                             'Pickup/Drop-off',
+                             'Rental car',
+                             'Shuttle/Van/Courtesy Vehicle')
+                        THEN 'Other'
+                        ELSE [fn_resident_tourjourney_mode].[mode_aggregate_description]
+                        END, 'Total') AS [mode_aggregate_description]
+            ,SUM(ISNULL([weight_person_trip], 0)) AS [person_trips]
+        FROM
+	        [fact].[person_trip]
+        INNER JOIN
+            [dimension].[tour]
+        ON
+            [person_trip].[scenario_id] = [tour].[scenario_id]
+            AND [person_trip].[tour_id] = [tour].[tour_id]
+        INNER JOIN
+            [report].[fn_resident_tourjourney_mode](@scenario_id)
+        ON
+            [person_trip].[scenario_id] = [fn_resident_tourjourney_mode].[scenario_id]
+            AND [person_trip].[tour_id] = [fn_resident_tourjourney_mode].[tour_id]
+            AND [person_trip].[inbound_id] = [fn_resident_tourjourney_mode].[inbound_id]
+        INNER JOIN
+            [dimension].[inbound]
+        ON
+            [person_trip].[inbound_id] = [inbound].[inbound_id]
+        INNER JOIN
+	        [dimension].[model_trip]
+        ON
+	        [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+        INNER JOIN
+            [dimension].[purpose_trip_destination]
+        ON
+            [person_trip].[purpose_trip_destination_id] = [purpose_trip_destination].[purpose_trip_destination_id]
+        INNER JOIN
+	        [dimension].[geography_tour_origin]
+        ON
+	        [tour].[geography_tour_origin_id] = [geography_tour_origin].[geography_tour_origin_id]
+        INNER JOIN
+	        [dimension].[geography_tour_destination]
+        ON
+	        [tour].[geography_tour_destination_id] = [geography_tour_destination].[geography_tour_destination_id]
+        LEFT OUTER JOIN -- keep as outer join since where clause is	OR condition
+	        @uats_mgras AS [uats_mgras_origin_xref]
+        ON
+	        [geography_tour_origin].[tour_origin_mgra_13] = [uats_mgras_origin_xref].[mgra]
+        LEFT OUTER JOIN -- keep as outer join since where clause is OR condition
+	        @uats_mgras AS [uats_mgras_dest_xref]
+        ON
+	        [geography_tour_destination].[tour_destination_mgra_13] = [uats_mgras_dest_xref].[mgra]
+        WHERE
+	        [person_trip].[scenario_id] = @scenario_id
+            AND [tour].[scenario_id] = @scenario_id
+            -- mandatory tours only to remove at-work subtours
+            AND [tour].[tour_category] = 'Mandatory'
+            -- outbound tour journey legs only
+            AND [inbound].[inbound_description] = 'Outbound'
+            -- use person trip weight at the final work destinating trip
+            AND [purpose_trip_destination].[purpose_trip_destination_description] = 'Work'
+            -- resident models only
+	        AND [model_trip].[model_trip_description] IN ('Individual',
+												            'Internal-External',
+												            'Joint')
+            -- if UATS districts option selected only count trips
+            -- originating and ending in UATS mgras
+	        AND (
+                    (@uats = 1
+                        AND (
+                        [uats_mgras_origin_xref].[mgra] IS NOT NULL
+                        AND [uats_mgras_dest_xref].[mgra] IS NOT NULL
+                        )
+                        )
+			        OR @uats = 0
+                    )
+        GROUP BY
+	        CASE WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN
+                        ('School Bus',
+                        'Taxi',
+                        'Heavy Heavy Duty Truck',
+                        'Light Heavy Duty Truck',
+                        'Medium Heavy Duty Truck',
+                        'Parking Lot',
+                        'Pickup/Drop-off',
+                        'Rental car',
+                        'Shuttle/Van/Courtesy Vehicle')
+                    THEN 'Other'
+                    ELSE [fn_resident_tourjourney_mode].[mode_aggregate_description]
+                    END
+        WITH ROLLUP
+    END
 
 
     -- get and store total person trips
@@ -2815,7 +2869,7 @@ BEGIN
         @scenario_id AS [scenario_id]
         ,[performance_measure]
         ,'Percentage of Total Person Trips - Total Bike and Walk' AS [metric]
-        ,SUM([value]) / @total_trips AS [value]
+        ,ISNULL(100.0 * SUM([value]) / @total_trips, 0) AS [value]
         ,USER_NAME() AS [updated_by]
         ,SYSDATETIME() AS [updated_date]
     FROM
@@ -2867,7 +2921,7 @@ BEGIN
         @scenario_id AS [scenario_id]
         ,[performance_measure]
         ,'Percentage of Total Person Trips - Total Carpool' AS [metric]
-        ,SUM([value]) / @total_trips AS [value]
+        ,ISNULL(100.0 * SUM([value]) / @total_trips, 0) AS [value]
         ,USER_NAME() AS [updated_by]
         ,SYSDATETIME() AS [updated_date]
     FROM
@@ -4107,12 +4161,14 @@ AS
 
 /**	
 summary:   >
-    Federal RTP 2020 Performance Measure B, average person-trip travel time
+    Federal RTP 2020 Performance Measure D, average person-trip travel time
     to/from neighboring counties(Imperial, Orange, Riverside) (minutes). A
     trip to/from neighboring counties is defined as a trip with origin or
-    destination to external neighboring counties TAZs. Note that ABM
-    External-External sub-model trips are removed from consideration.
-    Similar to Performance Measure 6C in the 2015 RTP.
+    destination to external neighboring counties TAZs.
+
+    Note that ABM External-External sub-model trips are removed from
+    consideration as well as any other sub-model trips that are external to
+    external. Similar to Performance Measure 6C in the 2015 RTP.
 
 filters:   >
     [model_trip].[model_trip_description] != 'External-External'
@@ -4125,6 +4181,8 @@ filters:   >
     'CA-78', 'CA-79', 'Pala Road', 'I-15', 'CA-241 Toll Road', 'I-5')
         part of OR condition with
         [geography_trip_origin].[trip_origin_external_zone]
+    Note that both conditions evaluating to TRUE results in the trip
+    being removed from consideration
 
 revisions:
     - author: Gregor Schroeder
@@ -4208,6 +4266,22 @@ BEGIN
 																			         'I-15',
 																			         'CA-241 Toll Road',
 																			         'I-5')
+                )
+            AND NOT (  -- remove external to external zone trips
+                [geography_trip_origin].[trip_origin_external_zone] IN ('I-8',
+																        'CA-78',
+																        'CA-79',
+																        'Pala Road',
+																        'I-15',
+																        'CA-241 Toll Road',
+																        'I-5')
+		        AND [geography_trip_destination].[trip_destination_external_zone] IN ('I-8',
+																			          'CA-78',
+																			          'CA-79',
+																			          'Pala Road',
+																			          'I-15',
+																			          'CA-241 Toll Road',
+																			          'I-5')
                 )) AS [to_unpvt]
     UNPIVOT (
         [value] FOR [metric] IN
