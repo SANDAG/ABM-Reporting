@@ -289,20 +289,11 @@ fed_rtp_20_pm = [
                  "Percentage of Household Income Spent on Transportation Costs - Non-Minority",
                  "Percentage of Household Income Spent on Transportation Costs - Senior",
                  "Percentage of Household Income Spent on Transportation Costs - Non-Senior",
-                 "Percentage of Household Income Spent on Transportation Costs - Total",
-                 "Percentage of Household Income Spent on Transportation Costs - Total",
-                 "Percentage of Household Income Spent on Transportation Costs - Low Income",
-                 "Percentage of Household Income Spent on Transportation Costs - Non-Low Income",
-                 "Percentage of Household Income Spent on Transportation Costs - Minority",
-                 "Percentage of Household Income Spent on Transportation Costs - Non-Minority",
-                 "Percentage of Household Income Spent on Transportation Costs - Senior",
-                 "Percentage of Household Income Spent on Transportation Costs - Non-Senior"],
+                 "Percentage of Household Income Spent on Transportation Costs - Total"],
      "sheets": ["Master"] * 7 +
-               ["Additional PM Table"] +
-               ["Social Equity PM Table"] * 7,
+               ["Additional PM Table"],
      "rows": list(range(237, 244)) +
-             [17] +
-             list(range(28, 35))},
+             [17]},
     # Performance Measure H
     {"sp": "[fed_rtp_20].[sp_pm_H]",
      "args": "@scenario_id=?,@update=1,@silent=0",
