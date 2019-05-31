@@ -10,8 +10,8 @@ template_protect = False
 template_password = ""
 
 # set SQL Server connection attributes
-server = "socioeca8"
-database = "abm_2_reporting"
+server = "${database_server}"
+database = "${database_name}"
 
 
 # initialize dictionary to hold ad-hoc queries to run
