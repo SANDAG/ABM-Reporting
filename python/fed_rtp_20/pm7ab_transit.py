@@ -81,10 +81,10 @@ destinations.loc[destinations.parkactive < .5, "parkactive"] = 0
 # MGRAs within 30 minutes via transit drive/walk access
 # in am peak period
 mgra_access_30 = list()
-with open(scenario_path + "/output/driveMgrasWithin30Min_am.csv", "r") as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=",")
-    for row in csv_reader:
-        mgra_access_30.append((row[0], (row[1:])))
+# with open(scenario_path + "/output/driveMgrasWithin30Min_am.csv", "r") as csv_file:
+#     csv_reader = csv.reader(csv_file, delimiter=",")
+#     for row in csv_reader:
+#         mgra_access_30.append((row[0], (row[1:])))
 with open(scenario_path + "/output/walkMgrasWithin30Min_am.csv", "r") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     for row in csv_reader:
@@ -185,10 +185,10 @@ output_7a = pd.DataFrame(data=[(
 # MGRAs within 15 minutes via transit drive/walk access
 # using mid-day skims
 mgra_access_15 = list()
-with open(scenario_path + "/output/driveMgrasWithin15Min_md.csv", "r") as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=",")
-    for row in csv_reader:
-        mgra_access_15.append((row[0], (row[1:])))
+# with open(scenario_path + "/output/driveMgrasWithin15Min_md.csv", "r") as csv_file:
+#     csv_reader = csv.reader(csv_file, delimiter=",")
+#     for row in csv_reader:
+#         mgra_access_15.append((row[0], (row[1:])))
 with open(scenario_path + "/output/walkMgrasWithin15Min_md.csv", "r") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     for row in csv_reader:
