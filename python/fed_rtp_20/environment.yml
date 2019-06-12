@@ -1,4 +1,4 @@
-name: abm_reporting
+name: fed_rtp_20
 channels:
   - defaults
 dependencies:
