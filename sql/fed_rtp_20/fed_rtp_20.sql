@@ -1834,7 +1834,7 @@ FROM (
 		[hwy_link].[scenario_id] = @scenario_id
 		AND [hwy_link].[ifc] < 10) AS [hwy_link_lanes]
 INNER JOIN
-	[fed_rtp_20].[particulate_matter_grid] WITH(INDEX(spix_particulatematter25grid_centroid))
+	[fed_rtp_20].[particulate_matter_grid] WITH(INDEX(spix_particulatemattergrid_centroid))
 ON
 	[particulate_matter_grid].[centroid].STWithin([hwy_link_lanes].[shape].STBuffer(@distance + @shoulder_width + CEILING([hwy_link_lanes].[lanes] / 2.0) * 12)) = 1;
 
@@ -2087,7 +2087,7 @@ FROM (
 		[hwy_link].[scenario_id] = @scenario_id
 		AND [hwy_link].[ifc] < 10) AS [hwy_link_lanes]
 INNER JOIN
-	[fed_rtp_20].[particulate_matter_grid] WITH(INDEX(spix_particulatematter25grid_centroid))
+	[fed_rtp_20].[particulate_matter_grid] WITH(INDEX(spix_particulatemattergrid_centroid))
 ON
 	[particulate_matter_grid].[centroid].STWithin([hwy_link_lanes].[shape].STBuffer(@distance + @shoulder_width + CEILING([hwy_link_lanes].[lanes] / 2.0) * 12)) = 1;
 
