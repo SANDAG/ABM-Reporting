@@ -1187,6 +1187,9 @@ summary:   >
 
 revisions:
     - author: Gregor Schroeder
+      modification: removed Idling Exhaust per Ziying Ouyang request
+      date: June 2019
+    - author: Gregor Schroeder
       modification: added Idling Exhaust
       date: May 2019
     - author: Gregor Schroeder
@@ -1285,48 +1288,6 @@ revisions:
                                        'PM10 BW')
         GROUP BY
             [Category].[Name]),
-    [idling_exhaust] AS (
-	    SELECT
-		    [Category].[Name] AS [CategoryName]
-		    ,SUM(CASE   WHEN [Pollutant].[Name] IN ('PM25',
-									                'PM25 TW',
-									                'PM25 BW')
-                        THEN [IdlingExhaust].[Value]
-                        ELSE 0 END) AS [Value_PM25]
-            ,SUM(CASE   WHEN [Pollutant].[Name] IN ('PM10',
-                                                    'PM10 TW',
-                                                    'PM10 BW')
-                        THEN [IdlingExhaust].[Value]
-                        ELSE 0 END) AS [Value_PM10]
-	    FROM
-		    [ctemfac_2014].[dbo].[IdlingExhaust]
-	    INNER JOIN
-		    [ctemfac_2014].[dbo].[Pollutant]
-	    ON
-		    [IdlingExhaust].[PollutantID] = [Pollutant].[PollutantID]
-	    INNER JOIN
-		    [ctemfac_2014].[dbo].[Category]
-	    ON
-		    [IdlingExhaust].[CategoryID] = [Category].[CategoryID]
-	    WHERE
-	        [IdlingExhaust].[AreaID] = (
-                SELECT [AreaID] FROM [ctemfac_2014].[dbo].[Area] WHERE [Name] = 'San Diego (SD)'
-            )
-	        AND [IdlingExhaust].[PeriodID] = (
-                SELECT [PeriodID] FROM [ctemfac_2014].[dbo].[Period] WHERE [Year] = (
-                    SELECT [year] FROM [dimension].[scenario] WHERE [scenario_id] = @scenario_id
-                )
-                AND [Season] = 'Annual'
-            )
-            -- particulate matter 2.5 and 10
-		    AND [Pollutant].[Name] IN ('PM25',
-								       'PM25 TW',
-								       'PM25 BW',
-                                       'PM10',
-                                       'PM10 TW',
-                                       'PM10 BW')
-        GROUP BY
-            [Category].[Name]),
     [travel] AS (
     -- get link level speed and vmt by aggregated modes
     -- include lower and bounds of 5mph speed bins for the link
@@ -1394,12 +1355,10 @@ revisions:
 					        [running_exhaust_low].[Value_PM25] * (([travel].[speed_bin_high] - 2.5) - [travel].[speed]) / 5),
 				        0)) AS [running_exhaust_PM25]
             ,SUM(ISNULL([travel].[vmt] * [tire_brake_wear].[Value_PM25], 0)) AS [tire_brake_wear_PM25]
-            ,SUM(ISNULL([travel].[vmt] * [idling_exhaust].[Value_PM25], 0)) AS [idling_exhaust_PM25]
             ,SUM(ISNULL([travel].[vmt] * ([running_exhaust_high].[Value_PM10] * ([travel].[speed] - ([travel].[speed_bin_low] - 2.5)) / 5 +
 					        [running_exhaust_low].[Value_PM10] * (([travel].[speed_bin_high] - 2.5) - [travel].[speed]) / 5),
 				        0)) AS [running_exhaust_PM10]
             ,SUM(ISNULL([travel].[vmt] * [tire_brake_wear].[Value_PM10], 0)) AS [tire_brake_wear_PM10]
-            ,SUM(ISNULL([travel].[vmt] * [idling_exhaust].[Value_PM10], 0)) AS [idling_exhaust_PM10]
         FROM
 	        [travel]
         LEFT OUTER JOIN
@@ -1416,10 +1375,6 @@ revisions:
 	        [tire_brake_wear]
         ON
 	        [travel].[CategoryName] = [tire_brake_wear].[CategoryName]
-	    LEFT OUTER JOIN
-	        [idling_exhaust]
-        ON
-	        [travel].[CategoryName] = [idling_exhaust].[CategoryName]
         GROUP BY
 	        [travel].[hwy_link_id]
 	        ,[travel].[hwycov_id])
@@ -1433,16 +1388,10 @@ revisions:
 	    ,[tire_brake_wear_PM25]
         ,[tire_brake_wear_PM10]
         ,[tire_brake_wear_PM25] + [tire_brake_wear_PM10] AS [tire_brake_wear]
-        ,[idling_exhaust_PM25]
-        ,[idling_exhaust_PM10]
-        ,[idling_exhaust_PM25] + [idling_exhaust_PM10] AS [idling_exhaust]
+	    ,[running_exhaust_PM25] + [tire_brake_wear_PM25] AS [link_total_emissions_PM25]
+	    ,[running_exhaust_PM10] + [tire_brake_wear_PM10] AS [link_total_emissions_PM10]
 	    ,[running_exhaust_PM25] + [tire_brake_wear_PM25] +
-	        [idling_exhaust_PM25] AS [link_total_emissions_PM25]
-	    ,[running_exhaust_PM10] + [tire_brake_wear_PM10] +
-	        [idling_exhaust_PM10] AS [link_total_emissions_PM10]
-	    ,[running_exhaust_PM25] + [tire_brake_wear_PM25] +
-	        [idling_exhaust_PM25] + [running_exhaust_PM10] +
-	        [tire_brake_wear_PM10] + [idling_exhaust_PM10] AS [link_total_emissions]
+	        [running_exhaust_PM10] + [tire_brake_wear_PM10] AS [link_total_emissions]
     FROM
 	    [link_emissions]
 GO
@@ -1487,6 +1436,9 @@ summary:   >
     Clint Daniels with input from Grace Chung.
 
 revisions:
+    - author: Gregor Schroeder
+      modification: removed Idling Exhaust per Ziying Ouyang request
+      date: June 2019
     - author: Gregor Schroeder
       modification: added Idling Exhaust
       date: May 2019
@@ -1586,48 +1538,6 @@ revisions:
                                        'PM10 BW')
         GROUP BY
             [Category].[Name]),
-    [idling_exhaust] AS (
-	    SELECT
-		    [Category].[Name] AS [CategoryName]
-		    ,SUM(CASE   WHEN [Pollutant].[Name] IN ('PM25',
-									                'PM25 TW',
-									                'PM25 BW')
-                        THEN [IdlingExhaust].[Value]
-                        ELSE 0 END) AS [Value_PM25]
-            ,SUM(CASE   WHEN [Pollutant].[Name] IN ('PM10',
-                                                    'PM10 TW',
-                                                    'PM10 BW')
-                        THEN [IdlingExhaust].[Value]
-                        ELSE 0 END) AS [Value_PM10]
-	    FROM
-		    [ctemfac_2017].[dbo].[IdlingExhaust]
-	    INNER JOIN
-		    [ctemfac_2017].[dbo].[Pollutant]
-	    ON
-		    [IdlingExhaust].[PollutantID] = [Pollutant].[PollutantID]
-	    INNER JOIN
-		    [ctemfac_2017].[dbo].[Category]
-	    ON
-		    [IdlingExhaust].[CategoryID] = [Category].[CategoryID]
-	    WHERE
-	        [IdlingExhaust].[AreaID] = (
-                SELECT [AreaID] FROM [ctemfac_2017].[dbo].[Area] WHERE [Name] = 'San Diego (SD)'
-            )
-	        AND [IdlingExhaust].[PeriodID] = (
-                SELECT [PeriodID] FROM [ctemfac_2017].[dbo].[Period] WHERE [Year] = (
-                    SELECT [year] FROM [dimension].[scenario] WHERE [scenario_id] = @scenario_id
-                )
-                AND [Season] = 'Annual'
-            )
-            -- particulate matter 2.5 and 10
-		    AND [Pollutant].[Name] IN ('PM25',
-								       'PM25 TW',
-								       'PM25 BW',
-                                       'PM10',
-                                       'PM10 TW',
-                                       'PM10 BW')
-        GROUP BY
-            [Category].[Name]),
     [travel] AS (
     -- get link level speed and vmt by aggregated modes
     -- include lower and bounds of 5mph speed bins for the link
@@ -1695,12 +1605,10 @@ revisions:
 					        [running_exhaust_low].[Value_PM25] * (([travel].[speed_bin_high] - 2.5) - [travel].[speed]) / 5),
 				        0)) AS [running_exhaust_PM25]
             ,SUM(ISNULL([travel].[vmt] * [tire_brake_wear].[Value_PM25], 0)) AS [tire_brake_wear_PM25]
-            ,SUM(ISNULL([travel].[vmt] * [idling_exhaust].[Value_PM25], 0)) AS [idling_exhaust_PM25]
             ,SUM(ISNULL([travel].[vmt] * ([running_exhaust_high].[Value_PM10] * ([travel].[speed] - ([travel].[speed_bin_low] - 2.5)) / 5 +
 					        [running_exhaust_low].[Value_PM10] * (([travel].[speed_bin_high] - 2.5) - [travel].[speed]) / 5),
 				        0)) AS [running_exhaust_PM10]
             ,SUM(ISNULL([travel].[vmt] * [tire_brake_wear].[Value_PM10], 0)) AS [tire_brake_wear_PM10]
-            ,SUM(ISNULL([travel].[vmt] * [idling_exhaust].[Value_PM10], 0)) AS [idling_exhaust_PM10]
         FROM
 	        [travel]
         LEFT OUTER JOIN
@@ -1717,10 +1625,6 @@ revisions:
 	        [tire_brake_wear]
         ON
 	        [travel].[CategoryName] = [tire_brake_wear].[CategoryName]
-	    LEFT OUTER JOIN
-	        [idling_exhaust]
-        ON
-	        [travel].[CategoryName] = [idling_exhaust].[CategoryName]
         GROUP BY
 	        [travel].[hwy_link_id]
 	        ,[travel].[hwycov_id])
@@ -1734,16 +1638,10 @@ revisions:
 	    ,[tire_brake_wear_PM25]
         ,[tire_brake_wear_PM10]
         ,[tire_brake_wear_PM25] + [tire_brake_wear_PM10] AS [tire_brake_wear]
-        ,[idling_exhaust_PM25]
-        ,[idling_exhaust_PM10]
-        ,[idling_exhaust_PM25] + [idling_exhaust_PM10] AS [idling_exhaust]
+	    ,[running_exhaust_PM25] + [tire_brake_wear_PM25] AS [link_total_emissions_PM25]
+	    ,[running_exhaust_PM10] + [tire_brake_wear_PM10] AS [link_total_emissions_PM10]
 	    ,[running_exhaust_PM25] + [tire_brake_wear_PM25] +
-	        [idling_exhaust_PM25] AS [link_total_emissions_PM25]
-	    ,[running_exhaust_PM10] + [tire_brake_wear_PM10] +
-	        [idling_exhaust_PM10] AS [link_total_emissions_PM10]
-	    ,[running_exhaust_PM25] + [tire_brake_wear_PM25] +
-	        [idling_exhaust_PM25] + [running_exhaust_PM10] +
-	        [tire_brake_wear_PM10] + [idling_exhaust_PM10] AS [link_total_emissions]
+	        [running_exhaust_PM10] + [tire_brake_wear_PM10] AS [link_total_emissions]
     FROM
 	    [link_emissions]
 GO
@@ -1782,6 +1680,10 @@ summary:   >
     Clint Daniels with input from Grace Chung.
 
 revisions:
+    - author: Gregor Schroeder
+      modification: switch final output metric from total particulate
+        matter exposure to average person particulate matter exposure
+      date: 14 June 2019
     - author: Gregor Schroeder
       modification: update to include particulate matter 10 and the updated
         [fed_rtp_20].[fn_particulate_matter_ctemfac_2014] function
@@ -1938,30 +1840,30 @@ with [grid_particulate_matter] AS (
 SELECT
     [Particulate Matter]
     ,[Population]
-    ,[Total Particulate Matter]
+    ,[Average Particulate Matter]
 FROM (
     SELECT
-        SUM(ISNULL([avg_PM25], 0) * [persons]) AS [person_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [persons]) AS [person_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [persons]) AS [person_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [senior]) AS [senior_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [senior]) AS [senior_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [senior]) AS [senior_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [non_senior]) AS [non_senior_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [non_senior]) AS [non_senior_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [non_senior]) AS [non_senior_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [minority]) AS [minority_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [minority]) AS [minority_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [minority]) AS [minority_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [non_minority]) AS [non_minority_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [non_minority]) AS [non_minority_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [non_minority]) AS [non_minority_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [low_income]) AS [low_income_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [low_income]) AS [low_income_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [low_income]) AS [low_income_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [non_low_income]) AS [non_low_income_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [non_low_income]) AS [non_low_income_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [non_low_income]) AS [non_low_income_PM]
+        SUM(ISNULL([avg_PM25], 0) * [persons]) / SUM([persons]) AS [person_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [persons]) / SUM([persons]) AS [person_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [persons]) / SUM([persons]) AS [person_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [senior]) / SUM([senior]) AS [senior_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [senior]) / SUM([senior]) AS [senior_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [senior]) / SUM([senior]) AS [senior_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [non_senior]) / SUM([non_senior]) AS [non_senior_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [non_senior]) / SUM([non_senior]) AS [non_senior_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [non_senior]) / SUM([non_senior]) AS [non_senior_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [minority]) / SUM([minority]) AS [minority_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [minority]) / SUM([minority]) AS [minority_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [minority]) / SUM([minority]) AS [minority_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [non_minority]) / SUM([non_minority]) AS [non_minority_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [non_minority]) / SUM([non_minority]) AS [non_minority_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [non_minority]) / SUM([non_minority]) AS [non_minority_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [low_income]) / SUM([low_income]) AS [low_income_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [low_income]) / SUM([low_income]) AS [low_income_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [low_income]) / SUM([low_income]) AS [low_income_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [non_low_income]) / SUM([non_low_income]) AS [non_low_income_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [non_low_income]) / SUM([non_low_income]) AS [non_low_income_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [non_low_income]) / SUM([non_low_income]) AS [non_low_income_PM]
     FROM
 	    [population]
     LEFT OUTER JOIN
@@ -1993,7 +1895,7 @@ CROSS APPLY (
            ('Particulate Matter 2.5 and 10', 'Non-Low Income', [non_low_income_PM]))
 x([Particulate Matter],
   [Population],
-  [Total Particulate Matter])
+  [Average Particulate Matter])
 OPTION(MAXDOP 1)
 
 
@@ -2035,6 +1937,10 @@ summary:   >
     Clint Daniels with input from Grace Chung.
 
 revisions:
+    - author: Gregor Schroeder
+      modification: switch final output metric from total particulate
+        matter exposure to average person particulate matter exposure
+      date: 14 June 2019
     - author: Gregor Schroeder
       modification: update to include particulate matter 10 and the updated
         [fed_rtp_20].[fn_particulate_matter_ctemfac_2017] function
@@ -2191,30 +2097,30 @@ with [grid_particulate_matter] AS (
 SELECT
     [Particulate Matter]
     ,[Population]
-    ,[Total Particulate Matter]
+    ,[Average Particulate Matter]
 FROM (
     SELECT
-        SUM(ISNULL([avg_PM25], 0) * [persons]) AS [person_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [persons]) AS [person_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [persons]) AS [person_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [senior]) AS [senior_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [senior]) AS [senior_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [senior]) AS [senior_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [non_senior]) AS [non_senior_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [non_senior]) AS [non_senior_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [non_senior]) AS [non_senior_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [minority]) AS [minority_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [minority]) AS [minority_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [minority]) AS [minority_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [non_minority]) AS [non_minority_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [non_minority]) AS [non_minority_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [non_minority]) AS [non_minority_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [low_income]) AS [low_income_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [low_income]) AS [low_income_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [low_income]) AS [low_income_PM]
-        ,SUM(ISNULL([avg_PM25], 0) * [non_low_income]) AS [non_low_income_PM25]
-        ,SUM(ISNULL([avg_PM10], 0) * [non_low_income]) AS [non_low_income_PM10]
-        ,SUM(ISNULL([avg_PM], 0) * [non_low_income]) AS [non_low_income_PM]
+        SUM(ISNULL([avg_PM25], 0) * [persons]) / SUM([persons]) AS [person_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [persons]) / SUM([persons]) AS [person_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [persons]) / SUM([persons]) AS [person_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [senior]) / SUM([senior]) AS [senior_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [senior]) / SUM([senior]) AS [senior_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [senior]) / SUM([senior]) AS [senior_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [non_senior]) / SUM([non_senior]) AS [non_senior_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [non_senior]) / SUM([non_senior]) AS [non_senior_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [non_senior]) / SUM([non_senior]) AS [non_senior_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [minority]) / SUM([minority]) AS [minority_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [minority]) / SUM([minority]) AS [minority_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [minority]) / SUM([minority]) AS [minority_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [non_minority]) / SUM([non_minority]) AS [non_minority_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [non_minority]) / SUM([non_minority]) AS [non_minority_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [non_minority]) / SUM([non_minority]) AS [non_minority_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [low_income]) / SUM([low_income]) AS [low_income_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [low_income]) / SUM([low_income]) AS [low_income_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [low_income]) / SUM([low_income]) AS [low_income_PM]
+        ,SUM(ISNULL([avg_PM25], 0) * [non_low_income]) / SUM([non_low_income]) AS [non_low_income_PM25]
+        ,SUM(ISNULL([avg_PM10], 0) * [non_low_income]) / SUM([non_low_income]) AS [non_low_income_PM10]
+        ,SUM(ISNULL([avg_PM], 0) * [non_low_income]) / SUM([non_low_income]) AS [non_low_income_PM]
     FROM
 	    [population]
     LEFT OUTER JOIN
@@ -2246,7 +2152,7 @@ CROSS APPLY (
            ('Particulate Matter 2.5 and 10', 'Non-Low Income', [non_low_income_PM]))
 x([Particulate Matter],
   [Population],
-  [Total Particulate Matter])
+  [Average Particulate Matter])
 OPTION(MAXDOP 1)
 
 -- drop the highway network to grid xref temporary table
