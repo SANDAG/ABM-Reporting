@@ -369,11 +369,11 @@ output_7b = pd.DataFrame(data=[(
              ])
 
 # write Performance Measures 7a/b - Auto out to csv
-# in the scenario report folder
+# in the scenario output folder
 if uats == "0":
-    output_path = scenario_path + "/report/pm_7ab_auto_region.csv"
+    output_path = scenario_path + "/output/pm_7ab_auto_region.csv"
 if uats == "1":
-    output_path = scenario_path + "/report/pm_7ab_auto_uats.csv"
+    output_path = scenario_path + "/output/pm_7ab_auto_uats.csv"
 
 output_7a.melt().to_csv(output_path,
                         index=False,
