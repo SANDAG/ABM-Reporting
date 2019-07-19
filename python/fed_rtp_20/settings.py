@@ -27,7 +27,7 @@ adhoc_queries = [
                ["Main 8 Table",
                 "Additional PM Table",
                 "Social Equity PM Table"],
-     "rows": [2] + [1] * 4},
+     "rows": [2] + [1] * 3 + [2]},
     # total households
     {"query": ("SELECT SUM([weight_household]) AS [total_hh] FROM "
                "[dimension].[household] WHERE [scenario_id] = ? "
@@ -163,7 +163,7 @@ fed_rtp_20_pm = [
                ["Social Equity PM Table"] * 7,
      "rows": list(range(73, 80)) +
              [31] +
-             list(range(51, 58))},
+             list(range(50, 57))},
     # Performance Measure A
     {"sp": "[fed_rtp_20].[sp_pm_A]",
      "args": "@scenario_id=?,@update=1,@silent=0",
@@ -241,7 +241,7 @@ fed_rtp_20_pm = [
              list(range(214, 221)) +
              list(range(221, 228)) +
              list(range(2, 8)) +
-             list(range(3, 27))},
+             list(range(4, 28))},
     # Performance Measure B
     {"sp": "[fed_rtp_20].[sp_pm_B]",
      "args": "@scenario_id=?,@update=1,@silent=0",
