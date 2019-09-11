@@ -42,13 +42,13 @@ adhoc_queries = [
      "columns": ["emp_total",
                  "college"],
      "sheets": ["Master"] * 2,
-     "rows": [8, 9]},
+     "rows": [9, 10]},
     # total person trips
     {"query": ("SELECT SUM([weight_person_trip]) AS [person_trips] FROM "
                "[fact].[person_trip] WHERE [scenario_id] = ?"),
      "columns": ["person_trips"],
      "sheets": ["Master"],
-     "rows": [14]}
+     "rows": [15]}
 ]
 
 
@@ -61,7 +61,7 @@ fed_rtp_20_pm = [
      "args": "@scenario_id=?,@update=1,@silent=0",
      "metrics": ["Vehicle Delay per Capita"] * 2,
      "sheets": ["Master", "Main 8 Table"],
-     "rows": [19, 2]},
+     "rows": [20, 2]},
     # Performance Measure 2a
     {"sp": "[fed_rtp_20].[sp_pm_2a]",
      "args": "@scenario_id=?,@update=1,@silent=0,@uats=0,@work=0",
@@ -77,7 +77,7 @@ fed_rtp_20_pm = [
                  "Percentage of Total Person Trips - Total Bike and Walk"],
      "sheets": ["Master"] * 7 +
                ["Main 8 Table"] * 3,
-     "rows": list(range(21, 28)) +
+     "rows": list(range(22, 29)) +
              list(range(4, 7))},
     # Performance Measure 2a - UATS
     {"sp": "[fed_rtp_20].[sp_pm_2a]",
@@ -94,7 +94,7 @@ fed_rtp_20_pm = [
                  "Percentage of Total Person Trips - Total Bike and Walk"],
      "sheets": ["Master"] * 7 +
                ["Main 8 Table"] * 3,
-     "rows": list(range(37, 44)) +
+     "rows": list(range(38, 45)) +
              list(range(12, 15))},
     # Performance Measure 2a - Work
     {"sp": "[fed_rtp_20].[sp_pm_2a]",
@@ -111,7 +111,7 @@ fed_rtp_20_pm = [
                  "Percentage of Total Person Trips - Total Bike and Walk"],
      "sheets": ["Master"] * 7 +
                ["Main 8 Table"] * 3,
-     "rows": list(range(29, 36)) +
+     "rows": list(range(30, 37)) +
              list(range(8, 11))},
     # Performance Measure 2a - UATS x Work
     {"sp": "[fed_rtp_20].[sp_pm_2a]",
@@ -128,7 +128,7 @@ fed_rtp_20_pm = [
                  "Percentage of Total Person Trips - Total Bike and Walk"],
      "sheets": ["Master"] * 7 +
                ["Main 8 Table"] * 3,
-     "rows": list(range(45, 52)) +
+     "rows": list(range(46, 53)) +
              list(range(16, 19))},
     # Performance Measure 2b
     {"sp": "[fed_rtp_20].[sp_pm_2b]",
@@ -138,7 +138,7 @@ fed_rtp_20_pm = [
                  "VMT per Capita"],
      "sheets": ["Master"] * 2 +
                ["Main 8 Table"],
-     "rows": [10, 11,
+     "rows": [11, 12,
               21]},
     # Performance Measure 6a
     {"sp": "[fed_rtp_20].[sp_pm_6a]",
@@ -161,7 +161,7 @@ fed_rtp_20_pm = [
      "sheets": ["Master"] * 7 +
                ["Main 8 Table"] +
                ["Social Equity PM Table"] * 7,
-     "rows": list(range(73, 80)) +
+     "rows": list(range(74, 81)) +
              [31] +
              list(range(50, 57))},
     # Performance Measure A
@@ -235,11 +235,11 @@ fed_rtp_20_pm = [
      "sheets": ["Master"] * 35 +
                ["Additional PM Table"] * 6 +
                ["Social Equity PM Table"] * 24,
-     "rows": list(range(193, 200)) +
-             list(range(200, 207)) +
-             list(range(207, 214)) +
-             list(range(214, 221)) +
-             list(range(221, 228)) +
+     "rows": list(range(194, 201)) +
+             list(range(201, 208)) +
+             list(range(208, 215)) +
+             list(range(215, 222)) +
+             list(range(222, 229)) +
              list(range(2, 8)) +
              list(range(4, 28))},
     # Performance Measure B
@@ -248,7 +248,7 @@ fed_rtp_20_pm = [
      "metrics": ["Average Travel Time"] * 2,
      "sheets": ["Master",
                 "Additional PM Table"],
-     "rows": [228,
+     "rows": [229,
               8]},
     # Performance Measure C
     {"sp": "[fed_rtp_20].[sp_pm_C]",
@@ -261,7 +261,7 @@ fed_rtp_20_pm = [
                  "Average Travel Time - Jacumba"] * 2,
      "sheets": ["Master"] * 6 +
                ["Additional PM Table"] * 6,
-     "rows": list(range(229, 235)) +
+     "rows": list(range(230, 236)) +
              list(range(9, 15))},
     # Performance Measure D
     {"sp": "[fed_rtp_20].[sp_pm_D]",
@@ -269,7 +269,7 @@ fed_rtp_20_pm = [
      "metrics": ["Average Travel Time"] * 2,
      "sheets": ["Master",
                 "Additional PM Table"],
-     "rows": [235,
+     "rows": [236,
               15]},
     # Performance Measure E
     {"sp": "[fed_rtp_20].[sp_pm_E]",
@@ -277,7 +277,7 @@ fed_rtp_20_pm = [
      "metrics": ["Average Travel Time"] * 2,
      "sheets": ["Master",
                 "Additional PM Table"],
-     "rows": [236,
+     "rows": [237,
               16]},
     # Performance Measure F
     {"sp": "[fed_rtp_20].[sp_pm_F]",
@@ -292,7 +292,7 @@ fed_rtp_20_pm = [
                  "Percentage of Household Income Spent on Transportation Costs - Total"],
      "sheets": ["Master"] * 7 +
                ["Additional PM Table"],
-     "rows": list(range(237, 244)) +
+     "rows": list(range(238, 245)) +
              [17]},
     # Performance Measure H
     {"sp": "[fed_rtp_20].[sp_pm_H]",
@@ -300,7 +300,7 @@ fed_rtp_20_pm = [
      "metrics": ["Average Travel Time"] * 2,
      "sheets": ["Master"] +
                ["Additional PM Table"],
-     "rows": [252] + [20]},
+     "rows": [253] + [20]},
     # Performance Measure I
     {"sp": "[fed_rtp_20].[sp_pm_I]",
      "args": "@scenario_id=?,@update=1,@silent=0",
@@ -314,7 +314,7 @@ fed_rtp_20_pm = [
                  "Percentage of Population Engaging in Transportation-Related Physical Activity - Total"],
      "sheets": ["Master"] * 7 +
                ["Additional PM Table"],
-     "rows": list(range(253, 260)) +
+     "rows": list(range(254, 261)) +
              [21]},
     # Performance Measure J
     {"sp": "[fed_rtp_20].[sp_pm_J]",
@@ -327,7 +327,7 @@ fed_rtp_20_pm = [
                  "Average Direct to Work Travel Distance - Walk"] * 2,
      "sheets": ["Master"] * 6 +
                ["Additional PM Table"] * 6,
-     "rows": list(range(260, 266)) +
+     "rows": list(range(261, 267)) +
              list(range(22, 28))},
     # Federal RTP 2020 Populations
     {"sp": "[fed_rtp_20].[sp_population]",
@@ -335,8 +335,9 @@ fed_rtp_20_pm = [
      "metrics": ["Population - Total",
                  "Population - Low Income",
                  "Population - Minority",
-                 "Population - Senior"],
-     "sheets": ["Master"] * 4,
-     "rows": list(range(4, 8))
+                 "Population - Senior",
+                 "Population - CoC"],
+     "sheets": ["Master"] * 5,
+     "rows": list(range(4, 9))
      }
 ]

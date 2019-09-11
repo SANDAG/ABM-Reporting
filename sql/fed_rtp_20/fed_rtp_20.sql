@@ -2205,6 +2205,18 @@ SELECT
             THEN 'Low Income'
             ELSE 'Non-Low Income'
             END AS [low_income]
+    ,CASE   WHEN [person].[age] >= 75
+                OR ([person].[race] IN ('Some Other Race Alone',
+									    'Asian Alone',
+									    'Black or African American Alone',
+									    'Two or More Major Race Groups',
+									    'Native Hawaiian and Other Pacific Islander Alone',
+									    'American Indian and Alaska Native Tribes specified; or American Indian or Alaska Native, not specified and no other races')
+                        OR [person].[hispanic] = 'Hispanic')
+                OR [household].[poverty] <= 2
+            THEN 'CoC'
+            ELSE 'Non-CoC'
+            END AS [coc]
 FROM
 	[dimension].[person]
 INNER JOIN
@@ -5613,6 +5625,8 @@ BEGIN
             ,[Non-Minority]
             ,[Low Income]
             ,[Non-Low Income]
+            ,[CoC]
+            ,[Non-CoC]
             ,[Total]
             ,[SB375]
         FROM (
@@ -5636,6 +5650,12 @@ BEGIN
                 ,SUM(CASE   WHEN [low_income] = 'Non-Low Income'
                             THEN [weight_person]
                             ELSE 0 END) AS [Non-Low Income]
+                ,SUM(CASE   WHEN [coc] = 'CoC'
+                            THEN [weight_person]
+                            ELSE 0 END) AS [CoC]
+                ,SUM(CASE   WHEN [coc] = 'Non-CoC'
+                            THEN [weight_person]
+                            ELSE 0 END) AS [Non-CoC]
                 ,SUM([weight_person]) AS [Total]
             FROM
                 [fed_rtp_20].[fn_person_coc] (@scenario_id)) AS [synthetic_pop]
@@ -5670,7 +5690,8 @@ BEGIN
     UNPIVOT (
         [population] FOR [pop_segmentation] IN
         ([Senior], [Non-Senior], [Minority], [Non-Minority],
-         [Low Income], [Non-Low Income], [SB375], [Total])) AS [unpvt] 
+         [Low Income], [Non-Low Income], [CoC], [Non-CoC],
+         [SB375], [Total])) AS [unpvt]
 
 END
 
