@@ -236,7 +236,6 @@ BEGIN
 
 	    -- build dynamic SQL string
 	    DECLARE @sql nvarchar(max) = '
-	    INSERT INTO #aggregated_trips
 		    SELECT
 			    ISNULL([geography].' + @geography_column + ', ''Exclude'') AS [geography]
 			    ,ISNULL([mode_aggregate_trip_description], ''Total'') AS [mode_aggregate_trip_description]
@@ -329,9 +328,9 @@ BEGIN
 		    #aggregated_trips.[geography] != ''Exclude''
         ORDER BY
             #combinations.[geography]
-		    ,CASE   WHEN #combinations.[mode_aggregate_description] = ''Total''
+		    ,CASE   WHEN #combinations.[mode_aggregate_trip_description] = ''Total''
                     THEN ''ZZ''
-                    ELSE #combinations.[mode_aggregate_description]
+                    ELSE #combinations.[mode_aggregate_trip_description]
                     END'
 
 	    -- execute dynamic SQL string
