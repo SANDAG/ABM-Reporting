@@ -22,7 +22,12 @@ All SQL objects necessary to create inputs from the Activity-Based Model to EMFA
 
 ### fed_rtp_20
 
-All Excel, Python, and SQL objects necessary to output reporting metrics for the Federal 2020 Regional Transportation Plan are included in this repository. These include SQL objects at **sql\fed_rtp_20** that are built to the ABM general reporting database, Python scripts and the environment necessary to run them at **python\fed_rtp_20**, and an Excel template populated by a Python script at **resources\fed_rtp_20**. 
+All Excel, Python, and SQL objects necessary to output reporting metrics for the Federal 2020 Regional Transportation Plan are included in this repository. These include SQL objects at **sql\fed_rtp_20** that are built to the ABM general reporting database, Python scripts and the environment necessary to run them at **python\fed_rtp_20**, and an Excel template populated by a Python script at **resources\fed_rtp_20\templates**. 
+
+
+### sensitivity
+
+All Excel, Python, and SQL objects necessary to output reporting metrics for sensitivity testing are included in this repository. These include SQL objects at **sql\sensitivity** that are built to the ABM general reporting database, Python scripts and the environment necessary to run them at **python\sensitivity**, and two Excel templates populated by a Python script at **resources\sensitivity\templates**. 
 
 
 ### report
