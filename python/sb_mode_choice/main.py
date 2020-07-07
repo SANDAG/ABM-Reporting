@@ -25,7 +25,7 @@ templateWriter = pd.ExcelWriter(
 templateWriter.book = template
 templateWriter.sheets = dict((ws.title, ws) for ws in template.worksheets)
 
-input_ws= template.get_sheet_by_name('Input')
+input_ws= template['Input']
 input_ws['C7']= scenario_id
 input_ws['C5']= proj_name
 input_ws['C8']= scenario_header

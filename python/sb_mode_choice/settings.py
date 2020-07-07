@@ -15,8 +15,9 @@ template_protect = False #True
 template_password = ""
 
 # set SQL Server connection attributes
-server = "${database_server}"
-database = "${database_name}"
+server = "sql2014a8"
+database = "popsyn_3_0"
+
 
 # initialize dictionary to hold report queries to run
 # and the sheets in the Excel template to write result sets to
