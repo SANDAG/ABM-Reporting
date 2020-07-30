@@ -2,7 +2,7 @@
 
 The ABM-Reporting repository houses all general reporting procedures for the Activity-Based model that do not require or have not yet been migrated to their own self-contained repositories. For example, this repository contains procedures to output datasets for the 2020 Federal Regional Transportation Plan but does not contain anything related to the [Benefit-Cost Tool](https://github.com/SANDAG/bca) as that exists in its own repository.
 
-This repository's release branches are tagged with the [Activity-Based Model Software](https://github.com/SANDAG/ABM) version they rely on and are compatible with.
+This repository's release branches are tagged with the [Activity-Based Model Software](https://github.com/SANDAG/ABM) version they rely on and are compatible with. The main branch is the most recent development branch. See the [Trunk-Based Development](https://trunkbaseddevelopment.com/) site for more information regarding the branching strategy employed in this repository.
 
 
 ## Contents
@@ -17,7 +17,7 @@ The build scripts to create the general reporting database are found in **sql\db
 
 ### emfac
 
-All SQL objects necessary to create inputs from the Activity-Based Model to EMFAC are included at **sql\emfac** and built to the ABM general reporting database.
+All Python and SQL objects necessary to create inputs to EMFAC from the Activity-Based Model are included in this repository. These include SQL objects at **sql\emfac** that are built to the ABM general reporting database as well as Python scripts and the environment necessary to run them at **python\emfac**.
 
 
 ### fed_rtp_20

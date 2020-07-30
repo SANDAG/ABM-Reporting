@@ -1,3 +1,4 @@
+
 -- create dimension schema if it does not already exist ----------------------
 IF NOT EXISTS (
     SELECT
@@ -12,8 +13,6 @@ EXECUTE ('CREATE SCHEMA [dimension]')
 EXECUTE [db_meta].[add_xp] 'dimension', 'MS_Description', 'schema to hold and manage ABM dimension tables and views'
 END
 GO
-
-
 
 
 -- create fact schema if it does not already exist ---------------------------
@@ -32,12 +31,8 @@ END
 GO
 
 
-
-
--- create synonyms for objects in the abm_2 database -------------------------
--- tables --------------------------------------------------------------------
+-- create synonyms for objects in the abm_2 database tables ------------------
 DROP SYNONYM IF EXISTS [dimension].[bike_link]
-GO
 CREATE SYNONYM [dimension].[bike_link]
 FOR [abm_2].[dimension].[bike_link]
 GO
