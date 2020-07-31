@@ -296,9 +296,15 @@ BEGIN
             ,CASE   WHEN @weight = 'persons' THEN SUM(ISNULL([person_trip].[weight_person_trip], 0))
                     WHEN @weight = 'trips' THEN SUM(ISNULL([person_trip].[weight_trip], 0))
                     ELSE NULL END AS [weight]
-            ,CASE   WHEN @metric = 'distance' THEN SUM(ISNULL([person_trip].[dist_total], 0))
-                    WHEN @metric IN ('trips', 'share') THEN 0  -- only weight is unused if trips or share is selected
-                    WHEN @metric = 'time' THEN SUM(ISNULL([person_trip].[time_total], 0))
+            ,CASE   WHEN @metric IN ('trips', 'share') THEN 0  -- only weight is unused if trips or share is selected
+                    WHEN @weight = 'persons' AND @metric = 'distance'
+                        THEN SUM(ISNULL([person_trip].[weight_person_trip], 0) * ISNULL([person_trip].[dist_total], 0))
+                    WHEN @weight = 'trips' AND @metric = 'distance'
+                        THEN SUM(ISNULL([person_trip].[weight_trip], 0) * ISNULL([person_trip].[dist_total], 0))
+                    WHEN @weight = 'persons' AND @metric = 'time'
+                        THEN SUM(ISNULL([person_trip].[weight_person_trip], 0) * ISNULL([person_trip].[time_total], 0))
+                    WHEN @weight = 'trips' AND @metric = 'time'
+                        THEN SUM(ISNULL([person_trip].[weight_trip], 0) * ISNULL([person_trip].[time_total], 0))
                     ELSE NULL END AS [metric]
         FROM
             [fact].[person_trip]
@@ -369,6 +375,8 @@ BEGIN
         ,SUM([metric]) AS [metric]
     FROM
         #aggTrips
+    WHERE
+        [model] != 'Resident Models'
     GROUP BY
         [mode]
 
@@ -653,10 +661,16 @@ BEGIN
                 ,CASE   WHEN @weight = 'persons' THEN SUM(ISNULL([person_trip].[weight_person_trip], 0))
                         WHEN @weight = 'trips' THEN SUM(ISNULL([person_trip].[weight_trip], 0))
                         ELSE NULL END AS [weight]
-                ,CASE   WHEN @metric = 'distance' THEN SUM(ISNULL([person_trip].[dist_total], 0))
-                        WHEN @metric = 'share' THEN 0  -- only weight is unused if share is selected
-                        WHEN @metric = 'time' THEN SUM(ISNULL([person_trip].[time_total], 0))
-                        ELSE NULL END AS [metric]
+                ,CASE   WHEN @metric IN ('trips', 'share') THEN 0  -- only weight is unused if trips or share is selected
+                    WHEN @weight = 'persons' AND @metric = 'distance'
+                        THEN SUM(ISNULL([person_trip].[weight_person_trip], 0) * ISNULL([person_trip].[dist_total], 0))
+                    WHEN @weight = 'trips' AND @metric = 'distance'
+                        THEN SUM(ISNULL([person_trip].[weight_trip], 0) * ISNULL([person_trip].[dist_total], 0))
+                    WHEN @weight = 'persons' AND @metric = 'time'
+                        THEN SUM(ISNULL([person_trip].[weight_person_trip], 0) * ISNULL([person_trip].[time_total], 0))
+                    WHEN @weight = 'trips' AND @metric = 'time'
+                        THEN SUM(ISNULL([person_trip].[weight_trip], 0) * ISNULL([person_trip].[time_total], 0))
+                    ELSE NULL END AS [metric]
             FROM
                 [fact].[person_trip]
             INNER JOIN 
@@ -749,6 +763,8 @@ BEGIN
         ,SUM([metric]) AS [metric]
     FROM
         #aggTrips
+    WHERE
+        [model] != 'Resident Models'
     GROUP BY
         [purpose]
 
@@ -1061,9 +1077,15 @@ BEGIN
             ,CASE   WHEN @weight = 'persons' THEN SUM(ISNULL([person_trip].[weight_person_trip], 0))
                     WHEN @weight = 'trips' THEN SUM(ISNULL([person_trip].[weight_trip], 0))
                     ELSE NULL END AS [weight]
-            ,CASE   WHEN @metric = 'distance' THEN SUM(ISNULL([person_trip].[dist_total], 0))
-                    WHEN @metric IN ('trips', 'share') THEN 0  -- only weight is unused if trips or share is selected
-                    WHEN @metric = 'time' THEN SUM(ISNULL([person_trip].[time_total], 0))
+            ,CASE   WHEN @metric IN ('trips', 'share') THEN 0  -- only weight is unused if trips or share is selected
+                    WHEN @weight = 'persons' AND @metric = 'distance'
+                        THEN SUM(ISNULL([person_trip].[weight_person_trip], 0) * ISNULL([person_trip].[dist_total], 0))
+                    WHEN @weight = 'trips' AND @metric = 'distance'
+                        THEN SUM(ISNULL([person_trip].[weight_trip], 0) * ISNULL([person_trip].[dist_total], 0))
+                    WHEN @weight = 'persons' AND @metric = 'time'
+                        THEN SUM(ISNULL([person_trip].[weight_person_trip], 0) * ISNULL([person_trip].[time_total], 0))
+                    WHEN @weight = 'trips' AND @metric = 'time'
+                        THEN SUM(ISNULL([person_trip].[weight_trip], 0) * ISNULL([person_trip].[time_total], 0))
                     ELSE NULL END AS [metric]
         FROM
             [fact].[person_trip]
@@ -1143,6 +1165,8 @@ BEGIN
         ,SUM([metric]) AS [metric]
     FROM
         #aggTrips
+    WHERE
+        [model] != 'Resident Models'
     GROUP BY
         [mode]
 
