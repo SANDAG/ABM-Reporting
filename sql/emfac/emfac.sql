@@ -215,19 +215,13 @@ WITH
 	(DATA_COMPRESSION = PAGE);
 
 INSERT INTO [emfac].[sandag_vehicle_class] VALUES
-	('Drive Alone Non-Toll'),
-	('Drive Alone Toll Eligible'),
-	('Heavy Heavy Duty Truck (Non-Toll)'),
-	('Heavy Heavy Duty Truck (Toll)'),
+	('Drive Alone'),
+	('Heavy Heavy Duty Truck'),
 	('Highway Network Preload - Bus'),
-	('Light Heavy Duty Truck (Non-Toll)'),
-	('Light Heavy Duty Truck (Toll)'),
-	('Medium Heavy Duty Truck (Non-Toll)'),
-	('Medium Heavy Duty Truck (Toll)'),
-	('Shared Ride 2 Non-Toll'),
-	('Shared Ride 2 Toll Eligible'),
-	('Shared Ride 3 Non-Toll'),
-	('Shared Ride 3 Toll Eligible')
+	('Light Heavy Duty Truck'),
+	('Medium Heavy Duty Truck'),
+	('Shared Ride 2'),
+	('Shared Ride 3+')
 GO
 
 -- add metadata for [emfac].[sandag_vehicle_class]
@@ -2172,306 +2166,157 @@ CREATE TABLE #tt_emfac_vehicle_map (
 	CONSTRAINT pk_tt_emfac_vehicle_map
         PRIMARY KEY ([sandag_vehicle_class], [emfac_vehicle_class], [major_version], [minor_version]))
 INSERT INTO #tt_emfac_vehicle_map VALUES
-	('Drive Alone Non-Toll', 'LDA - Dsl', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'LDA - Elec', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'LDA - Gas', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'LDT1 - Dsl', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'LDT1 - Elec', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'LDT1 - Gas', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'LDT2 - Dsl', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'LDT2 - Gas', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'MCY - Gas', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'MDV - Dsl', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'MDV - Gas', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'MH - Dsl', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'MH - Gas', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'LDA - Dsl', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'LDA - Elec', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'LDA - Gas', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT1 - Dsl', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT1 - Elec', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT1 - Gas', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT2 - Dsl', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT2 - Gas', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'MCY - Gas', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'MDV - Dsl', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'MDV - Gas', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'MH - Dsl', '2014', '1.0'),
-	('Drive Alone Toll Eligible', 'MH - Gas', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDA - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDA - Elec', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDA - Gas', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT1 - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT1 - Elec', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT1 - Gas', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT2 - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT2 - Gas', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MCY - Gas', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MDV - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MDV - Gas', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MH - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MH - Gas', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDA - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDA - Elec', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDA - Gas', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT1 - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT1 - Elec', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT1 - Gas', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT2 - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT2 - Gas', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MCY - Gas', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MDV - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MDV - Gas', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MH - Dsl', '2014', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MH - Gas', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDA - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDA - Elec', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDA - Gas', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT1 - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT1 - Elec', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT1 - Gas', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT2 - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT2 - Gas', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MCY - Gas', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MDV - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MDV - Gas', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MH - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MH - Gas', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDA - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDA - Elec', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDA - Gas', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT1 - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT1 - Elec', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT1 - Gas', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT2 - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT2 - Gas', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MCY - Gas', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MDV - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MDV - Gas', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MH - Dsl', '2014', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MH - Gas', '2014', '1.0'),
-	('Light Heavy Duty Truck (Non-Toll)', 'LHD1 - Dsl', '2014', '1.0'),
-	('Light Heavy Duty Truck (Non-Toll)', 'LHD1 - Gas', '2014', '1.0'),
-	('Light Heavy Duty Truck (Non-Toll)', 'LHD2 - Dsl', '2014', '1.0'),
-	('Light Heavy Duty Truck (Non-Toll)', 'LHD2 - Gas', '2014', '1.0'),
-	('Light Heavy Duty Truck (Toll)', 'LHD1 - Dsl', '2014', '1.0'),
-	('Light Heavy Duty Truck (Toll)', 'LHD1 - Gas', '2014', '1.0'),
-	('Light Heavy Duty Truck (Toll)', 'LHD2 - Dsl', '2014', '1.0'),
-	('Light Heavy Duty Truck (Toll)', 'LHD2 - Gas', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Ag - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 CAIRP Heavy - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 CAIRP Small - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Instate Construction Heavy - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Instate Construction Small - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Instate Heavy - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Instate Small - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 OOS Heavy - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 OOS Small - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Public - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Utility - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6TS - Gas', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Ag - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 CAIRP Heavy - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 CAIRP Small - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Instate Construction Heavy - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Instate Construction Small - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Instate Heavy - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Instate Small - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 OOS Heavy - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 OOS Small - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Public - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Utility - Dsl', '2014', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6TS - Gas', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Ag - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 CAIRP - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 CAIRP Construction - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 NNOOS - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 NOOS - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Other Port - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 POLA - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Public - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Single - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Single Construction - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 SWCV - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Tractor - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Tractor Construction - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Utility - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7IS - Gas', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'PTO - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Ag - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 CAIRP - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 CAIRP Construction - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 NNOOS - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 NOOS - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Other Port - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 POLA - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Public - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Single - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Single Construction - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 SWCV - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Tractor - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Tractor Construction - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Utility - Dsl', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7IS - Gas', '2014', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'PTO - Dsl', '2014', '1.0'),
+	('Drive Alone', 'LDA - Dsl', '2014', '1.0'),
+	('Drive Alone', 'LDA - Elec', '2014', '1.0'),
+	('Drive Alone', 'LDA - Gas', '2014', '1.0'),
+	('Drive Alone', 'LDT1 - Dsl', '2014', '1.0'),
+	('Drive Alone', 'LDT1 - Elec', '2014', '1.0'),
+	('Drive Alone', 'LDT1 - Gas', '2014', '1.0'),
+	('Drive Alone', 'LDT2 - Dsl', '2014', '1.0'),
+	('Drive Alone', 'LDT2 - Gas', '2014', '1.0'),
+	('Drive Alone', 'MCY - Gas', '2014', '1.0'),
+	('Drive Alone', 'MDV - Dsl', '2014', '1.0'),
+	('Drive Alone', 'MDV - Gas', '2014', '1.0'),
+	('Drive Alone', 'MH - Dsl', '2014', '1.0'),
+	('Drive Alone', 'MH - Gas', '2014', '1.0'),
+	('Shared Ride 2', 'LDA - Dsl', '2014', '1.0'),
+	('Shared Ride 2', 'LDA - Elec', '2014', '1.0'),
+	('Shared Ride 2', 'LDA - Gas', '2014', '1.0'),
+	('Shared Ride 2', 'LDT1 - Dsl', '2014', '1.0'),
+	('Shared Ride 2', 'LDT1 - Elec', '2014', '1.0'),
+	('Shared Ride 2', 'LDT1 - Gas', '2014', '1.0'),
+	('Shared Ride 2', 'LDT2 - Dsl', '2014', '1.0'),
+	('Shared Ride 2', 'LDT2 - Gas', '2014', '1.0'),
+	('Shared Ride 2', 'MCY - Gas', '2014', '1.0'),
+	('Shared Ride 2', 'MDV - Dsl', '2014', '1.0'),
+	('Shared Ride 2', 'MDV - Gas', '2014', '1.0'),
+	('Shared Ride 2', 'MH - Dsl', '2014', '1.0'),
+	('Shared Ride 2', 'MH - Gas', '2014', '1.0'),
+	('Shared Ride 3+', 'LDA - Dsl', '2014', '1.0'),
+	('Shared Ride 3+', 'LDA - Elec', '2014', '1.0'),
+	('Shared Ride 3+', 'LDA - Gas', '2014', '1.0'),
+	('Shared Ride 3+', 'LDT1 - Dsl', '2014', '1.0'),
+	('Shared Ride 3+', 'LDT1 - Elec', '2014', '1.0'),
+	('Shared Ride 3+', 'LDT1 - Gas', '2014', '1.0'),
+	('Shared Ride 3+', 'LDT2 - Dsl', '2014', '1.0'),
+	('Shared Ride 3+', 'LDT2 - Gas', '2014', '1.0'),
+	('Shared Ride 3+', 'MCY - Gas', '2014', '1.0'),
+	('Shared Ride 3+', 'MDV - Dsl', '2014', '1.0'),
+	('Shared Ride 3+', 'MDV - Gas', '2014', '1.0'),
+	('Shared Ride 3+', 'MH - Dsl', '2014', '1.0'),
+	('Shared Ride 3+', 'MH - Gas', '2014', '1.0'),
+	('Light Heavy Duty Truck', 'LHD1 - Dsl', '2014', '1.0'),
+	('Light Heavy Duty Truck', 'LHD1 - Gas', '2014', '1.0'),
+	('Light Heavy Duty Truck', 'LHD2 - Dsl', '2014', '1.0'),
+	('Light Heavy Duty Truck', 'LHD2 - Gas', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Ag - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 CAIRP Heavy - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 CAIRP Small - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Instate Construction Heavy - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Instate Construction Small - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Instate Heavy - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Instate Small - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 OOS Heavy - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 OOS Small - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Public - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Utility - Dsl', '2014', '1.0'),
+	('Medium Heavy Duty Truck', 'T6TS - Gas', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Ag - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 CAIRP - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 CAIRP Construction - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 NNOOS - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 NOOS - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Other Port - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 POLA - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Public - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Single - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Single Construction - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 SWCV - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Tractor - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Tractor Construction - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Utility - Dsl', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7IS - Gas', '2014', '1.0'),
+	('Heavy Heavy Duty Truck', 'PTO - Dsl', '2014', '1.0'),
 	('Highway Network Preload - Bus', 'UBUS - Dsl', '2014', '1.0'),
 	('Highway Network Preload - Bus', 'UBUS - Gas', '2014', '1.0'),
-	('Drive Alone Non-Toll', 'LDA - Dsl', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'LDA - Elec', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'LDA - Gas', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'LDT1 - Dsl', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'LDT1 - Elec', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'LDT1 - Gas', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'LDT2 - Dsl', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'LDT2 - Elec', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'LDT2 - Gas', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'MCY - Gas', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'MDV - Dsl', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'MDV - Elec', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'MDV - Gas', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'MH - Dsl', '2017', '1.0'),
-	('Drive Alone Non-Toll', 'MH - Gas', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDA - Dsl', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDA - Elec', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDA - Gas', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT1 - Dsl', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT1 - Elec', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT1 - Gas', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT2 - Dsl', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT2 - Elec', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'LDT2 - Gas', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'MCY - Gas', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'MDV - Dsl', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'MDV - Elec', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'MDV - Gas', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'MH - Dsl', '2017', '1.0'),
-	('Drive Alone Toll Eligible', 'MH - Gas', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDA - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDA - Elec', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDA - Gas', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT1 - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT1 - Elec', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT1 - Gas', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT2 - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT2 - Elec', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'LDT2 - Gas', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MCY - Gas', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MDV - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MDV - Elec', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MDV - Gas', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MH - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Non-Toll', 'MH - Gas', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDA - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDA - Elec', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDA - Gas', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT1 - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT1 - Elec', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT1 - Gas', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT2 - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT2 - Elec', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'LDT2 - Gas', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MCY - Gas', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MDV - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MDV - Elec', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MDV - Gas', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MH - Dsl', '2017', '1.0'),
-	('Shared Ride 2 Toll Eligible', 'MH - Gas', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDA - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDA - Elec', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDA - Gas', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT1 - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT1 - Elec', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT1 - Gas', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT2 - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT2 - Elec', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'LDT2 - Gas', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MCY - Gas', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MDV - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MDV - Elec', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MDV - Gas', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MH - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Non-Toll', 'MH - Gas', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDA - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDA - Elec', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDA - Gas', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT1 - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT1 - Elec', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT1 - Gas', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT2 - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT2 - Elec', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'LDT2 - Gas', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MCY - Gas', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MDV - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MDV - Elec', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MDV - Gas', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MH - Dsl', '2017', '1.0'),
-	('Shared Ride 3 Toll Eligible', 'MH - Gas', '2017', '1.0'),
-	('Light Heavy Duty Truck (Non-Toll)', 'LHD1 - Dsl', '2017', '1.0'),
-	('Light Heavy Duty Truck (Non-Toll)', 'LHD1 - Gas', '2017', '1.0'),
-	('Light Heavy Duty Truck (Non-Toll)', 'LHD2 - Dsl', '2017', '1.0'),
-	('Light Heavy Duty Truck (Non-Toll)', 'LHD2 - Gas', '2017', '1.0'),
-	('Light Heavy Duty Truck (Toll)', 'LHD1 - Dsl', '2017', '1.0'),
-	('Light Heavy Duty Truck (Toll)', 'LHD1 - Gas', '2017', '1.0'),
-	('Light Heavy Duty Truck (Toll)', 'LHD2 - Dsl', '2017', '1.0'),
-	('Light Heavy Duty Truck (Toll)', 'LHD2 - Gas', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Ag - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 CAIRP Heavy - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 CAIRP Small - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Instate Construction Heavy - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Instate Construction Small - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Instate Heavy - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Instate Small - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 OOS Heavy - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 OOS Small - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Public - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6 Utility - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Non-Toll)', 'T6TS - Gas', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Ag - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 CAIRP Heavy - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 CAIRP Small - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Instate Construction Heavy - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Instate Construction Small - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Instate Heavy - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Instate Small - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 OOS Heavy - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 OOS Small - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Public - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6 Utility - Dsl', '2017', '1.0'),
-	('Medium Heavy Duty Truck (Toll)', 'T6TS - Gas', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Ag - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 CAIRP - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 CAIRP Construction - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 NNOOS - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 NOOS - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Other Port - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 POLA - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Public - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Single - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Single Construction - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 SWCV - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 SWCV - NG', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Tractor - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Tractor Construction - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7 Utility - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'T7IS - Gas', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Non-Toll)', 'PTO - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Ag - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 CAIRP - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 CAIRP Construction - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 NNOOS - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 NOOS - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Other Port - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 POLA - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Public - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Single - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Single Construction - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 SWCV - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 SWCV - NG', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Tractor - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Tractor Construction - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7 Utility - Dsl', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'T7IS - Gas', '2017', '1.0'),
-	('Heavy Heavy Duty Truck (Toll)', 'PTO - Dsl', '2017', '1.0'),
+	('Drive Alone', 'LDA - Dsl', '2017', '1.0'),
+	('Drive Alone', 'LDA - Elec', '2017', '1.0'),
+	('Drive Alone', 'LDA - Gas', '2017', '1.0'),
+	('Drive Alone', 'LDT1 - Dsl', '2017', '1.0'),
+	('Drive Alone', 'LDT1 - Elec', '2017', '1.0'),
+	('Drive Alone', 'LDT1 - Gas', '2017', '1.0'),
+	('Drive Alone', 'LDT2 - Dsl', '2017', '1.0'),
+	('Drive Alone', 'LDT2 - Elec', '2017', '1.0'),
+	('Drive Alone', 'LDT2 - Gas', '2017', '1.0'),
+	('Drive Alone', 'MCY - Gas', '2017', '1.0'),
+	('Drive Alone', 'MDV - Dsl', '2017', '1.0'),
+	('Drive Alone', 'MDV - Elec', '2017', '1.0'),
+	('Drive Alone', 'MDV - Gas', '2017', '1.0'),
+	('Drive Alone', 'MH - Dsl', '2017', '1.0'),
+	('Drive Alone', 'MH - Gas', '2017', '1.0'),
+	('Shared Ride 2', 'LDA - Dsl', '2017', '1.0'),
+	('Shared Ride 2', 'LDA - Elec', '2017', '1.0'),
+	('Shared Ride 2', 'LDA - Gas', '2017', '1.0'),
+	('Shared Ride 2', 'LDT1 - Dsl', '2017', '1.0'),
+	('Shared Ride 2', 'LDT1 - Elec', '2017', '1.0'),
+	('Shared Ride 2', 'LDT1 - Gas', '2017', '1.0'),
+	('Shared Ride 2', 'LDT2 - Dsl', '2017', '1.0'),
+	('Shared Ride 2', 'LDT2 - Elec', '2017', '1.0'),
+	('Shared Ride 2', 'LDT2 - Gas', '2017', '1.0'),
+	('Shared Ride 2', 'MCY - Gas', '2017', '1.0'),
+	('Shared Ride 2', 'MDV - Dsl', '2017', '1.0'),
+	('Shared Ride 2', 'MDV - Elec', '2017', '1.0'),
+	('Shared Ride 2', 'MDV - Gas', '2017', '1.0'),
+	('Shared Ride 2', 'MH - Dsl', '2017', '1.0'),
+	('Shared Ride 2', 'MH - Gas', '2017', '1.0'),
+	('Shared Ride 3+', 'LDA - Dsl', '2017', '1.0'),
+	('Shared Ride 3+', 'LDA - Elec', '2017', '1.0'),
+	('Shared Ride 3+', 'LDA - Gas', '2017', '1.0'),
+	('Shared Ride 3+', 'LDT1 - Dsl', '2017', '1.0'),
+	('Shared Ride 3+', 'LDT1 - Elec', '2017', '1.0'),
+	('Shared Ride 3+', 'LDT1 - Gas', '2017', '1.0'),
+	('Shared Ride 3+', 'LDT2 - Dsl', '2017', '1.0'),
+	('Shared Ride 3+', 'LDT2 - Elec', '2017', '1.0'),
+	('Shared Ride 3+', 'LDT2 - Gas', '2017', '1.0'),
+	('Shared Ride 3+', 'MCY - Gas', '2017', '1.0'),
+	('Shared Ride 3+', 'MDV - Dsl', '2017', '1.0'),
+	('Shared Ride 3+', 'MDV - Elec', '2017', '1.0'),
+	('Shared Ride 3+', 'MDV - Gas', '2017', '1.0'),
+	('Shared Ride 3+', 'MH - Dsl', '2017', '1.0'),
+	('Shared Ride 3+', 'MH - Gas', '2017', '1.0'),
+	('Light Heavy Duty Truck', 'LHD1 - Dsl', '2017', '1.0'),
+	('Light Heavy Duty Truck', 'LHD1 - Gas', '2017', '1.0'),
+	('Light Heavy Duty Truck', 'LHD2 - Dsl', '2017', '1.0'),
+	('Light Heavy Duty Truck', 'LHD2 - Gas', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Ag - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 CAIRP Heavy - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 CAIRP Small - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Instate Construction Heavy - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Instate Construction Small - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Instate Heavy - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Instate Small - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 OOS Heavy - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 OOS Small - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Public - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6 Utility - Dsl', '2017', '1.0'),
+	('Medium Heavy Duty Truck', 'T6TS - Gas', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Ag - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 CAIRP - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 CAIRP Construction - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 NNOOS - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 NOOS - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Other Port - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 POLA - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Public - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Single - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Single Construction - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 SWCV - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 SWCV - NG', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Tractor - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Tractor Construction - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7 Utility - Dsl', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'T7IS - Gas', '2017', '1.0'),
+	('Heavy Heavy Duty Truck', 'PTO - Dsl', '2017', '1.0'),
 	('Highway Network Preload - Bus', 'UBUS - Dsl', '2017', '1.0'),
 	('Highway Network Preload - Bus', 'UBUS - Gas', '2017', '1.0'),
 	('Highway Network Preload - Bus', 'UBUS - NG', '2017', '1.0')
@@ -2760,8 +2605,7 @@ DROP PROCEDURE IF EXISTS [emfac].[sp_emfac_2014_vmt]
 GO
 
 CREATE PROCEDURE [emfac].[sp_emfac_2014_vmt]
-	@scenario_id int,  -- ABM scenario in [dimension].[scenario]
-	@bus_pce float = 3.0
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
 AS
 
 /**
@@ -2789,12 +2633,7 @@ BEGIN
 		,'San Diego (SD)' AS [Sub-Area]
 		,@year AS [Cal_Year]
 		,[fn_emfac_2014_vmt_map].[emfac_vehicle_class] AS [Veh_Tech]
-		,SUM(([hwy_flow_mode].[flow] /
-                (CASE WHEN [mode].[mode_description] = 'Highway Network Preload - Bus'
-                THEN @bus_pce
-                ELSE 1.0 END)) *
-             [hwy_link].[length_mile] *
-             [fn_emfac_2014_vmt_map].[value]) AS [New Total VMT]
+		,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2014_vmt_map].[value]) AS [New Total VMT]
 	FROM
 		[fact].[hwy_flow_mode]
 	INNER JOIN 
@@ -2831,6 +2670,7 @@ BEGIN
 		[emfac].[fn_get_unassigned_vmt]('2014', '1.0', @year)
 	ORDER BY
 		[emfac_vehicle_class]
+OPTION(MAXDOP 1)
 END
 GO
 
@@ -2846,8 +2686,7 @@ DROP PROCEDURE IF EXISTS [emfac].[sp_emfac_2017_vmt]
 GO
 
 CREATE PROCEDURE [emfac].[sp_emfac_2017_vmt]
-	@scenario_id int,  -- ABM scenario in [dimension].[scenario]
-	@bus_pce float = 3.0
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
 AS
 
 /**
@@ -2875,11 +2714,7 @@ BEGIN
 		,'San Diego (SD)' AS [Sub-Area]
 		,@year AS [Cal_Year]
 		,[fn_emfac_2017_vmt_map].[emfac_vehicle_class] AS [Veh_Tech]
-		,SUM(([hwy_flow_mode].[flow] /
-             (CASE WHEN [mode].[mode_description] = 'Highway Network Preload - Bus'
-             THEN @bus_pce ELSE 1.0 END)) *
-             [hwy_link].[length_mile] *
-             [fn_emfac_2017_vmt_map].[value]) AS [New Total VMT]
+		,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2017_vmt_map].[value]) AS [New Total VMT]
 	FROM
 		[fact].[hwy_flow_mode]
 	INNER JOIN 
@@ -2916,6 +2751,7 @@ BEGIN
 		[emfac].[fn_get_unassigned_vmt]('2017', '1.0', @year)
 	ORDER BY
 		[emfac_vehicle_class]
+OPTION(MAXDOP 1)
 END
 GO
 
@@ -2931,8 +2767,7 @@ DROP PROCEDURE IF EXISTS [emfac].[sp_emfac_2014_vmt_speed]
 GO
 
 CREATE PROCEDURE [emfac].[sp_emfac_2014_vmt_speed]
-	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
-	@bus_pce float = 3.0
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
 AS
 
 /**
@@ -2997,11 +2832,7 @@ BEGIN
 			[fn_emfac_2014_vmt_map].[emfac_vehicle_class]
 			,[hwy_flow_mode].[time_id]
 			,CEILING([hwy_flow].[speed] / 5) * 5 AS [speed_bin]
-			,SUM(([hwy_flow_mode].[flow] /
-                     (CASE WHEN [mode].[mode_description] = 'Highway Network Preload - Bus'
-                     THEN @bus_pce ELSE 1.0 END)) *
-                 [hwy_link].[length_mile] *
-                 [fn_emfac_2014_vmt_map].[value]) AS [vmt]
+			,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2014_vmt_map].[value]) AS [vmt]
 		FROM
 			[fact].[hwy_flow_mode]
 		INNER JOIN 
@@ -3398,8 +3229,7 @@ DROP PROCEDURE IF EXISTS [emfac].[sp_emfac_2017_vmt_speed]
 GO
 
 CREATE PROCEDURE [emfac].[sp_emfac_2017_vmt_speed]
-	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
-	@bus_pce float = 3.0
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
 AS
 
 /**
@@ -3463,11 +3293,7 @@ BEGIN
 			[fn_emfac_2017_vmt_map].[emfac_vehicle_class]
 			,[hwy_flow_mode].[time_id]
 			,CEILING([hwy_flow].[speed] / 5) * 5 AS [speed_bin]
-			,SUM(([hwy_flow_mode].[flow] /
-                    (CASE   WHEN [mode].[mode_description] = 'Highway Network Preload - Bus'
-                            THEN @bus_pce
-                            ELSE 1.0 END)) *
-                    [hwy_link].[length_mile] * [fn_emfac_2017_vmt_map].[value]) AS [vmt]
+			,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2017_vmt_map].[value]) AS [vmt]
 		FROM
 			[fact].[hwy_flow_mode]
 		INNER JOIN 

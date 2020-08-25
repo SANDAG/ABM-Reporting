@@ -20,9 +20,9 @@ The build scripts to create the general reporting database are found in **sql\db
 All Python and SQL objects necessary to create inputs to EMFAC from the Activity-Based Model are included in this repository. These include SQL objects at **sql\emfac** that are built to the ABM general reporting database as well as Python scripts and the environment necessary to run them at **python\emfac**.
 
 
-### fed_rtp_20
+### rp_2021
 
-All Excel, Python, and SQL objects necessary to output reporting metrics for the Federal 2020 Regional Transportation Plan are included in this repository. These include SQL objects at **sql\fed_rtp_20** that are built to the ABM general reporting database, Python scripts and the environment necessary to run them at **python\fed_rtp_20**, and an Excel template populated by a Python script at **resources\fed_rtp_20\templates**. 
+All Excel, Python, and SQL objects necessary to output reporting metrics for the 2021 Regional Transportation Plan are included in this repository. These include SQL objects at **sql\rp_2021** that are built to the ABM general reporting database, Python scripts and the environment necessary to run them at **python\rp_2021**, and an Excel template populated by a Python script at **resources\rp_2021\templates**. 
 
 
 ### sensitivity
