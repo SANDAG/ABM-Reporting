@@ -3849,8 +3849,8 @@ GRANT VIEW DEFINITION ON SCHEMA :: [rp_2021] TO [rp_2021_user];
 DENY DELETE ON [rp_2021].[particulate_matter_grid] TO [rp_2021_user];
 DENY INSERT ON [rp_2021].[particulate_matter_grid] TO [rp_2021_user];
 DENY UPDATE ON [rp_2021].[particulate_matter_grid] TO [rp_2021_user];
--- deny insert and update on [rp_2021].[pm_results] so user can only
+-- deny insert and update on [rp_2021].[results] so user can only
 -- add new information via stored procedures, allow deletes
-GRANT DELETE ON [rp_2021].[pm_results] TO [rp_2021_user];
-DENY INSERT ON [rp_2021].[pm_results] TO [rp_2021_user];
-DENY UPDATE ON [rp_2021].[pm_results] TO [rp_2021_user];
+GRANT DELETE ON [rp_2021].[results] TO [rp_2021_user];
+DENY INSERT ON [rp_2021].[results] TO [rp_2021_user];
+DENY UPDATE ON [rp_2021].[results] TO [rp_2021_user];
