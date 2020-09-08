@@ -37,36 +37,965 @@ GO
 
 
 
--- create table holding results of rp_2021 Performance Measures --------------
-DROP TABLE IF EXISTS [rp_2021].[pm_results]
-/**	
+-- create table holding series 13 TAZ freight distribution hubs --------------
+DROP TABLE IF EXISTS [rp_2021].[freight_distribution_hubs]
+/**
 summary:   >
-    Creates table holding results from 2021 RP Performance Measures. This
-    holds all outputs except for interim results used as inputs for other
-    processes from:
-        [rp_2021].[sp_particulate_matter_ctemfac_2014]
-        [rp_2021].[sp_particulate_matter_ctemfac_2017]
+    Create table holding series 13 TAZs identified as freight distribution
+    hubs. These are used in the stored procedure [rp_2021].[sp_pm_ad7] for
+    the 2021 Regional Plan Performance Measure AD-7, the average Truck and
+    Commercial Vehicle travel times to and around regional gateways and
+    distribution hubs (minutes).
 **/
 BEGIN
-    -- create table to hold results of 2020 federal rtp peformance measures
-	CREATE TABLE [rp_2021].[pm_results] (
+    -- create table to hold freight distribution hubs
+	CREATE TABLE [rp_2021].[freight_distribution_hubs] (
+        [taz_13] nvarchar(20) NOT NULL,
+		CONSTRAINT pk_freightdistributionhubs PRIMARY KEY ([taz_13]))
+	WITH (DATA_COMPRESSION = PAGE)
+
+    -- insert data into freight distribution hub table
+    INSERT INTO [rp_2021].[freight_distribution_hubs] VALUES
+        ('1'),
+        ('2'),
+        ('3'),
+        ('4'),
+        ('5'),
+        ('6'),
+        ('7'),
+        ('8'),
+        ('9'),
+        ('10'),
+        ('11'),
+        ('12'),
+        ('736'),
+        ('772'),
+        ('785'),
+        ('792'),
+        ('812'),
+        ('814'),
+        ('820'),
+        ('822'),
+        ('824'),
+        ('830'),
+        ('832'),
+        ('834'),
+        ('836'),
+        ('839'),
+        ('844'),
+        ('845'),
+        ('847'),
+        ('848'),
+        ('850'),
+        ('856'),
+        ('857'),
+        ('858'),
+        ('860'),
+        ('862'),
+        ('866'),
+        ('867'),
+        ('868'),
+        ('871'),
+        ('874'),
+        ('877'),
+        ('881'),
+        ('883'),
+        ('884'),
+        ('887'),
+        ('889'),
+        ('890'),
+        ('892'),
+        ('893'),
+        ('894'),
+        ('897'),
+        ('898'),
+        ('899'),
+        ('904'),
+        ('907'),
+        ('908'),
+        ('911'),
+        ('915'),
+        ('916'),
+        ('918'),
+        ('920'),
+        ('922'),
+        ('923'),
+        ('925'),
+        ('927'),
+        ('928'),
+        ('930'),
+        ('931'),
+        ('934'),
+        ('936'),
+        ('937'),
+        ('938'),
+        ('939'),
+        ('940'),
+        ('941'),
+        ('942'),
+        ('944'),
+        ('946'),
+        ('947'),
+        ('950'),
+        ('951'),
+        ('953'),
+        ('956'),
+        ('957'),
+        ('958'),
+        ('961'),
+        ('962'),
+        ('963'),
+        ('964'),
+        ('965'),
+        ('968'),
+        ('969'),
+        ('970'),
+        ('973'),
+        ('974'),
+        ('976'),
+        ('978'),
+        ('981'),
+        ('982'),
+        ('983'),
+        ('985'),
+        ('986'),
+        ('987'),
+        ('988'),
+        ('989'),
+        ('991'),
+        ('992'),
+        ('993'),
+        ('994'),
+        ('995'),
+        ('996'),
+        ('997'),
+        ('998'),
+        ('1000'),
+        ('1001'),
+        ('1002'),
+        ('1006'),
+        ('1007'),
+        ('1010'),
+        ('1012'),
+        ('1013'),
+        ('1014'),
+        ('1016'),
+        ('1018'),
+        ('1020'),
+        ('1023'),
+        ('1024'),
+        ('1025'),
+        ('1026'),
+        ('1028'),
+        ('1029'),
+        ('1030'),
+        ('1031'),
+        ('1032'),
+        ('1033'),
+        ('1038'),
+        ('1039'),
+        ('1040'),
+        ('1041'),
+        ('1043'),
+        ('1044'),
+        ('1045'),
+        ('1046'),
+        ('1047'),
+        ('1049'),
+        ('1050'),
+        ('1051'),
+        ('1052'),
+        ('1055'),
+        ('1056'),
+        ('1057'),
+        ('1058'),
+        ('1060'),
+        ('1061'),
+        ('1065'),
+        ('1066'),
+        ('1068'),
+        ('1069'),
+        ('1070'),
+        ('1073'),
+        ('1075'),
+        ('1076'),
+        ('1077'),
+        ('1079'),
+        ('1080'),
+        ('1081'),
+        ('1082'),
+        ('1084'),
+        ('1086'),
+        ('1088'),
+        ('1090'),
+        ('1091'),
+        ('1093'),
+        ('1096'),
+        ('1097'),
+        ('1099'),
+        ('1100'),
+        ('1101'),
+        ('1103'),
+        ('1105'),
+        ('1109'),
+        ('1111'),
+        ('1113'),
+        ('1115'),
+        ('1121'),
+        ('1124'),
+        ('1125'),
+        ('1136'),
+        ('1138'),
+        ('1140'),
+        ('1143'),
+        ('1144'),
+        ('1145'),
+        ('1147'),
+        ('1150'),
+        ('1154'),
+        ('1155'),
+        ('1156'),
+        ('1157'),
+        ('1160'),
+        ('1161'),
+        ('1170'),
+        ('1173'),
+        ('1174'),
+        ('1175'),
+        ('1176'),
+        ('1181'),
+        ('1182'),
+        ('1184'),
+        ('1186'),
+        ('1187'),
+        ('1188'),
+        ('1193'),
+        ('1197'),
+        ('1201'),
+        ('1205'),
+        ('1206'),
+        ('1209'),
+        ('1212'),
+        ('1213'),
+        ('1221'),
+        ('1223'),
+        ('1230'),
+        ('1235'),
+        ('1240'),
+        ('1241'),
+        ('1275'),
+        ('1419'),
+        ('1458'),
+        ('1459'),
+        ('1497'),
+        ('1502'),
+        ('1504'),
+        ('1514'),
+        ('1552'),
+        ('1554'),
+        ('1572'),
+        ('1576'),
+        ('1577'),
+        ('1583'),
+        ('1585'),
+        ('1590'),
+        ('1600'),
+        ('1627'),
+        ('1632'),
+        ('1639'),
+        ('1645'),
+        ('1646'),
+        ('1650'),
+        ('1671'),
+        ('1674'),
+        ('1678'),
+        ('1680'),
+        ('1681'),
+        ('1683'),
+        ('1684'),
+        ('1687'),
+        ('1688'),
+        ('1691'),
+        ('1693'),
+        ('1695'),
+        ('1699'),
+        ('1702'),
+        ('1704'),
+        ('1711'),
+        ('1712'),
+        ('1716'),
+        ('1718'),
+        ('1719'),
+        ('1720'),
+        ('1726'),
+        ('1728'),
+        ('1729'),
+        ('1731'),
+        ('1740'),
+        ('1762'),
+        ('1898'),
+        ('1901'),
+        ('1906'),
+        ('1908'),
+        ('1911'),
+        ('1912'),
+        ('1916'),
+        ('1917'),
+        ('1922'),
+        ('1925'),
+        ('1926'),
+        ('1927'),
+        ('1928'),
+        ('1929'),
+        ('1930'),
+        ('1933'),
+        ('1937'),
+        ('1945'),
+        ('1948'),
+        ('1950'),
+        ('1952'),
+        ('1961'),
+        ('1964'),
+        ('1971'),
+        ('1979'),
+        ('1982'),
+        ('1984'),
+        ('1991'),
+        ('1992'),
+        ('1993'),
+        ('1997'),
+        ('2003'),
+        ('2004'),
+        ('2008'),
+        ('2014'),
+        ('2021'),
+        ('2022'),
+        ('2062'),
+        ('2069'),
+        ('2086'),
+        ('2091'),
+        ('2097'),
+        ('2098'),
+        ('2103'),
+        ('2104'),
+        ('2105'),
+        ('2107'),
+        ('2110'),
+        ('2111'),
+        ('2113'),
+        ('2114'),
+        ('2115'),
+        ('2116'),
+        ('2119'),
+        ('2120'),
+        ('2121'),
+        ('2122'),
+        ('2123'),
+        ('2126'),
+        ('2127'),
+        ('2129'),
+        ('2131'),
+        ('2132'),
+        ('2134'),
+        ('2135'),
+        ('2136'),
+        ('2137'),
+        ('2138'),
+        ('2142'),
+        ('2143'),
+        ('2144'),
+        ('2145'),
+        ('2148'),
+        ('2149'),
+        ('2150'),
+        ('2151'),
+        ('2152'),
+        ('2153'),
+        ('2155'),
+        ('2156'),
+        ('2157'),
+        ('2159'),
+        ('2161'),
+        ('2162'),
+        ('2164'),
+        ('2166'),
+        ('2167'),
+        ('2168'),
+        ('2170'),
+        ('2171'),
+        ('2172'),
+        ('2173'),
+        ('2175'),
+        ('2176'),
+        ('2177'),
+        ('2178'),
+        ('2179'),
+        ('2181'),
+        ('2182'),
+        ('2183'),
+        ('2186'),
+        ('2188'),
+        ('2189'),
+        ('2190'),
+        ('2191'),
+        ('2193'),
+        ('2194'),
+        ('2195'),
+        ('2196'),
+        ('2197'),
+        ('2198'),
+        ('2201'),
+        ('2202'),
+        ('2204'),
+        ('2207'),
+        ('2208'),
+        ('2209'),
+        ('2210'),
+        ('2212'),
+        ('2213'),
+        ('2215'),
+        ('2218'),
+        ('2222'),
+        ('2227'),
+        ('2228'),
+        ('2233'),
+        ('2234'),
+        ('2236'),
+        ('2242'),
+        ('2246'),
+        ('2247'),
+        ('2248'),
+        ('2249'),
+        ('2250'),
+        ('2252'),
+        ('2253'),
+        ('2254'),
+        ('2257'),
+        ('2258'),
+        ('2264'),
+        ('2265'),
+        ('2266'),
+        ('2269'),
+        ('2272'),
+        ('2275'),
+        ('2279'),
+        ('2282'),
+        ('2283'),
+        ('2284'),
+        ('2286'),
+        ('2300'),
+        ('2376'),
+        ('2377'),
+        ('2409'),
+        ('2433'),
+        ('2439'),
+        ('2441'),
+        ('2448'),
+        ('2449'),
+        ('2451'),
+        ('2452'),
+        ('2456'),
+        ('2460'),
+        ('2463'),
+        ('2470'),
+        ('2471'),
+        ('2473'),
+        ('2474'),
+        ('2475'),
+        ('2476'),
+        ('2485'),
+        ('2486'),
+        ('2492'),
+        ('2493'),
+        ('2494'),
+        ('2496'),
+        ('2497'),
+        ('2498'),
+        ('2500'),
+        ('2501'),
+        ('2510'),
+        ('2512'),
+        ('2517'),
+        ('2533'),
+        ('2537'),
+        ('2542'),
+        ('2545'),
+        ('2546'),
+        ('2549'),
+        ('2554'),
+        ('2557'),
+        ('2559'),
+        ('2560'),
+        ('2562'),
+        ('2563'),
+        ('2564'),
+        ('2568'),
+        ('2580'),
+        ('2581'),
+        ('2583'),
+        ('2586'),
+        ('2588'),
+        ('2589'),
+        ('2590'),
+        ('2591'),
+        ('2592'),
+        ('2594'),
+        ('2599'),
+        ('2601'),
+        ('2609'),
+        ('2610'),
+        ('2616'),
+        ('2618'),
+        ('2620'),
+        ('2624'),
+        ('2626'),
+        ('2628'),
+        ('2631'),
+        ('2637'),
+        ('2639'),
+        ('2643'),
+        ('2645'),
+        ('2646'),
+        ('2647'),
+        ('2648'),
+        ('2649'),
+        ('2655'),
+        ('2660'),
+        ('2661'),
+        ('2664'),
+        ('2667'),
+        ('2668'),
+        ('2670'),
+        ('2671'),
+        ('2680'),
+        ('2691'),
+        ('2693'),
+        ('2694'),
+        ('2698'),
+        ('2700'),
+        ('2701'),
+        ('2702'),
+        ('2710'),
+        ('2713'),
+        ('2721'),
+        ('2724'),
+        ('2725'),
+        ('2747'),
+        ('2748'),
+        ('2749'),
+        ('2756'),
+        ('2761'),
+        ('2762'),
+        ('2789'),
+        ('2792'),
+        ('2801'),
+        ('2802'),
+        ('2804'),
+        ('2805'),
+        ('2806'),
+        ('2807'),
+        ('2808'),
+        ('2812'),
+        ('2860'),
+        ('2861'),
+        ('2862'),
+        ('2863'),
+        ('2875'),
+        ('2876'),
+        ('2894'),
+        ('2900'),
+        ('2919'),
+        ('2921'),
+        ('2927'),
+        ('2928'),
+        ('2933'),
+        ('2962'),
+        ('2963'),
+        ('2965'),
+        ('2966'),
+        ('3215'),
+        ('3252'),
+        ('3253'),
+        ('3255'),
+        ('3259'),
+        ('3261'),
+        ('3272'),
+        ('3274'),
+        ('3277'),
+        ('3281'),
+        ('3289'),
+        ('3290'),
+        ('3311'),
+        ('3312'),
+        ('3313'),
+        ('3314'),
+        ('3315'),
+        ('3317'),
+        ('3337'),
+        ('3340'),
+        ('3342'),
+        ('3343'),
+        ('3347'),
+        ('3363'),
+        ('3375'),
+        ('3378'),
+        ('3379'),
+        ('3383'),
+        ('3385'),
+        ('3388'),
+        ('3390'),
+        ('3392'),
+        ('3393'),
+        ('3395'),
+        ('3396'),
+        ('3397'),
+        ('3398'),
+        ('3399'),
+        ('3400'),
+        ('3401'),
+        ('3402'),
+        ('3403'),
+        ('3412'),
+        ('3433'),
+        ('3445'),
+        ('3446'),
+        ('3457'),
+        ('3458'),
+        ('3461'),
+        ('3464'),
+        ('3469'),
+        ('3470'),
+        ('3479'),
+        ('3493'),
+        ('3497'),
+        ('3498'),
+        ('3501'),
+        ('3502'),
+        ('3504'),
+        ('3505'),
+        ('3514'),
+        ('3517'),
+        ('3520'),
+        ('3521'),
+        ('3523'),
+        ('3524'),
+        ('3527'),
+        ('3528'),
+        ('3535'),
+        ('3536'),
+        ('3537'),
+        ('3540'),
+        ('3543'),
+        ('3549'),
+        ('3556'),
+        ('3563'),
+        ('3569'),
+        ('3570'),
+        ('3576'),
+        ('3581'),
+        ('3592'),
+        ('3593'),
+        ('3595'),
+        ('3597'),
+        ('3606'),
+        ('3611'),
+        ('3628'),
+        ('3631'),
+        ('3643'),
+        ('3652'),
+        ('3660'),
+        ('3664'),
+        ('3668'),
+        ('3671'),
+        ('3675'),
+        ('3683'),
+        ('3692'),
+        ('3694'),
+        ('3695'),
+        ('3697'),
+        ('3723'),
+        ('3730'),
+        ('3738'),
+        ('3748'),
+        ('3760'),
+        ('3785'),
+        ('3789'),
+        ('3798'),
+        ('4079'),
+        ('4080'),
+        ('4081'),
+        ('4082'),
+        ('4083'),
+        ('4086'),
+        ('4087'),
+        ('4088'),
+        ('4089'),
+        ('4090'),
+        ('4091'),
+        ('4092'),
+        ('4093'),
+        ('4096'),
+        ('4097'),
+        ('4107'),
+        ('4108'),
+        ('4109'),
+        ('4110'),
+        ('4111'),
+        ('4112'),
+        ('4113'),
+        ('4114'),
+        ('4115'),
+        ('4116'),
+        ('4117'),
+        ('4118'),
+        ('4130'),
+        ('4131'),
+        ('4134'),
+        ('4135'),
+        ('4136'),
+        ('4137'),
+        ('4138'),
+        ('4139'),
+        ('4140'),
+        ('4141'),
+        ('4142'),
+        ('4143'),
+        ('4144'),
+        ('4145'),
+        ('4146'),
+        ('4153'),
+        ('4154'),
+        ('4158'),
+        ('4159'),
+        ('4160'),
+        ('4161'),
+        ('4162'),
+        ('4163'),
+        ('4164'),
+        ('4165'),
+        ('4166'),
+        ('4167'),
+        ('4172'),
+        ('4174'),
+        ('4176'),
+        ('4177'),
+        ('4178'),
+        ('4179'),
+        ('4180'),
+        ('4181'),
+        ('4182'),
+        ('4183'),
+        ('4185'),
+        ('4195'),
+        ('4196'),
+        ('4198'),
+        ('4199'),
+        ('4200'),
+        ('4201'),
+        ('4202'),
+        ('4203'),
+        ('4204'),
+        ('4205'),
+        ('4207'),
+        ('4212'),
+        ('4213'),
+        ('4214'),
+        ('4215'),
+        ('4216'),
+        ('4224'),
+        ('4227'),
+        ('4228'),
+        ('4231'),
+        ('4232'),
+        ('4233'),
+        ('4234'),
+        ('4235'),
+        ('4236'),
+        ('4237'),
+        ('4239'),
+        ('4241'),
+        ('4251'),
+        ('4255'),
+        ('4257'),
+        ('4258'),
+        ('4259'),
+        ('4274'),
+        ('4275'),
+        ('4279'),
+        ('4281'),
+        ('4285'),
+        ('4286'),
+        ('4287'),
+        ('4290'),
+        ('4292'),
+        ('4306'),
+        ('4314'),
+        ('4395'),
+        ('4414'),
+        ('4425'),
+        ('4426'),
+        ('4427'),
+        ('4431'),
+        ('4432'),
+        ('4439'),
+        ('4441'),
+        ('4445'),
+        ('4447'),
+        ('4451'),
+        ('4456'),
+        ('4458'),
+        ('4462'),
+        ('4465'),
+        ('4468'),
+        ('4470'),
+        ('4473'),
+        ('4474'),
+        ('4477'),
+        ('4479'),
+        ('4481'),
+        ('4484'),
+        ('4491'),
+        ('4492'),
+        ('4495'),
+        ('4501'),
+        ('4502'),
+        ('4503'),
+        ('4505'),
+        ('4507'),
+        ('4509'),
+        ('4518'),
+        ('4519'),
+        ('4523'),
+        ('4525'),
+        ('4526'),
+        ('4527'),
+        ('4528'),
+        ('4531'),
+        ('4532'),
+        ('4536'),
+        ('4539'),
+        ('4544'),
+        ('4550'),
+        ('4556'),
+        ('4834'),
+        ('4835'),
+        ('4837'),
+        ('4855'),
+        ('4862'),
+        ('4865'),
+        ('4867'),
+        ('4868'),
+        ('4870'),
+        ('4871'),
+        ('4873'),
+        ('4875'),
+        ('4889'),
+        ('4890'),
+        ('4891'),
+        ('4894'),
+        ('4895'),
+        ('4897'),
+        ('4900'),
+        ('4902'),
+        ('4903'),
+        ('4908'),
+        ('4909'),
+        ('4912'),
+        ('4913'),
+        ('4915'),
+        ('4916'),
+        ('4917'),
+        ('4918'),
+        ('4920'),
+        ('4921'),
+        ('4922'),
+        ('4923'),
+        ('4924'),
+        ('4926'),
+        ('4927'),
+        ('4928'),
+        ('4929'),
+        ('4930'),
+        ('4935'),
+        ('4936'),
+        ('4937'),
+        ('4938'),
+        ('4939'),
+        ('4940'),
+        ('4941'),
+        ('4942'),
+        ('4943'),
+        ('4947'),
+        ('4948'),
+        ('4951'),
+        ('4952'),
+        ('4953'),
+        ('4954'),
+        ('4955'),
+        ('4956'),
+        ('4957'),
+        ('4958'),
+        ('4959'),
+        ('4961'),
+        ('4962'),
+        ('4964'),
+        ('4965'),
+        ('4966'),
+        ('4971'),
+        ('4972'),
+        ('4973'),
+        ('4975'),
+        ('4978'),
+        ('4980'),
+        ('4981'),
+        ('4982'),
+        ('4983'),
+        ('4984'),
+        ('4987'),
+        ('4989')
+
+    -- add table metadata
+	EXECUTE [db_meta].[add_xp] 'rp_2021.freight_distribution_hubs', 'MS_Description', 'table to hold series 13 TAZs identified as freight distribution hubs'
+    EXECUTE [db_meta].[add_xp] 'rp_2021.freight_distribution_hubs.taz_13', 'MS_Description', 'series 13 TAZ geography zones'
+END
+GO
+
+
+
+
+-- create table holding results of rp_2021 measures --------------------------
+DROP TABLE IF EXISTS [rp_2021].[results]
+/**
+summary:   >
+    Creates table holding results from 2021 regional plan measures.
+    This holds all outputs except for interim results used as inputs
+    to other processes from:
+        [rp_2021].[sp_particulate_matter_ctemfac_2014]
+        [rp_2021].[sp_particulate_matter_ctemfac_2017]
+        [rp_2021].[sp_m1_m5_destinations]
+        [rp_2021].[sp_m1_m5_populations]
+        [rp_2021].[fn_person_coc]
+**/
+BEGIN
+    -- create table to hold results of 2021 regional plan measures
+	CREATE TABLE [rp_2021].[results] (
         [scenario_id] int NOT NULL,
-		[performance_measure] nvarchar(50) NOT NULL,
+		[measure] nvarchar(100) NOT NULL,
         [metric] nvarchar(200) NOT NULL,
         [value] float NOT NULL,
         [updated_by] nvarchar(100) NOT NULL,
         [updated_date] smalldatetime NOT NULL,
-		CONSTRAINT pk_pmresults PRIMARY KEY ([scenario_id], [performance_measure], [metric]))
+		CONSTRAINT pk_results PRIMARY KEY ([scenario_id], [measure], [metric]))
 	WITH (DATA_COMPRESSION = PAGE)
 
     -- add table metadata
-	EXECUTE [db_meta].[add_xp] 'rp_2021.pm_results', 'MS_Description', 'table to hold results for 2021 rp performance measures'
-    EXECUTE [db_meta].[add_xp] 'rp_2021.pm_results.scenario_id', 'MS_Description', 'ABM scenario in ABM database [dimension].[scenario]'
-	EXECUTE [db_meta].[add_xp] 'rp_2021.pm_results.performance_measure', 'MS_Description', 'name of the performance measure'
-	EXECUTE [db_meta].[add_xp] 'rp_2021.pm_results.metric', 'MS_Description', 'metric within the performance measure'
-	EXECUTE [db_meta].[add_xp] 'rp_2021.pm_results.value', 'MS_Description', 'value of the specified metric within the performance measure'
-    EXECUTE [db_meta].[add_xp] 'rp_2021.pm_results.updated_by', 'MS_Description', 'SQL username who last updated the value of the specified metric within the performance measure'
-    EXECUTE [db_meta].[add_xp] 'rp_2021.pm_results.updated_date', 'MS_Description', 'date the value of the specified metric within the performance measure was last updated'
+	EXECUTE [db_meta].[add_xp] 'rp_2021.results', 'MS_Description', 'table to hold results for 2021 regional plan measures'
+    EXECUTE [db_meta].[add_xp] 'rp_2021.results.scenario_id', 'MS_Description', 'ABM scenario in ABM database [dimension].[scenario]'
+	EXECUTE [db_meta].[add_xp] 'rp_2021.results.measure', 'MS_Description', 'name of the regional plan measure'
+	EXECUTE [db_meta].[add_xp] 'rp_2021.results.metric', 'MS_Description', 'metric within the measure'
+	EXECUTE [db_meta].[add_xp] 'rp_2021.results.value', 'MS_Description', 'value of the specified metric within the measure'
+    EXECUTE [db_meta].[add_xp] 'rp_2021.results.updated_by', 'MS_Description', 'SQL username who last updated the value of the specified metric within the measure'
+    EXECUTE [db_meta].[add_xp] 'rp_2021.results.updated_date', 'MS_Description', 'date the value of the specified metric within the measure was last updated'
 END
 GO
 
@@ -1268,6 +2197,1601 @@ GO
 
 -- add metadata for [rp_2021].[fn_person_coc]
 EXECUTE [db_meta].[add_xp] 'rp_2021.fn_person_coc', 'MS_Description', 'return ABM synthetic population with Community of Concern (CoC) designations'
+GO
+
+
+
+
+-- create function to return Tier X transit stops ----------------------------
+DROP FUNCTION IF EXISTS [rp_2021].[fn_transit_node_tiers]
+GO
+
+CREATE FUNCTION [rp_2021].[fn_transit_node_tiers]
+(
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+)
+RETURNS TABLE
+AS
+RETURN
+/**
+summary:   >
+    Return the transit stop [near_node]/[trcov_id] for Tier 1, Tier 2, and
+    Tier 3 transit stops. Note that a single transit stop may be returned
+    multiple times under different Tiers. This is used by GIS to calculate
+    the 2021 Regional Plan Performance Meausres AD-2 and AD-3.
+
+    Tier 1: hardcoded routes 581, 582 583
+    Tier 2: rail routes (light rail and commuter)
+    Tier 3: rapid routes (freeway and arterial)
+
+revisions:
+    - None
+**/
+SELECT
+    [nodeTiers].[near_node] AS [trcov_id]
+    ,[nodeTiers].[tier]
+    ,[nodeTiersShape].[transit_stop_shape] AS [shape]
+FROM (
+    SELECT DISTINCT
+        [near_node]
+        ,CASE   WHEN [transit_route].[config] / 1000 IN (581, 582, 583) THEN 'Tier 1'
+                WHEN [transit_route].[config] / 1000 NOT IN (581, 582, 583)
+                    AND [mode_transit_route_description] IN ('Light Rail', 'Commuter Rail')
+                    THEN 'Tier 2'
+                WHEN [mode_transit_route_description] IN ('Freeway Rapid', 'Arterial Rapid')
+                    THEN 'Tier 3'
+                ELSE NULL END AS [tier]
+    FROM
+        [dimension].[transit_stop]
+    INNER JOIN
+        [dimension].[transit_route]
+    ON
+        [transit_stop].[scenario_id] = [transit_route].[scenario_id]
+        AND [transit_stop].[transit_route_id] = [transit_route].[transit_route_id]
+    INNER JOIN
+        [dimension].[mode_transit_route]
+    ON
+        [transit_route].[mode_transit_route_id] = [mode_transit_route].[mode_transit_route_id]
+    WHERE
+        [transit_stop].[scenario_id] = @scenario_id
+        AND [transit_route].[scenario_id] = @scenario_id
+        AND [mode_transit_route_description] NOT IN ('Premium Express Bus', 'Express Bus', 'Local Bus')
+    ) AS [nodeTiers]
+INNER JOIN (
+    SELECT
+	    [transit_stop].[near_node]
+        ,[transit_stop].[transit_stop_shape]
+    FROM
+	    [dimension].[transit_stop]
+    INNER JOIN (
+        SELECT
+		    [transit_stop].[scenario_id]
+            ,[near_node]
+            ,MIN([stop_id]) AS [stop_id]
+	    FROM
+		    [dimension].[transit_stop]
+	    INNER JOIN
+		    [dimension].[transit_route]
+	    ON
+		    [transit_stop].[scenario_id] = [transit_route].[scenario_id]
+	        AND [transit_stop].[transit_route_id] = [transit_route].[transit_route_id]
+	    INNER JOIN
+		    [dimension].[mode_transit_route]
+	    ON
+		    [transit_route].[mode_transit_route_id] = [mode_transit_route].[mode_transit_route_id]
+	    WHERE
+		    [transit_stop].[scenario_id] = @scenario_id
+            AND [transit_route].[scenario_id] = @scenario_id
+		    AND [mode_transit_route_description] NOT IN ('Premium Express Bus', 'Express Bus', 'Local Bus')
+	    GROUP BY
+		    [transit_stop].scenario_id, near_node
+	    ) AS [minStop]
+    ON
+	    [transit_stop].[scenario_id] = [minStop].[scenario_id]
+	    AND [transit_stop].[stop_id] = [minStop].[stop_id]
+) AS [nodeTiersShape]
+ON
+    [nodeTiers].[near_node] = [nodeTiersShape].[near_node]
+
+GO
+
+-- add metadata for [rp_2021].[fn_transit_node_tiers]
+EXECUTE [db_meta].[add_xp] 'rp_2021.fn_transit_node_tiers', 'MS_Description', 'inline function returning list of all Tier <<1,2,3>> transit stop nodes used in performance measures AD-2 and AD-3'
+GO
+
+
+
+
+-- create destination stored procedure for performance measures M1 and M5 ----
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_m1_m5_destinations]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_m1_m5_destinations]
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+AS
+/**
+summary:   >
+    Destinations at the MGRA level used in calculations for the 2021 Regional
+    Plan Main Performance Measures M1 and M5. Allows aggregation to MGRA or
+    TAZ level for both transit and auto accessibility.
+**/
+SET NOCOUNT ON;
+
+SELECT
+    CONVERT(integer, [geography].[mgra_13]) AS [mgra]
+	,CONVERT(integer, [geography].[taz_13]) AS [taz]
+    ,ISNULL([mgra_tiers].[tier], 0) AS [employmentCenterTier]  -- used in PM M-5-a and M-5-b
+	,[emp_health] AS [empHealth]  -- used in pm M-1-c
+	,[parkactive] AS [parkActive]  -- used in pm M-1-b, indicator > .5
+	,[emp_retail] AS [empRetail]  -- used in pm M-1-a
+    ,[collegeenroll] + [othercollegeenroll] AS [higherLearningEnrollment]  -- used in pm M-5-c
+FROM
+	[fact].[mgra_based_input]
+INNER JOIN
+	[dimension].[geography]
+ON
+	[mgra_based_input].[geography_id] = [geography].[geography_id]
+LEFT OUTER JOIN (  -- get indicators if MGRAs in Tier 1-4 employment centers
+    SELECT
+        [mgra_13],
+        [tier]
+    FROM OPENQUERY(
+	    [sql2014a8],
+	    'SELECT
+            [mgra_13]
+            ,[tier]
+         FROM
+            [employment].[employment_centers].[fn_get_mgra_xref](1)
+         WHERE
+            [tier] IN (1,2,3,4)')) AS [mgra_tiers]
+ON
+	[geography].[mgra_13] = CONVERT(nvarchar, [mgra_tiers].[mgra_13])
+WHERE
+	[mgra_based_input].[scenario_id] = @scenario_id
+GO
+
+-- add metadata for [rp_2021].[sp_m1_m5_destinations]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_m1_m5_destinations', 'MS_Description', 'main performance measures M-1 and M-5 destinations'
+GO
+
+
+
+
+-- create population stored procedure for performance measures M1 and M5 -----
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_m1_m5_populations]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_m1_m5_populations]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+	@age_18_plus bit = 0  -- 1/0 switch to limit population to aged 18+
+AS
+/**
+summary:   >
+    Population at the MGRA level used in calculations for the 2021 Regional
+    Plan Main Performance Measures M1 and M5. Allows aggregation to MGRA
+	or TAZ level for both transit and auto accessibility, optional restriction
+	to 18+ for employment and education metrics. Also includes Community of
+    Concern designations.
+**/
+SET NOCOUNT ON;
+
+SELECT
+	CONVERT(integer, [geography_household_location].[household_location_mgra_13]) AS [mgra]
+	,CONVERT(integer, [geography_household_location].[household_location_taz_13]) AS [taz]
+	,COUNT([fn_person_coc].[person_id]) AS [pop]
+	,SUM(CASE   WHEN [fn_person_coc].[senior] = 'Senior'
+                THEN 1 ELSE 0 END) AS [popSenior]
+    ,SUM(CASE   WHEN [fn_person_coc].[senior] = 'Non-Senior'
+                THEN 1 ELSE 0 END) AS [popNonSenior]
+    ,SUM(CASE   WHEN [fn_person_coc].[minority] = 'Minority'
+                THEN 1 ELSE 0 END) AS [popMinority]
+    ,SUM(CASE   WHEN [fn_person_coc].[minority] = 'Non-Minority'
+                THEN 1 ELSE 0 END) AS [popNonMinority]
+    ,SUM(CASE   WHEN [fn_person_coc].[low_income] = 'Low Income'
+                THEN 1 ELSE 0 END) AS [popLowIncome]
+    ,SUM(CASE   WHEN [fn_person_coc].[low_income] = 'Non-Low Income'
+                THEN 1 ELSE 0 END) AS [popNonLowIncome]
+FROM
+	[rp_2021].[fn_person_coc] (@scenario_id)
+INNER JOIN
+    [dimension].[person]
+ON
+    [fn_person_coc].[scenario_id] = [person].[scenario_id]
+	AND [fn_person_coc].[person_id] = [person].[person_id]
+INNER JOIN
+	[dimension].[household]
+ON
+	[fn_person_coc].[scenario_id] = [household].[scenario_id]
+	AND [fn_person_coc].[household_id] = [household].[household_id]
+INNER JOIN
+	[dimension].[geography_household_location]
+ON
+	[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+WHERE
+    [person].[scenario_id] = @scenario_id
+	AND [household].[scenario_id] = @scenario_id
+	AND [person].[person_id] > 0  -- remove Not Applicable values
+	AND [household].[household_id] > 0  -- remove Not Applicable values
+	AND ((@age_18_plus = 1 AND [person].[age] >= 18)
+		OR @age_18_plus = 0)  -- if age 18+ option is selected restrict population to individuals age 18 or older
+GROUP BY
+	[geography_household_location].[household_location_mgra_13]
+	,[geography_household_location].[household_location_taz_13]
+GO
+
+-- add metadata for [rp_2021].[sp_m1_m5_populations]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_m1_m5_populations', 'MS_Description', 'main performance measures M-1 and M-5 populations'
+GO
+
+
+
+
+-- create stored procedure for performance measure AD-1 ----------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad1]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_pm_ad1]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 1,  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+	@work bit = 0,  -- 1/0  switch to limit trip purpose to work
+    @peak_period bit = 0  -- 1/0 switch to limit trip start to ABM 5 TOD peak
+        -- period time periods (AM Peak and PM Peak)
+AS
+
+/**
+summary:   >
+    2021 Regional Plan Performance Measure AD-1 Mode Share, Percent of
+    person-trips by mode with option to filter to work purpose trips (defined
+    as outbound work tour where the mode is determined by the SANDAG tour
+    journey mode hierarchy) and/or to trips made in the peak period (ABM 5 TOD
+    AM Peak and PM Peak periods) for a given ABM scenario.
+
+filters:   >
+    [model_trip].[model_trip_description] IN ('Individual', 'Internal-External','Joint')
+        ABM resident sub-models
+    [tour].[tour_category] = 'Mandatory'
+         part of AND condition used if option selected to filter trips to
+         outbound work-tour destination only
+    [purpose_trip_destination].[purpose_trip_destination_description] = 'Work'
+        part of AND condition used if option selected to filter trips to
+        outbound work-tour destination only
+    [time_trip_start].[trip_start_abm_5_tod] IN (2, 4)
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+BEGIN
+SET NOCOUNT ON;
+
+-- create name of the Performance Measure based on options selected
+DECLARE @measure nvarchar(40)
+IF(@work = 0 AND @peak_period = 0)
+    SET @measure  = 'AD-1 - All Trips'
+IF(@work = 0 AND @peak_period = 1)
+    SET @measure = 'AD-1 - All Peak Period Trips'
+IF(@work = 1 AND @peak_period = 0)
+    SET @measure = 'AD-1 - Outbound Work Trips'
+IF(@work = 1 AND @peak_period = 1)
+    SET @measure = 'AD-1 - Peak Period Outbound Work Trips'
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove AD-1 result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = @measure
+
+
+    -- create table variable to hold result set
+    DECLARE @aggregated_trips TABLE (
+	    [mode] nchar(15) NOT NULL,
+	    [person_trips] float NOT NULL)
+
+
+    -- if work option is not selected then get person trips by mode
+    -- for resident models only (Individual, Internal-External, Joint)
+    -- filtered by trip start time in peak period if option is selected
+    IF(@work = 0)
+    BEGIN
+        INSERT INTO @aggregated_trips
+        SELECT
+	        ISNULL(CASE WHEN [mode_trip].[mode_aggregate_trip_description] IN ('School Bus',
+                                                                               'Taxi',
+                                                                               'Non-Pooled TNC',
+                                                                               'Pooled TNC')
+                        THEN 'Other'
+                        WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Bike', 'Super-Walk', 'Walk')
+                        THEN 'Bike & Walk'
+                        WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Shared Ride 2', 'Shared Ride 3+')
+                        THEN 'Carpool'
+                        ELSE [mode_trip].[mode_aggregate_trip_description]
+                        END, 'Total') AS [mode]
+	        ,SUM(ISNULL([weight_person_trip], 0)) AS [person_trips]
+        FROM
+	        [fact].[person_trip]
+        INNER JOIN
+	        [dimension].[model_trip]
+        ON
+	        [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+        INNER JOIN
+	        [dimension].[mode_trip]
+        ON
+	        [person_trip].[mode_trip_id] = [mode_trip].[mode_trip_id]
+        INNER JOIN
+            [dimension].[time_trip_start]
+        ON
+            [person_trip].[time_trip_start_id] = [time_trip_start].[time_trip_start_id]
+        WHERE
+	        [person_trip].[scenario_id] = @scenario_id
+            -- resident models only
+	        AND [model_trip].[model_trip_description] IN ('Individual',
+												          'Internal-External',
+												          'Joint')
+            -- if peak period selected filter trips to ABM 5 TOD Peak Periods
+            AND (
+                @peak_period = 0 OR
+                (@peak_period = 1 AND [time_trip_start].[trip_start_abm_5_tod] IN ('2', '4'))
+                )
+        GROUP BY
+	        CASE WHEN [mode_trip].[mode_aggregate_trip_description] IN ('School Bus',
+                                                                        'Taxi',
+                                                                        'Non-Pooled TNC',
+                                                                        'Pooled TNC')
+                        THEN 'Other'
+                        WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Bike', 'Super-Walk', 'Walk')
+                        THEN 'Bike & Walk'
+                        WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Shared Ride 2', 'Shared Ride 3+')
+                        THEN 'Carpool'
+                        ELSE [mode_trip].[mode_aggregate_trip_description]
+                        END
+        WITH ROLLUP
+    END
+
+
+    -- if work option is selected
+    -- get outbound work tour journeys
+    -- for resident models only (Individual, Internal-External, Joint)
+    -- filtered by tour origin or tour destination in UATS district if option selected
+    -- mode is determined by the SANDAG tour mode hierarchy
+    -- person trip weight set to final work destinating person trip weight
+    IF(@work = 1)
+    BEGIN
+        INSERT INTO @aggregated_trips
+        SELECT
+            ISNULL(CASE WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('School Bus',
+                                                                                             'Taxi',
+                                                                                             'Non-Pooled TNC',
+                                                                                             'Pooled TNC')
+                        THEN 'Other'
+                        WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Bike', 'Super-Walk', 'Walk')
+                        THEN 'Bike & Walk'
+                        WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Shared Ride 2', 'Shared Ride 3+')
+                        THEN 'Carpool'
+                        ELSE [fn_resident_tourjourney_mode].[mode_aggregate_description]
+                        END, 'Total') AS [mode]
+            ,SUM(ISNULL([weight_person_trip], 0)) AS [person_trips]
+        FROM
+	        [fact].[person_trip]
+        INNER JOIN
+            [dimension].[tour]
+        ON
+            [person_trip].[scenario_id] = [tour].[scenario_id]
+            AND [person_trip].[tour_id] = [tour].[tour_id]
+        INNER JOIN
+            [report].[fn_resident_tourjourney_mode](@scenario_id)
+        ON
+            [person_trip].[scenario_id] = [fn_resident_tourjourney_mode].[scenario_id]
+            AND [person_trip].[tour_id] = [fn_resident_tourjourney_mode].[tour_id]
+            AND [person_trip].[inbound_id] = [fn_resident_tourjourney_mode].[inbound_id]
+        INNER JOIN
+            [dimension].[inbound]
+        ON
+            [person_trip].[inbound_id] = [inbound].[inbound_id]
+        INNER JOIN
+	        [dimension].[model_trip]
+        ON
+	        [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+        INNER JOIN
+            [dimension].[purpose_trip_destination]
+        ON
+            [person_trip].[purpose_trip_destination_id] = [purpose_trip_destination].[purpose_trip_destination_id]
+        INNER JOIN
+            [dimension].[time_trip_start]
+        ON
+            [person_trip].[time_trip_start_id] = [time_trip_start].[time_trip_start_id]
+        WHERE
+	        [person_trip].[scenario_id] = @scenario_id
+            AND [tour].[scenario_id] = @scenario_id
+            AND [tour].[tour_category] = 'Mandatory'  -- mandatory tours only to remove at-work subtours
+            AND [inbound].[inbound_description] = 'Outbound'  -- outbound tour journey legs only
+            AND [purpose_trip_destination].[purpose_trip_destination_description] = 'Work'  -- use person trip weight at the final work destinating trip
+            -- resident models only
+	        AND [model_trip].[model_trip_description] IN ('Individual',
+												            'Internal-External',
+												            'Joint')
+            -- if peak period selected filter trips to ABM 5 TOD Peak Periods
+            AND (
+                @peak_period = 0 OR
+                (@peak_period = 1 AND [time_trip_start].[trip_start_abm_5_tod] IN ('2', '4'))
+                )
+        GROUP BY
+	        CASE WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('School Bus',
+                                                                                      'Taxi',
+                                                                                      'Non-Pooled TNC',
+                                                                                      'Pooled TNC')
+                 THEN 'Other'
+                 WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Bike', 'Super-Walk', 'Walk')
+                 THEN 'Bike & Walk'
+                 WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Shared Ride 2', 'Shared Ride 3+')
+                 THEN 'Carpool'
+                 ELSE [fn_resident_tourjourney_mode].[mode_aggregate_description]
+                 END
+        WITH ROLLUP
+        OPTION (MAXDOP 1)
+    END
+
+
+    -- get and store total person trips
+    DECLARE @total_trips float = (
+        SELECT [person_trips] FROM @aggregated_trips
+        WHERE [mode] = 'Total'
+        )
+
+
+    -- insert mode percentage split into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    )
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,@measure AS [measure]
+	    ,CONCAT('Percentage of Person Trips - ',
+                [all_modes].[mode]) AS [metric]
+	    ,ISNULL(100.0 * [person_trips] / @total_trips, 0) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+	    @aggregated_trips
+    RIGHT OUTER JOIN (  -- ensure all modes are represented
+        SELECT DISTINCT
+            CASE WHEN [mode_aggregate_trip_description] IN ('Taxi',
+                                                            'School Bus',
+                                                            'Non-Pooled TNC',
+                                                            'Pooled TNC')
+                 THEN 'Other'
+                 WHEN [mode_aggregate_trip_description] IN ('Bike', 'Super-Walk', 'Walk')
+                 THEN 'Bike & Walk'
+                 WHEN [mode_aggregate_trip_description] IN ('Shared Ride 2', 'Shared Ride 3+')
+                 THEN 'Carpool'
+                 ELSE [mode_aggregate_trip_description]
+                 END AS [mode]
+        FROM
+            [dimension].[mode_trip]
+        WHERE [mode_aggregate_trip_description] NOT IN ('Heavy Heavy Duty Truck',
+                                                        'Light Heavy Duty Truck',
+                                                        'Medium Heavy Duty Truck',
+                                                        'Not Applicable',
+                                                        'Parking Lot',
+                                                        'Pickup/Drop-off',
+                                                        'Rental car',
+                                                        'Shuttle/Van/Courtesy Vehicle')) AS [all_modes]
+    ON
+        [@aggregated_trips].[mode] = [all_modes].[mode]
+
+
+    -- insert total trips by mode into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    )
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,@measure AS [performance_measure]
+	    ,CONCAT('Person Trips - ',
+                [all_modes].[mode]) AS [metric]
+	    ,ISNULL([person_trips], 0) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+	    @aggregated_trips
+    RIGHT OUTER JOIN (  -- ensure all modes are represented
+        SELECT DISTINCT
+            CASE WHEN [mode_aggregate_trip_description] IN ('Taxi',
+                                                            'School Bus',
+                                                            'Non-Pooled TNC',
+                                                            'Pooled TNC')
+                 THEN 'Other'
+                 WHEN [mode_aggregate_trip_description] IN ('Bike', 'Super-Walk', 'Walk')
+                 THEN 'Bike & Walk'
+                 WHEN [mode_aggregate_trip_description] IN ('Shared Ride 2', 'Shared Ride 3+')
+                 THEN 'Carpool'
+                 ELSE [mode_aggregate_trip_description]
+                 END AS [mode]
+        FROM
+            [dimension].[mode_trip]
+        WHERE [mode_aggregate_trip_description] NOT IN ('Heavy Heavy Duty Truck',
+                                                        'Light Heavy Duty Truck',
+                                                        'Medium Heavy Duty Truck',
+                                                        'Not Applicable',
+                                                        'Parking Lot',
+                                                        'Pickup/Drop-off',
+                                                        'Rental car',
+                                                        'Shuttle/Van/Courtesy Vehicle')) AS [all_modes]
+    ON
+        [@aggregated_trips].[mode] = [all_modes].[mode]
+END
+
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = @measure;
+END
+GO
+
+-- add metadata for [rp_2021].[sp_pm_ad1]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad1', 'MS_Description', 'performance measure AD-1 Mode Share'
+GO
+
+
+
+
+-- create stored procedure for performance measure AD-5 ----------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad5]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_pm_ad5]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 1  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    2021 Regional Plan Performance Measure AD-5 Daily Transit Boardings.
+    Total boardings and total boardings for Tier 1 + Tier 2 transit routes
+    are provided. Tier 1 + Tier 2 routes are hardcoded based on route numbers.
+
+filters:   >
+    [transit_route].[config] / 1000 IN (581, 582, 583)
+        Tier 1 transit routes
+    [transit_route].[config] / 1000 NOT IN (581, 582, 583) AND [mode_transit_route_description] IN ('Light Rail','Commuter Rail')
+        Tier 2 transit routes
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+BEGIN
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove AD-5 result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-5'
+
+    -- insert AD-5 results into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+        @scenario_id AS [scenario_id]
+        ,'AD-5' AS [measure]
+        ,CONCAT('Daily Transit Boardings - ', [tier]) AS [metric]
+        ,ISNULL([boardings], 0) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM (
+        SELECT
+            ISNULL(CASE  WHEN [transit_route].[config] / 1000 IN (581, 582, 583)
+                            OR ([transit_route].[config] / 1000 NOT IN (581, 582, 583)
+                                AND [mode_transit_route_description] IN ('Light Rail','Commuter Rail'))
+                         THEN 'Tier 1 and Tier 2'
+                         ELSE 'No Tier' END, 'Total') AS [tier]
+               ,SUM([boardings]) AS [boardings]
+        FROM
+               [fact].[transit_onoff]
+        INNER JOIN
+               [dimension].[transit_route]
+        ON
+               [transit_onoff].[scenario_id] = [transit_route].[scenario_id]
+               AND [transit_onoff].[transit_route_id] = [transit_route].[transit_route_id]
+        INNER JOIN
+            [dimension].[mode_transit_route]
+        ON
+            [transit_route].[mode_transit_route_id] = [mode_transit_route].[mode_transit_route_id]
+        WHERE
+               [transit_onoff].[scenario_id] = @scenario_id
+               AND [transit_route].[scenario_id] = @scenario_id
+        GROUP BY
+            CASE  WHEN [transit_route].[config] / 1000 IN (581, 582, 583)
+                                    OR ([transit_route].[config] / 1000 NOT IN (581, 582, 583)
+                                        AND [mode_transit_route_description] IN ('Light Rail','Commuter Rail'))
+                                 THEN 'Tier 1 and Tier 2'
+                                 ELSE 'No Tier' END
+        WITH ROLLUP) AS [boardings]
+    WHERE
+        [tier] IN ('Tier 1 and Tier 2', 'Total')
+END
+
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-5';
+END
+GO
+
+-- add metadata for [rp_2021].[sp_pm_ad5]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad5', 'MS_Description', 'performance measure AD-5 Transit Boardings'
+GO
+
+
+
+
+-- create stored procedure for performance measure AD-6 activity per capita --
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad6_activity]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_pm_ad6_activity]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    2021 Regional Plan Performance Measure AD-6, person-level time engaged in
+    transportation-related physical activity per capita (minutes). Physical
+    activity is defined as any biking, walking, or micro-mobility.
+
+filters:   >
+    [model_trip].[model_trip_description] IN ('Individual',
+                                              'Internal-External',
+                                              'Joint')
+        ABM resident sub-models
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove Performance Measure AD-6 Activity per Capita result for the
+    -- given ABM scenario from the Performance Measure results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-6 Transportation-Related Physical Activity per Capita'
+
+
+    -- create table variable to hold population with
+    -- Community of Concern (CoC) attributes
+    DECLARE @coc_pop TABLE (
+        [person_id] integer PRIMARY KEY NOT NULL,
+        [senior] nvarchar(15) NOT NULL,
+        [minority] nvarchar(15) NOT NULL,
+        [low_income] nvarchar(15) NOT NULL)
+
+
+    -- assign CoC attributes to each person and insert into a table variable
+    INSERT INTO @coc_pop
+    SELECT
+        [person_id]
+        ,[senior]
+        ,[minority]
+        ,[low_income]
+    FROM
+        [rp_2021].[fn_person_coc] (@scenario_id)
+    WHERE
+        [person_id] > 0;  -- remove Not Applicable record
+
+
+    with [agg_coc_pop] AS (
+        -- aggregate the CoC populations and pivot from wide to long
+        SELECT
+            [pop_segmentation]
+            ,[persons]
+        FROM (
+            SELECT
+                SUM(CASE    WHEN [senior] = 'Senior'
+                            THEN 1
+                            ELSE 0 END) AS [Senior]
+                ,SUM(CASE   WHEN [senior] = 'Non-Senior'
+                            THEN 1
+                            ELSE 0 END) AS [Non-Senior]
+                ,SUM(CASE   WHEN [minority] = 'Minority'
+                            THEN 1
+                            ELSE 0 END) AS [Minority]
+                ,SUM(CASE   WHEN [minority] = 'Non-Minority'
+                            THEN 1
+                            ELSE 0 END) AS [Non-Minority]
+                ,SUM(CASE   WHEN [low_income] = 'Low Income'
+                            THEN 1
+                            ELSE 0 END) AS [Low Income]
+                ,SUM(CASE   WHEN [low_income] = 'Non-Low Income'
+                            THEN 1
+                            ELSE 0 END) AS [Non-Low Income]
+                ,COUNT([person_id]) AS [Total]
+            FROM
+	            @coc_pop) AS [to_unpvt]
+        UNPIVOT (
+            [persons] FOR [pop_segmentation] IN
+            ([Senior], [Non-Senior], [Minority], [Non-Minority],
+             [Low Income], [Non-Low Income], [Total])) AS [unpvt]),
+    [agg_activity] AS (
+        -- aggregate CoC physical activity in minutes and pivot from wide to long
+        SELECT
+            [pop_segmentation]
+            ,[physical_activity]
+        FROM (
+            SELECT
+                SUM(CASE     WHEN [senior] = 'Senior'
+                            THEN [weight_person_trip] * ([time_walk] + [time_bike] + [time_mm])
+                            ELSE 0 END) AS [Senior]
+                ,SUM(CASE   WHEN [senior] = 'Non-Senior'
+                            THEN [weight_person_trip] * ([time_walk] + [time_bike] + [time_mm])
+                            ELSE 0 END) AS [Non-Senior]
+                ,SUM(CASE   WHEN [minority] = 'Minority'
+                            THEN [weight_person_trip] * ([time_walk] + [time_bike] + [time_mm])
+                            ELSE 0 END) AS [Minority]
+                ,SUM(CASE   WHEN [minority] = 'Non-Minority'
+                            THEN [weight_person_trip] * ([time_walk] + [time_bike] + [time_mm])
+                            ELSE 0 END) AS [Non-Minority]
+                ,SUM(CASE   WHEN [low_income] = 'Low Income'
+                            THEN [weight_person_trip] * ([time_walk] + [time_bike] + [time_mm])
+                            ELSE 0 END) AS [Low Income]
+                ,SUM(CASE   WHEN [low_income] = 'Non-Low Income'
+                            THEN [weight_person_trip] * ([time_walk] + [time_bike] + [time_mm])
+                            ELSE 0 END) AS [Non-Low Income]
+                ,SUM([weight_person_trip] * ([time_walk] + [time_bike] + [time_mm])) AS [Total]
+            FROM
+	            [fact].[person_trip]
+            INNER JOIN
+	            [dimension].[model_trip]
+            ON
+	            [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+            INNER JOIN
+	            @coc_pop
+            ON
+	            [person_trip].[scenario_id] = @scenario_id
+	            AND [person_trip].[person_id] = [@coc_pop].[person_id]
+            WHERE
+	            [person_trip].[scenario_id] = @scenario_id
+                 -- synthetic population only used in resident models
+	            AND [model_trip].[model_trip_description] IN ('Individual',
+													          'Internal-External',
+													          'Joint')) AS [to_unpvt]
+        UNPIVOT (
+            [physical_activity] FOR [pop_segmentation] IN
+            ([Senior], [Non-Senior], [Minority], [Non-Minority],
+             [Low Income], [Non-Low Income], [Total])) AS [unpvt])
+    -- insert result set into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'AD-6 Transportation-Related Physical Activity per Capita' AS [measure]
+	    ,[agg_coc_pop].[pop_segmentation] AS [metric]
+	    ,ISNULL([agg_activity].[physical_activity], 0) / [agg_coc_pop].[persons] AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+	    [agg_coc_pop]
+    LEFT OUTER JOIN
+	    [agg_activity]
+    ON
+	    [agg_coc_pop].[pop_segmentation] = [agg_activity].[pop_segmentation]
+END
+
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-6 Transportation-Related Physical Activity per Capita';
+GO
+
+-- add metadata for [rp_2021].[sp_pm_ad6_activity]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad6_activity', 'MS_Description', 'performance metric AD-6 Physical Activity per Capita'
+GO
+
+
+
+
+-- create stored procedure for performance metric AD-6 percentage engaged ----
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad6_pct]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_pm_ad6_pct]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    2021 Regional Plan Performance Measure AD-6, percent of population
+    engaging in more than 20 minutes of daily transportation related
+    physical activity. Physical activity is defined as any biking, walking,
+    or micro-mobility.
+
+filters:   >
+    [model_trip].[model_trip_description] IN ('Individual',
+                                              'Internal-External',
+                                              'Joint')
+        ABM resident sub-models
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove Performance Measure AD-6 Percentage Engaged result for the
+    -- given ABM scenario from the Performance Measure results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-6 Percentage of Population Engaged in Transportation-Related Physical Activity'
+
+
+    -- create temporary table to store person-level results
+    DECLARE @person_results TABLE (
+        [person_id] integer PRIMARY KEY NOT NULL,
+        [senior] nvarchar(20) NOT NULL,
+        [minority] nvarchar(20) NOT NULL,
+        [low_income] nvarchar(20) NOT NULL,
+        [activity] float NOT NULL);
+
+
+    -- insert person result set into a temporary table
+    INSERT INTO @person_results
+    SELECT
+	    [person_coc].[person_id]
+        ,[senior]
+	    ,[minority]
+	    ,[low_income]
+	    ,ISNULL([physical_activity].[activity], 0) AS [activity]
+    FROM (
+	    SELECT
+		    [person_id]
+		    ,[senior]
+		    ,[minority]
+		    ,[low_income]
+	    FROM
+		    [rp_2021].[fn_person_coc] (@scenario_id)
+         WHERE  -- remove Not Applicable records
+            [person_id] > 0) AS [person_coc]
+    LEFT OUTER JOIN ( -- keep persons who do not travel
+	    SELECT
+		    [person_id]
+		    ,SUM([time_walk] + [time_bike]) AS [activity]
+	    FROM
+		    [fact].[person_trip]
+	    WHERE
+		    [person_trip].[scenario_id] = @scenario_id
+            AND [person_id] > 0  -- remove Not Applicable records
+	    GROUP BY
+		    [person_id]) AS [physical_activity]
+    ON
+	    [person_coc].[person_id] = [physical_activity].[person_id]
+
+
+    -- aggregate person result set transportation-related physical activity
+    -- to Community of Concern groups
+    -- insert result set into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+        @scenario_id AS [scenario_id]
+        ,'AD-6 Percentage of Population Engaged in Transportation-Related Physical Activity' AS [measure]
+	    ,[pop_segmentation] AS [metric]
+	    ,[activity] AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM (
+    SELECT
+        100.0 * SUM(CASE WHEN [senior] = 'Senior' AND [activity] >= 20 THEN 1 ELSE 0 END) /
+                SUM(CASE WHEN [senior] = 'Senior' THEN 1 ELSE 0 END) AS [Senior]
+        ,100.0 * SUM(CASE WHEN [senior] = 'Non-Senior' AND [activity] >= 20 THEN 1 ELSE 0 END) /
+                 SUM(CASE WHEN [senior] = 'Non-Senior' THEN 1 ELSE 0 END) AS [Non-Senior]
+        ,100.0 * SUM(CASE WHEN [minority] = 'Minority' AND [activity] >= 20 THEN 1 ELSE 0 END) /
+                 SUM(CASE WHEN [minority] = 'Minority' THEN 1 ELSE 0 END) AS [Minority]
+        ,100.0 * SUM(CASE WHEN [minority] = 'Non-Minority' AND [activity] >= 20 THEN 1 ELSE 0 END) /
+                 SUM(CASE WHEN [minority] = 'Non-Minority' THEN 1 ELSE 0 END) AS [Non-Minority]
+        ,100.0 * SUM(CASE WHEN [low_income] = 'Low Income' AND [activity] >= 20 THEN 1 ELSE 0 END) /
+                 SUM(CASE WHEN [low_income] = 'Low Income' THEN 1 ELSE 0 END) AS [Low Income]
+        ,100.0 * SUM(CASE WHEN [low_income] = 'Non-Low Income' AND [activity] >= 20 THEN 1 ELSE 0 END) /
+                 SUM(CASE WHEN [low_income] = 'Non-Low Income' THEN 1 ELSE 0 END) AS [Non-Low Income]
+        ,100.0 * SUM(CASE WHEN [activity] >= 20 THEN 1 ELSE 0 END) / COUNT([person_id]) AS [Total]
+    FROM
+        @person_results) AS [to_unpvt]
+    UNPIVOT (
+        [activity] FOR [pop_segmentation] IN
+        ([Senior], [Non-Senior], [Minority], [Non-Minority],
+            [Low Income], [Non-Low Income], [Total])) AS [unpvt]
+END
+
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-6 Percentage of Population Engaged in Transportation-Related Physical Activity';
+GO
+
+-- add metadata for [rp_2021].[sp_pm_ad6_pct]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad6_pct', 'MS_Description', 'performance metric AD-6 Percentage of Population Engaged in Transportation-Related Physical Activity'
+GO
+
+
+
+
+-- create stored procedure for performance measure AD-7 ----------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad7]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_pm_ad7]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    2021 Regional Plan Performance Measure AD-7, average trip travel time for
+    Commercial Vehicles and Trucks to/from freight distribution hubs.
+    Freight distribution hubs are defined by the table
+    [rp_2021].[freight_distribution_hubs].
+
+filters:   >
+    [model_trip].[model_trip_description] IN ('Commercial Vehicle', 'Truck')
+        ABM Commercial Vehicle and Truck sub-models
+    [geography_trip_origin].[trip_origin_taz_13] IN [freight_distribution_hubs].[taz_13]
+        part of OR condition with trip destination Series 13 TAZs
+        origin or destination is a freight distribution hub
+    [geography_trip_destination].[trip_destination_taz_13] IN [freight_distribution_hubs].[taz_13]
+        part of OR condition with trip origin Series 13 TAZs
+        origin or destination is a freight distribution hub
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [fed_rtp_20].[pm_results] table
+IF(@update = 1)
+BEGIN
+    -- remove Performance Measure AD-7 result for the given ABM scenario from the
+    -- Performance Measure results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-7'
+
+    -- calculate average trip travel time in minutes to/from freight
+    -- distribution hubs for Commercial Vehicle and Truck sub-models
+    -- insert result set into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'AD-7' AS [measure]
+	    ,'Average Travel Time' AS [metric]
+	    ,SUM([person_trip].[time_total] * [person_trip].[weight_trip]) /
+            SUM([person_trip].[weight_trip]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [fact].[person_trip]
+    INNER JOIN
+        [dimension].[model]
+    ON
+        [person_trip].[model_trip_id] = [model].[model_id]
+    INNER JOIN
+        [dimension].[geography_trip_origin]
+    ON
+        [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+    INNER JOIN
+        [dimension].[geography_trip_destination]
+    ON
+        [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+    LEFT OUTER JOIN  -- left outer join for later OR condition
+        [rp_2021].[freight_distribution_hubs] AS [hub_origin]
+    ON
+        [geography_trip_origin].[trip_origin_taz_13] = [hub_origin].[taz_13]
+    LEFT OUTER JOIN  -- left outer join for later OR condition
+        [rp_2021].[freight_distribution_hubs] AS [hub_destination]
+    ON
+        [geography_trip_destination].[trip_destination_taz_13] = [hub_destination].[taz_13]
+    WHERE
+        [person_trip].[scenario_id] = @scenario_id
+        -- commercial vehicle and truck models only
+        AND [model].[model_description] IN ('Commercial Vehicle',
+                                            'Truck')
+        -- origin or destination is a Series 13 TAZ freight distribution hub
+        AND ([hub_origin].[taz_13] IS NOT NULL
+             OR [hub_destination].[taz_13] IS NOT NULL)
+END
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-7';
+GO
+
+-- add metadata for [rp_2021].[sp_pm_ad7]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad7', 'MS_Description', 'performance measure AD-7, Average truck/commercial vehicle travel times to and around regional gateways and distribution hubs (minutes)'
+GO
+
+
+
+
+-- create stored procedure for performance measure AD-10 ---------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad10]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_pm_ad10]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    2021 Regional Plan Performance Measure AD-10, percent of household income
+    consumed by transportation costs. Transportation costs fall into 6
+    categories; auto fare costs (Taxi and TNC), micro-mobility/micro-transit
+    fare costs, parking costs, auto operating cost, toll cost, and transit
+    fare. Only households with members who travelled are considered in this
+    calculation. Costs are multiplied by 300 to estimate annual costs and are
+    capped at total household income.
+
+    Auto fare, parking, auto operating, and toll costs are split amongst
+    all trip participants excepting non-Joint TNC trips where fare costs are
+    assigned to each trip participant. Note auto operating cost and toll cost
+    do not apply to Taxi/TNC trips as it is assumed the driver pays for the
+    costs. Zero-passenger AV trip costs (parking, auto operating, and toll costs)
+    are assigned at the household level.
+
+    Micro-mobility/micro-transit fare costs and transit fare costs are
+    assigned to each trip participant. Transit fare costs are reduced by 50%
+    for persons aged 60 or over and a person’s transit travel costs are capped
+    at $12 or $5 depending if they used premium or non-premium transit mode.
+
+
+filters:   >
+    [model_trip].[model_trip_description] IN ('Individual',
+                                              'Internal-External',
+                                              'Joint',
+                                              'AV 0-Passenger')
+        ABM resident sub-models and zero-passenger AV trips of AVs owned
+        by synthetic population households
+    [dimension].[household]
+        limited to households with members who travelled
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove Performance Measure AD-10 result for the given ABM scenario from
+    -- the Performance Measure results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-10';
+
+
+    -- create temporary table to store household-level results
+    DECLARE @hh_results TABLE (
+        [household_id] integer PRIMARY KEY NOT NULL,
+        [senior] nvarchar(20) NOT NULL,
+        [minority] nvarchar(20) NOT NULL,
+        [low_income] nvarchar(20) NOT NULL,
+        [household_income] integer NOT NULL,
+        [annual_cost] float NOT NULL);
+
+    -- sum costs to ([person_id], [household_id]) level
+    with [costs] AS (
+	    SELECT
+		    [person_trip].[person_id]
+		    ,[person_trip].[household_id]
+            -- split auto fare cost amongst participants if Joint trip
+            -- otherwise assign to each trip participant
+            ,SUM(CASE WHEN [model_trip].[model_trip_description] = 'Joint'
+                      THEN [cost_fare_drive] * [weight_trip]
+                      ELSE [cost_fare_drive] * [weight_person_trip]
+                      END) AS [cost_fare_drive]
+            -- assign micro-mobility/micro-transit fare costs to each trip participant
+            ,SUM(([cost_fare_mm] + [cost_fare_mt]) * [weight_person_trip]) AS [cost_fare_mm_mt]
+            -- split parking costs amongst trip participants
+            -- note this also captures parking costs for 0-passenger AV trips
+            ,SUM([cost_parking] * [weight_trip]) AS [cost_parking]
+            -- split auto operating cost amongst trip participants
+            -- do not include if Taxi/TNC trip
+            -- note this also captures operating costs for 0-passenger AV trips
+            ,SUM(CASE WHEN [mode_trip].[mode_trip_description] IN ('TNC to Transit - Local Bus',
+                                                                   'TNC to Transit - Premium Transit',
+                                                                   'TNC to Transit - Local Bus and Premium Transit',
+                                                                   'Taxi',
+                                                                   'Non-Pooled TNC',
+                                                                   'Pooled TNC')
+                      THEN 0
+                      ELSE [cost_operating_drive] * [weight_trip]
+                      END) AS [cost_operating drive]
+            -- split auto toll costs amongst trip participants
+            -- do not include if Taxi/TNC trip
+            -- note this also captures toll costs for 0-passenger AV trips
+            ,SUM(CASE WHEN [mode_trip].[mode_trip_description] IN ('TNC to Transit - Local Bus',
+                                                                   'TNC to Transit - Premium Transit',
+                                                                   'TNC to Transit - Local Bus and Premium Transit',
+                                                                   'Taxi',
+                                                                   'Non-Pooled TNC',
+                                                                   'Pooled TNC')
+                      THEN 0
+                      ELSE [cost_toll_drive] * [weight_trip]
+                      END) AS [cost_toll_drive]
+		    ,SUM(CASE WHEN [person].[age] >= 60 THEN [weight_person_trip] * [cost_fare_transit] * .5
+					  ELSE [weight_person_trip] * [cost_fare_transit] END) AS [cost_transit]
+		    ,MAX(CASE WHEN [mode_trip].[mode_trip_description] IN ('Kiss and Ride to Transit - Local Bus and Premium Transit',
+																   'Kiss and Ride to Transit - Premium Transit Only',
+																   'Park and Ride to Transit - Local Bus and Premium Transit',
+																   'TNC to Transit - Premium Transit Only',
+                                                                   'TNC to Transit - Local Bus and Premium Transit',
+																   'Park and Ride to Transit - Premium Transit Only',
+																   'Walk to Transit - Local Bus and Premium Transit',
+																   'Walk to Transit - Premium Transit Only')
+				      THEN 1 ELSE 0 END) AS [premium_transit_indicator] -- indicate if premium transit was used for later transit fare cap
+	    FROM
+		    [fact].[person_trip]
+	    INNER JOIN
+		    [dimension].[model_trip]
+	    ON
+		    [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+	    INNER JOIN
+		    [dimension].[mode_trip]
+	    ON
+		    [person_trip].[mode_trip_id] = [mode_trip].[mode_trip_id]
+	    INNER JOIN
+		    [dimension].[person]
+	    ON
+		    [person_trip].[scenario_id] = [person].[scenario_id]
+		    AND [person_trip].[person_id] = [person].[person_id]
+	    INNER JOIN
+		    [dimension].[household]
+	    ON
+		    [person_trip].[scenario_id] = [household].[scenario_id]
+		    AND [person_trip].[household_id] = [household].[household_id]
+	    WHERE
+		    [person_trip].[scenario_id] = @scenario_id
+		    AND [person].[scenario_id] = @scenario_id
+		    AND [household].[scenario_id] = @scenario_id
+            -- San Diego Resident models that use synthetic population
+            -- and Zombie AV trips assigned to a synthetic population household
+		    AND [model_trip].[model_trip_description] IN ('Individual',
+													      'Internal-External',
+													      'Joint',
+                                                          'AV 0-Passenger')
+            -- remove trips not assigned to a synthetic person or household
+            AND ([person].[person_id] > 0 OR [household].[household_id] > 0)
+	    GROUP BY
+		    [person_trip].[person_id]
+		    ,[person_trip].[household_id]),
+    -- sum costs to [household_id] level
+    [total_costs] AS (
+	    SELECT
+		    -- multiply the cost by 300 to get annual cost and sum over the household to get household costs
+		    -- cap person transit costs at $12 or $5 depending on if they used premium or non-premium transit
+		    [costs].[household_id]
+		    ,SUM(300.0 * ([cost_fare_drive] + [cost_fare_mm_mt] + [cost_parking] +
+                          [cost_operating drive] + [cost_toll_drive] +
+			              CASE	WHEN [premium_transit_indicator] = 1 AND [cost_transit] > 12 THEN 12
+					            WHEN [premium_transit_indicator] = 0 AND [cost_transit] > 5 THEN 5
+					            ELSE [cost_transit] END)) AS [annual_cost]
+	    FROM
+		    [costs]
+	    GROUP BY
+		    [costs].[household_id])
+    -- insert household level total costs into a temporary table
+    INSERT INTO @hh_results
+    SELECT
+        [total_costs].[household_id]
+	    ,[senior]
+	    ,[minority]
+	    ,[low_income]
+	    ,[household_income]
+	    ,[annual_cost]
+    FROM
+	    [total_costs]
+    INNER JOIN (  -- only keep households that actually travelled
+        SELECT
+	        [household].[household_id]
+	        ,MAX([household].[household_income]) AS [household_income]
+	        ,CASE   WHEN MAX(CASE WHEN [senior] = 'Senior' THEN 1 ELSE 0 END) = 1
+                    THEN 'Senior' ELSE 'Non-Senior' END AS [senior]
+	        ,CASE   WHEN MAX(CASE WHEN [minority] = 'Minority' THEN 1 ELSE 0 END) = 1
+                    THEN 'Minority' ELSE 'Non-Minority' END AS [minority]
+	        ,CASE   WHEN MAX(CASE WHEN [low_income] = 'Low Income' THEN 1 ELSE 0 END) = 1
+                    THEN 'Low Income' ELSE 'Non-Low Income' END AS [low_income]
+        FROM
+	        [dimension].[household]
+        INNER JOIN
+	        [rp_2021].[fn_person_coc] (@scenario_id)
+        ON
+	        [household].[scenario_id] = [fn_person_coc].[scenario_id]
+	        AND [household].[household_id] = [fn_person_coc].[household_id]
+        WHERE
+	        [household].[scenario_id] = @scenario_id
+            AND [household].[household_id] > 0  -- remove Not Applicable records
+        GROUP BY
+	        [household].[household_id]) AS [coc_households]
+    ON
+	    [total_costs].[household_id] = [coc_households].[household_id]
+
+
+    -- aggregate household result set transportation costs as a percentage of
+    -- household income to Community of Concern household groups
+    -- insert result set into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    )
+    SELECT
+        @scenario_id AS [scenario_id]
+        ,'AD-10' AS [measure]
+	    ,[pop_segmentation] AS [metric]
+	    ,[annual_cost] AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM (
+        SELECT
+            100.0 * SUM(CASE    WHEN [senior] = 'Senior' THEN 1 ELSE 0 END *
+                        -- cap percentage cost at 100% of income
+		                CASE    WHEN [household_income] = 0 OR [annual_cost] / [household_income] > 1
+                                THEN 1 ELSE [annual_cost] / [household_income] END) /
+		        SUM(CASE    WHEN [senior] = 'Senior' THEN 1  ELSE 0 END) AS [Senior]
+            ,100.0 * SUM(CASE    WHEN [senior] = 'Non-Senior' THEN 1 ELSE 0 END *
+                        -- cap percentage cost at 100% of income
+		                CASE    WHEN [household_income] = 0 OR [annual_cost] / [household_income] > 1
+                                THEN 1 ELSE [annual_cost] / [household_income] END) /
+		        SUM(CASE    WHEN [senior] = 'Non-Senior' THEN 1  ELSE 0 END) AS [Non-Senior]
+            ,100.0 * SUM(CASE    WHEN [minority] = 'Minority' THEN 1 ELSE 0 END *
+                        -- cap percentage cost at 100% of income
+		                CASE    WHEN [household_income] = 0 OR [annual_cost] / [household_income] > 1
+                                THEN 1 ELSE [annual_cost] / [household_income] END) /
+		        SUM(CASE    WHEN [minority] = 'Minority' THEN 1  ELSE 0 END) AS [Minority]
+            ,100.0 * SUM(CASE    WHEN [minority] = 'Non-Minority' THEN 1 ELSE 0 END *
+                        -- cap percentage cost at 100% of income
+		                CASE    WHEN [household_income] = 0 OR [annual_cost] / [household_income] > 1
+                                THEN 1 ELSE [annual_cost] / [household_income] END) /
+		        SUM(CASE    WHEN [minority] = 'Non-Minority' THEN 1  ELSE 0 END) AS [Non-Minority]
+            ,100.0 * SUM(CASE    WHEN [low_income] = 'Low Income' THEN 1 ELSE 0 END *
+                        -- cap percentage cost at 100% of income
+		                CASE    WHEN [household_income] = 0 OR [annual_cost] / [household_income] > 1
+                                THEN 1 ELSE [annual_cost] / [household_income] END) /
+		        SUM(CASE    WHEN [low_income] = 'Low Income' THEN 1  ELSE 0 END) AS [Low Income]
+            ,100.0 * SUM(CASE    WHEN [low_income] = 'Non-Low Income' THEN 1 ELSE 0 END *
+                        -- cap percentage cost at 100% of income
+		                CASE    WHEN [household_income] = 0 OR [annual_cost] / [household_income] > 1
+                                THEN 1 ELSE [annual_cost] / [household_income] END) /
+		        SUM(CASE    WHEN [low_income] = 'Non-Low Income' THEN 1  ELSE 0 END) AS [Non-Low Income]
+            ,100.0 * SUM(CASE   WHEN [household_income] = 0 OR [annual_cost] / [household_income] > 1
+                                THEN 1 ELSE [annual_cost] / [household_income] END) /
+		        COUNT([household_id]) AS [Total]
+        FROM
+            @hh_results
+        ) AS [to_unpvt]
+    UNPIVOT (
+        [annual_cost] FOR [pop_segmentation] IN
+        ([Senior], [Non-Senior], [Minority], [Non-Minority],
+            [Low Income], [Non-Low Income], [Total])) AS [unpvt]
+END
+
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'AD-10';
+GO
+
+-- add metadata for [rp_2021].[sp_pm_ad10]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad10', 'MS_Description', 'performance measure AD-10, Percent of Income Consumed by Out-of-Pocket Transportation Costs'
+GO
+
+
+
+
+-- create stored procedure for performance metric M-4 ------------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_m4]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_pm_m4]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[sp_pm_2b] table instead of
+        -- grabbing the results from the [rp_2021].[sp_pm_2b] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[sp_pm_2b] table is updated with no output
+AS
+
+/**
+summary:   >
+    Performance Measure M-4, network VMT per capita and regionwide for a given
+    ABM scenario.
+
+filters:   >
+    None
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove Performance Measure M-4 result for the given ABM scenario from the
+    -- Performance Measure results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'M-4'
+
+
+    -- subquery for total synthetic population
+    DECLARE @population integer = (
+        SELECT
+            COUNT([person_id])
+        FROM
+            [dimension].[person]
+        WHERE
+            [scenario_id] = @scenario_id
+            AND [person_id] > 0  -- remove Not Applicable record
+    )
+
+
+    -- insert VMT per capita into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'M-4' AS [measure]
+        ,'VMT per Capita' AS [metric]
+	    ,SUM([hwy_flow].[flow] * [hwy_link].[length_mile]) /
+            @population AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+	    [fact].[hwy_flow]
+    INNER JOIN
+	    [dimension].[hwy_link]
+    ON
+	    [hwy_flow].[scenario_id] = [hwy_link].[scenario_id]
+	    AND [hwy_flow].[hwy_link_id] = [hwy_link].[hwy_link_id]
+    WHERE
+	    [hwy_flow].[scenario_id] = @scenario_id
+	    AND [hwy_link].[scenario_id] = @scenario_id
+
+
+    -- insert VMT into Performance Measures results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'M-4' AS [measure]
+        ,'VMT' AS [metric]
+	    ,SUM([hwy_flow].[flow] * [hwy_link].[length_mile]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+	    [fact].[hwy_flow]
+    INNER JOIN
+	    [dimension].[hwy_link]
+    ON
+	    [hwy_flow].[scenario_id] = [hwy_link].[scenario_id]
+	    AND [hwy_flow].[hwy_link_id] = [hwy_link].[hwy_link_id]
+    WHERE
+	    [hwy_flow].[scenario_id] = @scenario_id
+	    AND [hwy_link].[scenario_id] = @scenario_id
+END
+
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'M-4';
+GO
+
+-- add metadata for [rp_2021].[sp_pm_m4]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_m4', 'MS_Description', 'performance metric M-4 Vehicle Miles Travelled (VMT)'
 GO
 
 
