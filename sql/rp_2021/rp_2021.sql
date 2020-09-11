@@ -2417,6 +2417,7 @@ WHERE
 GROUP BY
 	[geography_household_location].[household_location_mgra_13]
 	,[geography_household_location].[household_location_taz_13]
+OPTION (MAXDOP 1)
 GO
 
 -- add metadata for [rp_2021].[sp_m1_m5_populations]

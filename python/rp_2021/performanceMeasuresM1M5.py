@@ -33,9 +33,9 @@ class PerformanceMeasuresM1M5(object):
         calc_drive_access: Calculate percentage of eligible population with
             access to any one destination of interest within maximum allowed
             travel time by drive alone and carpool modes
-        calc_transit_speed_access: Calculate percentage of eligible population
+        calc_transit_access: Calculate percentage of eligible population
             with access to any one destination of interest within maximum
-            allowed travel time by transit access modes speed one and speed two
+            allowed travel time by transit access mode speed one (mm/mt/walk)
         calc_walk_access: Calculate percentage of eligible population with
             access to any one destination of interest within maximum allowed
             travel time by walk/micro-mobility/micro-transit modes
@@ -293,6 +293,91 @@ class PerformanceMeasuresM1M5(object):
                 pop.at[row.Index, "access"] = 1
 
         omx_file.close()
+
+        # calculate percentage of population with accessibility
+        pct = pop[pop["access"] == 1].sum().divide(pop.sum())
+
+        pct.rename(index={"pop": "Population Access Pct",
+                          "popSenior": "Senior Access Pct",
+                          "popNonSenior": "Non-Senior Access Pct",
+                          "popMinority": "Minority Access Pct",
+                          "popNonMinority": "Non-Minority Access Pct",
+                          "popLowIncome": "Low Income Access Pct",
+                          "popNonLowIncome": "Non-Low Income Access Pct"}, inplace=True)
+
+        return pct[["Population Access Pct",
+                    "Low Income Access Pct",
+                    "Non-Low Income Access Pct",
+                    "Minority Access Pct",
+                    "Non-Minority Access Pct",
+                    "Senior Access Pct",
+                    "Non-Senior Access Pct"]]
+
+    def calc_transit_access(self, criteria: str, max_time: int, over18: bool, tod:str) -> pd.Series:
+        """ Calculates the percentage of the population with access to any one
+         destination via transit using transit access speed one
+         (walk/micro-mobility/micro-transit). Access is calculated for the
+         overall population and within the Low Income/Non-Low Income,
+         Minority/Non-Minority and Seniors/Non-Senior populations.
+
+         Note if any of the MGRA-MGRA transit travel time skims are under the
+         maximum time defined as accessible for the MGRA-MGRA zone pair then
+         that zone is considered accessible.
+
+         Args:
+             criteria: String indicating filter of interest to apply to the
+                destinations used in the filter_destinations() method. Must
+                be a valid string passed to Pandas.query
+            max_time: Integer indicating the maximum skim time in minutes
+                allowed for an origin-destination pair to be considered
+                accessible
+            over18: Boolean indicating whether to use the total population or
+                the population of 18+ year old persons only
+            tod: String name of ABM five time of day period used to get the
+                transit travel time skim file defining access
+
+        Returns:
+            Pandas.Series of the percentage of the population with access """
+
+        # select population based on input over18 boolean
+        if over18:
+            pop = self.populations_over18
+        else:
+            pop = self.populations
+
+        # initialize indicator of accessibility
+        pop["access"] = 0
+
+        # select MGRA destinations based on input filtering criteria
+        d = self.filter_destinations("mgra", criteria)
+
+        # load the MGRA-MGRA transit access skims
+        # based on input time of day parameter
+        if tod == "AM":
+            mgra_skims = pd.read_csv(
+                os.path.join(self.scenario_path, "output", "walkMgrasWithin45Min_AM.csv"),
+                names=["i", "j", "time"],  # header not created
+                usecols=["i",  # origin MGRA geography
+                         "j",  # destination MGRA geography
+                         "time"])  # time in minutes
+        elif tod == "MD":
+            mgra_skims = pd.read_csv(
+                os.path.join(self.scenario_path, "output", "walkMgrasWithin30Min_MD.csv"),
+                names=["i", "j", "time"],  # header not created
+                usecols=["i",  # origin MGRA geography
+                         "j",  # destination MGRA geography
+                         "time"])  # time in minutes
+        else:
+            raise ValueError("invalid parameter: tod must be in ('AM', 'MD')")
+            return
+
+        # filter skims where time <= specified maximum
+        # and destination is in MGRA destinations
+        mgra_skims = mgra_skims[(mgra_skims["time"] <= max_time) & mgra_skims["j"].isin(d)]
+
+        # if population MGRA present in the filtered MGRA skim origins
+        # then set access column to 1
+        pop.loc[pop["mgra"].isin(mgra_skims["i"]), "access"] = 1
 
         # calculate percentage of population with accessibility
         pct = pop[pop["access"] == 1].sum().divide(pop.sum())

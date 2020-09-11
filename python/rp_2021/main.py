@@ -23,6 +23,8 @@ for scenario in scenarios:
 
     # for each measure
     for measureKey in measureDict:
+        print("Measure: " + measureKey)
+
         # delete old results from the results table if they exist
         with settings.engine.connect() as conn:
             conn.execute(
@@ -38,7 +40,7 @@ for scenario in scenarios:
                 result = func.to_frame(name="value")
                 result["scenario_id"] = scenario
                 result["measure"] = measureKey
-                result["metric"] = metricKey + " - " + result.index
+                result["metric"] = result.index + " - " + metricKey
                 result["updated_by"] = os.environ["userdomain"] + "\\" + os.getenv("username")
                 result["updated_date"] = datetime.datetime.now()
 

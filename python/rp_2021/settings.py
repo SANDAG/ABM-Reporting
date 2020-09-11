@@ -44,6 +44,15 @@ access_pms = {
                  "over18": False,
                  "matrix": "MD_SOV_NT_L"}
              },
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "empRetail > 0",
+                 "max_time": 15,
+                 "over18": False,
+                 "tod": "MD"}
+             },
         "Walk":
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_walk_access",
@@ -80,6 +89,15 @@ access_pms = {
                  "over18": False,
                  "matrix": "MD_SOV_NT_L"}
              },
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "parkActive >= .5",
+                 "max_time": 15,
+                 "over18": False,
+                 "tod": "MD"}
+             },
         "Walk":
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_walk_access",
@@ -107,6 +125,103 @@ access_pms = {
                  "max_time": 30,
                  "over18": False,
                  "matrix": "MD_SOV_NT_L"}
+             },
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "empHealth > 0",
+                 "max_time": 30,
+                 "over18": False,
+                 "tod": "MD"}
+             }
+    },
+    "SE-M-5-a - 30 minutes": {
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier == 1",
+                 "max_time": 30,
+                 "over18": True,
+                 "tod": "AM"}
+             }
+    },
+    "SE-M-5-a - 45 minutes": {
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier == 1",
+                 "max_time": 45,
+                 "over18": True,
+                 "tod": "AM"}
+             }
+    },
+    "SE-M-5-b - 30 minutes": {
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier == 2",
+                 "max_time": 30,
+                 "over18": True,
+                 "tod": "AM"}
+             }
+    },
+    "SE-M-5-b - 45 minutes": {
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier == 2",
+                 "max_time": 45,
+                 "over18": True,
+                 "tod": "AM"}
+             }
+    },
+    "SE-M-5-c - 30 minutes": {
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "higherLearningEnrollment > 0",
+                 "max_time": 30,
+                 "over18": True,
+                 "tod": "AM"}
+             }
+    },
+    "SE-M-5-c - 45 minutes": {
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "higherLearningEnrollment > 0",
+                 "max_time": 45,
+                 "over18": True,
+                 "tod": "AM"}
+             }
+    },
+    "SE-M-5-d - 30 minutes": {
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier > 0",
+                 "max_time": 30,
+                 "over18": True,
+                 "tod": "AM"}
+             }
+    },
+    "SE-M-5-d - 45 minutes": {
+        "Transit - Speed One":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier > 0",
+                 "max_time": 45,
+                 "over18": True,
+                 "tod": "AM"}
              }
     }
 }
