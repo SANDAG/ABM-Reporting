@@ -94,29 +94,37 @@ BEGIN
                     WHEN [hwy_link].[ifc] = 9 THEN 'Local Ramp'
                     WHEN [hwy_link].[ifc] = 10 THEN 'Zone Connector'
                     ELSE NULL END AS [ifc_desc]
-            ,SUM(CASE   WHEN @metric = 'vhd'
-                        THEN [hwyFlowModeWide].[autoFlow] * ([hwy_flow].[time] - [hwy_link_ab_tod].[tm] - [hwy_link_ab_tod].[tx]) / 60.0
+            ,SUM(CASE   WHEN @metric = 'vhd'  -- vhd must always be >= 0
+                        THEN IIF([hwy_flow].[time] < [hwy_link_ab_tod].[tm] + [hwy_link_ab_tod].[tx],
+                                 0,
+                                 [hwyFlowModeWide].[autoFlow] * ([hwy_flow].[time] - [hwy_link_ab_tod].[tm] - [hwy_link_ab_tod].[tx]) / 60.0)
                         WHEN @metric = 'vht'
                         THEN [hwyFlowModeWide].[autoFlow] * [hwy_flow].[time] / 60.0
                         WHEN @metric = 'vmt'
                         THEN [hwyFlowModeWide].[autoFlow] * [hwy_link].[length_mile]
                         ELSE NULL END) AS [Auto]
-            ,SUM(CASE   WHEN @metric = 'vhd'
-                        THEN [hwyFlowModeWide].[truckFlow] * ([hwy_flow].[time] - [hwy_link_ab_tod].[tm] - [hwy_link_ab_tod].[tx]) / 60.0
+            ,SUM(CASE   WHEN @metric = 'vhd'  -- vhd must always be >= 0
+                        THEN IIF([hwy_flow].[time] < [hwy_link_ab_tod].[tm] + [hwy_link_ab_tod].[tx],
+                                 0,
+                                 [hwyFlowModeWide].[truckFlow] * ([hwy_flow].[time] - [hwy_link_ab_tod].[tm] - [hwy_link_ab_tod].[tx]) / 60.0)
                         WHEN @metric = 'vht'
                         THEN [hwyFlowModeWide].[truckFlow] * [hwy_flow].[time] / 60.0
                         WHEN @metric = 'vmt'
                         THEN [hwyFlowModeWide].[truckFlow] * [hwy_link].[length_mile]
                         ELSE NULL END) AS [Truck]
-            ,SUM(CASE   WHEN @metric = 'vhd'
-                        THEN [hwyFlowModeWide].[busFlow] * ([hwy_flow].[time] - [hwy_link_ab_tod].[tm] - [hwy_link_ab_tod].[tx]) / 60.0
+            ,SUM(CASE   WHEN @metric = 'vhd'  -- vhd must always be >= 0
+                        THEN IIF([hwy_flow].[time] < [hwy_link_ab_tod].[tm] + [hwy_link_ab_tod].[tx],
+                                 0,
+                                 [hwyFlowModeWide].[busFlow] * ([hwy_flow].[time] - [hwy_link_ab_tod].[tm] - [hwy_link_ab_tod].[tx]) / 60.0)
                         WHEN @metric = 'vht'
                         THEN [hwyFlowModeWide].[busFlow] * [hwy_flow].[time] / 60.0
                         WHEN @metric = 'vmt'
                         THEN [hwyFlowModeWide].[busFlow] * [hwy_link].[length_mile]
                         ELSE NULL END) AS [Bus]
-            ,SUM(CASE   WHEN @metric = 'vhd'
-                        THEN [hwy_flow].[flow] * ([hwy_flow].[time] - [hwy_link_ab_tod].[tm] - [hwy_link_ab_tod].[tx]) / 60.0
+            ,SUM(CASE   WHEN @metric = 'vhd'  -- vhd must always be >= 0
+                        THEN IIF([hwy_flow].[time] < [hwy_link_ab_tod].[tm] + [hwy_link_ab_tod].[tx],
+                                 0,
+                                 [hwy_flow].[flow] * ([hwy_flow].[time] - [hwy_link_ab_tod].[tm] - [hwy_link_ab_tod].[tx]) / 60.0)
                         WHEN @metric = 'vht'
                         THEN [hwy_flow].[flow] * [hwy_flow].[time] / 60.0
                         WHEN @metric = 'vmt'
@@ -1513,7 +1521,7 @@ BEGIN
             ON
                 [time_trip_start].[trip_start_abm_5_tod] = [times].[abm_5_tod]
             WHERE
-                [scenario_id] = 492
+                [scenario_id] = @scenario_id
                 AND [mode_trip].[mode_aggregate_trip_description] = 'Transit'
             GROUP BY
                 [times].[abm_5_tod]

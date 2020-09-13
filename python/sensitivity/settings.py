@@ -14,8 +14,8 @@ templateWritePaths = {
 }
 
 # set SQL Server connection attributes
-server = "sql2014a8"
-database = "abm_2_reporting"
+server =
+database =
 
 
 # initialize dictionary to hold single scenario Sensitivity Measures
