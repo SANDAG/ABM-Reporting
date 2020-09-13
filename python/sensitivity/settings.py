@@ -14,8 +14,8 @@ templateWritePaths = {
 }
 
 # set SQL Server connection attributes
-server = "sql2014a8"
-database = "abm_2_reporting"
+server = "DDAMWSQL16"
+database = "abm_14_2_0_reporting"
 
 
 # initialize dictionary to hold single scenario Sensitivity Measures
@@ -36,7 +36,7 @@ singleScenarioMeasures = [
     {"sp": "[sensitivity].[sp_mode_metrics]",
      "args": "@scenario_id=?,@weight='trips',@metric='share'",
      "sheets": ["modeShare"],
-     "rows": [20]},
+     "rows": [22]},
     # Person Trip Distance by Mode
     {"sp": "[sensitivity].[sp_mode_metrics]",
      "args": "@scenario_id=?,@weight='persons',@metric='distance'",
@@ -46,17 +46,17 @@ singleScenarioMeasures = [
     {"sp": "[sensitivity].[sp_mode_metrics]",
      "args": "@scenario_id=?,@weight='persons',@metric='time'",
      "sheets": ["tripLengthMode"],
-     "rows": [20]},
+     "rows": [22]},
     # Trip Distance by Mode
     {"sp": "[sensitivity].[sp_mode_metrics]",
      "args": "@scenario_id=?,@weight='trips',@metric='distance'",
      "sheets": ["tripLengthMode"],
-     "rows": [38]},
+     "rows": [42]},
     # Trip Time by Mode
     {"sp": "[sensitivity].[sp_mode_metrics]",
      "args": "@scenario_id=?,@weight='trips',@metric='time'",
      "sheets": ["tripLengthMode"],
-     "rows": [56]},
+     "rows": [62]},
     # Person Trip Purpose Share
     {"sp": "[sensitivity].[sp_purpose_metrics]",
      "args": "@scenario_id=?,@weight='persons',@metric='share'",
@@ -66,7 +66,7 @@ singleScenarioMeasures = [
     {"sp": "[sensitivity].[sp_purpose_metrics]",
      "args": "@scenario_id=?,@weight='trips',@metric='share'",
      "sheets": ["purposeShare"],
-     "rows": [20]},
+     "rows": [22]},
     # Person Trip Distance by Purpose
     {"sp": "[sensitivity].[sp_purpose_metrics]",
      "args": "@scenario_id=?,@weight='persons',@metric='distance'",
@@ -76,17 +76,17 @@ singleScenarioMeasures = [
     {"sp": "[sensitivity].[sp_purpose_metrics]",
      "args": "@scenario_id=?,@weight='persons',@metric='time'",
      "sheets": ["tripLengthPurpose"],
-     "rows": [20]},
+     "rows": [22]},
     # Trip Distance by Purpose
     {"sp": "[sensitivity].[sp_purpose_metrics]",
      "args": "@scenario_id=?,@weight='trips',@metric='distance'",
      "sheets": ["tripLengthPurpose"],
-     "rows": [38]},
+     "rows": [42]},
     # Trip Time by Purpose
     {"sp": "[sensitivity].[sp_purpose_metrics]",
      "args": "@scenario_id=?,@weight='trips',@metric='time'",
      "sheets": ["tripLengthPurpose"],
-     "rows": [56]},
+     "rows": [62]},
     # VMT by IFC and Mode
     {"sp": "[sensitivity].[sp_ifc_metrics]",
      "args": "@scenario_id=?,@metric='vmt'",
@@ -111,17 +111,17 @@ singleScenarioMeasures = [
     {"sp": "[sensitivity].[sp_transit_mode_metrics]",
      "args": "@scenario_id=?,@weight='persons',@metric='trips'",
      "sheets": ["transitModeShareTripLength"],
-     "rows": [20]},
+     "rows": [22]},
     # Person Transit Trip Distance by Mode
     {"sp": "[sensitivity].[sp_transit_mode_metrics]",
      "args": "@scenario_id=?,@weight='persons',@metric='distance'",
      "sheets": ["transitModeShareTripLength"],
-     "rows": [38]},
+     "rows": [42]},
     # Person Transit Trip Time by Mode
     {"sp": "[sensitivity].[sp_transit_mode_metrics]",
      "args": "@scenario_id=?,@weight='persons',@metric='time'",
      "sheets": ["transitModeShareTripLength"],
-     "rows": [56]},
+     "rows": [62]},
     # Transit Boardings by Mode
     {"sp": "[sensitivity].[sp_transit_onoff_metrics]",
      "args": "@scenario_id=?,@metric='boardings'",
@@ -151,17 +151,7 @@ singleScenarioMeasures = [
     {"sp": "[sensitivity].[sp_transit_onoff_metrics]",
      "args": "@scenario_id=?,@metric='transfers per trip'",
      "sheets": ["transitNetwork"],
-     "rows": [57]},
-    # Work Segment Distance and Persons
-    {"sp": "[sensitivity].[sp_work_location]",
-     "args": "@scenario_id=?",
-     "sheets": ["workSchoolLocation"],
-     "rows": [2]},
-    # Student Status Distance and Persons
-    {"sp": "[sensitivity].[sp_school_location]",
-     "args": "@scenario_id=?",
-     "sheets": ["workSchoolLocation"],
-     "rows": [15]}
+     "rows": [57]}
 ]
 
 
@@ -288,19 +278,5 @@ multipleScenarioMeasures = [
      "filter": "time_period_desc == 'Total'",
      "drop": ["time_period_desc"],
      "sheets": ["transitNetwork"],
-     "rows": [84]},
-    # Work Segment Distance and Persons
-    {"sp": "[sensitivity].[sp_work_location]",
-     "args": "@scenario_id=?",
-     "filter": "work_segment == 'All Workers'",
-     "drop": ["work_segment"],
-     "sheets": ["workSchoolLocation"],
-     "rows": [2]},
-    # Student Status Distance and Persons
-    {"sp": "[sensitivity].[sp_school_location]",
-     "args": "@scenario_id=?",
-     "filter": "student_status == 'All Students'",
-     "drop": ["student_status"],
-     "sheets": ["workSchoolLocation"],
-     "rows": [12]}
+     "rows": [84]}
 ]
