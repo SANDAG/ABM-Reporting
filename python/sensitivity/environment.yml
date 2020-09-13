@@ -30,5 +30,4 @@ dependencies:
   - wheel=0.35.1=py_0
   - wincertstore=0.2=py38_0
   - zlib=1.2.11=h62dcd97_4
-prefix: C:\Users\gsc\Miniconda3\envs\sensitivity
 
