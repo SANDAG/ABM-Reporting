@@ -3798,6 +3798,753 @@ GO
 
 
 
+-- create stored procedure for sb375 auto ownership --------------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_auto_ownership]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_sb375_auto_ownership]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    SB375 average household auto ownership.
+
+filters:   >
+    None
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Auto Ownership'
+
+    -- insert average household auto ownership into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Auto Ownership' AS [measure]
+        ,'Average Household Auto Ownership' AS [metric]
+        ,1.0 * SUM([autos]) / COUNT([household_id]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [dimension].[household]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [household_id] > 0  -- remove Not Applicable records
+END
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Auto Ownership';
+GO
+
+-- add metadata for [rp_2021].[sp_sb375_auto_ownership]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_sb375_auto_ownership', 'MS_Description', 'sb375 average household auto ownership'
+GO
+
+
+
+
+-- create stored procedure for sb375 housing structures ----------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_housing_structures]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_sb375_housing_structures]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    SB375 total housing structures, single-family housing structures,
+    multi-family housing structures, the percentage of total housing structures
+    that are single-family, and the percentage of total housing structures that
+    are mult-family.
+
+filters:   >
+    None
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Housing Structures'
+
+    -- insert total housing structures into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Housing Structures' AS [measure]
+        ,'Total Housing Structures' AS [metric]
+        ,SUM([hs]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [fact].[mgra_based_input]
+    WHERE
+        [scenario_id] = @scenario_id
+
+    -- insert total single-family housing structures into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Housing Structures' AS [measure]
+        ,'Total Single-Family Housing Structures' AS [metric]
+        ,SUM([hs_sf]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [fact].[mgra_based_input]
+    WHERE
+        [scenario_id] = @scenario_id
+
+    -- insert total multi-family housing structures into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Housing Structures' AS [measure]
+        ,'Total Multi-Family Housing Structures' AS [metric]
+        ,SUM([hs_mf]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [fact].[mgra_based_input]
+    WHERE
+        [scenario_id] = @scenario_id
+
+    -- insert share of single-family housing structures into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Housing Structures' AS [measure]
+        ,'Share of Single-Family Housing Structures' AS [metric]
+        ,1.0 * SUM([hs_sf]) / SUM([hs]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [fact].[mgra_based_input]
+    WHERE
+        [scenario_id] = @scenario_id
+
+    -- insert share of multi-family housing structures into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Housing Structures' AS [measure]
+        ,'Share of Multi-Family Housing Structures' AS [metric]
+        ,1.0 * SUM([hs_mf]) / SUM([hs]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [fact].[mgra_based_input]
+    WHERE
+        [scenario_id] = @scenario_id
+END
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Housing Structures';
+GO
+
+-- add metadata for [rp_2021].[sp_sb375_housing_structures]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_sb375_housing_structures', 'MS_Description', 'sb375 housing structures'
+GO
+
+
+
+
+-- create stored procedure for sb375 jobs ------------------------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_jobs]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_sb375_jobs]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    SB375 total jobs in the San Diego region.
+
+filters:   >
+    None
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Jobs'
+
+    -- insert total jobs into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Jobs' AS [measure]
+        ,'Total Jobs' AS [metric]
+        ,SUM([emp_total]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [fact].[mgra_based_input]
+    WHERE
+        [scenario_id] = @scenario_id
+END
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Jobs';
+GO
+
+-- add metadata for [rp_2021].[sp_sb375_jobs]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_sb375_jobs', 'MS_Description', 'sb375 total jobs'
+GO
+
+
+
+
+-- create stored procedure for sb375 median income ---------------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_median_income]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_sb375_median_income]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    SB375 Median Household Income for a given ABM scenario.
+
+filters:   >
+    None
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Median Household Income'
+
+    -- insert median household income into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT DISTINCT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Median Household Income' AS [measure]
+        ,'Median Household Income' AS [metric]
+        ,PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY [household_income]) OVER () AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [dimension].[household]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [household_id] > 0  -- remove Not Applicable record
+END
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Median Household Income';
+GO
+
+-- add metadata for [rp_2021].[sp_sb375_median_income]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_sb375_median_income', 'MS_Description', 'sb375 median household income'
+GO
+
+
+
+
+-- create stored procedure for sb375 mode-based measures ---------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_mode_measures]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_sb375_mode_measures]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+	@measure nvarchar(15),  -- measure of interest to calculate
+    @low_income bit = 1,  -- restrict to members of low income households only
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+     Calculate a person trip based measure for ABM resident sub-models by
+     by ABM mode. The stored procedure allows the calculation of the
+     person trip based travel distance, mode share, travel time, or count
+     of person trips. Optionally, can restrict measures to members of low
+     income households only.
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON
+
+-- check input parameter
+IF (@measure NOT IN ('distance', 'share', 'time', 'person trips') OR @measure IS NULL)
+BEGIN
+    RAISERROR('Invalid parameter: @measure must be one of (''distance'', ''share'', ''time'', ''person trips'')', 18, 0)
+    RETURN
+END
+
+-- create measure name
+DECLARE @measure_name nvarchar(50) =
+    CASE WHEN @measure = 'distance' THEN 'SB375 - Average Trip Length by Mode'
+         WHEN @measure = 'share' THEN 'SB375 - Mode Share'
+         WHEN @measure = 'time' THEN 'SB375 - Average Trip Time by Mode'
+         WHEN @measure = 'person trips' THEN 'SB375 - Person Trips by Mode'
+         ELSE NULL END
+
+IF (@low_income = 1) SET @measure_name = CONCAT(@measure_name, ' for Low Income Residents')
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF (@update = 1)
+BEGIN
+    -- remove result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = @measure_name
+
+    -- get total person trips
+    DECLARE @total_ptrips float = (
+        SELECT
+            SUM([weight_person_trip])
+        FROM
+            [fact].[person_trip]
+        INNER JOIN
+            [dimension].[model_trip]
+        ON
+            [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+        INNER JOIN
+            [dimension].[household]
+        ON
+            [person_trip].[scenario_id] = [household].[scenario_id]
+            AND [person_trip].[household_id] = [household].[household_id]
+        WHERE
+            [person_trip].[scenario_id] = @scenario_id
+            AND [household].[scenario_id] = @scenario_id
+            AND (@low_income = 0 OR (@low_income = 1 AND [household].[poverty] <= 2))  -- restrict to low income populaton if indicated
+            AND [model_trip].[model_trip_aggregate_description] = 'Resident Models')  -- Resident Models only
+
+    -- insert mode metric into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+        @scenario_id AS [scenario_id]
+        ,@measure_name AS [measure]
+        ,ISNULL([modes].[mode], 'error') AS [metric]
+        ,CASE   WHEN @measure IN ('distance', 'time') THEN [metric] / [weight_person_trip]
+                WHEN @measure = 'person trips' THEN [weight_person_trip]
+                WHEN @measure = 'share' THEN [weight_person_trip] / @total_ptrips
+                ELSE NULL END AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM (
+        SELECT
+            ISNULL(CASE WHEN [mode_trip].[mode_trip_description] IN ('Drive Alone',
+                                                                     'Shared Ride 2',
+                                                                     'Shared Ride 3+',
+                                                                     'Bike',
+                                                                     'Walk')
+                        THEN [mode_trip].[mode_trip_description]
+                        WHEN [mode_trip].[mode_trip_description] IN ('Kiss and Ride to Transit - Local Bus',
+                                                                     'Kiss and Ride to Transit - Local Bus and Premium Transit',
+                                                                     'Kiss and Ride to Transit - Premium Transit',
+                                                                     'Park and Ride to Transit - Local Bus',
+                                                                     'Park and Ride to Transit - Local Bus and Premium Transit',
+                                                                     'Park and Ride to Transit - Premium Transit',
+                                                                     'TNC to Transit - Local Bus',
+                                                                     'TNC to Transit - Local Bus and Premium Transit',
+                                                                     'TNC to Transit - Premium Transit')
+                        THEN 'Drive to Transit'
+                        WHEN [mode_trip].[mode_trip_description] IN ('Walk to Transit - Local Bus',
+                                                                     'Walk to Transit - Local Bus and Premium Transit',
+                                                                     'Walk to Transit - Premium Transit')
+                        THEN 'Walk to Transit'
+                        ELSE 'Other' END, 'All Modes') AS [mode]
+            ,SUM([person_trip].[weight_person_trip]) AS [weight_person_trip]
+            ,CASE   WHEN @measure IN ('person trips', 'share') THEN 0  -- only weight is used if trips or share is selected
+                    WHEN @measure = 'distance' THEN SUM([person_trip].[weight_person_trip] * [person_trip].[distance_total])
+                    WHEN @measure = 'time' THEN SUM([person_trip].[weight_person_trip] * [person_trip].[time_total])
+                    ELSE NULL END AS [metric]
+        FROM
+            [fact].[person_trip]
+        INNER JOIN
+            [dimension].[model_trip]
+        ON
+            [person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+        INNER JOIN
+            [dimension].[mode_trip]
+        ON
+            [person_trip].[mode_trip_id]  = [mode_trip].[mode_trip_id]
+        INNER JOIN
+            [dimension].[household]
+        ON
+            [person_trip].[scenario_id] = [household].[scenario_id]
+            AND [person_trip].[household_id] = [household].[household_id]
+        WHERE
+            [person_trip].[scenario_id] = @scenario_id
+            AND [household].[scenario_id] = @scenario_id
+            AND (@low_income = 0 OR (@low_income = 1 AND [household].[poverty] <= 2))  -- restrict to low income populaton if indicated
+            AND [model_trip].[model_trip_aggregate_description] = 'Resident Models'  -- Resident Models only
+        GROUP BY
+            CASE   WHEN [mode_trip].[mode_trip_description] IN ('Drive Alone',
+                                                                'Shared Ride 2',
+                                                                'Shared Ride 3+',
+                                                                'Bike',
+                                                                'Walk')
+                    THEN [mode_trip].[mode_trip_description]
+                    WHEN [mode_trip].[mode_trip_description] IN ('Kiss and Ride to Transit - Local Bus',
+                                                                 'Kiss and Ride to Transit - Local Bus and Premium Transit',
+                                                                 'Kiss and Ride to Transit - Premium Transit',
+                                                                 'Park and Ride to Transit - Local Bus',
+                                                                 'Park and Ride to Transit - Local Bus and Premium Transit',
+                                                                 'Park and Ride to Transit - Premium Transit',
+                                                                 'TNC to Transit - Local Bus',
+                                                                 'TNC to Transit - Local Bus and Premium Transit',
+                                                                 'TNC to Transit - Premium Transit')
+                    THEN 'Drive to Transit'
+                    WHEN [mode_trip].[mode_trip_description] IN ('Walk to Transit - Local Bus',
+                                                                 'Walk to Transit - Local Bus and Premium Transit',
+                                                                 'Walk to Transit - Premium Transit')
+                    THEN 'Walk to Transit'
+                    ELSE 'Other' END
+                    WITH ROLLUP) AS [trips]
+    FULL OUTER JOIN (
+        -- create table containing all combinations of models and modes of interest
+        -- ensures all combinations are represented if not present the scenario
+        SELECT
+            [mode]
+        FROM (
+            VALUES
+                ('Drive Alone'),
+                ('Shared Ride 2'),
+                ('Shared Ride 3+'),
+                ('Drive to Transit'),
+                ('Walk to Transit'),
+                ('Bike'),
+                ('Walk'),
+                ('Other'),
+                ('All Modes')) AS [modes] ([mode]) ) AS [modes]
+    ON
+        [trips].[mode] = [modes].[mode]
+    OPTION(MAXDOP 1)
+END
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = @measure_name;
+GO
+
+-- add metadata for [rp_2021].[sp_sb375_mode_measures]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_sb375_mode_measures', 'MS_Description', 'sb375 mode-based measures'
+GO
+
+
+
+
+-- create stored procedure for sb375 population ------------------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_population]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_sb375_population]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    SB375 total population (including institutionalized group quarters and
+    modeled population (not including institutionalized group quarters).
+
+filters:   >
+    None
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Total Population'
+
+    -- insert total population into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Population' AS [measure]
+        ,'Total Population' AS [metric]
+        ,SUM([pop]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [fact].[mgra_based_input]
+    WHERE
+        [scenario_id] = @scenario_id
+
+    -- insert total population into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Population' AS [measure]
+        ,'Modeled Population' AS [metric]
+        ,COUNT([person_id]) AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+    FROM
+        [dimension].[person]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [person_id] > 0  -- remove Not Applicable record
+END
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Total Population';
+GO
+
+-- add metadata for [rp_2021].[sp_sb375_population]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_sb375_population', 'MS_Description', 'sb375 total population measures'
+GO
+
+
+
+
 -- define [rp_2021] schema permissions -----------------------------------------
 -- drop [rp_2021] role if it exists
 DECLARE @RoleName sysname
