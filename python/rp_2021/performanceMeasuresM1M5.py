@@ -245,7 +245,9 @@ class PerformanceMeasuresM1M5(object):
 
             Note access is defined at the TAZ-TAZ level for auto mode skims.
             The network vehicle class input determines which auto mode travel
-            time skim is used to define accessibility.
+            time skim is used to define accessibility. Additionally, the auto
+            mode terminal time walk skims are added to the auto mode travel
+            time skim to get door to door travel times.
 
             Args:
                 criteria: String indicating filter of interest to apply to the
@@ -276,6 +278,24 @@ class PerformanceMeasuresM1M5(object):
         # select TAZ destinations based on input filtering criteria
         d = self.filter_destinations("taz", criteria)
 
+        # read in auto terminal time fixed width file
+        terminal_times = pd.read_fwf(
+            os.path.join(pm_m1_m5.scenario_path, "input", "zone.term"),
+            widths=[5, 7],
+            names=["destinationTAZ",
+                   "timeAutoTerminalWalk"],
+            dtype={"destinationTAZ": "int16",
+                   "timeAutoTerminalWalk": "float32"})
+
+        # add records with 0s for TAZs with no terminal times
+        # and return terminal times as numpy array ordered by TAZ
+        terminal_times = terminal_times.merge(
+            pd.DataFrame({"destinationTAZ": range(1, 4997)}),
+            on="destinationTAZ",
+            how="right")
+        terminal_times["timeAutoTerminalWalk"] = terminal_times["timeAutoTerminalWalk"].fillna(0)
+        terminal_times = terminal_times["timeAutoTerminalWalk"].to_numpy()
+
         # using the input network vehicle class matrix open the
         # appropriate auto mode omx file and travel time skim matrix
         omx_fn = "traffic_skims_" + matrix[:2] + ".omx"
@@ -289,7 +309,7 @@ class PerformanceMeasuresM1M5(object):
         for row in pop.itertuples():
             o_idx = [omx_map[number] for number in [row.Index]*len(d)]
             d_idx = [omx_map[number] for number in d]
-            if any(t <= max_time for t in omx_file[matrix + "_TIME"][o_idx, d_idx]):
+            if any(t <= max_time for t in omx_file[matrix + "_TIME"][o_idx, d_idx] + terminal_times[d_idx]):
                 pop.at[row.Index, "access"] = 1
 
         omx_file.close()
