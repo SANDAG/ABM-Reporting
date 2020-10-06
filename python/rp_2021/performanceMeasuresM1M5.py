@@ -27,18 +27,16 @@ class PerformanceMeasuresM1M5(object):
             database table [dimension].[scenario]
 
     Methods:
-        calc_bike_access: Calculate percentage of eligible population with
+        calc_bike_walk_access: Calculate percentage of eligible population with
             access to any one destination of interest within maximum allowed
-            travel time by bicycle mode
+            travel time by any combination of bicycle, walk, micro-mobility,
+            and/or micro-transit modes
         calc_drive_access: Calculate percentage of eligible population with
             access to any one destination of interest within maximum allowed
             travel time by drive alone and carpool modes
         calc_transit_access: Calculate percentage of eligible population
             with access to any one destination of interest within maximum
             allowed travel time by transit access mode speed one (mm/mt/walk)
-        calc_walk_access: Calculate percentage of eligible population with
-            access to any one destination of interest within maximum allowed
-            travel time by walk/micro-mobility/micro-transit modes
         filter_destinations: Filter destination list based on input
             destination(s) of interest at specified geography
 
@@ -147,18 +145,12 @@ class PerformanceMeasuresM1M5(object):
 
         return path.iloc[0]["path"]
 
-    def calc_bike_access(self, criteria: str, max_time: int, over18: bool) -> pd.Series:
+    def calc_bike_walk_access(self, criteria: str, max_time: int, over18: bool, access_cols: list) -> pd.Series:
         """ Calculates the percentage of the population with access to any one
-         destination via the bicycle mode. Access is calculated for the
+         destination via any combination of bicycle, walk, micro-mobility,
+         and/or micro-transit modes. Access is calculated for the
          overall population and within the Low Income/Non-Low Income,
          Minority/Non-Minority and Seniors/Non-Senior populations.
-
-         Note both the MGRA and TAZ bicycle skims are used to determine access
-         between MGRA-MGRA pairs via the direct MGRA-MGRA access time and the
-         TAZ-TAZ access time for the TAZ-TAZ pair the MGRA-MGRA pair nests
-         within. If either pair is at or under the input maximum time
-         threshold of accessibility then the MGRA-MGRA pair is considered
-         accessible.
 
          Args:
              criteria: String indicating filter of interest to apply to the
@@ -169,6 +161,9 @@ class PerformanceMeasuresM1M5(object):
                 accessible
             over18: Boolean indicating whether to use the total population or
                 the population of 18+ year old persons only
+            access_cols: List of String names of access columns in the
+              to use in access time calculation (bikeTime, walkTime, mmTime,
+              mtTime)
 
         Returns:
             Pandas.Series of the percentage of the population with access """
@@ -187,36 +182,60 @@ class PerformanceMeasuresM1M5(object):
         d_taz = self.filter_destinations("taz", criteria)
 
         # load the MGRA-MGRA bicycle skims
-        mgra_skims = pd.read_csv(
+        bike_mgra_skims = pd.read_csv(
             os.path.join(self.scenario_path, "output", "bikeMgraLogsum.csv"),
             usecols=["i",  # origin MGRA geography
                      "j",  # destination MGRA geography
                      "time"]  # time in minutes
         )
 
+        bike_mgra_skims.rename(columns={"time": "bikeTime"}, inplace=True)
+
+        # load the MGRA-MGRA walk skims
+        walk_mgra_skims = pd.read_csv(
+            os.path.join(self.scenario_path, "output", "microMgraEquivMinutes.csv"),
+            usecols=["i",  # origin MGRA geography
+                     "j",  # destination MGRA geography
+                     "walkTime",  # time in minutes walk mode
+                     "mmTime",  # time in minutes micro-mobility mode
+                     "mtTime"]  # time in minutes micro-transit mode
+        )
+
+        # combine the bicycle and walk MGRA-MGRA skims
+        # set na values of skims to 999
+        mgra_skims = bike_mgra_skims.merge(walk_mgra_skims, on=["i", "j"], how="outer")
+        mgra_skims.fillna(999, inplace=True)
+
+        # calculate access time based on input list of access columns
+        mgra_skims["accessTime"] = mgra_skims[access_cols].min(axis=1)
+
         # filter skims where time <= specified maximum
         # and destination is in MGRA destinations
-        mgra_skims = mgra_skims[(mgra_skims["time"] <= max_time) & mgra_skims["j"].isin(d_mgra)]
+        mgra_skims = mgra_skims[(mgra_skims["accessTime"] <= max_time) & mgra_skims["j"].isin(d_mgra)]
 
         # if population MGRA present in the filtered MGRA skim origins
         # then set access column to 1
         pop.loc[pop["mgra"].isin(mgra_skims["i"]), "access"] = 1
 
-        # load the TAZ-TAZ bicycle skims
-        taz_skims = pd.read_csv(
-            os.path.join(self.scenario_path, "output", "bikeTazLogsum.csv"),
-            usecols=["i",  # origin TAZ geography
-                     "j",  # destination TAZ geography
-                     "time"]  # time in minutes
-        )
+        # if bicycle skim in input list of access columns
+        if "bikeTime" in access_cols:
+            # load the TAZ-TAZ bicycle skims
+            taz_skims = pd.read_csv(
+                os.path.join(self.scenario_path, "output", "bikeTazLogsum.csv"),
+                usecols=["i",  # origin TAZ geography
+                         "j",  # destination TAZ geography
+                         "time"]  # time in minutes
+            )
 
-        # filter skims where time <= specified maximum
-        # and destination is in TAZ destinations
-        taz_skims = taz_skims[(taz_skims["time"] <= max_time) & taz_skims["j"].isin(d_taz)]
+            # filter skims where time <= specified maximum
+            # and destination is in TAZ destinations
+            taz_skims = taz_skims[(taz_skims["time"] <= max_time) & taz_skims["j"].isin(d_taz)]
 
-        # if population TAZ still present in filtered TAZ skim origins
-        # then set access column to 1
-        pop.loc[pop["taz"].isin(taz_skims["i"]), "access"] = 1
+            # if population TAZ still present in filtered TAZ skim origins
+            # then set access column to 1
+            pop.loc[pop["taz"].isin(taz_skims["i"]), "access"] = 1
+        else:
+            pass
 
         # calculate percentage of population with accessibility
         pct = pop[pop["access"] == 1].sum().divide(pop.sum())
@@ -280,7 +299,7 @@ class PerformanceMeasuresM1M5(object):
 
         # read in auto terminal time fixed width file
         terminal_times = pd.read_fwf(
-            os.path.join(pm_m1_m5.scenario_path, "input", "zone.term"),
+            os.path.join(self.scenario_path, "input", "zone.term"),
             widths=[5, 7],
             names=["destinationTAZ",
                    "timeAutoTerminalWalk"],

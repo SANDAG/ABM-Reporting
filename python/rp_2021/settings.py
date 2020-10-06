@@ -20,11 +20,21 @@ access_pms = {
     "SE-M-1-a": {
         "Bike":
             {"class": "PerformanceMeasuresM1M5",
-             "method": "calc_bike_access",
+             "method": "calc_bike_walk_access",
              "args": {
                  "criteria": "empRetail > 0",
                  "max_time": 15,
-                 "over18": False}
+                 "over18": False,
+                 "access_cols": ["bikeTime"]}
+             },
+        "Bike + Walk + MM + MT":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_bike_walk_access",
+             "args": {
+                 "criteria": "empRetail > 0",
+                 "max_time": 15,
+                 "over18": False,
+                 "access_cols": ["bikeTime", "walkTime", "mmTime", "mtTime"]}
              },
         "Carpool":
             {"class": "PerformanceMeasuresM1M5",
@@ -55,21 +65,41 @@ access_pms = {
              },
         "Walk":
             {"class": "PerformanceMeasuresM1M5",
-             "method": "calc_walk_access",
+             "method": "calc_bike_walk_access",
              "args": {
                  "criteria": "empRetail > 0",
                  "max_time": 15,
-                 "over18": False}
+                 "over18": False,
+                 "access_cols": ["walkTime"]}
+             },
+        "Walk + MM + MT":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_bike_walk_access",
+             "args": {
+                 "criteria": "empRetail > 0",
+                 "max_time": 15,
+                 "over18": False,
+                 "access_cols": ["walkTime", "mmTime", "mtTime"]}
              }
     },
     "SE-M-1-b": {
         "Bike":
             {"class": "PerformanceMeasuresM1M5",
-             "method": "calc_bike_access",
+             "method": "calc_bike_walk_access",
              "args": {
                  "criteria": "parkActive >= .5",
                  "max_time": 15,
-                 "over18": False}
+                 "over18": False,
+                 "access_cols": ["bikeTime"]}
+             },
+        "Bike + Walk + MM + MT":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_bike_walk_access",
+             "args": {
+                 "criteria": "parkActive >= .5",
+                 "max_time": 15,
+                 "over18": False,
+                 "access_cols": ["bikeTime", "walkTime", "mmTime", "mtTime"]}
              },
         "Carpool":
             {"class": "PerformanceMeasuresM1M5",
@@ -100,11 +130,21 @@ access_pms = {
              },
         "Walk":
             {"class": "PerformanceMeasuresM1M5",
-             "method": "calc_walk_access",
+             "method": "calc_bike_walk_access",
              "args": {
                  "criteria": "parkActive >= .5",
                  "max_time": 15,
-                 "over18": False}
+                 "over18": False,
+                 "access_cols": ["walkTime"]}
+             },
+        "Walk + MM + MT":
+            {"class": "PerformanceMeasuresM1M5",
+             "method": "calc_bike_walk_access",
+             "args": {
+                 "criteria": "parkActive >= .5",
+                 "max_time": 15,
+                 "over18": False,
+                 "access_cols": ["walkTime", "mmTime", "mtTime"]}
              }
     },
     "SE-M-1-c": {
