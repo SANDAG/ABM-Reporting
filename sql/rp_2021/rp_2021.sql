@@ -4545,6 +4545,161 @@ GO
 
 
 
+-- create stored procedure for sb375 seat utilization ------------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_seat_utilization]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_sb375_seat_utilization]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+    @update bit = 1,  -- 1/0 switch to actually run the ABM performance
+        -- measure and update the [rp_2021].[results] table instead of
+        -- grabbing the results from the [rp_2021].[results] table
+    @silent bit = 0  -- 1/0 switch to suppress result set output so only the
+        -- [rp_2021].[results] table is updated with no output
+AS
+
+/**
+summary:   >
+    SB375 Seat Utilization for a given ABM scenario. Seat Utilization is
+    defined as total passenger miles divided by total seat miles.
+
+revisions:
+    - author: None
+      modification: None
+      date: None
+**/
+SET NOCOUNT ON;
+
+-- if update switch is selected then run the performance measure and replace
+-- the value of the result set in the [rp_2021].[results] table
+IF(@update = 1)
+BEGIN
+    -- remove result for the given ABM scenario from the results table
+    DELETE FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Seat Utilization'
+
+    -- sum of transit flow multiplied by length of segment to get passenger miles
+    DECLARE @passenger_miles float = (
+        SELECT
+	        SUM([transit_flow] * ([to_mp] - [from_mp])) AS [passenger_miles]
+        FROM
+	        [fact].[transit_flow]
+        INNER JOIN
+	        [dimension].[time]
+        ON
+	        [transit_flow].[time_id] = [time].[time_id]
+        INNER JOIN
+            [dimension].[transit_route]
+        ON
+            [transit_flow].[scenario_id] = [transit_route].[scenario_id]
+	        AND [transit_flow].[transit_route_id] = [transit_route].[transit_route_id]
+
+        WHERE
+	        [transit_flow].[scenario_id] = @scenario_id
+            AND [transit_route].[scenario_id] = @scenario_id
+	        AND [time].[abm_5_tod] BETWEEN 2 AND 4  -- restricted to day time
+    )
+
+    -- each mode on each route has a specific seat capacity used in seat miles
+    -- each route number has a specific set of headways used in seat miles
+    --seat capacity by route type-------------
+    --Heavy Rail 130/car (5 car trains)
+    --Trolley 64/car (3 car trains)
+    --SPRINTER 136/car (2 car trains)
+    --Circulator 29/vehicle        -> mode 10 San Marcos Shuttle, Super loop
+    --Bus 37/vehicle               -> mode 7, 9, 10 & streetcar (mode 5, route 551-559 + 565)
+    --Bus 53/vehicle               -> mode 8 limited express bus (810, 850, 860, 880 in year 2012, no longer exist in future years)
+    --Bus 53/vehicle               -> mode 8 limited express bus (810, 850, 860, 880 in year 2012, no longer exist in future years)
+    --Bus Rapid Transit 53/vehicle -> mode 6
+    DECLARE @seat_miles float = (
+        SELECT
+            SUM( [tt_route_miles].[route_miles] *
+                 ( ISNULL(180 / NULLIF([am_headway], 0), 0) + ISNULL(390 / NULLIF([op_headway], 0) ,0) + ISNULL(210 / NULLIF([pm_headway], 0), 0) ) *
+                 CASE WHEN [mode_description] = 'Commuter Rail' THEN 130 * 5  -- coaster and heavy rail
+		              WHEN [mode_description] = 'Light Rail' AND [config]/1000 > 500 AND [config]/1000 < 551  THEN 64 * 3  -- trolley
+		              WHEN [mode_description] = 'Light Rail' AND [config]/1000 = 399 THEN 136 * 2  -- sprinter
+		              WHEN [mode_description] = 'Light Rail' AND (([config] / 1000 >= 551 AND [config] / 1000 <= 559) OR [config] / 1000 = 565) THEN 37  -- streetcar
+		              WHEN [mode_description] = 'Light Rail' AND [config]/1000 > 559 AND [config]/1000 < 565  THEN 64 * 3  -- trolley
+		              WHEN [mode_description] = 'Light Rail' AND [config]/1000 = 588 THEN 136 * 2  -- sprinter
+		              WHEN [mode_description] in ('Freeway Rapid',
+			     						          'Arterial Rapid') THEN 53  -- rapid
+		              WHEN [mode_description] IN ('Premium Express Bus',
+				  					              'Express Bus',
+									              'Local Bus') THEN 37  -- bus
+		              ELSE 0
+		              END ) AS [seat_miles]
+        FROM
+	        [dimension].[transit_route]
+        INNER JOIN
+	        [dimension].[mode]
+        ON
+	        [transit_route].[mode_transit_route_id] = [mode].[mode_id]
+        INNER JOIN (  -- get total route miles
+	        SELECT
+		        [scenario_id]
+		        ,[transit_route_id]
+		        ,MAX([to_mp]) AS [route_miles]
+	        FROM
+		        [fact].[transit_flow]
+	        WHERE
+		        [scenario_id] = @scenario_id
+	        GROUP BY
+		        [scenario_id]
+		        ,[transit_route_id]
+		        ) AS [tt_route_miles]
+        ON
+	        [transit_route].[scenario_id] = [tt_route_miles].[scenario_id]
+	        AND [transit_route].[transit_route_id] = [tt_route_miles].[transit_route_id]
+        WHERE
+            [transit_route].[scenario_id] = @scenario_id
+    )
+
+    -- insert seat utilization into results table
+    INSERT INTO [rp_2021].[results] (
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date])
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'SB375 - Seat Utilization' AS [measure]
+        ,'Seat Utilization' AS [metric]
+        ,@passenger_miles / @seat_miles AS [value]
+        ,USER_NAME() AS [updated_by]
+        ,SYSDATETIME() AS [updated_date]
+END
+
+-- if silent switch is selected then do not output a result set
+IF(@silent = 1)
+    RETURN;
+ELSE
+    -- return the result set
+    SELECT
+        [scenario_id]
+        ,[measure]
+        ,[metric]
+        ,[value]
+        ,[updated_by]
+        ,[updated_date]
+    FROM
+        [rp_2021].[results]
+    WHERE
+        [scenario_id] = @scenario_id
+        AND [measure] = 'SB375 - Seat Utilization';
+GO
+
+-- add metadata for [rp_2021].[sp_sb375_seat_utilization]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_sb375_seat_utilization', 'MS_Description', 'sb375 seat utilization'
+GO
+
+
+
+
 -- define [rp_2021] schema permissions -----------------------------------------
 -- drop [rp_2021] role if it exists
 DECLARE @RoleName sysname
