@@ -42,8 +42,8 @@ DROP TABLE IF EXISTS [rp_2021].[freight_distribution_hubs]
 /**
 summary:   >
     Create table holding series 13 TAZs identified as freight distribution
-    hubs. These are used in the stored procedure [rp_2021].[sp_pm_ad7] for
-    the 2021 Regional Plan Performance Measure AD-7, the average Truck and
+    hubs. These are used in the stored procedure [rp_2021].[sp_pm_sm7] for
+    the 2021 Regional Plan Performance Measure SM-7, the average Truck and
     Commercial Vehicle travel times to and around regional gateways and
     distribution hubs (minutes).
 **/
@@ -2218,10 +2218,10 @@ summary:   >
     Return the transit stop [near_node]/[trcov_id] for Tier 1, Tier 2, and
     Tier 3 transit stops. Note that a single transit stop may be returned
     multiple times under different Tiers. This is used by GIS to calculate
-    the 2021 Regional Plan Performance Meausres AD-2 and AD-3.
+    the 2021 Regional Plan Performance Meausres SM-2 and SM-3.
 
-    Tier 1: hardcoded routes 581, 582 583
-    Tier 2: rail routes (light rail and commuter)
+    Tier 1: hardcoded routes 581, 582 583 and commuter rail routes
+    Tier 2: light rail routes
     Tier 3: rapid routes (freeway and arterial)
 
 revisions:
@@ -2234,12 +2234,14 @@ SELECT
 FROM (
     SELECT DISTINCT
         [near_node]
-        ,CASE   WHEN [transit_route].[config] / 1000 IN (581, 582, 583) THEN 'Tier 1'
+        ,CASE   WHEN [transit_route].[config] / 1000 IN (581, 582, 583)
+                    OR [mode_transit_route_description] = 'Commuter Rail'
+                THEN 'Tier 1'
                 WHEN [transit_route].[config] / 1000 NOT IN (581, 582, 583)
-                    AND [mode_transit_route_description] IN ('Light Rail', 'Commuter Rail')
-                    THEN 'Tier 2'
+                    AND [mode_transit_route_description] = 'Light Rail'
+                THEN 'Tier 2'
                 WHEN [mode_transit_route_description] IN ('Freeway Rapid', 'Arterial Rapid')
-                    THEN 'Tier 3'
+                THEN 'Tier 3'
                 ELSE NULL END AS [tier]
     FROM
         [dimension].[transit_stop]
@@ -2296,7 +2298,7 @@ ON
 GO
 
 -- add metadata for [rp_2021].[fn_transit_node_tiers]
-EXECUTE [db_meta].[add_xp] 'rp_2021.fn_transit_node_tiers', 'MS_Description', 'inline function returning list of all Tier <<1,2,3>> transit stop nodes used in performance measures AD-2 and AD-3'
+EXECUTE [db_meta].[add_xp] 'rp_2021.fn_transit_node_tiers', 'MS_Description', 'inline function returning list of all Tier <<1,2,3>> transit stop nodes used in performance measures SM-2 and SM-3'
 GO
 
 
@@ -2427,11 +2429,11 @@ GO
 
 
 
--- create stored procedure for performance measure AD-1 ----------------------
-DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad1]
+-- create stored procedure for performance measure SM-1 ----------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_sm1]
 GO
 
-CREATE PROCEDURE [rp_2021].[sp_pm_ad1]
+CREATE PROCEDURE [rp_2021].[sp_pm_sm1]
 	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
     @update bit = 1,  -- 1/0 switch to actually run the ABM performance
         -- measure and update the [rp_2021].[results] table instead of
@@ -2445,7 +2447,7 @@ AS
 
 /**
 summary:   >
-    2021 Regional Plan Performance Measure AD-1 Mode Share, Percent of
+    2021 Regional Plan Performance Measure SM-1 Mode Share, Percent of
     person-trips by mode with option to filter to work purpose trips (defined
     as outbound work tour where the mode is determined by the SANDAG tour
     journey mode hierarchy) and/or to trips made in the peak period (ABM 5 TOD
@@ -2473,19 +2475,19 @@ SET NOCOUNT ON;
 -- create name of the Performance Measure based on options selected
 DECLARE @measure nvarchar(40)
 IF(@work = 0 AND @peak_period = 0)
-    SET @measure  = 'AD-1 - All Trips'
+    SET @measure  = 'SM-1 - All Trips'
 IF(@work = 0 AND @peak_period = 1)
-    SET @measure = 'AD-1 - All Peak Period Trips'
+    SET @measure = 'SM-1 - All Peak Period Trips'
 IF(@work = 1 AND @peak_period = 0)
-    SET @measure = 'AD-1 - Outbound Work Trips'
+    SET @measure = 'SM-1 - Outbound Work Trips'
 IF(@work = 1 AND @peak_period = 1)
-    SET @measure = 'AD-1 - Peak Period Outbound Work Trips'
+    SET @measure = 'SM-1 - Peak Period Outbound Work Trips'
 
 -- if update switch is selected then run the performance measure and replace
 -- the value of the result set in the [rp_2021].[results] table
 IF(@update = 1)
 BEGIN
-    -- remove AD-1 result for the given ABM scenario from the results table
+    -- remove SM-1 result for the given ABM scenario from the results table
     DELETE FROM
         [rp_2021].[results]
     WHERE
@@ -2762,18 +2764,18 @@ ELSE
 END
 GO
 
--- add metadata for [rp_2021].[sp_pm_ad1]
-EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad1', 'MS_Description', 'performance measure AD-1 Mode Share'
+-- add metadata for [rp_2021].[sp_pm_sm1]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_sm1', 'MS_Description', 'performance measure SM-1 Mode Share'
 GO
 
 
 
 
--- create stored procedure for performance measure AD-5 ----------------------
-DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad5]
+-- create stored procedure for performance measure SM-5 ----------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_sm5]
 GO
 
-CREATE PROCEDURE [rp_2021].[sp_pm_ad5]
+CREATE PROCEDURE [rp_2021].[sp_pm_sm5]
 	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
     @update bit = 1,  -- 1/0 switch to actually run the ABM performance
         -- measure and update the [rp_2021].[results] table instead of
@@ -2784,14 +2786,14 @@ AS
 
 /**
 summary:   >
-    2021 Regional Plan Performance Measure AD-5 Daily Transit Boardings.
+    2021 Regional Plan Performance Measure SM-5 Daily Transit Boardings.
     Total boardings and total boardings for Tier 1 + Tier 2 transit routes
     are provided. Tier 1 + Tier 2 routes are hardcoded based on route numbers.
 
 filters:   >
-    [transit_route].[config] / 1000 IN (581, 582, 583)
+    [transit_route].[config] / 1000 IN (581, 582, 583) OR [mode_transit_route_description] = 'Commuter Rail'
         Tier 1 transit routes
-    [transit_route].[config] / 1000 NOT IN (581, 582, 583) AND [mode_transit_route_description] IN ('Light Rail','Commuter Rail')
+    [transit_route].[config] / 1000 NOT IN (581, 582, 583) AND [mode_transit_route_description] = 'Light Rail'
         Tier 2 transit routes
 
 revisions:
@@ -2806,14 +2808,14 @@ SET NOCOUNT ON;
 -- the value of the result set in the [rp_2021].[results] table
 IF(@update = 1)
 BEGIN
-    -- remove AD-5 result for the given ABM scenario from the results table
+    -- remove SM-5 result for the given ABM scenario from the results table
     DELETE FROM
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-5'
+        AND [measure] = 'SM-5'
 
-    -- insert AD-5 results into Performance Measures results table
+    -- insert SM-5 results into Performance Measures results table
     INSERT INTO [rp_2021].[results] (
         [scenario_id]
         ,[measure]
@@ -2823,7 +2825,7 @@ BEGIN
         ,[updated_date])
     SELECT
         @scenario_id AS [scenario_id]
-        ,'AD-5' AS [measure]
+        ,'SM-5' AS [measure]
         ,CONCAT('Daily Transit Boardings - ', [tier]) AS [metric]
         ,ISNULL([boardings], 0) AS [value]
         ,USER_NAME() AS [updated_by]
@@ -2831,10 +2833,8 @@ BEGIN
     FROM (
         SELECT
             ISNULL(CASE  WHEN [transit_route].[config] / 1000 IN (581, 582, 583)
-                            OR ([transit_route].[config] / 1000 NOT IN (581, 582, 583)
-                                AND [mode_transit_route_description] IN ('Light Rail','Commuter Rail'))
-                         THEN 'Tier 1 and Tier 2'
-                         ELSE 'No Tier' END, 'Total') AS [tier]
+                           OR [mode_transit_route_description] IN ('Light Rail','Commuter Rail')
+                         THEN 'Tier 1 and Tier 2' ELSE 'No Tier' END, 'Total') AS [tier]
                ,SUM([boardings]) AS [boardings]
         FROM
                [fact].[transit_onoff]
@@ -2852,10 +2852,8 @@ BEGIN
                AND [transit_route].[scenario_id] = @scenario_id
         GROUP BY
             CASE  WHEN [transit_route].[config] / 1000 IN (581, 582, 583)
-                                    OR ([transit_route].[config] / 1000 NOT IN (581, 582, 583)
-                                        AND [mode_transit_route_description] IN ('Light Rail','Commuter Rail'))
-                                 THEN 'Tier 1 and Tier 2'
-                                 ELSE 'No Tier' END
+                    OR [mode_transit_route_description] IN ('Light Rail','Commuter Rail')
+                  THEN 'Tier 1 and Tier 2' ELSE 'No Tier' END
         WITH ROLLUP) AS [boardings]
     WHERE
         [tier] IN ('Tier 1 and Tier 2', 'Total')
@@ -2878,22 +2876,22 @@ ELSE
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-5';
+        AND [measure] = 'SM-5';
 END
 GO
 
--- add metadata for [rp_2021].[sp_pm_ad5]
-EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad5', 'MS_Description', 'performance measure AD-5 Transit Boardings'
+-- add metadata for [rp_2021].[sp_pm_sm5]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_sm5', 'MS_Description', 'performance measure SM-5 Transit Boardings'
 GO
 
 
 
 
--- create stored procedure for performance measure AD-6 activity per capita --
-DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad6_activity]
+-- create stored procedure for performance measure SM-6 activity per capita --
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_sm6_activity]
 GO
 
-CREATE PROCEDURE [rp_2021].[sp_pm_ad6_activity]
+CREATE PROCEDURE [rp_2021].[sp_pm_sm6_activity]
 	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
     @update bit = 1,  -- 1/0 switch to actually run the ABM performance
         -- measure and update the [rp_2021].[results] table instead of
@@ -2904,7 +2902,7 @@ AS
 
 /**
 summary:   >
-    2021 Regional Plan Performance Measure AD-6, person-level time engaged in
+    2021 Regional Plan Performance Measure SM-6, person-level time engaged in
     transportation-related physical activity per capita (minutes). Physical
     activity is defined as any biking, walking, or micro-mobility.
 
@@ -2925,13 +2923,13 @@ SET NOCOUNT ON;
 -- the value of the result set in the [rp_2021].[results] table
 IF(@update = 1)
 BEGIN
-    -- remove Performance Measure AD-6 Activity per Capita result for the
+    -- remove Performance Measure SM-6 Activity per Capita result for the
     -- given ABM scenario from the Performance Measure results table
     DELETE FROM
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-6 Transportation-Related Physical Activity per Capita'
+        AND [measure] = 'SM-6 Transportation-Related Physical Activity per Capita'
 
 
     -- create table variable to hold population with
@@ -3045,7 +3043,7 @@ BEGIN
         ,[updated_date])
     SELECT
 	    @scenario_id AS [scenario_id]
-        ,'AD-6 Transportation-Related Physical Activity per Capita' AS [measure]
+        ,'SM-6 Transportation-Related Physical Activity per Capita' AS [measure]
 	    ,[agg_coc_pop].[pop_segmentation] AS [metric]
 	    ,ISNULL([agg_activity].[physical_activity], 0) / [agg_coc_pop].[persons] AS [value]
         ,USER_NAME() AS [updated_by]
@@ -3075,21 +3073,21 @@ ELSE
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-6 Transportation-Related Physical Activity per Capita';
+        AND [measure] = 'SM-6 Transportation-Related Physical Activity per Capita';
 GO
 
--- add metadata for [rp_2021].[sp_pm_ad6_activity]
-EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad6_activity', 'MS_Description', 'performance metric AD-6 Physical Activity per Capita'
+-- add metadata for [rp_2021].[sp_pm_sm6_activity]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_sm6_activity', 'MS_Description', 'performance metric SM-6 Physical Activity per Capita'
 GO
 
 
 
 
--- create stored procedure for performance metric AD-6 percentage engaged ----
-DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad6_pct]
+-- create stored procedure for performance metric SM-6 percentage engaged ----
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_sm6_pct]
 GO
 
-CREATE PROCEDURE [rp_2021].[sp_pm_ad6_pct]
+CREATE PROCEDURE [rp_2021].[sp_pm_sm6_pct]
 	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
     @update bit = 1,  -- 1/0 switch to actually run the ABM performance
         -- measure and update the [rp_2021].[results] table instead of
@@ -3100,7 +3098,7 @@ AS
 
 /**
 summary:   >
-    2021 Regional Plan Performance Measure AD-6, percent of population
+    2021 Regional Plan Performance Measure SM-6, percent of population
     engaging in more than 20 minutes of daily transportation related
     physical activity. Physical activity is defined as any biking, walking,
     or micro-mobility.
@@ -3122,13 +3120,13 @@ SET NOCOUNT ON;
 -- the value of the result set in the [rp_2021].[results] table
 IF(@update = 1)
 BEGIN
-    -- remove Performance Measure AD-6 Percentage Engaged result for the
+    -- remove Performance Measure SM-6 Percentage Engaged result for the
     -- given ABM scenario from the Performance Measure results table
     DELETE FROM
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-6 Percentage of Population Engaged in Transportation-Related Physical Activity'
+        AND [measure] = 'SM-6 Percentage of Population Engaged in Transportation-Related Physical Activity'
 
 
     -- create temporary table to store person-level results
@@ -3185,7 +3183,7 @@ BEGIN
         ,[updated_date])
     SELECT
         @scenario_id AS [scenario_id]
-        ,'AD-6 Percentage of Population Engaged in Transportation-Related Physical Activity' AS [measure]
+        ,'SM-6 Percentage of Population Engaged in Transportation-Related Physical Activity' AS [measure]
 	    ,[pop_segmentation] AS [metric]
 	    ,[activity] AS [value]
         ,USER_NAME() AS [updated_by]
@@ -3230,21 +3228,21 @@ ELSE
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-6 Percentage of Population Engaged in Transportation-Related Physical Activity';
+        AND [measure] = 'SM-6 Percentage of Population Engaged in Transportation-Related Physical Activity';
 GO
 
--- add metadata for [rp_2021].[sp_pm_ad6_pct]
-EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad6_pct', 'MS_Description', 'performance metric AD-6 Percentage of Population Engaged in Transportation-Related Physical Activity'
+-- add metadata for [rp_2021].[sp_pm_sm6_pct]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_sm6_pct', 'MS_Description', 'performance metric SM-6 Percentage of Population Engaged in Transportation-Related Physical Activity'
 GO
 
 
 
 
--- create stored procedure for performance measure AD-7 ----------------------
-DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad7]
+-- create stored procedure for performance measure SM-7 ----------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_sm7]
 GO
 
-CREATE PROCEDURE [rp_2021].[sp_pm_ad7]
+CREATE PROCEDURE [rp_2021].[sp_pm_sm7]
 	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
     @update bit = 1,  -- 1/0 switch to actually run the ABM performance
         -- measure and update the [rp_2021].[results] table instead of
@@ -3255,7 +3253,7 @@ AS
 
 /**
 summary:   >
-    2021 Regional Plan Performance Measure AD-7, average trip travel time for
+    2021 Regional Plan Performance Measure SM-7, average trip travel time for
     Commercial Vehicles and Trucks to/from freight distribution hubs.
     Freight distribution hubs are defined by the table
     [rp_2021].[freight_distribution_hubs].
@@ -3276,13 +3274,13 @@ SET NOCOUNT ON;
 -- the value of the result set in the [fed_rtp_20].[pm_results] table
 IF(@update = 1)
 BEGIN
-    -- remove Performance Measure AD-7 result for the given ABM scenario from the
+    -- remove Performance Measure SM-7 result for the given ABM scenario from the
     -- Performance Measure results table
     DELETE FROM
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-7'
+        AND [measure] = 'SM-7'
 
     -- calculate average trip travel time in minutes to/from freight
     -- distribution hubs for Commercial Vehicle and Truck sub-models
@@ -3296,7 +3294,7 @@ BEGIN
         ,[updated_date])
     SELECT
 	    @scenario_id AS [scenario_id]
-        ,'AD-7' AS [measure]
+        ,'SM-7' AS [measure]
 	    ,'Average Travel Time' AS [metric]
 	    ,SUM([person_trip].[time_total] * [person_trip].[weight_trip]) /
             SUM([person_trip].[weight_trip]) AS [value]
@@ -3350,21 +3348,21 @@ ELSE
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-7';
+        AND [measure] = 'SM-7';
 GO
 
--- add metadata for [rp_2021].[sp_pm_ad7]
-EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad7', 'MS_Description', 'performance measure AD-7, Average truck/commercial vehicle travel times to and around regional gateways and distribution hubs (minutes)'
+-- add metadata for [rp_2021].[sp_pm_sm7]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_sm7', 'MS_Description', 'performance measure SM-7, Average truck/commercial vehicle travel times to and around regional gateways and distribution hubs (minutes)'
 GO
 
 
 
 
--- create stored procedure for performance measure AD-10 ---------------------
-DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_ad10]
+-- create stored procedure for performance measure SM-10 ---------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_pm_sm10]
 GO
 
-CREATE PROCEDURE [rp_2021].[sp_pm_ad10]
+CREATE PROCEDURE [rp_2021].[sp_pm_sm10]
 	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
     @update bit = 1,  -- 1/0 switch to actually run the ABM performance
         -- measure and update the [rp_2021].[results] table instead of
@@ -3375,7 +3373,7 @@ AS
 
 /**
 summary:   >
-    2021 Regional Plan Performance Measure AD-10, percent of household income
+    2021 Regional Plan Performance Measure SM-10, percent of household income
     consumed by transportation costs. Transportation costs fall into 6
     categories; auto fare costs (Taxi and TNC), micro-mobility/micro-transit
     fare costs, parking costs, auto operating cost, toll cost, and transit
@@ -3417,13 +3415,13 @@ SET NOCOUNT ON;
 -- the value of the result set in the [rp_2021].[results] table
 IF(@update = 1)
 BEGIN
-    -- remove Performance Measure AD-10 result for the given ABM scenario from
+    -- remove Performance Measure SM-10 result for the given ABM scenario from
     -- the Performance Measure results table
     DELETE FROM
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-10';
+        AND [measure] = 'SM-10';
 
 
     -- create temporary table to store household-level results
@@ -3586,7 +3584,7 @@ BEGIN
     )
     SELECT
         @scenario_id AS [scenario_id]
-        ,'AD-10' AS [measure]
+        ,'SM-10' AS [measure]
 	    ,[pop_segmentation] AS [metric]
 	    ,[annual_cost] AS [value]
         ,USER_NAME() AS [updated_by]
@@ -3652,11 +3650,11 @@ ELSE
         [rp_2021].[results]
     WHERE
         [scenario_id] = @scenario_id
-        AND [measure] = 'AD-10';
+        AND [measure] = 'SM-10';
 GO
 
--- add metadata for [rp_2021].[sp_pm_ad10]
-EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_ad10', 'MS_Description', 'performance measure AD-10, Percent of Income Consumed by Out-of-Pocket Transportation Costs'
+-- add metadata for [rp_2021].[sp_pm_sm10]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_pm_sm10', 'MS_Description', 'performance measure SM-10, Percent of Income Consumed by Out-of-Pocket Transportation Costs'
 GO
 
 
