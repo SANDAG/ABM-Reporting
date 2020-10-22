@@ -3,16 +3,19 @@ channels:
   - defaults
 dependencies:
   - blas=1.0=mkl
-  - ca-certificates=2020.7.22=0
+  - ca-certificates=2020.10.14=0
   - certifi=2020.6.20=py38_0
+  - et_xmlfile=1.0.1=py_1001
   - intel-openmp=2020.2=254
+  - jdcal=1.4.1=py_0
   - mkl=2020.2=256
   - mkl-service=2.3.0=py38hb782905_0
   - mkl_fft=1.1.0=py38h45dec08_0
   - mkl_random=1.1.1=py38h47e9c7a_0
   - numpy=1.19.1=py38h5510c5b_0
   - numpy-base=1.19.1=py38ha3acd2a_0
-  - openssl=1.1.1g=he774522_1
+  - openpyxl=3.0.5=py_0
+  - openssl=1.1.1h=he774522_0
   - pandas=1.1.1=py38ha925a31_0
   - pip=20.2.2=py38_0
   - pyodbc=4.0.30=py38ha925a31_0
@@ -32,4 +35,3 @@ dependencies:
     - numexpr==2.7.1
     - openmatrix==0.3.5.0
     - tables==3.6.1
-
