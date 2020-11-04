@@ -69,7 +69,7 @@ class PerformanceMeasuresM1M5(object):
                 higherLearningEnrollment - total university and other college
                     enrollment
         """
-        with settings.engine.connect() as conn:
+        with settings.engines["ABM-Reporting"].connect() as conn:
             dest = pd.read_sql(
                 sql="EXECUTE [rp_2021].[sp_m1_m5_destinations]  " +
                     str(self.scenario_id),
@@ -83,7 +83,7 @@ class PerformanceMeasuresM1M5(object):
         """ Get master list of MGRAs with population(s) of interest fields.
 
          Returns:
-             Pandas of DataFrame of MGRAs with fields describing populations
+             Pandas DataFrame of MGRAs with fields describing populations
              of interest.
                 mgra - Master Geographic Reference Area geography number
                 taz - Transportation Access Zone geography number
@@ -95,7 +95,7 @@ class PerformanceMeasuresM1M5(object):
                 popNonMinority - White Non-Hispanic population
                 popLowIncome - Low Income population
                 popNonLowIncome - Non-Low Income population"""
-        with settings.engine.connect() as conn:
+        with settings.engines["ABM-Reporting"].connect() as conn:
             pop = pd.read_sql(
                 sql="EXECUTE [rp_2021].[sp_m1_m5_populations]  " +
                     str(self.scenario_id) + ",0",  # 18 plus switch turned off
@@ -124,7 +124,7 @@ class PerformanceMeasuresM1M5(object):
                 popNonMinority - White Non-Hispanic 18+ population
                 popLowIncome - Low Income 18+ population
                 popNonLowIncome - Non-Low Income 18+ population"""
-        with settings.engine.connect() as conn:
+        with settings.engines["ABM-Reporting"].connect() as conn:
             pop_over18 = pd.read_sql(
                 sql="EXECUTE [rp_2021].[sp_m1_m5_populations]  " +
                     str(self.scenario_id) + ",1",  # 18 plus switch turned on
@@ -139,7 +139,7 @@ class PerformanceMeasuresM1M5(object):
     @lru_cache(maxsize=1)
     def scenario_path(self) -> str:
         """ Get UNC file path of loaded ABM scenario folder """
-        with settings.engine.connect() as conn:
+        with settings.engines["ABM-Reporting"].connect() as conn:
             path = pd.read_sql(
                 sql="SELECT[path] FROM [dimension].[scenario] WHERE [scenario_id] =  " +
                     str(self.scenario_id),

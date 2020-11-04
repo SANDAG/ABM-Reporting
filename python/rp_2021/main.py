@@ -1,9 +1,24 @@
 import datetime
+from performanceMeasuresGIS import PerformanceMeasuresGIS
 from performanceMeasuresM1M5 import PerformanceMeasuresM1M5
 import settings
 import openpyxl
 import os
 import pandas as pd
+
+
+# get GIS Performance Measures and populate SQL Server results table
+print("---- Getting GIS Performance Measures ----")
+for scenario in settings.scenarios:
+    print("Scenario: " + str(scenario))
+
+    # if scenario is the 2020 SB375 only scenario then skip access measures
+    if settings.scenarios[scenario] == "2020":
+        print("SB375 only scenario: no GIS access measures calculated")
+    else:
+        gis_data = PerformanceMeasuresGIS(85)
+        gis_data.insert_performance_measures()
+        print("Finished getting GIS Performance Measures")
 
 
 # run SQL-based Performance Measures and populate SQL Server results table
@@ -19,7 +34,7 @@ for scenario in settings.scenarios:
         measureDict = settings.sql_measures[measureKey]
 
         # execute stored procedure with specified arguments
-        with settings.engine.begin() as conn:
+        with settings.engines["ABM-Reporting"].begin() as conn:
             sql = "EXECUTE " + measureDict["sp"] + " " + measureDict["args"]
             conn.execute(sql.format(scenario))
 
@@ -29,53 +44,57 @@ print("---- Running Python-based Performance Measures ----")
 for scenario in settings.scenarios:
     print("Scenario: " + str(scenario))
 
-    # initialize access measure class object
-    pm_m1_m5 = PerformanceMeasuresM1M5(scenario)
+    # if scenario is the 2020 SB375 only scenario then skip access measures
+    if settings.scenarios[scenario] == "2020":
+        print("SB375 only scenario: no access measures calculated")
+    else:
+        # initialize access measure class object
+        pm_m1_m5 = PerformanceMeasuresM1M5(scenario)
 
-    # for each performance measure
-    for measureKey in settings.python_measures:
-        print("Measure: " + measureKey)
+        # for each performance measure
+        for measureKey in settings.python_measures:
+            print("Measure: " + measureKey)
 
-        # delete old results from the results table if they exist
-        with settings.engine.begin() as conn:
-            conn.execute(
-                "DELETE FROM [rp_2021].[results] WHERE [scenario_id] = " +
-                str(scenario) + " AND [measure] = '" + measureKey + "'")
+            # delete old results from the results table if they exist
+            with settings.engines["ABM-Reporting"].begin() as conn:
+                conn.execute(
+                    "DELETE FROM [rp_2021].[results] WHERE [scenario_id] = " +
+                    str(scenario) + " AND [measure] = '" + measureKey + "'")
 
-        # for each metric within the performance measure
-        for metricKey in settings.python_measures[measureKey]:
-            metricDict = settings.python_measures[measureKey][metricKey]
-            # run the appropriate class method and write results to results table
-            if metricDict["class"] == "PerformanceMeasuresM1M5":
+            # for each metric within the performance measure
+            for metricKey in settings.python_measures[measureKey]:
+                metricDict = settings.python_measures[measureKey][metricKey]
+                # run the appropriate class method and write results to results table
+                if metricDict["class"] == "PerformanceMeasuresM1M5":
 
-                func = getattr(pm_m1_m5, metricDict["method"])(**metricDict["args"])
-                result = func.to_frame(name="value")
-                result["scenario_id"] = scenario
-                result["measure"] = measureKey
-                result["metric"] = result.index + " - " + metricKey
-                result["updated_by"] = os.environ["userdomain"] + "\\" + os.getenv("username")
-                result["updated_date"] = datetime.datetime.now()
+                    func = getattr(pm_m1_m5, metricDict["method"])(**metricDict["args"])
+                    result = func.to_frame(name="value")
+                    result["scenario_id"] = scenario
+                    result["measure"] = measureKey
+                    result["metric"] = result.index + " - " + metricKey
+                    result["updated_by"] = os.environ["userdomain"] + "\\" + os.getenv("username")
+                    result["updated_date"] = datetime.datetime.now()
 
-                result = result[["scenario_id",
-                                 "measure",
-                                 "metric",
-                                 "value",
-                                 "updated_by",
-                                 "updated_date"]]
+                    result = result[["scenario_id",
+                                     "measure",
+                                     "metric",
+                                     "value",
+                                     "updated_by",
+                                     "updated_date"]]
 
-                result.to_sql(name="results",
-                              schema="rp_2021",
-                              con=settings.engine,
-                              if_exists="append",
-                              index=False,
-                              method="multi")
+                    result.to_sql(name="results",
+                                  schema="rp_2021",
+                                  con=settings.engines["ABM-Reporting"],
+                                  if_exists="append",
+                                  index=False,
+                                  method="multi")
 
 
 # populate Excel Workbook template with performance measure results
 print("---- Populating Excel Workbook ----")
 
 # initialize Performance Measures Excel workbook template
-template = openpyxl.load_workbook("./resources/rp_2021/PerformanceMeasures_Template.xlsx")
+template = openpyxl.load_workbook("C:/Users/gsc/OneDrive - San Diego Association of Governments/gsc/git/ABM-Reporting/resources/rp_2021/PerformanceMeasures_Template.xlsx")
 templateWriter = pd.ExcelWriter(
     path=settings.templateWritePath,
     mode="w",
@@ -98,7 +117,7 @@ for scenario in settings.scenarios:
             result = pd.read_sql_query(
                 sql=("SELECT [value] FROM [rp_2021].[results] WHERE"
                      "[scenario_id] = ? AND [measure] = ? AND [metric] = ?"),
-                con=settings.engine,
+                con=settings.engines["ABM-Reporting"],
                 params=[scenario, measureKey, metricKey]
             )
 

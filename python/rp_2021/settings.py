@@ -14,8 +14,17 @@ scenarios = {
 templateWritePath = ""
 
 # set SQL Server connection attributes
-server = ""
-database = ""
+sqlAttributes = {
+    "ABM-Reporting": {
+        "server": "",
+        "database": ""
+    },
+    "GIS": {
+        "server": "",
+        "database": ""
+    }
+}
+
 
 # map scenario labels to template sheet columns
 # Sheet: (Scenario Label)
@@ -49,6 +58,7 @@ template_columns = {
     },
     "SB375 Data Table": {
         "2016": 3,
+        "2020": 4,
         "2035nb": 5,
         "2050nb": 7,
         "2035build": 6,
@@ -56,14 +66,28 @@ template_columns = {
     }
 }
 
-# create SQL Server connection string
-connString = "DRIVER={SQL Server Native Client 11.0};SERVER=" + \
-             server + ";DATABASE=" + database + ";Trusted_Connection=yes;"
+# create SQL Server connection strings
+connStrings = {
+    "ABM-Reporting": "DRIVER={SQL Server Native Client 11.0};SERVER=" +
+                     sqlAttributes["ABM-Reporting"]["server"] +
+                     ";DATABASE=" + sqlAttributes["ABM-Reporting"]["database"]
+                     + ";Trusted_Connection=yes;",
+    "GIS": "DRIVER={SQL Server Native Client 11.0};SERVER=" +
+                     sqlAttributes["GIS"]["server"] +
+                     ";DATABASE=" + sqlAttributes["GIS"]["database"]
+                     + ";Trusted_Connection=yes;"
+}
 
-# create SQL alchemy engine using pyodbc sql server connection
+# create SQL alchemy engines using pyodbc sql server connection
 pyodbc.pooling = False
-params = urllib.parse.quote_plus(connString)
-engine = sqlalchemy.create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
+engines = {
+    "ABM-Reporting": sqlalchemy.create_engine(
+        "mssql+pyodbc:///?odbc_connect=%s" %
+        urllib.parse.quote_plus(connStrings["ABM-Reporting"])),
+    "GIS": sqlalchemy.create_engine(
+        "mssql+pyodbc:///?odbc_connect=%s" %
+        urllib.parse.quote_plus(connStrings["GIS"]))
+}
 
 # dictionary of Python-based performance measures
 # Measure: Metric: (class, method, args: (specific arguments))
@@ -1813,6 +1837,324 @@ template_locations = {
             "row": 260
         }
     },
+    "SM-2": {
+        "Tier 1 - Population": {
+            "sheet": "SupportingMeasures",
+            "row": 21
+        },
+        "Tier 1 - Population Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 22
+        },
+        "Tier 2 - Population": {
+            "sheet": "SupportingMeasures",
+            "row": 23
+        },
+        "Tier 2 - Population Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 24
+        },
+        "Tier 3 - Population": {
+            "sheet": "SupportingMeasures",
+            "row": 25
+        },
+        "Tier 3 - Population Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 26
+        },
+        "Population": {
+            "sheet": "SupportingMeasures",
+            "row": 27
+        },
+        "Population Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 28
+        },
+        "Tier 1 - Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 272
+        },
+        "Tier 2 - Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 273
+        },
+        "Tier 3 - Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 274
+        },
+        "Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 275
+        },
+        "Tier 1 - Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 276
+        },
+        "Tier 2 - Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 277
+        },
+        "Tier 3 - Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 278
+        },
+        "Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 279
+        },
+        "Tier 1 - Non-Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 280
+        },
+        "Tier 2 - Non-Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 281
+        },
+        "Tier 3 - Non-Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 282
+        },
+        "Non-Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 283
+        },
+        "Tier 1 - Non-Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 284
+        },
+        "Tier 2 - Non-Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 285
+        },
+        "Tier 3 - Non-Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 286
+        },
+        "Non-Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 287
+        },
+        "Tier 1 - Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 288
+        },
+        "Tier 2 - Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 289
+        },
+        "Tier 3 - Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 290
+        },
+        "Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 291
+        },
+        "Tier 1 - Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 292
+        },
+        "Tier 2 - Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 293
+        },
+        "Tier 3 - Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 294
+        },
+        "Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 295
+        },
+        "Tier 1 - Non-Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 296
+        },
+        "Tier 2 - Non-Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 297
+        },
+        "Tier 3 - Non-Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 298
+        },
+        "Non-Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 299
+        },
+        "Tier 1 - Non-Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 300
+        },
+        "Tier 2 - Non-Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 301
+        },
+        "Tier 3 - Non-Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 302
+        },
+        "Non-Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 303
+        },
+        "Tier 1 - Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 304
+        },
+        "Tier 2 - Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 305
+        },
+        "Tier 3 - Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 306
+        },
+        "Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 307
+        },
+        "Tier 1 - Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 308
+        },
+        "Tier 2 - Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 309
+        },
+        "Tier 3 - Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 310
+        },
+        "Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 311
+        },
+        "Tier 1 - Non-Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 312
+        },
+        "Tier 2 - Non-Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 313
+        },
+        "Tier 3 - Non-Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 314
+        },
+        "Non-Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 315
+        },
+        "Tier 1 - Non-Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 316
+        },
+        "Tier 2 - Non-Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 317
+        },
+        "Tier 3 - Non-Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 318
+        },
+        "Non-Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 319
+        }
+    },
+    "SM-3": {
+        "Tier 1 - Jobs": {
+            "sheet": "SupportingMeasures",
+            "row": 30
+        },
+        "Tier 1 - Jobs Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 31
+        },
+        "Tier 2 - Jobs": {
+            "sheet": "SupportingMeasures",
+            "row": 32
+        },
+        "Tier 2 - Jobs Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 33
+        },
+        "Tier 3 - Jobs": {
+            "sheet": "SupportingMeasures",
+            "row": 34
+        },
+        "Tier 3 - Jobs Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 35
+        },
+        "Jobs": {
+            "sheet": "SupportingMeasures",
+            "row": 36
+        },
+        "Jobs Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 37
+        }
+    },
+    "SM-4": {
+        "Population": {
+            "sheet": "SupportingMeasures",
+            "row": 39
+        },
+        "Population Access Pct": {
+            "sheet": "SupportingMeasures",
+            "row": 40
+        },
+        "Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 321
+        },
+        "Non-Low Income Population": {
+            "sheet": "Social Equity PMs",
+            "row": 322
+        },
+        "Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 323
+        },
+        "Non-Minority Population": {
+            "sheet": "Social Equity PMs",
+            "row": 324
+        },
+        "Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 325
+        },
+        "Non-Senior Population": {
+            "sheet": "Social Equity PMs",
+            "row": 326
+        },
+        "Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 327
+        },
+        "Non-Low Income Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 328
+        },
+        "Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 329
+        },
+        "Non-Minority Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 330
+        },
+        "Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 331
+        },
+        "Non-Senior Access Pct": {
+            "sheet": "Social Equity PMs",
+            "row": 332
+        }
+    },
     "SM-1 - Peak Period Outbound Work Trips": {
         "Percentage of Person Trips - Bike & Walk": {
             "sheet": "SupportingMeasures",
@@ -2020,27 +2362,27 @@ template_locations = {
         },
         "Low Income": {
             "sheet": "Social Equity PMs",
-            "row": 389
+            "row": 341
         },
         "Non-Low Income": {
             "sheet": "Social Equity PMs",
-            "row": 390
+            "row": 342
         },
         "Minority": {
             "sheet": "Social Equity PMs",
-            "row": 391
+            "row": 343
         },
         "Non-Minority": {
             "sheet": "Social Equity PMs",
-            "row": 392
+            "row": 344
         },
         "Senior": {
             "sheet": "Social Equity PMs",
-            "row": 393
+            "row": 345
         },
         "Non-Senior": {
             "sheet": "Social Equity PMs",
-            "row": 394
+            "row": 346
         }
     },
     "SB375 - Auto Ownership": {
