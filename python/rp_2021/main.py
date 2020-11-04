@@ -94,7 +94,7 @@ for scenario in settings.scenarios:
 print("---- Populating Excel Workbook ----")
 
 # initialize Performance Measures Excel workbook template
-template = openpyxl.load_workbook("C:/Users/gsc/OneDrive - San Diego Association of Governments/gsc/git/ABM-Reporting/resources/rp_2021/PerformanceMeasures_Template.xlsx")
+template = openpyxl.load_workbook("./resources/rp_2021/PerformanceMeasures_Template.xlsx")
 templateWriter = pd.ExcelWriter(
     path=settings.templateWritePath,
     mode="w",
