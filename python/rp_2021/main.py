@@ -16,7 +16,7 @@ for scenario in settings.scenarios:
     if settings.scenarios[scenario] == "2020":
         print("SB375 only scenario: no GIS access measures calculated")
     else:
-        gis_data = PerformanceMeasuresGIS(85)
+        gis_data = PerformanceMeasuresGIS(scenario)
         gis_data.insert_performance_measures()
         print("Finished getting GIS Performance Measures")
 
