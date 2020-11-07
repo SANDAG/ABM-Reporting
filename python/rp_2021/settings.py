@@ -485,7 +485,7 @@ python_measures = {
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_transit_access",
              "args": {
-                 "criteria": "higherLearningEnrollment > 0",
+                 "criteria": "employmentCenterTier > 0",
                  "max_time": 30,
                  "over18": True,
                  "mobility_hub": False,
@@ -497,7 +497,7 @@ python_measures = {
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_transit_access",
              "args": {
-                 "criteria": "higherLearningEnrollment > 0",
+                 "criteria": "employmentCenterTier > 0",
                  "max_time": 30,
                  "over18": True,
                  "mobility_hub": True,
@@ -509,7 +509,7 @@ python_measures = {
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_transit_access",
              "args": {
-                 "criteria": "higherLearningEnrollment > 0",
+                 "criteria": "employmentCenterTier > 0",
                  "max_time": 45,
                  "over18": True,
                  "mobility_hub": False,
@@ -521,7 +521,7 @@ python_measures = {
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_transit_access",
              "args": {
-                 "criteria": "higherLearningEnrollment > 0",
+                 "criteria": "employmentCenterTier > 0",
                  "max_time": 45,
                  "over18": True,
                  "mobility_hub": True,
@@ -533,7 +533,7 @@ python_measures = {
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_transit_access",
              "args": {
-                 "criteria": "employmentCenterTier > 0",
+                 "criteria": "higherLearningEnrollment > 0",
                  "max_time": 30,
                  "over18": True,
                  "mobility_hub": False,
@@ -545,7 +545,7 @@ python_measures = {
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_transit_access",
              "args": {
-                 "criteria": "employmentCenterTier > 0",
+                 "criteria": "higherLearningEnrollment > 0",
                  "max_time": 30,
                  "over18": True,
                  "mobility_hub": True,
@@ -557,7 +557,7 @@ python_measures = {
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_transit_access",
              "args": {
-                 "criteria": "employmentCenterTier > 0",
+                 "criteria": "higherLearningEnrollment > 0",
                  "max_time": 45,
                  "over18": True,
                  "mobility_hub": False,
@@ -569,7 +569,7 @@ python_measures = {
             {"class": "PerformanceMeasuresM1M5",
              "method": "calc_transit_access",
              "args": {
-                 "criteria": "employmentCenterTier > 0",
+                 "criteria": "higherLearningEnrollment > 0",
                  "max_time": 45,
                  "over18": True,
                  "mobility_hub": True,
