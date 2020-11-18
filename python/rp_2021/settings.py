@@ -2396,207 +2396,207 @@ template_locations = {
     "SB375 - Auto Ownership": {
         "Average Household Auto Ownership": {
             "sheet": "SB375 Data Table",
-            "row": 37
+            "row": 38
         }
     },
     "SB375 - Housing Structures": {
         "Total Households": {
             "sheet": "SB375 Data Table",
-            "row": 9
+            "row": 10
         },
         "Total Housing Structures": {
             "sheet": "SB375 Data Table",
-            "row": 13
+            "row": 14
         },
         "Total Single-Family Housing Structures": {
             "sheet": "SB375 Data Table",
-            "row": 14
+            "row": 15
         },
         "Share of Single-Family Housing Structures": {
             "sheet": "SB375 Data Table",
-            "row": 15
+            "row": 16
         },
         "Total Multi-Family Housing Structures": {
             "sheet": "SB375 Data Table",
-            "row": 16
+            "row": 17
         },
         "Share of Multi-Family Housing Structures": {
             "sheet": "SB375 Data Table",
-            "row": 17
+            "row": 18
         }
     },
     "SB375 - Jobs": {
         "Total Jobs": {
             "sheet": "SB375 Data Table",
-            "row": 10
+            "row": 11
         }
     },
     "SB375 - Median Household Income": {
         "Median Household Income": {
             "sheet": "SB375 Data Table",
-            "row": 8
+            "row": 9
         }
     },
     "SB375 - Average Trip Length by Mode": {
         "Drive Alone": {
             "sheet": "SB375 Data Table",
-            "row": 39
+            "row": 40
         },
         "Shared Ride 2": {
             "sheet": "SB375 Data Table",
-            "row": 40
+            "row": 41
         },
         "Shared Ride 3+": {
             "sheet": "SB375 Data Table",
-            "row": 41
+            "row": 42
         },
         "Drive to Transit": {
             "sheet": "SB375 Data Table",
-            "row": 42
+            "row": 43
         },
         "Walk to Transit": {
             "sheet": "SB375 Data Table",
-            "row": 43
+            "row": 44
         },
         "Bike": {
             "sheet": "SB375 Data Table",
-            "row": 44
+            "row": 45
         },
         "Walk": {
             "sheet": "SB375 Data Table",
-            "row": 45
+            "row": 46
         },
         "All Modes": {
             "sheet": "SB375 Data Table",
-            "row": 46
+            "row": 47
         }
     },
     "SB375 - Average Trip Time by Mode": {
         "Drive Alone": {
             "sheet": "SB375 Data Table",
-            "row": 51
+            "row": 52
         },
         "Shared Ride 2": {
             "sheet": "SB375 Data Table",
-            "row": 52
+            "row": 53
         },
         "Shared Ride 3+": {
             "sheet": "SB375 Data Table",
-            "row": 53
+            "row": 54
         },
         "Drive to Transit": {
             "sheet": "SB375 Data Table",
-            "row": 54
+            "row": 55
         },
         "Walk to Transit": {
             "sheet": "SB375 Data Table",
-            "row": 55
+            "row": 56
         },
         "Bike": {
             "sheet": "SB375 Data Table",
-            "row": 56
+            "row": 57
         },
         "Walk": {
             "sheet": "SB375 Data Table",
-            "row": 57
+            "row": 58
         },
         "All Modes": {
             "sheet": "SB375 Data Table",
-            "row": 58
+            "row": 59
         }
     },
     "SB375 - Average Trip Time by Mode for Low Income Residents": {
         "Drive Alone": {
             "sheet": "SB375 Data Table",
-            "row": 60
+            "row": 61
         },
         "Shared Ride 2": {
             "sheet": "SB375 Data Table",
-            "row": 61
+            "row": 62
         },
         "Shared Ride 3+": {
             "sheet": "SB375 Data Table",
-            "row": 62
+            "row": 63
         },
         "Drive to Transit": {
             "sheet": "SB375 Data Table",
-            "row": 63
+            "row": 64
         },
         "Walk to Transit": {
             "sheet": "SB375 Data Table",
-            "row": 64
+            "row": 65
         },
         "Bike": {
             "sheet": "SB375 Data Table",
-            "row": 65
+            "row": 66
         },
         "Walk": {
             "sheet": "SB375 Data Table",
-            "row": 66
+            "row": 67
         },
         "All Modes": {
             "sheet": "SB375 Data Table",
-            "row": 67
+            "row": 68
         }
     },
     "SB375 - Mode Share": {
         "Drive Alone": {
             "sheet": "SB375 Data Table",
-            "row": 69
+            "row": 70
         },
         "Shared Ride 2": {
             "sheet": "SB375 Data Table",
-            "row": 70
+            "row": 71
         },
         "Shared Ride 3+": {
             "sheet": "SB375 Data Table",
-            "row": 71
+            "row": 72
         },
         "Drive to Transit": {
             "sheet": "SB375 Data Table",
-            "row": 72
+            "row": 73
         },
         "Walk to Transit": {
             "sheet": "SB375 Data Table",
-            "row": 73
+            "row": 74
         },
         "Bike": {
             "sheet": "SB375 Data Table",
-            "row": 74
+            "row": 75
         },
         "Walk": {
             "sheet": "SB375 Data Table",
-            "row": 75
+            "row": 76
         },
         "All Modes": {
             "sheet": "SB375 Data Table",
-            "row": 76
+            "row": 77
         }
     },
     "SB375 - Population": {
         "Total Population": {
             "sheet": "SB375 Data Table",
-            "row": 4
+            "row": 5
         },
         "Modeled Population": {
             "sheet": "SB375 Data Table",
-            "row": 5
+            "row": 6
         }
     },
     "SB375 - Seat Utilization": {
         "Seat Utilization": {
             "sheet": "SB375 Data Table",
-            "row": 77
+            "row": 78
         }
     },
     "SB375 - Travel Time by Purpose": {
         "Outbound Work Trips": {
             "sheet": "SB375 Data Table",
-            "row": 48
+            "row": 49
         },
         "Other Trips": {
             "sheet": "SB375 Data Table",
-            "row": 49
+            "row": 50
         }
     }
 }

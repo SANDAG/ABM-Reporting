@@ -103,6 +103,13 @@ templateWriter.book = template
 templateWriter.sheets = dict((ws.title, ws) for ws in template.worksheets)
 
 for scenario in settings.scenarios:
+
+    # write scenario to sheets of Excel template
+    for sheet in settings.template_columns:
+        col = settings.template_columns[sheet][settings.scenarios[scenario]]
+        cell = template[sheet].cell(row=3, column=col)
+        cell.value = scenario
+
     # for each dictionary of Performance Measures
     for measureKey in settings.template_locations:
 
