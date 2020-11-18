@@ -2234,39 +2234,47 @@ template_locations = {
             "sheet": "SupportingMeasures",
             "row": 44
         },
-        "Daily Transit Boardings - Total": {
+        "Daily Transit Boardings - Local Bus": {
             "sheet": "SupportingMeasures",
             "row": 45
+        },
+        "Daily Transit Boardings - Total": {
+            "sheet": "SupportingMeasures",
+            "row": 46
         }
     },
     "SM-5 Mobility Hubs": {
         "Daily Transit Boardings - Tier 1": {
             "sheet": "SupportingMeasures",
-            "row": 46
+            "row": 47
         },
         "Daily Transit Boardings - Tier 2": {
             "sheet": "SupportingMeasures",
-            "row": 47
+            "row": 48
         },
         "Daily Transit Boardings - Tier 3": {
             "sheet": "SupportingMeasures",
-            "row": 48
+            "row": 49
+        },
+        "Daily Transit Boardings - Local Bus": {
+            "sheet": "SupportingMeasures",
+            "row": 50
         },
         "Daily Transit Boardings - Total": {
             "sheet": "SupportingMeasures",
-            "row": 49
+            "row": 51
         }
     },
     "SM-6 Transportation-Related Physical Activity per Capita": {
         "Total": {
             "sheet": "SupportingMeasures",
-            "row": 51
+            "row": 53
         }
     },
     "SM-6 Percentage of Population Engaged in Transportation-Related Physical Activity": {
         "Total": {
             "sheet": "SupportingMeasures",
-            "row": 52
+            "row": 54
         }
     },
     "SM-7": {
@@ -2278,87 +2286,87 @@ template_locations = {
     "SM-9-a": {
         "TTI - Highway (SHS)": {
             "sheet": "SupportingMeasures",
-            "row": 58
+            "row": 60
         },
         "TTI - Arterial": {
             "sheet": "SupportingMeasures",
-            "row": 59
+            "row": 61
         },
         "TTI - All IFCs": {
             "sheet": "SupportingMeasures",
-            "row": 60
+            "row": 62
         }
     },
     "SM-9-b": {
         "Heavy Heavy Duty Truck - Highway (SHS) - VHD": {
             "sheet": "SupportingMeasures",
-            "row": 62
+            "row": 64
         },
         "Heavy Heavy Duty Truck - Arterial - VHD": {
             "sheet": "SupportingMeasures",
-            "row": 63
+            "row": 65
         },
         "Heavy Heavy Duty Truck - Highway (SHS) - VHD - Peak Period": {
             "sheet": "SupportingMeasures",
-            "row": 64
+            "row": 66
         },
         "Heavy Heavy Duty Truck - Arterial - VHD - Peak Period": {
             "sheet": "SupportingMeasures",
-            "row": 65
+            "row": 67
         },
         "Medium Heavy Duty Truck - Highway (SHS) - VHD": {
             "sheet": "SupportingMeasures",
-            "row": 66
+            "row": 68
         },
         "Medium Heavy Duty Truck - Arterial - VHD": {
             "sheet": "SupportingMeasures",
-            "row": 67
+            "row": 69
         },
         "Medium Heavy Duty Truck - Highway (SHS) - VHD - Peak Period": {
             "sheet": "SupportingMeasures",
-            "row": 68
+            "row": 70
         },
         "Medium Heavy Duty Truck - Arterial - VHD - Peak Period": {
             "sheet": "SupportingMeasures",
-            "row": 69
+            "row": 71
         },
         "Light Heavy Duty Truck - Highway (SHS) - VHD": {
             "sheet": "SupportingMeasures",
-            "row": 70
+            "row": 72
         },
         "Light Heavy Duty Truck - Arterial - VHD": {
             "sheet": "SupportingMeasures",
-            "row": 71
+            "row": 73
         },
         "Light Heavy Duty Truck - Highway (SHS) - VHD - Peak Period": {
             "sheet": "SupportingMeasures",
-            "row": 72
+            "row": 74
         },
         "Light Heavy Duty Truck - Arterial - VHD - Peak Period": {
             "sheet": "SupportingMeasures",
-            "row": 73
+            "row": 75
         },
         "All Heavy Duty Trucks - Highway (SHS) - VHD": {
             "sheet": "SupportingMeasures",
-            "row": 74
+            "row": 76
         },
         "All Heavy Duty Trucks - Arterial - VHD": {
             "sheet": "SupportingMeasures",
-            "row": 75
+            "row": 77
         },
         "All Heavy Duty Trucks - Highway (SHS) - VHD - Peak Period": {
             "sheet": "SupportingMeasures",
-            "row": 76
+            "row": 78
         },
         "All Heavy Duty Trucks - Arterial - VHD - Peak Period": {
             "sheet": "SupportingMeasures",
-            "row": 77
+            "row": 79
         }
     },
     "SM-10": {
         "Total": {
             "sheet": "SupportingMeasures",
-            "row": 79
+            "row": 81
         },
         "Low Income": {
             "sheet": "Social Equity PMs",

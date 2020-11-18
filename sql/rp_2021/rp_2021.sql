@@ -11643,8 +11643,9 @@ AS
 /**
 summary:   >
     2021 Regional Plan Performance Measure SM-5 Daily Transit Boardings.
-    Total boardings and total boardings for Tier 1 + Tier 2 transit routes
-    are provided. Tier 1 + Tier 2 routes are hardcoded based on route numbers.
+    Total boardings and total boardings for Tier 1, Tier 2, Tier 3, and local
+    bus transit routes. are provided. Tier 1 + Tier 2 routes are hardcoded
+    based on route numbers.
 
 filters:   >
     [transit_route].[config] / 1000 IN (581, 582, 583) OR [mode_transit_route_description] = 'Commuter Rail'
@@ -11741,7 +11742,9 @@ BEGIN
                         THEN 'Tier 2'
                         WHEN [mode_transit_route_description] IN ('Freeway Rapid', 'Arterial Rapid')
                         THEN 'Tier 3'
-                        ELSE 'No Tier' END, 'Total') AS [tier]
+                        WHEN [mode_transit_route_description] = 'Local Bus'
+                        THEN 'Local Bus'
+                        ELSE 'Other' END, 'Total') AS [tier]
             ,SUM([boardings]) AS [boardings]
         FROM
             [fact].[transit_onoff]
@@ -11770,7 +11773,9 @@ BEGIN
                  THEN 'Tier 2'
                  WHEN [mode_transit_route_description] IN ('Freeway Rapid', 'Arterial Rapid')
                  THEN 'Tier 3'
-                 ELSE 'No Tier' END
+                WHEN [mode_transit_route_description] = 'Local Bus'
+                THEN 'Local Bus'
+                ELSE 'Other' END
         WITH ROLLUP) AS [boardings]
 
     DROP TABLE #includedStops
