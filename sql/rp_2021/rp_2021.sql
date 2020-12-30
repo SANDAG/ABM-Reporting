@@ -11189,15 +11189,10 @@ LEFT OUTER JOIN (  -- get indicators if MGRAs in Tier 1-4 employment centers
     SELECT
         [mgra_13],
         [tier]
-    FROM OPENQUERY(
-	    [sql2014a8],
-	    'SELECT
-            [mgra_13]
-            ,[tier]
-         FROM
-            [employment].[employment_centers].[fn_get_mgra_xref](1)
-         WHERE
-            [tier] IN (1,2,3,4)')) AS [mgra_tiers]
+    FROM
+        [employment].[employment_centers].[fn_get_mgra_xref](1)
+     WHERE
+         [tier] IN (1,2,3,4)) AS [mgra_tiers]
 ON
 	[geography].[mgra_13] = CONVERT(nvarchar, [mgra_tiers].[mgra_13])
 WHERE
