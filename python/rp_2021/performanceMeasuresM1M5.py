@@ -75,7 +75,13 @@ class PerformanceMeasuresM1M5(object):
                     str(self.scenario_id),
                 con=conn)
 
-        return dest
+        return dest[["mgra",
+                     "taz",
+                     "employmentCenterTier",
+                     "empHealth",
+                     "parkActive",
+                     "empRetail",
+                     "higherLearningEnrollment"]]
 
     @property
     @lru_cache(maxsize=1)
@@ -104,7 +110,16 @@ class PerformanceMeasuresM1M5(object):
         # convert geography columns from string to numeric
         pop[["mgra", "taz"]] = pop[["mgra", "taz"]].apply(pd.to_numeric)
 
-        return pop
+        return pop[["mgra",
+                    "taz",
+                    "mobilityHub",
+                    "pop",
+                    "popSenior",
+                    "popNonSenior",
+                    "popMinority",
+                    "popNonMinority",
+                    "popLowIncome",
+                    "popNonLowIncome"]]
 
     @property
     @lru_cache(maxsize=1)
@@ -133,7 +148,16 @@ class PerformanceMeasuresM1M5(object):
         # convert geography columns from string to numeric
         pop_over18[["mgra", "taz"]] = pop_over18[["mgra", "taz"]].apply(pd.to_numeric)
 
-        return pop_over18
+        return pop_over18[["mgra",
+                           "taz",
+                           "mobilityHub",
+                           "pop",
+                           "popSenior",
+                           "popNonSenior",
+                           "popMinority",
+                           "popNonMinority",
+                           "popLowIncome",
+                           "popNonLowIncome"]]
 
     @property
     @lru_cache(maxsize=1)
