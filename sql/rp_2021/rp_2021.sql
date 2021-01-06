@@ -11362,12 +11362,13 @@ BEGIN
     BEGIN
         INSERT INTO @aggregated_trips
         SELECT
-	        ISNULL(CASE WHEN [mode_trip].[mode_aggregate_trip_description] IN ('School Bus',
+	        ISNULL(CASE WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Super-Walk',
+	                                                                           'School Bus',
                                                                                'Taxi',
                                                                                'Non-Pooled TNC',
                                                                                'Pooled TNC')
                         THEN 'Other'
-                        WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Bike', 'Super-Walk', 'Walk')
+                        WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Bike', 'Walk')
                         THEN 'Bike & Walk'
                         WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Shared Ride 2', 'Shared Ride 3+')
                         THEN 'Carpool'
@@ -11400,12 +11401,13 @@ BEGIN
                 (@peak_period = 1 AND [time_trip_start].[trip_start_abm_5_tod] IN ('2', '4'))
                 )
         GROUP BY
-	        CASE WHEN [mode_trip].[mode_aggregate_trip_description] IN ('School Bus',
+	        CASE WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Super-Walk',
+	                                                                    'School Bus',
                                                                         'Taxi',
                                                                         'Non-Pooled TNC',
                                                                         'Pooled TNC')
                         THEN 'Other'
-                        WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Bike', 'Super-Walk', 'Walk')
+                        WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Bike', 'Walk')
                         THEN 'Bike & Walk'
                         WHEN [mode_trip].[mode_aggregate_trip_description] IN ('Shared Ride 2', 'Shared Ride 3+')
                         THEN 'Carpool'
