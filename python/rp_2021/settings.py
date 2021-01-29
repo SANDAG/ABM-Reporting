@@ -4,24 +4,24 @@ import urllib
 
 # create dictionary of ABM SQL database scenario ids and the corresponding
 # scenario label they map to within the Performance Measure template
-# possible labels: 2016, 2025nb, 2035nb, 2050nb, 2025build, 2035build, 2050build
+# possible labels: 2016, 2020, 2025nb, 2035nb, 2050nb, 2025build, 2035build, 2050build
 scenarios = {
-    # 1: "2035build"  example format
+    # 1: "2035build"  example format  TODO: set scenarios
 }
 
 # set path to write Performance Measure workbook
 # example format: C:/Users/gsc/Desktop/PerformanceMeasures.xlsx
-templateWritePath = ""
+templateWritePath = ""  # TODO: set template write path
 
 # set SQL Server connection attributes
 sqlAttributes = {
     "ABM-Reporting": {
-        "server": "",
-        "database": ""
+        "server": "",  # TODO: set SQL server name
+        "database": ""  # TODO: set SQL server database name
     },
     "GIS": {
-        "server": "",
-        "database": ""
+        "server": "",  # TODO: set SQL server name
+        "database": ""  # TODO: set SQL server database name
     }
 }
 

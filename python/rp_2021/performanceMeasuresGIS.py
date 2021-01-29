@@ -13,7 +13,7 @@ from functools import lru_cache  # caching decorator for modules
 import os
 import pandas as pd
 import pyodbc
-import settings  # python project settings file
+import sqlalchemy
 
 
 class PerformanceMeasuresGIS(object):
@@ -23,6 +23,10 @@ class PerformanceMeasuresGIS(object):
     Args:
         scenario_id: Integer scenario id of the loaded ABM scenario in the ABM
             database table [dimension].[scenario]
+        conn_abm: SQL Alchemy connection engine for ABM-Reporting database
+            (see sqlalchemy.engine.Engine)
+        conn_gis: SQL Alchemy connection engine for GIS database
+            (see sqlalchemy.engine.Engine)
 
     Methods:
         check_scenario: Check GIS Performance Measure database table for
@@ -34,8 +38,12 @@ class PerformanceMeasuresGIS(object):
             Performance Measure database for the given ABM scenario id
     """
 
-    def __init__(self, scenario_id: int) -> None:
+    def __init__(self, scenario_id: int,
+                 conn_abm: sqlalchemy.engine.Engine,
+                 conn_gis: sqlalchemy.engine.Engine) -> None:
         self.scenario_id = scenario_id
+        self.conn_abm = conn_abm
+        self.conn_gis = conn_gis
 
     def check_scenario(self) -> bool:
         """ Check the GIS Performance Measure database table for existence of
@@ -45,7 +53,7 @@ class PerformanceMeasuresGIS(object):
         Returns:
             Boolean indicator if scenario exists in table
         """
-        with settings.engines["GIS"].connect() as conn:
+        with self.conn_gis.connect() as conn:
             exists = pd.read_sql(
                 sql="SELECT ISNULL((SELECT TOP (1) 1 FROM " +
                     "[dbo].[PerformanceMeasures] WHERE [scenario_id] = " +
@@ -82,7 +90,7 @@ class PerformanceMeasuresGIS(object):
                 WHERE
                     [scenario_id] = """ + str(self.scenario_id)
 
-        with settings.engines["GIS"].connect() as conn:
+        with self.conn_gis.connect() as conn:
             data = pd.read_sql(
                 sql=sql,
                 con=conn)
@@ -110,7 +118,7 @@ class PerformanceMeasuresGIS(object):
                          "updated_date"]]
 
             # delete old results from the results table if they exist
-            with settings.engines["ABM-Reporting"].begin() as conn:
+            with self.conn_abm.begin() as conn:
                 conn.execute(
                     "DELETE FROM [rp_2021].[results] WHERE [scenario_id] = " +
                     str(self.scenario_id) + " AND [measure] IN ('SE-SM-2'," +

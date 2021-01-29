@@ -1,76 +1,39 @@
 import datetime
-from performanceMeasuresGIS import PerformanceMeasuresGIS
 from performanceMeasuresM1M5 import PerformanceMeasuresM1M5
-import settings
+import settingsMoHubAccess
 import openpyxl
 import os
 import pandas as pd
 
 
-# get GIS Performance Measures and populate SQL Server results table
-print("---- Getting GIS Performance Measures ----")
-for scenario in settings.scenarios:
-    print("Scenario: " + str(scenario))
-
-    # if scenario is the 2020 SB375 only scenario then skip access measures
-    if settings.scenarios[scenario] == "2020":
-        print("SB375 only scenario: no GIS access measures calculated")
-    else:
-        gis_data = PerformanceMeasuresGIS(
-            scenario_id=scenario,
-            conn_abm=settings.engines["ABM-Reporting"],
-            conn_gis=settings.engines["GIS"]
-        )
-        gis_data.insert_performance_measures()
-        print("Finished getting GIS Performance Measures")
-
-
-# run SQL-based Performance Measures and populate SQL Server results table
-print("---- Running SQL-based Performance Measures ----")
-for scenario in settings.scenarios:
-    print("Scenario: " + str(scenario))
-
-    # for each performance measure
-    for measureKey in settings.sql_measures:
-        print("Measure: " + measureKey)
-
-        # get the performance measure dictionary
-        measureDict = settings.sql_measures[measureKey]
-
-        # execute stored procedure with specified arguments
-        with settings.engines["ABM-Reporting"].begin() as conn:
-            sql = "EXECUTE " + measureDict["sp"] + " " + measureDict["args"]
-            conn.execute(sql.format(scenario))
-
-
 # run Python-based Performance Measures and populate SQL Server results table
 print("---- Running Python-based Performance Measures ----")
-for scenario in settings.scenarios:
+for scenario in settingsMoHubAccess.scenarios:
     print("Scenario: " + str(scenario))
 
     # if scenario is the 2020 SB375 only scenario then skip access measures
-    if settings.scenarios[scenario] == "2020":
+    if settingsMoHubAccess.scenarios[scenario] == "2020":
         print("SB375 only scenario: no access measures calculated")
     else:
         # initialize access measure class object
         pm_m1_m5 = PerformanceMeasuresM1M5(
             scenario_id=scenario,
-            conn=settings.engines["ABM-Reporting"]
+            conn=settingsMoHubAccess.engines["ABM-Reporting"]
         )
 
         # for each performance measure
-        for measureKey in settings.python_measures:
+        for measureKey in settingsMoHubAccess.python_measures:
             print("Measure: " + measureKey)
 
             # delete old results from the results table if they exist
-            with settings.engines["ABM-Reporting"].begin() as conn:
+            with settingsMoHubAccess.engines["ABM-Reporting"].begin() as conn:
                 conn.execute(
                     "DELETE FROM [rp_2021].[results] WHERE [scenario_id] = " +
                     str(scenario) + " AND [measure] = '" + measureKey + "'")
 
             # for each metric within the performance measure
-            for metricKey in settings.python_measures[measureKey]:
-                metricDict = settings.python_measures[measureKey][metricKey]
+            for metricKey in settingsMoHubAccess.python_measures[measureKey]:
+                metricDict = settingsMoHubAccess.python_measures[measureKey][metricKey]
                 # run the appropriate class method and write results to results table
                 if metricDict["class"] == "PerformanceMeasuresM1M5":
 
@@ -91,7 +54,7 @@ for scenario in settings.scenarios:
 
                     result.to_sql(name="results",
                                   schema="rp_2021",
-                                  con=settings.engines["ABM-Reporting"],
+                                  con=settingsMoHubAccess.engines["ABM-Reporting"],
                                   if_exists="append",
                                   index=False,
                                   method="multi")
@@ -100,27 +63,27 @@ for scenario in settings.scenarios:
 # populate Excel Workbook template with performance measure results
 print("---- Populating Excel Workbook ----")
 
-# initialize Performance Measures Excel workbook template
-template = openpyxl.load_workbook("./resources/rp_2021/PerformanceMeasures_Template.xlsx")
+# initialize Mobility Hub Access Excel workbook template
+template = openpyxl.load_workbook("./resources/rp_2021/MoHubAccess_Template.xlsx")
 templateWriter = pd.ExcelWriter(
-    path=settings.templateWritePath,
+    path=settingsMoHubAccess.templateWritePath,
     mode="w",
     engine="openpyxl")
 templateWriter.book = template
 templateWriter.sheets = dict((ws.title, ws) for ws in template.worksheets)
 
-for scenario in settings.scenarios:
+for scenario in settingsMoHubAccess.scenarios:
 
     # write scenario to sheets of Excel template
-    for sheet in settings.template_columns:
-        col = settings.template_columns[sheet][settings.scenarios[scenario]]
+    for sheet in settingsMoHubAccess.template_columns:
+        col = settingsMoHubAccess.template_columns[sheet][settingsMoHubAccess.scenarios[scenario]]
         cell = template[sheet].cell(row=3, column=col)
         cell.value = scenario
 
     # for each dictionary of Performance Measures
-    for measureKey in settings.template_locations:
+    for measureKey in settingsMoHubAccess.template_locations:
 
-        measureDict = settings.template_locations[measureKey]
+        measureDict = settingsMoHubAccess.template_locations[measureKey]
 
         # for each metric within each Performance Measure
         for metricKey in measureDict:
@@ -131,7 +94,7 @@ for scenario in settings.scenarios:
             result = pd.read_sql_query(
                 sql=("SELECT [value] FROM [rp_2021].[results] WHERE"
                      "[scenario_id] = ? AND [measure] = ? AND [metric] = ?"),
-                con=settings.engines["ABM-Reporting"],
+                con=settingsMoHubAccess.engines["ABM-Reporting"],
                 params=[scenario, measureKey, metricKey]
             )
 
@@ -139,9 +102,9 @@ for scenario in settings.scenarios:
             # and write results to specified Excel template sheet and row
             # if none is specified for the given scenario label and template sheet
             # then do not write results
-            colDict = settings.template_columns[metricDict["sheet"]]
-            if settings.scenarios[scenario] in colDict.keys():
-                col = colDict[settings.scenarios[scenario]]
+            colDict = settingsMoHubAccess.template_columns[metricDict["sheet"]]
+            if settingsMoHubAccess.scenarios[scenario] in colDict.keys():
+                col = colDict[settingsMoHubAccess.scenarios[scenario]]
 
                 # write result to specified Excel template sheet and row
                 result.to_excel(

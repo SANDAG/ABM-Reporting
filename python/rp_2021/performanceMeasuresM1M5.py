@@ -15,7 +15,7 @@ import openmatrix as omx
 import os
 import pandas as pd
 import pyodbc
-import settings  # python project settings file
+import sqlalchemy
 
 
 class PerformanceMeasuresM1M5(object):
@@ -25,6 +25,7 @@ class PerformanceMeasuresM1M5(object):
     Args:
         scenario_id: Integer scenario id of the loaded ABM scenario in the ABM
             database table [dimension].[scenario]
+        conn: SQL Alchemy connection engine (see sqlalchemy.engine.Engine)
 
     Methods:
         calc_bike_walk_access: Calculate percentage of eligible population with
@@ -39,17 +40,18 @@ class PerformanceMeasuresM1M5(object):
             allowed travel time by transit access mode speed one (mm/mt/walk)
         filter_destinations: Filter destination list based on input
             destination(s) of interest at specified geography
+        populations: Get master list of MGRAs with populations of interest fields
+        populations_over18: Get master list of MGRAs with over 18 populations of
+            interest fields
 
     Properties:
         destinations: Master list of MGRAs with destination(s) interest fields
-        populations: Master list of MGRAs with populations of interest fields
-        populations_over18: Master list of MGRAs with over 18 populations of
-            interest fields
         scenario_path: UNC file path to loaded ABM scenario folder
     """
 
-    def __init__(self, scenario_id: int) -> None:
+    def __init__(self, scenario_id: int, conn: sqlalchemy.engine.Engine) -> None:
         self.scenario_id = scenario_id
+        self.conn = conn
 
     @property
     @lru_cache(maxsize=1)
@@ -69,7 +71,7 @@ class PerformanceMeasuresM1M5(object):
                 higherLearningEnrollment - total university and other college
                     enrollment
         """
-        with settings.engines["ABM-Reporting"].connect() as conn:
+        with self.conn.connect() as conn:
             dest = pd.read_sql(
                 sql="EXECUTE [rp_2021].[sp_m1_m5_destinations]  " +
                     str(self.scenario_id),
@@ -83,14 +85,17 @@ class PerformanceMeasuresM1M5(object):
                      "empRetail",
                      "higherLearningEnrollment"]]
 
-    @property
     @lru_cache(maxsize=1)
-    def populations(self) -> pd.DataFrame:
+    def populations(self, mobility_hub_name: str = None) -> pd.DataFrame:
         """ Get master list of MGRAs with population(s) of interest fields.
 
-         Returns:
-             Pandas DataFrame of MGRAs with fields describing populations
-             of interest.
+        Args:
+            mobility_hub_name - Optional String to filter origin MGRAs within
+                specified mobility hub name
+
+        Returns:
+            Pandas DataFrame of MGRAs with fields describing populations
+            of interest.
                 mgra - Master Geographic Reference Area geography number
                 taz - Transportation Access Zone geography number
                 mobilityHub - 1/0 indicator if mgra is in a Mobility Hub
@@ -100,12 +105,18 @@ class PerformanceMeasuresM1M5(object):
                 popMinority - Non-White or Hispanic population
                 popNonMinority - White Non-Hispanic population
                 popLowIncome - Low Income population
-                popNonLowIncome - Non-Low Income population"""
-        with settings.engines["ABM-Reporting"].connect() as conn:
+                popNonLowIncome - Non-Low Income population """
+        with self.conn.connect() as conn:
             pop = pd.read_sql(
                 sql="EXECUTE [rp_2021].[sp_m1_m5_populations]  " +
                     str(self.scenario_id) + ",0",  # 18 plus switch turned off
                 con=conn)
+
+        # filter MGRAs to those within mobility hub name if specified
+        if mobility_hub_name is not None:
+            pop = pop[pop["mobilityHubName"] == mobility_hub_name]
+        else:
+            pass
 
         # convert geography columns from string to numeric
         pop[["mgra", "taz"]] = pop[["mgra", "taz"]].apply(pd.to_numeric)
@@ -121,14 +132,17 @@ class PerformanceMeasuresM1M5(object):
                     "popLowIncome",
                     "popNonLowIncome"]]
 
-    @property
     @lru_cache(maxsize=1)
-    def populations_over18(self) -> pd.DataFrame:
+    def populations_over18(self, mobility_hub_name: str = None) -> pd.DataFrame:
         """ Get master list of MGRAs with 18+ population(s) of interest fields.
 
-         Returns:
-             Pandas of DataFrame of MGRAs with fields describing 18+
-             populations of interest.
+        Args:
+            mobility_hub_name - Optional String to filter origin MGRAs within
+                specified mobility hub name
+
+        Returns:
+            Pandas of DataFrame of MGRAs with fields describing 18+
+            populations of interest.
                 mgra - Master Geographic Reference Area geography number
                 taz - Transportation Access Zone geography number
                 mobilityHub - 1/0 indicator if mgra is in a Mobility Hub
@@ -138,12 +152,18 @@ class PerformanceMeasuresM1M5(object):
                 popMinority - Non-White or Hispanic 18+ population
                 popNonMinority - White Non-Hispanic 18+ population
                 popLowIncome - Low Income 18+ population
-                popNonLowIncome - Non-Low Income 18+ population"""
-        with settings.engines["ABM-Reporting"].connect() as conn:
+                popNonLowIncome - Non-Low Income 18+ population """
+        with self.conn.connect() as conn:
             pop_over18 = pd.read_sql(
                 sql="EXECUTE [rp_2021].[sp_m1_m5_populations]  " +
                     str(self.scenario_id) + ",1",  # 18 plus switch turned on
                 con=conn)
+
+        # filter MGRAs to those within mobility hub name if specified
+        if mobility_hub_name is not None:
+            pop_over18 = pop_over18[pop_over18["mobilityHubName"] == mobility_hub_name]
+        else:
+            pass
 
         # convert geography columns from string to numeric
         pop_over18[["mgra", "taz"]] = pop_over18[["mgra", "taz"]].apply(pd.to_numeric)
@@ -163,7 +183,7 @@ class PerformanceMeasuresM1M5(object):
     @lru_cache(maxsize=1)
     def scenario_path(self) -> str:
         """ Get UNC file path of loaded ABM scenario folder """
-        with settings.engines["ABM-Reporting"].connect() as conn:
+        with self.conn.connect() as conn:
             path = pd.read_sql(
                 sql="SELECT[path] FROM [dimension].[scenario] WHERE [scenario_id] =  " +
                     str(self.scenario_id),
@@ -172,7 +192,8 @@ class PerformanceMeasuresM1M5(object):
         return path.iloc[0]["path"]
 
     def calc_bike_walk_access(self, criteria: str, max_time: int, over18: bool,
-                              mobility_hub: bool, access_cols: list) -> pd.Series:
+                              mobility_hub: bool, access_cols: list,
+                              mobility_hub_name: str = None) -> pd.Series:
         """ Calculates the percentage of the population with access to any one
          destination via any combination of bicycle, walk, micro-mobility,
          and/or micro-transit modes. Access is calculated for the
@@ -193,15 +214,17 @@ class PerformanceMeasuresM1M5(object):
             access_cols: List of String names of access columns in the
               to use in access time calculation (bikeTime, walkTime, mmTime,
               mtTime)
+            mobility_hub_name: Optional String to filter origin MGRAs within
+                specified mobility hub name
 
         Returns:
             Pandas.Series of the percentage of the population with access """
 
         # select population based on input over18 boolean
         if over18:
-            pop = self.populations_over18
+            pop = self.populations_over18(mobility_hub_name)
         else:
-            pop = self.populations
+            pop = self.populations(mobility_hub_name)
 
         # filter population based on input mobility hub boolean
         if mobility_hub:
@@ -290,7 +313,8 @@ class PerformanceMeasuresM1M5(object):
                     "Non-Senior Access Pct"]]
 
     def calc_drive_access(self, criteria: str, max_time: int, over18: bool,
-                          mobility_hub: bool, matrix: str) -> pd.Series:
+                          mobility_hub: bool, matrix: str,
+                          mobility_hub_name: str = None) -> pd.Series:
         """ Calculates the percentage of the population with access to any one
             destination via the auto mode. Access is calculated for the
             overall population and within the Low Income/Non-Low Income,
@@ -315,14 +339,16 @@ class PerformanceMeasuresM1M5(object):
                     to MGRAs within mobility hubs
                 matrix: String name of the travel network vehicle class matrix
                     used to get the auto mode travel time skim defining access
+                mobility_hub_name: Optional String to filter origin MGRAs within
+                    specified mobility hub name
 
             Returns:
                 Pandas.Series of the percentage of the population with access """
         # select population based on input over18 boolean
         if over18:
-            pop = self.populations_over18
+            pop = self.populations_over18(mobility_hub_name)
         else:
-            pop = self.populations
+            pop = self.populations(mobility_hub_name)
 
         # filter population based on input mobility hub boolean
         if mobility_hub:
@@ -393,7 +419,8 @@ class PerformanceMeasuresM1M5(object):
                     "Non-Senior Access Pct"]]
 
     def calc_transit_access(self, criteria: str, max_time: int, over18: bool,
-                            mobility_hub: bool, tod: str) -> pd.Series:
+                            mobility_hub: bool, tod: str,
+                            mobility_hub_name: str = None) -> pd.Series:
         """ Calculates the percentage of the population with access to any one
          destination via transit using transit access speed one
          (walk/micro-mobility/micro-transit). Access is calculated for the
@@ -417,15 +444,17 @@ class PerformanceMeasuresM1M5(object):
                     to MGRAs within mobility hubs
             tod: String name of ABM five time of day period used to get the
                 transit travel time skim file defining access
+            mobility_hub_name: Optional String to filter origin MGRAs within
+                specified mobility hub name
 
         Returns:
             Pandas.Series of the percentage of the population with access """
 
         # select population based on input over18 boolean
         if over18:
-            pop = self.populations_over18
+            pop = self.populations_over18(mobility_hub_name)
         else:
-            pop = self.populations
+            pop = self.populations(mobility_hub_name)
 
         # filter population based on input mobility hub boolean
         if mobility_hub:
