@@ -21,6 +21,19 @@ if emfac_version not in ["2014", "2017"]:
     print(usage)
     sys.exit(-1)
 
+# "Created by" is needed for EMFAC2017 to be able to work in the EMFAC2017 web tool.
+if emfac_version == "2017":
+    first_parameter = "Created by"
+else:
+    first_parameter = "Version"
+
+if emfac_version == "2017":
+    emfac_version_for_settings = "EMFAC2017 v1.0.3"
+else:
+    emfac_version_for_settings = "EMFAC2014"
+
+
+
 scenario_id = int(sys.argv[2])
 
 season = sys.argv[3]
@@ -36,18 +49,19 @@ if sb375 not in ["On", "Off"]:
 output_folder = sys.argv[5]
 
 # create emfac settings data frame
-emfac_settings = {"Parameter": ["Date", "Season/Month", "SB375 Run"],
-                  "Value": [datetime.now().strftime("%x %X"),
+emfac_settings = {"Parameter": [first_parameter, "Season/Month", "SB375 Run", "Date"],
+                  "Value": [emfac_version_for_settings,
                             season,
-                            sb375]}
+                            sb375,
+                            datetime.now().strftime("%x %X")]}
 
 emfac_settings = pd.DataFrame(data=emfac_settings)
 
 # set sql server connection string
 # noinspection PyArgumentList
 sql_con = pyodbc.connect(driver='{SQL Server}',
-                         server='socioeca8',
-                         database='abmTest_reporting',
+                         server='DDAMWSQL16',
+                         database='abm_14_2_0_reporting',
                          trusted_connection='yes')
 
 # get scenario information for the given scenario_id
