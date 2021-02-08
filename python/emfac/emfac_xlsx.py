@@ -60,8 +60,8 @@ emfac_settings = pd.DataFrame(data=emfac_settings)
 # set sql server connection string
 # noinspection PyArgumentList
 sql_con = pyodbc.connect(driver='{SQL Server}',
-                         server='DDAMWSQL16',
-                         database='abm_14_2_0_reporting',
+                         server='',  # TODO: set database server
+                         database='',  # TODO: set database name
                          trusted_connection='yes')
 
 # get scenario information for the given scenario_id
