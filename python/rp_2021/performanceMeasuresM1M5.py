@@ -420,7 +420,8 @@ class PerformanceMeasuresM1M5(object):
 
     def calc_transit_access(self, criteria: str, max_time: int, over18: bool,
                             mobility_hub: bool, tod: str,
-                            mobility_hub_name: str = None) -> pd.Series:
+                            mobility_hub_name: str = None,
+                            return_mgras: bool = False) -> pd.Series:
         """ Calculates the percentage of the population with access to any one
          destination via transit using transit access speed one
          (walk/micro-mobility/micro-transit). Access is calculated for the
@@ -446,9 +447,14 @@ class PerformanceMeasuresM1M5(object):
                 transit travel time skim file defining access
             mobility_hub_name: Optional String to filter origin MGRAs within
                 specified mobility hub name
+            return_mgras: Optional Boolean to return accessible MGRAs
+                instead of summarized access percentages
 
         Returns:
-            Pandas.Series of the percentage of the population with access """
+            if optional return_mgras argument set to False then
+            Pandas.Series of the percentage of the population with access
+            if optional return_mgras argument set to True then
+            Pandas.Series of accessible MGRAs"""
 
         # select population based on input over18 boolean
         if over18:
@@ -494,24 +500,29 @@ class PerformanceMeasuresM1M5(object):
         # then set access column to 1
         pop.loc[pop["mgra"].isin(mgra_skims["i"]), "access"] = 1
 
-        # calculate percentage of population with accessibility
-        pct = pop[pop["access"] == 1].sum().divide(pop.sum())
+        if return_mgras:
+            metric = pop.loc[pop.access == 1, "mgra"]
+        else:
+            # calculate percentage of population with accessibility
+            metric = pop[pop["access"] == 1].sum().divide(pop.sum())
 
-        pct.rename(index={"pop": "Population Access Pct",
-                          "popSenior": "Senior Access Pct",
-                          "popNonSenior": "Non-Senior Access Pct",
-                          "popMinority": "Minority Access Pct",
-                          "popNonMinority": "Non-Minority Access Pct",
-                          "popLowIncome": "Low Income Access Pct",
-                          "popNonLowIncome": "Non-Low Income Access Pct"}, inplace=True)
+            metric.rename(index={"pop": "Population Access Pct",
+                                 "popSenior": "Senior Access Pct",
+                                 "popNonSenior": "Non-Senior Access Pct",
+                                 "popMinority": "Minority Access Pct",
+                                 "popNonMinority": "Non-Minority Access Pct",
+                                 "popLowIncome": "Low Income Access Pct",
+                                 "popNonLowIncome": "Non-Low Income Access Pct"}, inplace=True)
 
-        return pct[["Population Access Pct",
-                    "Low Income Access Pct",
-                    "Non-Low Income Access Pct",
-                    "Minority Access Pct",
-                    "Non-Minority Access Pct",
-                    "Senior Access Pct",
-                    "Non-Senior Access Pct"]]
+            metric = metric[["Population Access Pct",
+                             "Low Income Access Pct",
+                             "Non-Low Income Access Pct",
+                             "Minority Access Pct",
+                             "Non-Minority Access Pct",
+                             "Senior Access Pct",
+                             "Non-Senior Access Pct"]]
+
+        return metric
 
     def filter_destinations(self, geography: str, criteria: str) -> pd.Series:
         """ Filter master list of MGRAs with destination(s) of interest fields
