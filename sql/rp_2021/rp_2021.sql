@@ -10004,6 +10004,390 @@ GO
 
 
 
+-- create function to use as query layer for RP 2021 EIR ---------------------
+DROP FUNCTION IF EXISTS [rp_2021].[fn_eir_shp_qry_layer]
+GO
+
+CREATE FUNCTION [rp_2021].[fn_eir_shp_qry_layer]
+(
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+)
+RETURNS TABLE
+AS
+RETURN
+/**
+summary:   >
+    Shape file query layer for RP 2021 EIR.
+**/
+    SELECT
+        @scenario_id AS [scenario_id]
+        ,[hwy_link].[hwycov_id]
+        ,[hwy_link].[nm]
+        ,[hwy_link].[length_mile]
+        ,[hwy_link].[ifc]
+        ,CASE WHEN [ifc] = 1 THEN 'Freeway'
+              WHEN [ifc] = 2 THEN 'Prime Arterial'
+              WHEN [ifc] = 3 THEN 'Major Arterial'
+              WHEN [ifc] = 4 THEN 'Collector'
+              WHEN [ifc] = 5 THEN 'Local Collector'
+              WHEN [ifc] = 6 THEN 'Rural Collector'
+              WHEN [ifc] = 7 THEN 'Local (non-circulation element) Road'
+              WHEN [ifc] = 8 THEN 'Freeway Connector Ramp'
+              WHEN [ifc] = 9 THEN 'Local Ramp'
+              WHEN [ifc] = 10 THEN 'Zone Connector'
+              ELSE NULL END AS [ifc_desc]
+        ,[hwy_link].[ihov]
+        ,[hwy_link].[itruck]
+        ,[hwy_link].[iway]
+        ,(ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_am_da_flow], 0) + ISNULL([ab_md_da_flow], 0) + ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_ev_da_flow], 0) +
+          ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) +
+          ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) +
+          ISNULL([ab_ea_truck_flow], 0) + ISNULL([ab_am_truck_flow], 0) + ISNULL([ab_md_truck_flow], 0) + ISNULL([ab_pm_truck_flow], 0) + ISNULL([ab_ev_truck_flow], 0) +
+          ISNULL([ab_ea_preload_flow], 0) + ISNULL([ab_am_preload_flow], 0) + ISNULL([ab_md_preload_flow], 0) + ISNULL([ab_pm_preload_flow], 0) + ISNULL([ab_ev_preload_flow], 0) +
+          ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_am_da_flow], 0) + ISNULL([ba_md_da_flow], 0) + ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_ev_da_flow], 0) +
+          ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) +
+          ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) +
+          ISNULL([ba_ea_truck_flow], 0) + ISNULL([ba_am_truck_flow], 0) + ISNULL([ba_md_truck_flow], 0) + ISNULL([ba_pm_truck_flow], 0) + ISNULL([ba_ev_truck_flow], 0) +
+          ISNULL([ba_ea_preload_flow], 0) + ISNULL([ba_am_preload_flow], 0) + ISNULL([ba_md_preload_flow], 0) + ISNULL([ba_pm_preload_flow], 0) + ISNULL([ba_ev_preload_flow], 0)) * [length_mile] AS [vmt]
+        ,(ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_am_da_flow], 0) + ISNULL([ab_md_da_flow], 0) + ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_ev_da_flow], 0) +
+          ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) +
+          ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) +
+          ISNULL([ab_ea_truck_flow], 0) + ISNULL([ab_am_truck_flow], 0) + ISNULL([ab_md_truck_flow], 0) + ISNULL([ab_pm_truck_flow], 0) + ISNULL([ab_ev_truck_flow], 0) +
+          ISNULL([ab_ea_preload_flow], 0) + ISNULL([ab_am_preload_flow], 0) + ISNULL([ab_md_preload_flow], 0) + ISNULL([ab_pm_preload_flow], 0) + ISNULL([ab_ev_preload_flow], 0)) * [length_mile] AS [ab_vmt]
+        ,(ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_am_da_flow], 0) + ISNULL([ba_md_da_flow], 0) + ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_ev_da_flow], 0) +
+          ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) +
+          ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) +
+          ISNULL([ba_ea_truck_flow], 0) + ISNULL([ba_am_truck_flow], 0) + ISNULL([ba_md_truck_flow], 0) + ISNULL([ba_pm_truck_flow], 0) + ISNULL([ba_ev_truck_flow], 0) +
+          ISNULL([ba_ea_preload_flow], 0) + ISNULL([ba_am_preload_flow], 0) + ISNULL([ba_md_preload_flow], 0) + ISNULL([ba_pm_preload_flow], 0) + ISNULL([ba_ev_preload_flow], 0)) * [length_mile] AS [ba_vmt]
+        ,ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_am_da_flow], 0) + ISNULL([ab_md_da_flow], 0) + ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_ev_da_flow], 0) +
+         ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) +
+         ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) +
+         ISNULL([ab_ea_truck_flow], 0) + ISNULL([ab_am_truck_flow], 0) + ISNULL([ab_md_truck_flow], 0) + ISNULL([ab_pm_truck_flow], 0) + ISNULL([ab_ev_truck_flow], 0) +
+         ISNULL([ab_ea_preload_flow], 0) + ISNULL([ab_am_preload_flow], 0) + ISNULL([ab_md_preload_flow], 0) + ISNULL([ab_pm_preload_flow], 0) + ISNULL([ab_ev_preload_flow], 0) +
+         ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_am_da_flow], 0) + ISNULL([ba_md_da_flow], 0) + ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_ev_da_flow], 0) +
+         ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) +
+         ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) +
+         ISNULL([ba_ea_truck_flow], 0) + ISNULL([ba_am_truck_flow], 0) + ISNULL([ba_md_truck_flow], 0) + ISNULL([ba_pm_truck_flow], 0) + ISNULL([ba_ev_truck_flow], 0) +
+         ISNULL([ba_ea_preload_flow], 0) + ISNULL([ba_am_preload_flow], 0) + ISNULL([ba_md_preload_flow], 0) + ISNULL([ba_pm_preload_flow], 0) + ISNULL([ba_ev_preload_flow], 0) AS [flow]
+        ,ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_am_da_flow], 0) + ISNULL([ab_md_da_flow], 0) + ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_ev_da_flow], 0) +
+         ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) +
+         ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) +
+         ISNULL([ab_ea_truck_flow], 0) + ISNULL([ab_am_truck_flow], 0) + ISNULL([ab_md_truck_flow], 0) + ISNULL([ab_pm_truck_flow], 0) + ISNULL([ab_ev_truck_flow], 0) +
+         ISNULL([ab_ea_preload_flow], 0) + ISNULL([ab_am_preload_flow], 0) + ISNULL([ab_md_preload_flow], 0) + ISNULL([ab_pm_preload_flow], 0) + ISNULL([ab_ev_preload_flow], 0) AS [ab_flow]
+        ,ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_am_da_flow], 0) + ISNULL([ba_md_da_flow], 0) + ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_ev_da_flow], 0) +
+         ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) +
+         ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) +
+         ISNULL([ba_ea_truck_flow], 0) + ISNULL([ba_am_truck_flow], 0) + ISNULL([ba_md_truck_flow], 0) + ISNULL([ba_pm_truck_flow], 0) + ISNULL([ba_ev_truck_flow], 0) +
+         ISNULL([ba_ea_preload_flow], 0) + ISNULL([ba_am_preload_flow], 0) + ISNULL([ba_md_preload_flow], 0) + ISNULL([ba_pm_preload_flow], 0) + ISNULL([ba_ev_preload_flow], 0) AS [ba_flow]
+        ,ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_ea_truck_flow], 0) + ISNULL([ab_ea_preload_flow], 0) AS [ab_ea_flow]
+        ,ISNULL([ab_am_da_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_am_truck_flow], 0) + ISNULL([ab_am_preload_flow], 0) AS [ab_am_flow]
+        ,ISNULL([ab_md_da_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_md_truck_flow], 0) + ISNULL([ab_md_preload_flow], 0) AS [ab_md_flow]
+        ,ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_pm_truck_flow], 0) + ISNULL([ab_pm_preload_flow], 0) AS [ab_pm_flow]
+        ,ISNULL([ab_ev_da_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) + ISNULL([ab_ev_truck_flow], 0) + ISNULL([ab_ev_preload_flow], 0) AS [ab_ev_flow]
+        ,ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_ea_truck_flow], 0) + ISNULL([ba_ea_preload_flow], 0) AS [ba_ea_flow]
+        ,ISNULL([ba_am_da_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_am_truck_flow], 0) + ISNULL([ba_am_preload_flow], 0) AS [ba_am_flow]
+        ,ISNULL([ba_md_da_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_md_truck_flow], 0) + ISNULL([ba_md_preload_flow], 0) AS [ba_md_flow]
+        ,ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_pm_truck_flow], 0) + ISNULL([ba_pm_preload_flow], 0) AS [ba_pm_flow]
+        ,ISNULL([ba_ev_da_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) + ISNULL([ba_ev_truck_flow], 0) + ISNULL([ba_ev_preload_flow], 0) AS [ba_ev_flow]
+        ,ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_am_da_flow], 0) + ISNULL([ab_md_da_flow], 0) + ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_ev_da_flow], 0) +
+         ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) +
+         ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) +
+         ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_am_da_flow], 0) + ISNULL([ba_md_da_flow], 0) + ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_ev_da_flow], 0) +
+         ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) +
+         ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) AS [auto_flow]
+        ,ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_am_da_flow], 0) + ISNULL([ab_md_da_flow], 0) + ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_ev_da_flow], 0) +
+         ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) +
+         ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) AS [ab_auto_flow]
+        ,ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_am_da_flow], 0) + ISNULL([ba_md_da_flow], 0) + ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_ev_da_flow], 0) +
+         ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) +
+         ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) AS [ba_auto_flow]
+        ,ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_ea_sr3_flow], 0) AS [ab_ea_auto_flow]
+        ,ISNULL([ab_am_da_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_am_sr3_flow], 0) AS [ab_am_auto_flow]
+        ,ISNULL([ab_md_da_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_md_sr3_flow], 0) AS [ab_md_auto_flow]
+        ,ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) AS [ab_pm_auto_flow]
+        ,ISNULL([ab_ev_da_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) AS [ab_ev_auto_flow]
+        ,ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_ea_sr3_flow], 0) AS [ba_ea_auto_flow]
+        ,ISNULL([ba_am_da_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_am_sr3_flow], 0) AS [ba_am_auto_flow]
+        ,ISNULL([ba_md_da_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_md_sr3_flow], 0) AS [ba_md_auto_flow]
+        ,ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) AS [ba_pm_auto_flow]
+        ,ISNULL([ba_ev_da_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) AS [ba_ev_auto_flow]
+        ,ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_am_da_flow], 0) + ISNULL([ab_md_da_flow], 0) + ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_ev_da_flow], 0) +
+         ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_am_da_flow], 0) + ISNULL([ba_md_da_flow], 0) + ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_ev_da_flow], 0) AS [da_flow]
+        ,ISNULL([ab_ea_da_flow], 0) + ISNULL([ab_am_da_flow], 0) + ISNULL([ab_md_da_flow], 0) + ISNULL([ab_pm_da_flow], 0) + ISNULL([ab_ev_da_flow], 0) AS [ab_da_flow]
+        ,ISNULL([ba_ea_da_flow], 0) + ISNULL([ba_am_da_flow], 0) + ISNULL([ba_md_da_flow], 0) + ISNULL([ba_pm_da_flow], 0) + ISNULL([ba_ev_da_flow], 0) AS [ba_da_flow]
+        ,ISNULL([ab_ea_da_flow], 0) AS [ab_ea_da_flow]
+        ,ISNULL([ab_am_da_flow], 0) AS [ab_am_da_flow]
+        ,ISNULL([ab_md_da_flow], 0) AS [ab_md_da_flow]
+        ,ISNULL([ab_pm_da_flow], 0) AS [ab_pm_da_flow]
+        ,ISNULL([ab_ev_da_flow], 0) AS [ab_ev_da_flow]
+        ,ISNULL([ba_ea_da_flow], 0) AS [ba_ea_da_flow]
+        ,ISNULL([ba_am_da_flow], 0) AS [ba_am_da_flow]
+        ,ISNULL([ba_md_da_flow], 0) AS [ba_md_da_flow]
+        ,ISNULL([ba_pm_da_flow], 0) AS [ba_pm_da_flow]
+        ,ISNULL([ba_ev_da_flow], 0) AS [ba_ev_da_flow]
+        ,ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) +
+         ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) AS [sr2_flow]
+        ,ISNULL([ab_ea_sr2_flow], 0) + ISNULL([ab_am_sr2_flow], 0) + ISNULL([ab_md_sr2_flow], 0) + ISNULL([ab_pm_sr2_flow], 0) + ISNULL([ab_ev_sr2_flow], 0) AS [ab_sr2_flow]
+        ,ISNULL([ba_ea_sr2_flow], 0) + ISNULL([ba_am_sr2_flow], 0) + ISNULL([ba_md_sr2_flow], 0) + ISNULL([ba_pm_sr2_flow], 0) + ISNULL([ba_ev_sr2_flow], 0) AS [ba_sr2_flow]
+        ,ISNULL([ab_ea_sr2_flow], 0) AS [ab_ea_sr2_flow]
+        ,ISNULL([ab_am_sr2_flow], 0) AS [ab_am_sr2_flow]
+        ,ISNULL([ab_md_sr2_flow], 0) AS [ab_md_sr2_flow]
+        ,ISNULL([ab_pm_sr2_flow], 0) AS [ab_pm_sr2_flow]
+        ,ISNULL([ab_ev_sr2_flow], 0) AS [ab_ev_sr2_flow]
+        ,ISNULL([ba_ea_sr2_flow], 0) AS [ba_ea_sr2_flow]
+        ,ISNULL([ba_am_sr2_flow], 0) AS [ba_am_sr2_flow]
+        ,ISNULL([ba_md_sr2_flow], 0) AS [ba_md_sr2_flow]
+        ,ISNULL([ba_pm_sr2_flow], 0) AS [ba_pm_sr2_flow]
+        ,ISNULL([ba_ev_sr2_flow], 0) AS [ba_ev_sr2_flow]
+        ,ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) +
+         ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) AS [sr3_flow]
+        ,ISNULL([ab_ea_sr3_flow], 0) + ISNULL([ab_am_sr3_flow], 0) + ISNULL([ab_md_sr3_flow], 0) + ISNULL([ab_pm_sr3_flow], 0) + ISNULL([ab_ev_sr3_flow], 0) AS [ab_sr3_flow]
+        ,ISNULL([ba_ea_sr3_flow], 0) + ISNULL([ba_am_sr3_flow], 0) + ISNULL([ba_md_sr3_flow], 0) + ISNULL([ba_pm_sr3_flow], 0) + ISNULL([ba_ev_sr3_flow], 0) AS [ba_sr3_flow]
+        ,ISNULL([ab_ea_sr3_flow], 0) AS [ab_ea_sr3_flow]
+        ,ISNULL([ab_am_sr3_flow], 0) AS [ab_am_sr3_flow]
+        ,ISNULL([ab_md_sr3_flow], 0) AS [ab_md_sr3_flow]
+        ,ISNULL([ab_pm_sr3_flow], 0) AS [ab_pm_sr3_flow]
+        ,ISNULL([ab_ev_sr3_flow], 0) AS [ab_ev_sr3_flow]
+        ,ISNULL([ba_ea_sr3_flow], 0) AS [ba_ea_sr3_flow]
+        ,ISNULL([ba_am_sr3_flow], 0) AS [ba_am_sr3_flow]
+        ,ISNULL([ba_md_sr3_flow], 0) AS [ba_md_sr3_flow]
+        ,ISNULL([ba_pm_sr3_flow], 0) AS [ba_pm_sr3_flow]
+        ,ISNULL([ba_ev_sr3_flow], 0) AS [ba_ev_sr3_flow]
+        ,ISNULL([ab_ea_truck_flow], 0) + ISNULL([ab_am_truck_flow], 0) + ISNULL([ab_md_truck_flow], 0) + ISNULL([ab_pm_truck_flow], 0) + ISNULL([ab_ev_truck_flow], 0) +
+         ISNULL([ba_ea_truck_flow], 0) + ISNULL([ba_am_truck_flow], 0) + ISNULL([ba_md_truck_flow], 0) + ISNULL([ba_pm_truck_flow], 0) + ISNULL([ba_ev_truck_flow], 0) AS [truck_flow]
+        ,ISNULL([ab_ea_truck_flow], 0) + ISNULL([ab_am_truck_flow], 0) + ISNULL([ab_md_truck_flow], 0) + ISNULL([ab_pm_truck_flow], 0) + ISNULL([ab_ev_truck_flow], 0) AS [ab_truck_flow]
+        ,ISNULL([ba_ea_truck_flow], 0) + ISNULL([ba_am_truck_flow], 0) + ISNULL([ba_md_truck_flow], 0) + ISNULL([ba_pm_truck_flow], 0) + ISNULL([ba_ev_truck_flow], 0) AS [ba_truck_flow]
+        ,ISNULL([ab_ea_truck_flow], 0) AS [ab_ea_truck_flow]
+        ,ISNULL([ab_am_truck_flow], 0) AS [ab_am_truck_flow]
+        ,ISNULL([ab_md_truck_flow], 0) AS [ab_md_truck_flow]
+        ,ISNULL([ab_pm_truck_flow], 0) AS [ab_pm_truck_flow]
+        ,ISNULL([ab_ev_truck_flow], 0) AS [ab_ev_truck_flow]
+        ,ISNULL([ba_ea_truck_flow], 0) AS [ba_ea_truck_flow]
+        ,ISNULL([ba_am_truck_flow], 0) AS [ba_am_truck_flow]
+        ,ISNULL([ba_md_truck_flow], 0) AS [ba_md_truck_flow]
+        ,ISNULL([ba_pm_truck_flow], 0) AS [ba_pm_truck_flow]
+        ,ISNULL([ba_ev_truck_flow], 0) AS [ba_ev_truck_flow]
+        ,ISNULL([ab_ea_preload_flow], 0) + ISNULL([ab_am_preload_flow], 0) + ISNULL([ab_md_preload_flow], 0) + ISNULL([ab_pm_preload_flow], 0) + ISNULL([ab_ev_preload_flow], 0) +
+         ISNULL([ba_ea_preload_flow], 0) + ISNULL([ba_am_preload_flow], 0) + ISNULL([ba_md_preload_flow], 0) + ISNULL([ba_pm_preload_flow], 0) + ISNULL([ba_ev_preload_flow], 0) AS [preload_flow]
+        ,ISNULL([ab_ea_preload_flow], 0) + ISNULL([ab_am_preload_flow], 0) + ISNULL([ab_md_preload_flow], 0) + ISNULL([ab_pm_preload_flow], 0) + ISNULL([ab_ev_preload_flow], 0) AS [ab_preload_flow]
+        ,ISNULL([ba_ea_preload_flow], 0) + ISNULL([ba_am_preload_flow], 0) + ISNULL([ba_md_preload_flow], 0) + ISNULL([ba_pm_preload_flow], 0) + ISNULL([ba_ev_preload_flow], 0) AS [ba_preload_flow]
+        ,ISNULL([ab_ea_preload_flow], 0) AS [ab_ea_preload_flow]
+        ,ISNULL([ab_am_preload_flow], 0) AS [ab_am_preload_flow]
+        ,ISNULL([ab_md_preload_flow], 0) AS [ab_md_preload_flow]
+        ,ISNULL([ab_pm_preload_flow], 0) AS [ab_pm_preload_flow]
+        ,ISNULL([ab_ev_preload_flow], 0) AS [ab_ev_preload_flow]
+        ,ISNULL([ba_ea_preload_flow], 0) AS [ba_ea_preload_flow]
+        ,ISNULL([ba_am_preload_flow], 0) AS [ba_am_preload_flow]
+        ,ISNULL([ba_md_preload_flow], 0) AS [ba_md_preload_flow]
+        ,ISNULL([ba_pm_preload_flow], 0) AS [ba_pm_preload_flow]
+        ,ISNULL([ba_ev_preload_flow], 0) AS [ba_ev_preload_flow]
+        ,[ab_ea_speed]
+        ,[ab_am_speed]
+        ,[ab_md_speed]
+        ,[ab_pm_speed]
+        ,[ab_ev_speed]
+        ,[ba_ea_speed]
+        ,[ba_am_speed]
+        ,[ba_md_speed]
+        ,[ba_pm_speed]
+        ,[ba_ev_speed]
+        ,[ab_ea_ln]
+        ,[ab_am_ln]
+        ,[ab_md_ln]
+        ,[ab_pm_ln]
+        ,[ab_ev_ln]
+        ,[ba_ea_ln]
+        ,[ba_am_ln]
+        ,[ba_md_ln]
+        ,[ba_pm_ln]
+        ,[ba_ev_ln]
+        ,[hwy_link].[shape].MakeValid() AS [shape]
+    FROM (
+        SELECT
+            [hwy_flow_mode].[hwy_link_id]
+            ,CONCAT(CASE WHEN [ab] = 1 THEN 'ab'
+                          WHEN [ab] = 0 THEN 'ba'
+                          ELSE NULL END,
+                     '_',
+                     CASE WHEN [abm_5_tod] = '1' THEN 'ea'
+                          WHEN [abm_5_tod] = '2' THEN 'am'
+                          WHEN [abm_5_tod] = '3' THEN 'md'
+                          WHEN [abm_5_tod] = '4' THEN 'pm'
+                          WHEN [abm_5_tod] = '5' THEN 'ev'
+                          ELSE NULL END,
+                      '_',
+                     CASE WHEN [mode_description] = 'Highway Network Preload - Bus' THEN 'preload'
+                          WHEN [mode_description] IN ('Light Heavy Duty Truck',
+                                                      'Medium Heavy Duty Truck',
+                                                      'Heavy Heavy Duty Truck') THEN 'truck'
+                          WHEN [mode_description] = 'Drive Alone' THEN 'da'
+                          WHEN [mode_description] = 'Shared Ride 2' THEN 'sr2'
+                          WHEN [mode_description] = 'Shared Ride 3+' THEN 'sr3'
+                          ELSE NULL END,
+                     '_flow') AS [class]
+            ,[flow] AS [flow]
+        FROM
+            [fact].[hwy_flow_mode]
+        INNER JOIN
+            [dimension].[hwy_link_ab]
+        ON
+            [hwy_flow_mode].[scenario_id] = [hwy_link_ab].[scenario_id]
+            AND [hwy_flow_mode].[hwy_link_ab_id] = [hwy_link_ab].[hwy_link_ab_id]
+        INNER JOIN
+            [dimension].[time]
+        ON
+            [hwy_flow_mode].[time_id] = [time].[time_id]
+        INNER JOIN
+            [dimension].[mode]
+        ON
+            [hwy_flow_mode].[mode_id] = [mode].[mode_id]
+        WHERE
+            [hwy_flow_mode].[scenario_id] = @scenario_id
+            AND [hwy_link_ab].[scenario_id] = @scenario_id) AS [hwy_flow_mode_to_p]
+    PIVOT ( SUM([flow]) FOR [class] IN ([ab_ea_da_flow],
+                                        [ab_am_da_flow],
+                                        [ab_md_da_flow],
+                                        [ab_pm_da_flow],
+                                        [ab_ev_da_flow],
+                                        [ab_ea_sr2_flow],
+                                        [ab_am_sr2_flow],
+                                        [ab_md_sr2_flow],
+                                        [ab_pm_sr2_flow],
+                                        [ab_ev_sr2_flow],
+                                        [ab_ea_sr3_flow],
+                                        [ab_am_sr3_flow],
+                                        [ab_md_sr3_flow],
+                                        [ab_pm_sr3_flow],
+                                        [ab_ev_sr3_flow],
+                                        [ab_ea_truck_flow],
+                                        [ab_am_truck_flow],
+                                        [ab_md_truck_flow],
+                                        [ab_pm_truck_flow],
+                                        [ab_ev_truck_flow],
+                                        [ab_ea_preload_flow],
+                                        [ab_am_preload_flow],
+                                        [ab_md_preload_flow],
+                                        [ab_pm_preload_flow],
+                                        [ab_ev_preload_flow],
+                                        [ba_ea_da_flow],
+                                        [ba_am_da_flow],
+                                        [ba_md_da_flow],
+                                        [ba_pm_da_flow],
+                                        [ba_ev_da_flow],
+                                        [ba_ea_sr2_flow],
+                                        [ba_am_sr2_flow],
+                                        [ba_md_sr2_flow],
+                                        [ba_pm_sr2_flow],
+                                        [ba_ev_sr2_flow],
+                                        [ba_ea_sr3_flow],
+                                        [ba_am_sr3_flow],
+                                        [ba_md_sr3_flow],
+                                        [ba_pm_sr3_flow],
+                                        [ba_ev_sr3_flow],
+                                        [ba_ea_truck_flow],
+                                        [ba_am_truck_flow],
+                                        [ba_md_truck_flow],
+                                        [ba_pm_truck_flow],
+                                        [ba_ev_truck_flow],
+                                        [ba_ea_preload_flow],
+                                        [ba_am_preload_flow],
+                                        [ba_md_preload_flow],
+                                        [ba_pm_preload_flow],
+                                        [ba_ev_preload_flow])
+    ) AS [hwy_flow_mode_p]
+    INNER JOIN (
+        SELECT
+            [hwy_flow].[hwy_link_id]
+            ,CONCAT(CASE WHEN [ab] = 1 THEN 'ab'
+                            WHEN [ab] = 0 THEN 'ba'
+                            ELSE NULL END,
+                        '_',
+                        CASE WHEN [abm_5_tod] = '1' THEN 'ea'
+                            WHEN [abm_5_tod] = '2' THEN 'am'
+                            WHEN [abm_5_tod] = '3' THEN 'md'
+                            WHEN [abm_5_tod] = '4' THEN 'pm'
+                            WHEN [abm_5_tod] = '5' THEN 'ev'
+                            ELSE NULL END,
+                        '_speed') AS [class]
+              ,[speed]
+        FROM
+            [fact].[hwy_flow]
+        INNER JOIN
+            [dimension].[hwy_link_ab_tod]
+        ON
+            [hwy_flow].[scenario_id] = [hwy_link_ab_tod].[scenario_id]
+            AND [hwy_flow].[hwy_link_ab_tod_id] = [hwy_link_ab_tod].[hwy_link_ab_tod_id]
+        INNER JOIN
+            [dimension].[time]
+        ON
+            [hwy_flow].[time_id] = [time].[time_id]
+        WHERE
+            [hwy_flow].[scenario_id] = @scenario_id
+            AND [hwy_link_ab_tod].[scenario_id] = @scenario_id) AS [hwy_speed_to_p]
+        PIVOT ( AVG([speed]) FOR [class] IN ([ab_ea_speed],
+                                             [ab_am_speed],
+                                             [ab_md_speed],
+                                             [ab_pm_speed],
+                                             [ab_ev_speed],
+                                             [ba_ea_speed],
+                                             [ba_am_speed],
+                                             [ba_md_speed],
+                                             [ba_pm_speed],
+                                             [ba_ev_speed])
+        ) AS [hwy_speed_p]
+    ON
+        [hwy_flow_mode_p].[hwy_link_id] = [hwy_speed_p].[hwy_link_id]
+    INNER JOIN (
+        SELECT
+            [hwy_link_ab_tod].[hwy_link_id]
+            ,CONCAT(CASE WHEN [ab] = 1 THEN 'ab'
+                            WHEN [ab] = 0 THEN 'ba'
+                            ELSE NULL END,
+                        '_',
+                        CASE WHEN [abm_5_tod] = '1' THEN 'ea'
+                            WHEN [abm_5_tod] = '2' THEN 'am'
+                            WHEN [abm_5_tod] = '3' THEN 'md'
+                            WHEN [abm_5_tod] = '4' THEN 'pm'
+                            WHEN [abm_5_tod] = '5' THEN 'ev'
+                            ELSE NULL END,
+                        '_ln') AS [class]
+              ,CASE WHEN [ln] = 9 THEN 0 ELSE [ln] END AS [ln]
+        FROM
+            [dimension].[hwy_link_ab_tod]
+        INNER JOIN
+            [dimension].[time]
+        ON
+            [hwy_link_ab_tod].[time_id] = [time].[time_id]
+        WHERE
+            [hwy_link_ab_tod].[scenario_id] = @scenario_id
+            AND [hwy_link_ab_tod].[scenario_id] = @scenario_id) AS [hwy_ln_to_p]
+        PIVOT ( MAX([ln]) FOR [class] IN ([ab_ea_ln],
+                                          [ab_am_ln],
+                                          [ab_md_ln],
+                                          [ab_pm_ln],
+                                          [ab_ev_ln],
+                                          [ba_ea_ln],
+                                          [ba_am_ln],
+                                          [ba_md_ln],
+                                          [ba_pm_ln],
+                                          [ba_ev_ln])
+        ) AS [hwy_ln_p]
+    ON
+         [hwy_flow_mode_p].[hwy_link_id] = [hwy_ln_p].[hwy_link_id]
+    INNER JOIN
+        [dimension].[hwy_link]
+    ON
+        [hwy_flow_mode_p].[hwy_link_id] = [hwy_link].[hwy_link_id]
+        AND [hwy_link].[scenario_id] = @scenario_id
+GO
+
+-- add metadata for [rp_2021].[fn_eir_shp_qry_layer]
+EXECUTE [db_meta].[add_xp] 'rp_2021.fn_eir_shp_qry_layer', 'MS_Description', 'shape file query layer for RP 2021 EIR'
+GO
+
+
+
+
 -- create function to calculate link-level particulate matter for EMFAC 2014 -
 DROP FUNCTION IF EXISTS [rp_2021].[fn_particulate_matter_ctemfac_2014]
 GO
