@@ -2280,7 +2280,7 @@ template_locations = {
     "SM-7": {
         "Average Travel Time": {
             "sheet": "SupportingMeasures",
-            "row": 54
+            "row": 56
         }
     },
     "SM-9-a": {
