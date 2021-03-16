@@ -15,6 +15,11 @@ The repository houses the build script for the general ABM reporting database an
 The build scripts to create the general reporting database are found in **sql\db** and a .bat file that controls the creation process is located at **resources\db**. Once created, the general reporting database provides the space to hold SQL objects created in the ABM-Reporting repository.
 
 
+### cmcp_2021
+
+All Excel, Python, and SQL objects necessary to output reporting metrics for the 2021 CMCP Study are included in this repository. These include SQL objects at **sql\cmcp_2021** that are built to the ABM general reporting database, Python scripts and the environment necessary to run them at **python\cmcp_2021**, and an Excel template populated by a Python script at **resources\cmcp_2021**. 
+
+
 ### emfac
 
 All Python and SQL objects necessary to create inputs to EMFAC from the Activity-Based Model are included in this repository. These include SQL objects at **sql\emfac** that are built to the ABM general reporting database as well as Python scripts and the environment necessary to run them at **python\emfac**.

@@ -1,0 +1,77 @@
+measureKey,metricKey,sheet,row
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Drive Alone,Primary Measures,4
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Shared Ride 2,Primary Measures,5
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Shared Ride 3,Primary Measures,6
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Transit,Primary Measures,7
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Bike,Primary Measures,8
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Walk,Primary Measures,9
+CMCP Mode Share,Percentage of Total Person Trips - Drive Alone,Primary Measures,10
+CMCP Mode Share,Percentage of Total Person Trips - Shared Ride 2,Primary Measures,11
+CMCP Mode Share,Percentage of Total Person Trips - Shared Ride 3,Primary Measures,12
+CMCP Mode Share,Percentage of Total Person Trips - Transit,Primary Measures,13
+CMCP Mode Share,Percentage of Total Person Trips - Bike,Primary Measures,14
+CMCP Mode Share,Percentage of Total Person Trips - Walk,Primary Measures,15
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Drive Alone,Primary Measures,28
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Shared Ride 2,Primary Measures,29
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Shared Ride 3,Primary Measures,30
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Transit,Primary Measures,31
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Bike,Primary Measures,32
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Walk,Primary Measures,33
+CMCP Mode Share - Work Trips,Total Person Trips - Drive Alone    ,Primary Measures,34
+CMCP Mode Share - Work Trips,Total Person Trips - Shared Ride 2  ,Primary Measures,35
+CMCP Mode Share - Work Trips,Total Person Trips - Shared Ride 3  ,Primary Measures,36
+CMCP Mode Share - Work Trips,Total Person Trips - Transit        ,Primary Measures,37
+CMCP Mode Share - Work Trips,Total Person Trips - Bike           ,Primary Measures,38
+CMCP Mode Share - Work Trips,Total Person Trips - Walk           ,Primary Measures,39
+CMCP Mode Share - Work Trips,Total Person Trips - Total,Primary Measures,40
+CMCP Mode Share,Total Person Trips - Drive Alone    ,Primary Measures,41
+CMCP Mode Share,Total Person Trips - Shared Ride 2  ,Primary Measures,42
+CMCP Mode Share,Total Person Trips - Shared Ride 3  ,Primary Measures,43
+CMCP Mode Share,Total Person Trips - Transit        ,Primary Measures,44
+CMCP Mode Share,Total Person Trips - Bike           ,Primary Measures,45
+CMCP Mode Share,Total Person Trips - Walk           ,Primary Measures,46
+CMCP Mode Share,Total Person Trips - Total,Primary Measures,47
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Drive Alone    ,Primary Measures,48
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Shared Ride 2  ,Primary Measures,49
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Shared Ride 3  ,Primary Measures,50
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Transit        ,Primary Measures,51
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Bike           ,Primary Measures,52
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Walk           ,Primary Measures,53
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Total,Primary Measures,54
+Daily vehicle hours of delay,Heavy duty truck - Highway (SHS) - VHD,Primary Measures,97
+Daily vehicle hours of delay,Heavy duty truck - Arterial - VHD,Primary Measures,98
+Daily vehicle hours of delay,Heavy duty truck - All Facility - VHD,Primary Measures,99
+Daily vehicle hours of delay,Heavy duty truck - Highway (SHS) - VHD - Peak Period,Primary Measures,100
+Daily vehicle hours of delay,Heavy duty truck - Arterial - VHD - Peak Period,Primary Measures,101
+Daily vehicle hours of delay,Heavy duty truck - All Facility - VHD - Peak Period,Primary Measures,102
+Daily vehicle hours of delay,Drive Alone - All Facility - VHD,Primary Measures,103
+Daily vehicle hours of delay,Carpool - All Facility - VHD,Primary Measures,104
+Daily vehicle hours of delay,Transit - All Facility - VHD,Primary Measures,105
+Daily vehicle hours of delay,Drive Alone - All Facility - VHD - Peak Period,Primary Measures,106
+Daily vehicle hours of delay,Carpool - All Facility - VHD - Peak Period,Primary Measures,107
+Daily vehicle hours of delay,Transit - All Facility - VHD - Peak Period,Primary Measures,108
+Daily Vehicle Delay per Capita,Daily Vehicle Delay per Capita,Primary Measures,109
+Population Near High Frequency Transit,Population Access Pct,Primary Measures,110
+Population Near High Frequency Transit,Low Income Access Pct,Primary Measures,111
+Population Near High Frequency Transit,Non-Low Income Access Pct,Primary Measures,112
+Population Near High Frequency Transit,Minority Access Pct,Primary Measures,113
+Population Near High Frequency Transit,Non-Minority Access Pct,Primary Measures,114
+Population Near High Frequency Transit,Senior Access Pct,Primary Measures,115
+Population Near High Frequency Transit,Non-Senior Access Pct,Primary Measures,116
+VMT,VMT,Primary Measures,118
+VMT per Capita,All Residents - Activity Assigned to Home Location,Primary Measures,119
+VMT per Employee,Workers Only - Activity Assigned to Workplace Location,Primary Measures,120
+VMT per Lane Mile,VMT per Lane Mile,Primary Measures,121
+Bicycle and Pedestrian Miles Traveled,Pedestrian Miles Traveled,Primary Measures,133
+Bicycle and Pedestrian Miles Traveled,Bicycle Miles Traveled,Primary Measures,134
+Percentage of Population With >= 20 Minutes of Physical Activity,Percentage of Population With >= 20 Minutes of Physical Activity,Primary Measures,135
+Multifamily Population Near Transit,Multifamily Population,Primary Measures,136
+Multifamily Population Near Transit,Multifamily Population Access Pct,Primary Measures,137
+Average Commute Time to Work,Peak Period - Drive Alone,Primary Measures,138
+Average Commute Time to Work,Peak Period - Shared Ride 2,Primary Measures,139
+Average Commute Time to Work,Peak Period - Shared Ride 3,Primary Measures,140
+Average Commute Time to Work,Peak Period - Transit,Primary Measures,141
+Average Commute Time to Work,Peak Period - Bike,Primary Measures,142
+Average Commute Time to Work,Peak Period - Walk,Primary Measures,143
+Multifamily Housing Near High Frequency Transit,Multifamily Housing,Primary Measures,144
+Multifamily Housing Near High Frequency Transit,Multifamily Housing Pct,Primary Measures,145
