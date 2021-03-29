@@ -11811,12 +11811,13 @@ BEGIN
     BEGIN
         INSERT INTO @aggregated_trips
         SELECT
-            ISNULL(CASE WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('School Bus',
+            ISNULL(CASE WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Super-Walk',
+                                                                                             'School Bus',
                                                                                              'Taxi',
                                                                                              'Non-Pooled TNC',
                                                                                              'Pooled TNC')
                         THEN 'Other'
-                        WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Bike', 'Super-Walk', 'Walk')
+                        WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Bike', 'Walk')
                         THEN 'Bike & Walk'
                         WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Shared Ride 2', 'Shared Ride 3+')
                         THEN 'Carpool'
@@ -11860,20 +11861,21 @@ BEGIN
             AND [purpose_trip_destination].[purpose_trip_destination_description] = 'Work'  -- use person trip weight at the final work destinating trip
             -- resident models only
 	        AND [model_trip].[model_trip_description] IN ('Individual',
-												            'Internal-External',
-												            'Joint')
+												          'Internal-External',
+												          'Joint')
             -- if peak period selected filter trips to ABM 5 TOD Peak Periods
             AND (
                 @peak_period = 0 OR
                 (@peak_period = 1 AND [time_trip_start].[trip_start_abm_5_tod] IN ('2', '4'))
                 )
         GROUP BY
-	        CASE WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('School Bus',
+	        CASE WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Super-Walk',
+                                                                                      'School Bus',
                                                                                       'Taxi',
                                                                                       'Non-Pooled TNC',
                                                                                       'Pooled TNC')
                  THEN 'Other'
-                 WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Bike', 'Super-Walk', 'Walk')
+                 WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Bike', 'Walk')
                  THEN 'Bike & Walk'
                  WHEN [fn_resident_tourjourney_mode].[mode_aggregate_description] IN ('Shared Ride 2', 'Shared Ride 3+')
                  THEN 'Carpool'
@@ -11912,12 +11914,13 @@ BEGIN
 	    @aggregated_trips
     RIGHT OUTER JOIN (  -- ensure all modes are represented
         SELECT DISTINCT
-            CASE WHEN [mode_aggregate_trip_description] IN ('Taxi',
+            CASE WHEN [mode_aggregate_trip_description] IN ('Super-Walk',
+                                                            'Taxi',
                                                             'School Bus',
                                                             'Non-Pooled TNC',
                                                             'Pooled TNC')
                  THEN 'Other'
-                 WHEN [mode_aggregate_trip_description] IN ('Bike', 'Super-Walk', 'Walk')
+                 WHEN [mode_aggregate_trip_description] IN ('Bike', 'Walk')
                  THEN 'Bike & Walk'
                  WHEN [mode_aggregate_trip_description] IN ('Shared Ride 2', 'Shared Ride 3+')
                  THEN 'Carpool'
@@ -11958,12 +11961,13 @@ BEGIN
 	    @aggregated_trips
     RIGHT OUTER JOIN (  -- ensure all modes are represented
         SELECT DISTINCT
-            CASE WHEN [mode_aggregate_trip_description] IN ('Taxi',
+            CASE WHEN [mode_aggregate_trip_description] IN ('Super-Walk',
+                                                            'Taxi',
                                                             'School Bus',
                                                             'Non-Pooled TNC',
                                                             'Pooled TNC')
                  THEN 'Other'
-                 WHEN [mode_aggregate_trip_description] IN ('Bike', 'Super-Walk', 'Walk')
+                 WHEN [mode_aggregate_trip_description] IN ('Bike', 'Walk')
                  THEN 'Bike & Walk'
                  WHEN [mode_aggregate_trip_description] IN ('Shared Ride 2', 'Shared Ride 3+')
                  THEN 'Carpool'
