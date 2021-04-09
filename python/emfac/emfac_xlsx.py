@@ -5,7 +5,7 @@ import pyodbc
 import sys
 
 # error string to print if user inputs invalid parameters
-usage = ("Correct Usage: emfac_2014.py <EMFAC version: 2014 | 2017> "
+usage = ("Correct Usage: emfac_2014.py <EMFAC version: 2014 | 2017 | 2021> "
          "<scenario_id> <Season: Annual | Summer | Winter> "
          "<SB 375: On | Off> <Output Folder>")
 
@@ -15,24 +15,24 @@ if len(sys.argv) != 6:
     sys.exit(-1)
 
 # user inputs
-
 emfac_version = sys.argv[1]
-if emfac_version not in ["2014", "2017"]:
+if emfac_version not in ["2014", "2017", "2021"]:
     print(usage)
     sys.exit(-1)
 
-# "Created by" is needed for EMFAC2017 to be able to work in the EMFAC2017 web tool.
-if emfac_version == "2017":
+# "Created by" is needed for EMFAC2017 and EMFAC2021
+# to be able to work in the EMFAC web tool
+if emfac_version in ["2017", "2021"]:
     first_parameter = "Created by"
 else:
     first_parameter = "Version"
 
 if emfac_version == "2017":
     emfac_version_for_settings = "EMFAC2017 v1.0.3"
+elif emfac_version == "2021":
+    emfac_version_for_settings = "EMFAC2021 v1.0.0"
 else:
     emfac_version_for_settings = "EMFAC2014"
-
-
 
 scenario_id = int(sys.argv[2])
 
@@ -48,6 +48,12 @@ if sb375 not in ["On", "Off"]:
 
 output_folder = sys.argv[5]
 
+# set sql server connection string
+sql_con = pyodbc.connect(driver="{SQL Server}",
+                         server="",  # TODO: enter SQL server
+                         database="",  # TODO: enter SQL database
+                         trusted_connection="yes")
+
 # create emfac settings data frame
 emfac_settings = {"Parameter": [first_parameter, "Season/Month", "SB375 Run", "Date"],
                   "Value": [emfac_version_for_settings,
@@ -56,13 +62,6 @@ emfac_settings = {"Parameter": [first_parameter, "Season/Month", "SB375 Run", "D
                             datetime.now().strftime("%x %X")]}
 
 emfac_settings = pd.DataFrame(data=emfac_settings)
-
-# set sql server connection string
-# noinspection PyArgumentList
-sql_con = pyodbc.connect(driver='{SQL Server}',
-                         server='',  # TODO: set database server
-                         database='',  # TODO: set database name
-                         trusted_connection='yes')
 
 # get scenario information for the given scenario_id
 scenario = pd.read_sql_query(
@@ -73,9 +72,10 @@ scenario = pd.read_sql_query(
 )
 
 # build the output xlsx save location file path
-output_path = output_folder + "\EMFAC" + emfac_version + "-SANDAG-" + \
+output_path = output_folder + "/EMFAC" + emfac_version + "-SANDAG-" + \
               str(scenario.at[0, "name"]) + "-" + str(scenario_id) + "-" + \
               season + "-" + str(scenario.at[0, "year"])
+
 if sb375 == "On":
     output_path = output_path + "-sb375"
 output_path = output_path + ".xlsx"

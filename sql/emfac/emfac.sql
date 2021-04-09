@@ -192,7 +192,140 @@ INSERT INTO [emfac].[emfac_vehicle_class] VALUES
 	('UBUS - NG','UBUS','NG','2017','1.0'),
 	('Motor Coach - Dsl','Motor Coach','Dsl','2017','1.0'),
 	('OBUS - Gas','OBUS','Gas','2017','1.0'),
-	('All Other Buses - Dsl','All Other Buses','Dsl','2017','1.0')
+	('All Other Buses - Dsl','All Other Buses','Dsl','2017','1.0'),
+    ('All Other Buses-Dsl','All Other Buses','Dsl','2021','1.0'),
+    ('All Other Buses-NG','All Other Buses','NG','2021','1.0'),
+    ('LDA-Dsl','LDA','Dsl','2021','1.0'),
+    ('LDA-Elec','LDA','Elec','2021','1.0'),
+    ('LDA-Gas','LDA','Gas','2021','1.0'),
+    ('LDA-Phe','LDA','Phe','2021','1.0'),
+    ('LDT1-Dsl','LDT1','Dsl','2021','1.0'),
+    ('LDT1-Elec','LDT1','Elec','2021','1.0'),
+    ('LDT1-Gas','LDT1','Gas','2021','1.0'),
+    ('LDT1-Phe','LDT1','Phe','2021','1.0'),
+    ('LDT2-Dsl','LDT2','Dsl','2021','1.0'),
+    ('LDT2-Elec','LDT2','Elec','2021','1.0'),
+    ('LDT2-Gas','LDT2','Gas','2021','1.0'),
+    ('LDT2-Phe','LDT2','Phe','2021','1.0'),
+    ('LHD1-Dsl','LHD1','Dsl','2021','1.0'),
+    ('LHD1-Elec','LHD1','Elec','2021','1.0'),
+    ('LHD1-Gas','LHD1','Gas','2021','1.0'),
+    ('LHD2-Dsl','LHD2','Dsl','2021','1.0'),
+    ('LHD2-Elec','LHD2','Elec','2021','1.0'),
+    ('LHD2-Gas','LHD2','Gas','2021','1.0'),
+    ('MCY-Gas','MCY','Gas','2021','1.0'),
+    ('MDV-Dsl','MDV','Dsl','2021','1.0'),
+    ('MDV-Elec','MDV','Elec','2021','1.0'),
+    ('MDV-Gas','MDV','Gas','2021','1.0'),
+    ('MDV-Phe','MDV','Phe','2021','1.0'),
+    ('MH-Dsl','MH','Dsl','2021','1.0'),
+    ('MH-Gas','MH','Gas','2021','1.0'),
+    ('Motor Coach-Dsl','Motor Coach','Dsl','2021','1.0'),
+    ('OBUS-Elec','OBUS','Elec','2021','1.0'),
+    ('OBUS-Gas','OBUS','Gas','2021','1.0'),
+    ('PTO-Dsl','PTO','Dsl','2021','1.0'),
+    ('PTO-Elec','PTO','Elec','2021','1.0'),
+    ('SBUS-Dsl','SBUS','Dsl','2021','1.0'),
+    ('SBUS-Elec','SBUS','Elec','2021','1.0'),
+    ('SBUS-Gas','SBUS','Gas','2021','1.0'),
+    ('SBUS-NG','SBUS','NG','2021','1.0'),
+    ('T6 CAIRP Class 4-Dsl','T6 CAIRP Class 4','Dsl','2021','1.0'),
+    ('T6 CAIRP Class 4-Elec','T6 CAIRP Class 4','Elec','2021','1.0'),
+    ('T6 CAIRP Class 5-Dsl','T6 CAIRP Class 5','Dsl','2021','1.0'),
+    ('T6 CAIRP Class 5-Elec','T6 CAIRP Class 5','Elec','2021','1.0'),
+    ('T6 CAIRP Class 6-Dsl','T6 CAIRP Class 6','Dsl','2021','1.0'),
+    ('T6 CAIRP Class 6-Elec','T6 CAIRP Class 6','Elec','2021','1.0'),
+    ('T6 CAIRP Class 7-Dsl','T6 CAIRP Class 7','Dsl','2021','1.0'),
+    ('T6 CAIRP Class 7-Elec','T6 CAIRP Class 7','Elec','2021','1.0'),
+    ('T6 Instate Delivery Class 4-Dsl','T6 Instate Delivery Class 4','Dsl','2021','1.0'),
+    ('T6 Instate Delivery Class 4-Elec','T6 Instate Delivery Class 4','Elec','2021','1.0'),
+    ('T6 Instate Delivery Class 4-NG','T6 Instate Delivery Class 4','NG','2021','1.0'),
+    ('T6 Instate Delivery Class 5-Dsl','T6 Instate Delivery Class 5','Dsl','2021','1.0'),
+    ('T6 Instate Delivery Class 5-Elec','T6 Instate Delivery Class 5','Elec','2021','1.0'),
+    ('T6 Instate Delivery Class 5-NG','T6 Instate Delivery Class 5','NG','2021','1.0'),
+    ('T6 Instate Delivery Class 6-Dsl','T6 Instate Delivery Class 6','Dsl','2021','1.0'),
+    ('T6 Instate Delivery Class 6-Elec','T6 Instate Delivery Class 6','Elec','2021','1.0'),
+    ('T6 Instate Delivery Class 6-NG','T6 Instate Delivery Class 6','NG','2021','1.0'),
+    ('T6 Instate Delivery Class 7-Dsl','T6 Instate Delivery Class 7','Dsl','2021','1.0'),
+    ('T6 Instate Delivery Class 7-Elec','T6 Instate Delivery Class 7','Elec','2021','1.0'),
+    ('T6 Instate Delivery Class 7-NG','T6 Instate Delivery Class 7','NG','2021','1.0'),
+    ('T6 Instate Other Class 4-Dsl','T6 Instate Other Class 4','Dsl','2021','1.0'),
+    ('T6 Instate Other Class 4-Elec','T6 Instate Other Class 4','Elec','2021','1.0'),
+    ('T6 Instate Other Class 4-NG','T6 Instate Other Class 4','NG','2021','1.0'),
+    ('T6 Instate Other Class 5-Dsl','T6 Instate Other Class 5','Dsl','2021','1.0'),
+    ('T6 Instate Other Class 5-Elec','T6 Instate Other Class 5','Elec','2021','1.0'),
+    ('T6 Instate Other Class 5-NG','T6 Instate Other Class 5','NG','2021','1.0'),
+    ('T6 Instate Other Class 6-Dsl','T6 Instate Other Class 6','Dsl','2021','1.0'),
+    ('T6 Instate Other Class 6-Elec','T6 Instate Other Class 6','Elec','2021','1.0'),
+    ('T6 Instate Other Class 6-NG','T6 Instate Other Class 6','NG','2021','1.0'),
+    ('T6 Instate Other Class 7-Dsl','T6 Instate Other Class 7','Dsl','2021','1.0'),
+    ('T6 Instate Other Class 7-Elec','T6 Instate Other Class 7','Elec','2021','1.0'),
+    ('T6 Instate Other Class 7-NG','T6 Instate Other Class 7','NG','2021','1.0'),
+    ('T6 Instate Tractor Class 6-Dsl','T6 Instate Tractor Class 6','Dsl','2021','1.0'),
+    ('T6 Instate Tractor Class 6-Elec','T6 Instate Tractor Class 6','Elec','2021','1.0'),
+    ('T6 Instate Tractor Class 6-NG','T6 Instate Tractor Class 6','NG','2021','1.0'),
+    ('T6 Instate Tractor Class 7-Dsl','T6 Instate Tractor Class 7','Dsl','2021','1.0'),
+    ('T6 Instate Tractor Class 7-Elec','T6 Instate Tractor Class 7','Elec','2021','1.0'),
+    ('T6 Instate Tractor Class 7-NG','T6 Instate Tractor Class 7','NG','2021','1.0'),
+    ('T6 OOS Class 4-Dsl','T6 OOS Class 4','Dsl','2021','1.0'),
+    ('T6 OOS Class 5-Dsl','T6 OOS Class 5','Dsl','2021','1.0'),
+    ('T6 OOS Class 6-Dsl','T6 OOS Class 6','Dsl','2021','1.0'),
+    ('T6 OOS Class 7-Dsl','T6 OOS Class 7','Dsl','2021','1.0'),
+    ('T6 Public Class 4-Dsl','T6 Public Class 4','Dsl','2021','1.0'),
+    ('T6 Public Class 4-Elec','T6 Public Class 4','Elec','2021','1.0'),
+    ('T6 Public Class 4-NG','T6 Public Class 4','NG','2021','1.0'),
+    ('T6 Public Class 5-Dsl','T6 Public Class 5','Dsl','2021','1.0'),
+    ('T6 Public Class 5-Elec','T6 Public Class 5','Elec','2021','1.0'),
+    ('T6 Public Class 5-NG','T6 Public Class 5','NG','2021','1.0'),
+    ('T6 Public Class 6-Dsl','T6 Public Class 6','Dsl','2021','1.0'),
+    ('T6 Public Class 6-Elec','T6 Public Class 6','Elec','2021','1.0'),
+    ('T6 Public Class 6-NG','T6 Public Class 6','NG','2021','1.0'),
+    ('T6 Public Class 7-Dsl','T6 Public Class 7','Dsl','2021','1.0'),
+    ('T6 Public Class 7-Elec','T6 Public Class 7','Elec','2021','1.0'),
+    ('T6 Public Class 7-NG','T6 Public Class 7','NG','2021','1.0'),
+    ('T6 Utility Class 5-Dsl','T6 Utility Class 5','Dsl','2021','1.0'),
+    ('T6 Utility Class 5-Elec','T6 Utility Class 5','Elec','2021','1.0'),
+    ('T6 Utility Class 6-Dsl','T6 Utility Class 6','Dsl','2021','1.0'),
+    ('T6 Utility Class 6-Elec','T6 Utility Class 6','Elec','2021','1.0'),
+    ('T6 Utility Class 7-Dsl','T6 Utility Class 7','Dsl','2021','1.0'),
+    ('T6 Utility Class 7-Elec','T6 Utility Class 7','Elec','2021','1.0'),
+    ('T6TS-Elec','T6TS','Elec','2021','1.0'),
+    ('T6TS-Gas','T6TS','Gas','2021','1.0'),
+    ('T7 CAIRP Class 8-Dsl','T7 CAIRP Class 8','Dsl','2021','1.0'),
+    ('T7 CAIRP Class 8-Elec','T7 CAIRP Class 8','Elec','2021','1.0'),
+    ('T7 CAIRP Class 8-NG','T7 CAIRP Class 8','NG','2021','1.0'),
+    ('T7 NNOOS Class 8-Dsl','T7 NNOOS Class 8','Dsl','2021','1.0'),
+    ('T7 NOOS Class 8-Dsl','T7 NOOS Class 8','Dsl','2021','1.0'),
+    ('T7 Other Port Class 8-Dsl','T7 Other Port Class 8','Dsl','2021','1.0'),
+    ('T7 Other Port Class 8-Elec','T7 Other Port Class 8','Elec','2021','1.0'),
+    ('T7 POLA Class 8-Dsl','T7 POLA Class 8','Dsl','2021','1.0'),
+    ('T7 POLA Class 8-Elec','T7 POLA Class 8','Elec','2021','1.0'),
+    ('T7 Public Class 8-Dsl','T7 Public Class 8','Dsl','2021','1.0'),
+    ('T7 Public Class 8-Elec','T7 Public Class 8','Elec','2021','1.0'),
+    ('T7 Public Class 8-NG','T7 Public Class 8','NG','2021','1.0'),
+    ('T7 Single Concrete/Transit Mix Class 8-Dsl','T7 Single Concrete/Transit Mix Class 8','Dsl','2021','1.0'),
+    ('T7 Single Concrete/Transit Mix Class 8-Elec','T7 Single Concrete/Transit Mix Class 8','Elec','2021','1.0'),
+    ('T7 Single Concrete/Transit Mix Class 8-NG','T7 Single Concrete/Transit Mix Class 8','NG','2021','1.0'),
+    ('T7 Single Dump Class 8-Dsl','T7 Single Dump Class 8','Dsl','2021','1.0'),
+    ('T7 Single Dump Class 8-Elec','T7 Single Dump Class 8','Elec','2021','1.0'),
+    ('T7 Single Dump Class 8-NG','T7 Single Dump Class 8','NG','2021','1.0'),
+    ('T7 Single Other Class 8-Dsl','T7 Single Other Class 8','Dsl','2021','1.0'),
+    ('T7 Single Other Class 8-Elec','T7 Single Other Class 8','Elec','2021','1.0'),
+    ('T7 Single Other Class 8-NG','T7 Single Other Class 8','NG','2021','1.0'),
+    ('T7 SWCV Class 8-Dsl','T7 SWCV Class 8','Dsl','2021','1.0'),
+    ('T7 SWCV Class 8-Elec','T7 SWCV Class 8','Elec','2021','1.0'),
+    ('T7 SWCV Class 8-NG','T7 SWCV Class 8','NG','2021','1.0'),
+    ('T7 Tractor Class 8-Dsl','T7 Tractor Class 8','Dsl','2021','1.0'),
+    ('T7 Tractor Class 8-Elec','T7 Tractor Class 8','Elec','2021','1.0'),
+    ('T7 Tractor Class 8-NG','T7 Tractor Class 8','NG','2021','1.0'),
+    ('T7 Utility Class 8-Dsl','T7 Utility Class 8','Dsl','2021','1.0'),
+    ('T7 Utility Class 8-Elec','T7 Utility Class 8','Elec','2021','1.0'),
+    ('T7IS-Elec','T7IS','Elec','2021','1.0'),
+    ('T7IS-Gas','T7IS','Gas','2021','1.0'),
+    ('UBUS-Dsl','UBUS','Dsl','2021','1.0'),
+    ('UBUS-Elec','UBUS','Elec','2021','1.0'),
+    ('UBUS-Gas','UBUS','Gas','2021','1.0'),
+    ('UBUS-NG','UBUS','NG','2021','1.0')
 GO
 
 -- add metadata for [emfac].[emfac_vehicle_class]
@@ -210,8 +343,8 @@ CREATE TABLE [emfac].[sandag_vehicle_class](
 	[sandag_vehicle_class_id] tinyint IDENTITY(1, 1) NOT NULL,
 	[sandag_vehicle_class] varchar(50) NOT NULL,
 	CONSTRAINT [pk_sandag_vehicle_class]
-        PRIMARY KEY ([sandag_vehicle_class_id])) 
-WITH 
+        PRIMARY KEY ([sandag_vehicle_class_id]))
+WITH
 	(DATA_COMPRESSION = PAGE);
 
 INSERT INTO [emfac].[sandag_vehicle_class] VALUES
@@ -244,8 +377,8 @@ CREATE TABLE [emfac].[emfac_default_vmt](
         PRIMARY KEY ([emfac_default_vmt_id]),
 	CONSTRAINT [ixuq_emfac_default_vmt]
         UNIQUE ([emfac_vehicle_class_id],[year])
-        WITH (DATA_COMPRESSION = PAGE)) 
-WITH 
+        WITH (DATA_COMPRESSION = PAGE))
+WITH
 	(DATA_COMPRESSION = PAGE);
 GO
 
@@ -2099,6 +2232,1840 @@ INSERT INTO #tt_emfac_default_vmt VALUES
 	('2017', '1.0', 2050, 'MCY', 'Gas', 630197.997825984),
 	('2017', '1.0', 2050, 'MH', 'Gas', 69273.2749387299),
 	('2017', '1.0', 2050, 'MH', 'Dsl', 31082.999310364)
+INSERT INTO #tt_emfac_default_vmt VALUES
+    ('2021', '1.0', 2016, 'All Other Buses', 'Dsl', 27438.5),
+    ('2021', '1.0', 2016, 'All Other Buses', 'NG', 1112.56),
+    ('2021', '1.0', 2016, 'LDA', 'Gas', 4.91364e+007),
+    ('2021', '1.0', 2016, 'LDA', 'Dsl', 514134),
+    ('2021', '1.0', 2016, 'LDA', 'Elec', 392176),
+    ('2021', '1.0', 2016, 'LDA', 'Phe', 426354),
+    ('2021', '1.0', 2016, 'LDT1', 'Gas', 5.5202e+006),
+    ('2021', '1.0', 2016, 'LDT1', 'Dsl', 3702.37),
+    ('2021', '1.0', 2016, 'LDT1', 'Elec', 5743.21),
+    ('2021', '1.0', 2016, 'LDT2', 'Gas', 1.81693e+007),
+    ('2021', '1.0', 2016, 'LDT2', 'Dsl', 75273.7),
+    ('2021', '1.0', 2016, 'LDT2', 'Elec', 1225.11),
+    ('2021', '1.0', 2016, 'LDT2', 'Phe', 3028.9),
+    ('2021', '1.0', 2016, 'LHD1', 'Gas', 1.4152e+006),
+    ('2021', '1.0', 2016, 'LHD1', 'Dsl', 1.11299e+006),
+    ('2021', '1.0', 2016, 'LHD2', 'Gas', 178189),
+    ('2021', '1.0', 2016, 'LHD2', 'Dsl', 368461),
+    ('2021', '1.0', 2016, 'MCY', 'Gas', 524788),
+    ('2021', '1.0', 2016, 'MDV', 'Gas', 1.10431e+007),
+    ('2021', '1.0', 2016, 'MDV', 'Dsl', 222672),
+    ('2021', '1.0', 2016, 'MDV', 'Elec', 402.582),
+    ('2021', '1.0', 2016, 'MDV', 'Phe', 10128.6),
+    ('2021', '1.0', 2016, 'MH', 'Gas', 123378),
+    ('2021', '1.0', 2016, 'MH', 'Dsl', 37550.5),
+    ('2021', '1.0', 2016, 'Motor Coach', 'Dsl', 21771.5),
+    ('2021', '1.0', 2016, 'OBUS', 'Gas', 78975.6),
+    ('2021', '1.0', 2016, 'PTO', 'Dsl', 33128.6),
+    ('2021', '1.0', 2016, 'SBUS', 'Gas', 17904.9),
+    ('2021', '1.0', 2016, 'SBUS', 'Dsl', 44284.8),
+    ('2021', '1.0', 2016, 'SBUS', 'NG', 141.26),
+    ('2021', '1.0', 2016, 'T6 CAIRP Class 4', 'Dsl', 518.591),
+    ('2021', '1.0', 2016, 'T6 CAIRP Class 5', 'Dsl', 711.414),
+    ('2021', '1.0', 2016, 'T6 CAIRP Class 6', 'Dsl', 1858.95),
+    ('2021', '1.0', 2016, 'T6 CAIRP Class 7', 'Dsl', 11660.2),
+    ('2021', '1.0', 2016, 'T6 Instate Delivery Class 4', 'Dsl', 28853.2),
+    ('2021', '1.0', 2016, 'T6 Instate Delivery Class 4', 'NG', 27.3519),
+    ('2021', '1.0', 2016, 'T6 Instate Delivery Class 5', 'Dsl', 21892.5),
+    ('2021', '1.0', 2016, 'T6 Instate Delivery Class 5', 'NG', 20.7537),
+    ('2021', '1.0', 2016, 'T6 Instate Delivery Class 6', 'Dsl', 65296.9),
+    ('2021', '1.0', 2016, 'T6 Instate Delivery Class 6', 'NG', 61.897),
+    ('2021', '1.0', 2016, 'T6 Instate Delivery Class 7', 'Dsl', 25523.8),
+    ('2021', '1.0', 2016, 'T6 Instate Delivery Class 7', 'NG', 1.17645),
+    ('2021', '1.0', 2016, 'T6 Instate Other Class 4', 'Dsl', 75202.6),
+    ('2021', '1.0', 2016, 'T6 Instate Other Class 4', 'NG', 69.5834),
+    ('2021', '1.0', 2016, 'T6 Instate Other Class 5', 'Dsl', 142070),
+    ('2021', '1.0', 2016, 'T6 Instate Other Class 5', 'NG', 131.538),
+    ('2021', '1.0', 2016, 'T6 Instate Other Class 6', 'Dsl', 139983),
+    ('2021', '1.0', 2016, 'T6 Instate Other Class 6', 'NG', 129.333),
+    ('2021', '1.0', 2016, 'T6 Instate Other Class 7', 'Dsl', 68389),
+    ('2021', '1.0', 2016, 'T6 Instate Other Class 7', 'NG', 5.34854),
+    ('2021', '1.0', 2016, 'T6 Instate Tractor Class 6', 'Dsl', 834.831),
+    ('2021', '1.0', 2016, 'T6 Instate Tractor Class 6', 'NG', 0.906339),
+    ('2021', '1.0', 2016, 'T6 Instate Tractor Class 7', 'Dsl', 25379.5),
+    ('2021', '1.0', 2016, 'T6 Instate Tractor Class 7', 'NG', 1.77628),
+    ('2021', '1.0', 2016, 'T6 OOS Class 4', 'Dsl', 295.582),
+    ('2021', '1.0', 2016, 'T6 OOS Class 5', 'Dsl', 405.486),
+    ('2021', '1.0', 2017, 'T7 NNOOS Class 8', 'Dsl', 476590),
+    ('2021', '1.0', 2017, 'T7 NOOS Class 8', 'Dsl', 173137),
+    ('2021', '1.0', 2017, 'T7 Other Port Class 8', 'Dsl', 83557.1),
+    ('2021', '1.0', 2017, 'T7 POLA Class 8', 'Dsl', 25899.8),
+    ('2021', '1.0', 2017, 'T7 Public Class 8', 'Dsl', 65824.5),
+    ('2021', '1.0', 2017, 'T7 Public Class 8', 'NG', 114.711),
+    ('2021', '1.0', 2017, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 26832.1),
+    ('2021', '1.0', 2017, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 299.985),
+    ('2021', '1.0', 2017, 'T7 Single Dump Class 8', 'Dsl', 51838.7),
+    ('2021', '1.0', 2017, 'T7 Single Dump Class 8', 'NG', 2235.86),
+    ('2021', '1.0', 2017, 'T7 Single Other Class 8', 'Dsl', 90106.9),
+    ('2021', '1.0', 2017, 'T7 Single Other Class 8', 'NG', 4637.05),
+    ('2021', '1.0', 2017, 'T7 SWCV Class 8', 'Dsl', 61889),
+    ('2021', '1.0', 2017, 'T7 SWCV Class 8', 'NG', 25561.4),
+    ('2021', '1.0', 2017, 'T7 Tractor Class 8', 'Dsl', 304591),
+    ('2021', '1.0', 2017, 'T7 Tractor Class 8', 'NG', 3126.04),
+    ('2021', '1.0', 2017, 'T7 Utility Class 8', 'Dsl', 6587.55),
+    ('2021', '1.0', 2017, 'T7IS', 'Gas', 1805.07),
+    ('2021', '1.0', 2017, 'UBUS', 'Gas', 23242.6),
+    ('2021', '1.0', 2017, 'UBUS', 'Dsl', 4777.69),
+    ('2021', '1.0', 2017, 'UBUS', 'NG', 86875.1),
+    ('2021', '1.0', 2018, 'All Other Buses', 'Dsl', 25721.1),
+    ('2021', '1.0', 2018, 'All Other Buses', 'NG', 3699.78),
+    ('2021', '1.0', 2018, 'LDA', 'Gas', 4.7106e+007),
+    ('2021', '1.0', 2018, 'LDA', 'Dsl', 236237),
+    ('2021', '1.0', 2018, 'LDA', 'Elec', 700562),
+    ('2021', '1.0', 2018, 'LDA', 'Phe', 723622),
+    ('2021', '1.0', 2018, 'LDT1', 'Gas', 5.16348e+006),
+    ('2021', '1.0', 2018, 'LDT1', 'Dsl', 3145.84),
+    ('2021', '1.0', 2018, 'LDT1', 'Elec', 4922.5),
+    ('2021', '1.0', 2018, 'LDT1', 'Phe', 94.9787),
+    ('2021', '1.0', 2018, 'LDT2', 'Gas', 2.00153e+007),
+    ('2021', '1.0', 2018, 'LDT2', 'Dsl', 88300.6),
+    ('2021', '1.0', 2018, 'LDT2', 'Elec', 971.917),
+    ('2021', '1.0', 2018, 'LDT2', 'Phe', 9511.71),
+    ('2021', '1.0', 2018, 'LHD1', 'Gas', 1.60818e+006),
+    ('2021', '1.0', 2018, 'LHD1', 'Dsl', 1.11499e+006),
+    ('2021', '1.0', 2018, 'LHD2', 'Gas', 208119),
+    ('2021', '1.0', 2018, 'LHD2', 'Dsl', 374464),
+    ('2021', '1.0', 2018, 'MCY', 'Gas', 471421),
+    ('2021', '1.0', 2018, 'MDV', 'Gas', 1.28459e+007),
+    ('2021', '1.0', 2018, 'MDV', 'Dsl', 216954),
+    ('2021', '1.0', 2018, 'MDV', 'Elec', 490.283),
+    ('2021', '1.0', 2018, 'MDV', 'Phe', 43998),
+    ('2021', '1.0', 2018, 'MH', 'Gas', 122196),
+    ('2021', '1.0', 2018, 'MH', 'Dsl', 42581.6),
+    ('2021', '1.0', 2018, 'Motor Coach', 'Dsl', 22434.8),
+    ('2021', '1.0', 2018, 'OBUS', 'Gas', 70609.1),
+    ('2021', '1.0', 2018, 'PTO', 'Dsl', 34137.9),
+    ('2021', '1.0', 2018, 'SBUS', 'Gas', 19397.1),
+    ('2021', '1.0', 2018, 'SBUS', 'Dsl', 45432.1),
+    ('2021', '1.0', 2018, 'SBUS', 'NG', 347.455),
+    ('2021', '1.0', 2018, 'T6 CAIRP Class 4', 'Dsl', 534.391),
+    ('2021', '1.0', 2018, 'T6 CAIRP Class 5', 'Dsl', 733.088),
+    ('2021', '1.0', 2019, 'T6 Instate Other Class 7', 'Dsl', 70168.3),
+    ('2021', '1.0', 2019, 'T6 Instate Other Class 7', 'NG', 557.507),
+    ('2021', '1.0', 2019, 'T6 Instate Tractor Class 6', 'Dsl', 849.326),
+    ('2021', '1.0', 2019, 'T6 Instate Tractor Class 6', 'NG', 14.8989),
+    ('2021', '1.0', 2019, 'T6 Instate Tractor Class 7', 'Dsl', 26178.7),
+    ('2021', '1.0', 2019, 'T6 Instate Tractor Class 7', 'NG', 67.6826),
+    ('2021', '1.0', 2019, 'T6 OOS Class 4', 'Dsl', 305.658),
+    ('2021', '1.0', 2019, 'T6 OOS Class 5', 'Dsl', 419.308),
+    ('2021', '1.0', 2019, 'T6 OOS Class 6', 'Dsl', 1095.66),
+    ('2021', '1.0', 2019, 'T6 OOS Class 7', 'Dsl', 7966.83),
+    ('2021', '1.0', 2019, 'T6 Public Class 4', 'Dsl', 9836.81),
+    ('2021', '1.0', 2019, 'T6 Public Class 4', 'NG', 20.3664),
+    ('2021', '1.0', 2019, 'T6 Public Class 5', 'Dsl', 21735.2),
+    ('2021', '1.0', 2019, 'T6 Public Class 5', 'NG', 257.57),
+    ('2021', '1.0', 2019, 'T6 Public Class 6', 'Dsl', 14730.1),
+    ('2021', '1.0', 2019, 'T6 Public Class 6', 'NG', 45.6024),
+    ('2021', '1.0', 2019, 'T6 Public Class 7', 'Dsl', 32748.2),
+    ('2021', '1.0', 2019, 'T6 Public Class 7', 'NG', 143.097),
+    ('2021', '1.0', 2019, 'T6 Utility Class 5', 'Dsl', 8180.55),
+    ('2021', '1.0', 2019, 'T6 Utility Class 6', 'Dsl', 1964.19),
+    ('2021', '1.0', 2019, 'T6 Utility Class 7', 'Dsl', 2383.32),
+    ('2021', '1.0', 2019, 'T6TS', 'Gas', 189399),
+    ('2021', '1.0', 2019, 'T7 CAIRP Class 8', 'Dsl', 394964),
+    ('2021', '1.0', 2019, 'T7 CAIRP Class 8', 'NG', 299.905),
+    ('2021', '1.0', 2019, 'T7 NNOOS Class 8', 'Dsl', 467324),
+    ('2021', '1.0', 2019, 'T7 NOOS Class 8', 'Dsl', 169770),
+    ('2021', '1.0', 2019, 'T7 Other Port Class 8', 'Dsl', 81932.5),
+    ('2021', '1.0', 2019, 'T7 POLA Class 8', 'Dsl', 25396.3),
+    ('2021', '1.0', 2019, 'T7 Public Class 8', 'Dsl', 64387.4),
+    ('2021', '1.0', 2019, 'T7 Public Class 8', 'NG', 269.691),
+    ('2021', '1.0', 2019, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 24958.4),
+    ('2021', '1.0', 2019, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1646.22),
+    ('2021', '1.0', 2019, 'T7 Single Dump Class 8', 'Dsl', 49765.2),
+    ('2021', '1.0', 2019, 'T7 Single Dump Class 8', 'NG', 3258.02),
+    ('2021', '1.0', 2019, 'T7 Single Other Class 8', 'Dsl', 87039),
+    ('2021', '1.0', 2019, 'T7 Single Other Class 8', 'NG', 5862.84),
+    ('2021', '1.0', 2019, 'T7 SWCV Class 8', 'Dsl', 53754.4),
+    ('2021', '1.0', 2019, 'T7 SWCV Class 8', 'NG', 31995.8),
+    ('2021', '1.0', 2019, 'T7 Tractor Class 8', 'Dsl', 297691),
+    ('2021', '1.0', 2019, 'T7 Tractor Class 8', 'NG', 4043.45),
+    ('2021', '1.0', 2019, 'T7 Utility Class 8', 'Dsl', 6459.47),
+    ('2021', '1.0', 2019, 'T7IS', 'Gas', 851.047),
+    ('2021', '1.0', 2019, 'UBUS', 'Gas', 11134.7),
+    ('2021', '1.0', 2019, 'UBUS', 'Dsl', 3331.18),
+    ('2021', '1.0', 2019, 'UBUS', 'NG', 89470.1),
+    ('2021', '1.0', 2020, 'All Other Buses', 'Dsl', 24593.8),
+    ('2021', '1.0', 2020, 'All Other Buses', 'NG', 5044.59),
+    ('2021', '1.0', 2020, 'LDA', 'Gas', 4.01255e+007),
+    ('2021', '1.0', 2020, 'LDA', 'Dsl', 204548),
+    ('2021', '1.0', 2020, 'LDA', 'Elec', 1.11837e+006),
+    ('2021', '1.0', 2020, 'LDA', 'Phe', 819575),
+    ('2021', '1.0', 2020, 'LDT1', 'Gas', 4.21752e+006),
+    ('2021', '1.0', 2020, 'LDT1', 'Dsl', 1193.27),
+    ('2021', '1.0', 2020, 'LDT1', 'Elec', 4452.87),
+    ('2021', '1.0', 2020, 'LDT1', 'Phe', 293.758),
+    ('2021', '1.0', 2021, 'OBUS', 'Gas', 63994.5),
+    ('2021', '1.0', 2021, 'PTO', 'Dsl', 34639.4),
+    ('2021', '1.0', 2021, 'SBUS', 'Gas', 13935),
+    ('2021', '1.0', 2021, 'SBUS', 'Dsl', 45575),
+    ('2021', '1.0', 2021, 'SBUS', 'NG', 365.448),
+    ('2021', '1.0', 2021, 'T6 CAIRP Class 4', 'Dsl', 543.014),
+    ('2021', '1.0', 2021, 'T6 CAIRP Class 5', 'Dsl', 744.918),
+    ('2021', '1.0', 2021, 'T6 CAIRP Class 6', 'Dsl', 1946.49),
+    ('2021', '1.0', 2021, 'T6 CAIRP Class 7', 'Dsl', 12209.4),
+    ('2021', '1.0', 2021, 'T6 Instate Delivery Class 4', 'Dsl', 29813.8),
+    ('2021', '1.0', 2021, 'T6 Instate Delivery Class 4', 'NG', 426.796),
+    ('2021', '1.0', 2021, 'T6 Instate Delivery Class 5', 'Dsl', 22442.9),
+    ('2021', '1.0', 2021, 'T6 Instate Delivery Class 5', 'NG', 502.294),
+    ('2021', '1.0', 2021, 'T6 Instate Delivery Class 6', 'Dsl', 67285.9),
+    ('2021', '1.0', 2021, 'T6 Instate Delivery Class 6', 'NG', 1150.88),
+    ('2021', '1.0', 2021, 'T6 Instate Delivery Class 7', 'Dsl', 26477.1),
+    ('2021', '1.0', 2021, 'T6 Instate Delivery Class 7', 'NG', 249.982),
+    ('2021', '1.0', 2021, 'T6 Instate Other Class 4', 'Dsl', 77891.1),
+    ('2021', '1.0', 2021, 'T6 Instate Other Class 4', 'NG', 925.992),
+    ('2021', '1.0', 2021, 'T6 Instate Other Class 5', 'Dsl', 145445),
+    ('2021', '1.0', 2021, 'T6 Instate Other Class 5', 'NG', 3452.93),
+    ('2021', '1.0', 2021, 'T6 Instate Other Class 6', 'Dsl', 143119),
+    ('2021', '1.0', 2021, 'T6 Instate Other Class 6', 'NG', 3591.55),
+    ('2021', '1.0', 2021, 'T6 Instate Other Class 7', 'Dsl', 71037.1),
+    ('2021', '1.0', 2021, 'T6 Instate Other Class 7', 'NG', 578.27),
+    ('2021', '1.0', 2021, 'T6 Instate Tractor Class 6', 'Dsl', 858.391),
+    ('2021', '1.0', 2021, 'T6 Instate Tractor Class 6', 'NG', 16.7044),
+    ('2021', '1.0', 2021, 'T6 Instate Tractor Class 7', 'Dsl', 26463.8),
+    ('2021', '1.0', 2021, 'T6 Instate Tractor Class 7', 'NG', 112.736),
+    ('2021', '1.0', 2021, 'T6 OOS Class 4', 'Dsl', 309.503),
+    ('2021', '1.0', 2021, 'T6 OOS Class 5', 'Dsl', 424.582),
+    ('2021', '1.0', 2021, 'T6 OOS Class 6', 'Dsl', 1109.44),
+    ('2021', '1.0', 2021, 'T6 OOS Class 7', 'Dsl', 8067.04),
+    ('2021', '1.0', 2021, 'T6 Public Class 4', 'Dsl', 9895.66),
+    ('2021', '1.0', 2021, 'T6 Public Class 4', 'NG', 39.9045),
+    ('2021', '1.0', 2021, 'T6 Public Class 5', 'Dsl', 21893.6),
+    ('2021', '1.0', 2021, 'T6 Public Class 5', 'NG', 274.073),
+    ('2021', '1.0', 2021, 'T6 Public Class 6', 'Dsl', 14821.7),
+    ('2021', '1.0', 2021, 'T6 Public Class 6', 'NG', 71.5189),
+    ('2021', '1.0', 2021, 'T6 Public Class 7', 'Dsl', 32925.5),
+    ('2021', '1.0', 2021, 'T6 Public Class 7', 'NG', 227.382),
+    ('2021', '1.0', 2021, 'T6 Utility Class 5', 'Dsl', 8245.61),
+    ('2021', '1.0', 2021, 'T6 Utility Class 6', 'Dsl', 1979.81),
+    ('2021', '1.0', 2021, 'T6 Utility Class 7', 'Dsl', 2402.28),
+    ('2021', '1.0', 2021, 'T6TS', 'Gas', 189874),
+    ('2021', '1.0', 2021, 'T7 CAIRP Class 8', 'Dsl', 402335),
+    ('2021', '1.0', 2021, 'T7 CAIRP Class 8', 'NG', 339.754),
+    ('2021', '1.0', 2021, 'T7 NNOOS Class 8', 'Dsl', 476086),
+    ('2021', '1.0', 2021, 'T7 NOOS Class 8', 'Dsl', 172954),
+    ('2021', '1.0', 2021, 'T7 Other Port Class 8', 'Dsl', 89231.7),
+    ('2021', '1.0', 2021, 'T7 POLA Class 8', 'Dsl', 27793.9),
+    ('2021', '1.0', 2021, 'T7 Public Class 8', 'Dsl', 64832),
+    ('2021', '1.0', 2021, 'T7 Public Class 8', 'NG', 339.293),
+    ('2021', '1.0', 2021, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 24685.4),
+    ('2021', '1.0', 2023, 'All Other Buses', 'NG', 5808.9),
+    ('2021', '1.0', 2023, 'LDA', 'Gas', 4.68619e+007),
+    ('2021', '1.0', 2023, 'LDA', 'Dsl', 189349),
+    ('2021', '1.0', 2023, 'LDA', 'Elec', 2.58825e+006),
+    ('2021', '1.0', 2023, 'LDA', 'Phe', 1.4082e+006),
+    ('2021', '1.0', 2023, 'LDT1', 'Gas', 4.54653e+006),
+    ('2021', '1.0', 2023, 'LDT1', 'Dsl', 995.632),
+    ('2021', '1.0', 2023, 'LDT1', 'Elec', 8437.07),
+    ('2021', '1.0', 2023, 'LDT1', 'Phe', 4488.74),
+    ('2021', '1.0', 2023, 'LDT2', 'Gas', 2.21782e+007),
+    ('2021', '1.0', 2023, 'LDT2', 'Dsl', 85740.5),
+    ('2021', '1.0', 2023, 'LDT2', 'Elec', 78826.8),
+    ('2021', '1.0', 2023, 'LDT2', 'Phe', 161761),
+    ('2021', '1.0', 2023, 'LHD1', 'Gas', 1.65992e+006),
+    ('2021', '1.0', 2023, 'LHD1', 'Dsl', 1.17748e+006),
+    ('2021', '1.0', 2023, 'LHD2', 'Gas', 229749),
+    ('2021', '1.0', 2023, 'LHD2', 'Dsl', 468439),
+    ('2021', '1.0', 2023, 'MCY', 'Gas', 433816),
+    ('2021', '1.0', 2023, 'MDV', 'Gas', 1.30722e+007),
+    ('2021', '1.0', 2023, 'MDV', 'Dsl', 241474),
+    ('2021', '1.0', 2023, 'MDV', 'Elec', 84685.4),
+    ('2021', '1.0', 2023, 'MDV', 'Phe', 97545.5),
+    ('2021', '1.0', 2023, 'MH', 'Gas', 98581.3),
+    ('2021', '1.0', 2023, 'MH', 'Dsl', 40051.4),
+    ('2021', '1.0', 2023, 'Motor Coach', 'Dsl', 22889.4),
+    ('2021', '1.0', 2023, 'OBUS', 'Gas', 59392.5),
+    ('2021', '1.0', 2023, 'PTO', 'Dsl', 35414.4),
+    ('2021', '1.0', 2023, 'PTO', 'Elec', 9.76186),
+    ('2021', '1.0', 2023, 'SBUS', 'Gas', 15325.7),
+    ('2021', '1.0', 2023, 'SBUS', 'Dsl', 45498.9),
+    ('2021', '1.0', 2023, 'SBUS', 'Elec', 13.1418),
+    ('2021', '1.0', 2023, 'SBUS', 'NG', 428.354),
+    ('2021', '1.0', 2023, 'T6 CAIRP Class 4', 'Dsl', 555.733),
+    ('2021', '1.0', 2023, 'T6 CAIRP Class 4', 'Elec', 0.399354),
+    ('2021', '1.0', 2023, 'T6 CAIRP Class 5', 'Dsl', 762.45),
+    ('2021', '1.0', 2023, 'T6 CAIRP Class 5', 'Elec', 0.464085),
+    ('2021', '1.0', 2023, 'T6 CAIRP Class 6', 'Dsl', 1991.03),
+    ('2021', '1.0', 2023, 'T6 CAIRP Class 6', 'Elec', 2.48164),
+    ('2021', '1.0', 2023, 'T6 CAIRP Class 7', 'Dsl', 12497.4),
+    ('2021', '1.0', 2023, 'T6 CAIRP Class 7', 'Elec', 6.89451),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 4', 'Dsl', 30431.5),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 4', 'Elec', 10.3119),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 4', 'NG', 529.425),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 5', 'Dsl', 22926.3),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 5', 'Elec', 5.53676),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 5', 'NG', 567.672),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 6', 'Dsl', 68598.5),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 6', 'Elec', 24.8595),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 6', 'NG', 1466.82),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 7', 'Dsl', 27090.9),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 7', 'Elec', 3.27321),
+    ('2021', '1.0', 2023, 'T6 Instate Delivery Class 7', 'NG', 278.574),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 4', 'Dsl', 79291),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 4', 'Elec', 5.03771),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 4', 'NG', 1425.23),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 5', 'Dsl', 148440),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 5', 'Elec', 34.8742),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 5', 'NG', 4020.43),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 6', 'Dsl', 145985),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 6', 'Elec', 42.9386),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 6', 'NG', 4226.79),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 7', 'Dsl', 72701.7),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 7', 'Elec', 1140.14),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 7', 'NG', 573.426),
+    ('2021', '1.0', 2026, 'T6 Instate Tractor Class 6', 'Dsl', 885.106),
+    ('2021', '1.0', 2026, 'T6 Instate Tractor Class 6', 'Elec', 22.4898),
+    ('2021', '1.0', 2026, 'T6 Instate Tractor Class 6', 'NG', 21.3149),
+    ('2021', '1.0', 2026, 'T6 Instate Tractor Class 7', 'Dsl', 27869.9),
+    ('2021', '1.0', 2026, 'T6 Instate Tractor Class 7', 'Elec', 180.613),
+    ('2021', '1.0', 2026, 'T6 Instate Tractor Class 7', 'NG', 160.393),
+    ('2021', '1.0', 2026, 'T6 OOS Class 4', 'Dsl', 328.536),
+    ('2021', '1.0', 2026, 'T6 OOS Class 5', 'Dsl', 450.692),
+    ('2021', '1.0', 2026, 'T6 OOS Class 6', 'Dsl', 1177.67),
+    ('2021', '1.0', 2026, 'T6 OOS Class 7', 'Dsl', 8563.13),
+    ('2021', '1.0', 2026, 'T6 Public Class 4', 'Dsl', 9905.76),
+    ('2021', '1.0', 2026, 'T6 Public Class 4', 'Elec', 196.252),
+    ('2021', '1.0', 2026, 'T6 Public Class 4', 'NG', 78.3721),
+    ('2021', '1.0', 2026, 'T6 Public Class 5', 'Dsl', 22071.5),
+    ('2021', '1.0', 2026, 'T6 Public Class 5', 'Elec', 331.209),
+    ('2021', '1.0', 2026, 'T6 Public Class 5', 'NG', 311.177),
+    ('2021', '1.0', 2026, 'T6 Public Class 6', 'Dsl', 14862.3),
+    ('2021', '1.0', 2026, 'T6 Public Class 6', 'Elec', 274.512),
+    ('2021', '1.0', 2026, 'T6 Public Class 6', 'NG', 123.416),
+    ('2021', '1.0', 2026, 'T6 Public Class 7', 'Dsl', 32932.6),
+    ('2021', '1.0', 2026, 'T6 Public Class 7', 'Elec', 710.149),
+    ('2021', '1.0', 2026, 'T6 Public Class 7', 'NG', 326.992),
+    ('2021', '1.0', 2026, 'T6 Utility Class 5', 'Dsl', 8196.58),
+    ('2021', '1.0', 2026, 'T6 Utility Class 5', 'Elec', 252.21),
+    ('2021', '1.0', 2026, 'T6 Utility Class 6', 'Dsl', 1966.99),
+    ('2021', '1.0', 2026, 'T6 Utility Class 6', 'Elec', 61.6063),
+    ('2021', '1.0', 2026, 'T6 Utility Class 7', 'Dsl', 2375.93),
+    ('2021', '1.0', 2026, 'T6 Utility Class 7', 'Elec', 85.5338),
+    ('2021', '1.0', 2026, 'T6TS', 'Gas', 196489),
+    ('2021', '1.0', 2026, 'T6TS', 'Elec', 4604.08),
+    ('2021', '1.0', 2026, 'T7 CAIRP Class 8', 'Dsl', 426609),
+    ('2021', '1.0', 2026, 'T7 CAIRP Class 8', 'Elec', 8754.1),
+    ('2021', '1.0', 2026, 'T7 CAIRP Class 8', 'NG', 466.547),
+    ('2021', '1.0', 2026, 'T7 NNOOS Class 8', 'Dsl', 515284),
+    ('2021', '1.0', 2026, 'T7 NOOS Class 8', 'Dsl', 187194),
+    ('2021', '1.0', 2026, 'T7 Other Port Class 8', 'Dsl', 107051),
+    ('2021', '1.0', 2026, 'T7 Other Port Class 8', 'Elec', 1106.97),
+    ('2021', '1.0', 2026, 'T7 POLA Class 8', 'Dsl', 33991.7),
+    ('2021', '1.0', 2026, 'T7 POLA Class 8', 'Elec', 105.059),
+    ('2021', '1.0', 2026, 'T7 Public Class 8', 'Dsl', 65207.4),
+    ('2021', '1.0', 2026, 'T7 Public Class 8', 'Elec', 1146.8),
+    ('2021', '1.0', 2026, 'T7 Public Class 8', 'NG', 422.985),
+    ('2021', '1.0', 2026, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 24457.2),
+    ('2021', '1.0', 2026, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 924.342),
+    ('2021', '1.0', 2026, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 2087.37),
+    ('2021', '1.0', 2026, 'T7 Single Dump Class 8', 'Dsl', 49757.6),
+    ('2021', '1.0', 2026, 'T7 Single Dump Class 8', 'Elec', 949.296),
+    ('2021', '1.0', 2026, 'T7 Single Dump Class 8', 'NG', 4038.96),
+    ('2021', '1.0', 2026, 'T7 Single Other Class 8', 'Dsl', 93053.4),
+    ('2021', '1.0', 2026, 'T7 Single Other Class 8', 'Elec', 1913.03),
+    ('2021', '1.0', 2026, 'T7 Single Other Class 8', 'NG', 7469.92),
+    ('2021', '1.0', 2026, 'T7 SWCV Class 8', 'Dsl', 30800.1),
+    ('2021', '1.0', 2026, 'T7 SWCV Class 8', 'Elec', 1028.22),
+    ('2021', '1.0', 2026, 'T7 SWCV Class 8', 'NG', 56733.5),
+    ('2021', '1.0', 2026, 'T7 Tractor Class 8', 'Dsl', 324527),
+    ('2021', '1.0', 2026, 'T7 Tractor Class 8', 'Elec', 3341.4),
+    ('2021', '1.0', 2026, 'T7 Tractor Class 8', 'NG', 4832.53),
+    ('2021', '1.0', 2026, 'T7 Utility Class 8', 'Dsl', 6575.86),
+    ('2021', '1.0', 2026, 'T7 Utility Class 8', 'Elec', 95.4111),
+    ('2021', '1.0', 2026, 'T7IS', 'Gas', 471.798),
+    ('2021', '1.0', 2026, 'T7IS', 'Elec', 12.7702),
+    ('2021', '1.0', 2026, 'UBUS', 'Gas', 14501.9),
+    ('2021', '1.0', 2026, 'UBUS', 'Elec', 5573.63),
+    ('2021', '1.0', 2026, 'UBUS', 'NG', 115309),
+    ('2021', '1.0', 2029, 'T7 Tractor Class 8', 'Elec', 11404.8),
+    ('2021', '1.0', 2029, 'T7 Tractor Class 8', 'NG', 4809.71),
+    ('2021', '1.0', 2029, 'T7 Utility Class 8', 'Dsl', 6379.2),
+    ('2021', '1.0', 2029, 'T7 Utility Class 8', 'Elec', 386.023),
+    ('2021', '1.0', 2029, 'T7IS', 'Gas', 484.064),
+    ('2021', '1.0', 2029, 'T7IS', 'Elec', 47.198),
+    ('2021', '1.0', 2029, 'UBUS', 'Gas', 15882),
+    ('2021', '1.0', 2029, 'UBUS', 'Elec', 27331),
+    ('2021', '1.0', 2029, 'UBUS', 'NG', 105312),
+    ('2021', '1.0', 2030, 'All Other Buses', 'Dsl', 25729.9),
+    ('2021', '1.0', 2030, 'All Other Buses', 'NG', 5327.42),
+    ('2021', '1.0', 2030, 'LDA', 'Gas', 4.61787e+007),
+    ('2021', '1.0', 2030, 'LDA', 'Dsl', 82539.8),
+    ('2021', '1.0', 2030, 'LDA', 'Elec', 5.13321e+006),
+    ('2021', '1.0', 2030, 'LDA', 'Phe', 2.03555e+006),
+    ('2021', '1.0', 2030, 'LDT1', 'Gas', 3.74812e+006),
+    ('2021', '1.0', 2030, 'LDT1', 'Dsl', 60.7717),
+    ('2021', '1.0', 2030, 'LDT1', 'Elec', 39240.6),
+    ('2021', '1.0', 2030, 'LDT1', 'Phe', 29530.2),
+    ('2021', '1.0', 2030, 'LDT2', 'Gas', 2.31243e+007),
+    ('2021', '1.0', 2030, 'LDT2', 'Dsl', 89997.9),
+    ('2021', '1.0', 2030, 'LDT2', 'Elec', 348640),
+    ('2021', '1.0', 2030, 'LDT2', 'Phe', 400375),
+    ('2021', '1.0', 2030, 'LHD1', 'Gas', 1.59726e+006),
+    ('2021', '1.0', 2030, 'LHD1', 'Dsl', 1.17318e+006),
+    ('2021', '1.0', 2030, 'LHD1', 'Elec', 263906),
+    ('2021', '1.0', 2030, 'LHD2', 'Gas', 219451),
+    ('2021', '1.0', 2030, 'LHD2', 'Dsl', 510869),
+    ('2021', '1.0', 2030, 'LHD2', 'Elec', 65783),
+    ('2021', '1.0', 2030, 'MCY', 'Gas', 408889),
+    ('2021', '1.0', 2030, 'MDV', 'Gas', 1.33269e+007),
+    ('2021', '1.0', 2030, 'MDV', 'Dsl', 193552),
+    ('2021', '1.0', 2030, 'MDV', 'Elec', 345605),
+    ('2021', '1.0', 2030, 'MDV', 'Phe', 255449),
+    ('2021', '1.0', 2030, 'MH', 'Gas', 69772.3),
+    ('2021', '1.0', 2030, 'MH', 'Dsl', 35959.7),
+    ('2021', '1.0', 2030, 'Motor Coach', 'Dsl', 23738.8),
+    ('2021', '1.0', 2030, 'OBUS', 'Gas', 41815.1),
+    ('2021', '1.0', 2030, 'OBUS', 'Elec', 4503.74),
+    ('2021', '1.0', 2030, 'PTO', 'Dsl', 34429),
+    ('2021', '1.0', 2030, 'PTO', 'Elec', 3852.78),
+    ('2021', '1.0', 2030, 'SBUS', 'Gas', 17314.2),
+    ('2021', '1.0', 2030, 'SBUS', 'Dsl', 41877.1),
+    ('2021', '1.0', 2030, 'SBUS', 'Elec', 4824.2),
+    ('2021', '1.0', 2030, 'SBUS', 'NG', 614.817),
+    ('2021', '1.0', 2030, 'T6 CAIRP Class 4', 'Dsl', 525.106),
+    ('2021', '1.0', 2030, 'T6 CAIRP Class 4', 'Elec', 79.4884),
+    ('2021', '1.0', 2030, 'T6 CAIRP Class 5', 'Dsl', 725.756),
+    ('2021', '1.0', 2030, 'T6 CAIRP Class 5', 'Elec', 103.639),
+    ('2021', '1.0', 2030, 'T6 CAIRP Class 6', 'Dsl', 1848.78),
+    ('2021', '1.0', 2030, 'T6 CAIRP Class 6', 'Elec', 318.452),
+    ('2021', '1.0', 2030, 'T6 CAIRP Class 7', 'Dsl', 12535.4),
+    ('2021', '1.0', 2030, 'T6 CAIRP Class 7', 'Elec', 1058.55),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 4', 'Dsl', 29940.7),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 4', 'Elec', 3163.12),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 4', 'NG', 566.257),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 5', 'Dsl', 22717.6),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 5', 'Elec', 2296.35),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 5', 'NG', 533.39),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 6', 'Dsl', 67792.7),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 6', 'Elec', 6956.95),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 6', 'NG', 1448.17),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 5', 'NG', 500.734),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 6', 'Dsl', 65259.2),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 6', 'Elec', 12415),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 6', 'NG', 1374.39),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 7', 'Dsl', 28691.7),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 7', 'Elec', 1902.24),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 7', 'NG', 277.45),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 4', 'Dsl', 73396.6),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 4', 'Elec', 16175.1),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 4', 'NG', 1466.77),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 5', 'Dsl', 139139),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 5', 'Elec', 29461),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 5', 'NG', 3386.76),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 6', 'Dsl', 137035),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 6', 'Elec', 28913.7),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 6', 'NG', 3510.15),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 7', 'Dsl', 71405.1),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 7', 'Elec', 10754.4),
+    ('2021', '1.0', 2032, 'T6 Instate Other Class 7', 'NG', 560.478),
+    ('2021', '1.0', 2032, 'T6 Instate Tractor Class 6', 'Dsl', 809.889),
+    ('2021', '1.0', 2032, 'T6 Instate Tractor Class 6', 'Elec', 183.821),
+    ('2021', '1.0', 2032, 'T6 Instate Tractor Class 6', 'NG', 17.0784),
+    ('2021', '1.0', 2032, 'T6 Instate Tractor Class 7', 'Dsl', 28676.1),
+    ('2021', '1.0', 2032, 'T6 Instate Tractor Class 7', 'Elec', 1847.57),
+    ('2021', '1.0', 2032, 'T6 Instate Tractor Class 7', 'NG', 173.854),
+    ('2021', '1.0', 2032, 'T6 OOS Class 4', 'Dsl', 357.494),
+    ('2021', '1.0', 2032, 'T6 OOS Class 5', 'Dsl', 490.418),
+    ('2021', '1.0', 2032, 'T6 OOS Class 6', 'Dsl', 1281.48),
+    ('2021', '1.0', 2032, 'T6 OOS Class 7', 'Dsl', 9317.92),
+    ('2021', '1.0', 2032, 'T6 Public Class 4', 'Dsl', 9002.06),
+    ('2021', '1.0', 2032, 'T6 Public Class 4', 'Elec', 1357.68),
+    ('2021', '1.0', 2032, 'T6 Public Class 4', 'NG', 93.0447),
+    ('2021', '1.0', 2032, 'T6 Public Class 5', 'Dsl', 19951.8),
+    ('2021', '1.0', 2032, 'T6 Public Class 5', 'Elec', 3081.8),
+    ('2021', '1.0', 2032, 'T6 Public Class 5', 'NG', 288.074),
+    ('2021', '1.0', 2032, 'T6 Public Class 6', 'Dsl', 13455.4),
+    ('2021', '1.0', 2032, 'T6 Public Class 6', 'Elec', 2069.65),
+    ('2021', '1.0', 2032, 'T6 Public Class 6', 'NG', 143.505),
+    ('2021', '1.0', 2032, 'T6 Public Class 7', 'Dsl', 29446.4),
+    ('2021', '1.0', 2032, 'T6 Public Class 7', 'Elec', 5080.97),
+    ('2021', '1.0', 2032, 'T6 Public Class 7', 'NG', 351.351),
+    ('2021', '1.0', 2032, 'T6 Utility Class 5', 'Dsl', 6672.36),
+    ('2021', '1.0', 2032, 'T6 Utility Class 5', 'Elec', 2002.49),
+    ('2021', '1.0', 2032, 'T6 Utility Class 6', 'Dsl', 1600.76),
+    ('2021', '1.0', 2032, 'T6 Utility Class 6', 'Elec', 482.115),
+    ('2021', '1.0', 2032, 'T6 Utility Class 7', 'Dsl', 1886.08),
+    ('2021', '1.0', 2032, 'T6 Utility Class 7', 'Elec', 641.251),
+    ('2021', '1.0', 2032, 'T6TS', 'Gas', 174733),
+    ('2021', '1.0', 2032, 'T6TS', 'Elec', 38640.3),
+    ('2021', '1.0', 2032, 'T7 CAIRP Class 8', 'Dsl', 435255),
+    ('2021', '1.0', 2032, 'T7 CAIRP Class 8', 'Elec', 62559.8),
+    ('2021', '1.0', 2032, 'T7 CAIRP Class 8', 'NG', 389.61),
+    ('2021', '1.0', 2032, 'T7 NNOOS Class 8', 'Dsl', 589031),
+    ('2021', '1.0', 2032, 'T7 NOOS Class 8', 'Dsl', 213985),
+    ('2021', '1.0', 2032, 'T7 Other Port Class 8', 'Dsl', 119718),
+    ('2021', '1.0', 2032, 'T7 Other Port Class 8', 'Elec', 14239.2),
+    ('2021', '1.0', 2032, 'T7 POLA Class 8', 'Dsl', 41447.6),
+    ('2021', '1.0', 2032, 'T7 POLA Class 8', 'Elec', 1478.81),
+    ('2021', '1.0', 2032, 'T7 Public Class 8', 'Dsl', 59345.9),
+    ('2021', '1.0', 2032, 'T7 Public Class 8', 'Elec', 8769.43),
+    ('2021', '1.0', 2032, 'T7 Public Class 8', 'NG', 448.605),
+    ('2021', '1.0', 2032, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 19865.7),
+    ('2021', '1.0', 2032, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 6772.35),
+    ('2021', '1.0', 2032, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1574.73),
+    ('2021', '1.0', 2035, 'T7 Public Class 8', 'NG', 439.17),
+    ('2021', '1.0', 2035, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 16781.7),
+    ('2021', '1.0', 2035, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 10525.3),
+    ('2021', '1.0', 2035, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1299.47),
+    ('2021', '1.0', 2035, 'T7 Single Dump Class 8', 'Dsl', 41019.1),
+    ('2021', '1.0', 2035, 'T7 Single Dump Class 8', 'Elec', 12793.2),
+    ('2021', '1.0', 2035, 'T7 Single Dump Class 8', 'NG', 3200.74),
+    ('2021', '1.0', 2035, 'T7 Single Other Class 8', 'Dsl', 90766.3),
+    ('2021', '1.0', 2035, 'T7 Single Other Class 8', 'Elec', 32350.8),
+    ('2021', '1.0', 2035, 'T7 Single Other Class 8', 'NG', 7034.04),
+    ('2021', '1.0', 2035, 'T7 SWCV Class 8', 'Dsl', 12651.9),
+    ('2021', '1.0', 2035, 'T7 SWCV Class 8', 'Elec', 15266.2),
+    ('2021', '1.0', 2035, 'T7 SWCV Class 8', 'NG', 64032.4),
+    ('2021', '1.0', 2035, 'T7 Tractor Class 8', 'Dsl', 375121),
+    ('2021', '1.0', 2035, 'T7 Tractor Class 8', 'Elec', 42371.1),
+    ('2021', '1.0', 2035, 'T7 Tractor Class 8', 'NG', 5223.48),
+    ('2021', '1.0', 2035, 'T7 Utility Class 8', 'Dsl', 5404.21),
+    ('2021', '1.0', 2035, 'T7 Utility Class 8', 'Elec', 1522.32),
+    ('2021', '1.0', 2035, 'T7IS', 'Gas', 480.103),
+    ('2021', '1.0', 2035, 'T7IS', 'Elec', 185.951),
+    ('2021', '1.0', 2035, 'UBUS', 'Gas', 18446.8),
+    ('2021', '1.0', 2035, 'UBUS', 'Elec', 90624.4),
+    ('2021', '1.0', 2035, 'UBUS', 'NG', 65734.8),
+    ('2021', '1.0', 2040, 'All Other Buses', 'Dsl', 26960.3),
+    ('2021', '1.0', 2040, 'All Other Buses', 'NG', 5201.49),
+    ('2021', '1.0', 2040, 'LDA', 'Gas', 4.68679e+007),
+    ('2021', '1.0', 2040, 'LDA', 'Dsl', 32233.5),
+    ('2021', '1.0', 2040, 'LDA', 'Elec', 6.64525e+006),
+    ('2021', '1.0', 2040, 'LDA', 'Phe', 2.23796e+006),
+    ('2021', '1.0', 2040, 'LDT1', 'Gas', 3.18621e+006),
+    ('2021', '1.0', 2040, 'LDT1', 'Dsl', 32.9516),
+    ('2021', '1.0', 2040, 'LDT1', 'Elec', 86382.3),
+    ('2021', '1.0', 2040, 'LDT1', 'Phe', 63187.2),
+    ('2021', '1.0', 2040, 'LDT2', 'Gas', 2.35681e+007),
+    ('2021', '1.0', 2040, 'LDT2', 'Dsl', 89853.6),
+    ('2021', '1.0', 2040, 'LDT2', 'Elec', 643497),
+    ('2021', '1.0', 2040, 'LDT2', 'Phe', 611620),
+    ('2021', '1.0', 2040, 'LHD1', 'Gas', 1.17626e+006),
+    ('2021', '1.0', 2040, 'LHD1', 'Dsl', 893628),
+    ('2021', '1.0', 2040, 'LHD1', 'Elec', 1.17723e+006),
+    ('2021', '1.0', 2040, 'LHD2', 'Gas', 159909),
+    ('2021', '1.0', 2040, 'LHD2', 'Dsl', 412217),
+    ('2021', '1.0', 2040, 'LHD2', 'Elec', 301922),
+    ('2021', '1.0', 2040, 'MCY', 'Gas', 396882),
+    ('2021', '1.0', 2040, 'MDV', 'Gas', 1.36484e+007),
+    ('2021', '1.0', 2040, 'MDV', 'Dsl', 155837),
+    ('2021', '1.0', 2040, 'MDV', 'Elec', 585861),
+    ('2021', '1.0', 2040, 'MDV', 'Phe', 386985),
+    ('2021', '1.0', 2040, 'MH', 'Gas', 52833.9),
+    ('2021', '1.0', 2040, 'MH', 'Dsl', 31198.9),
+    ('2021', '1.0', 2040, 'Motor Coach', 'Dsl', 25069.8),
+    ('2021', '1.0', 2040, 'OBUS', 'Gas', 23584),
+    ('2021', '1.0', 2040, 'OBUS', 'Elec', 18005.9),
+    ('2021', '1.0', 2040, 'PTO', 'Dsl', 28832.6),
+    ('2021', '1.0', 2040, 'PTO', 'Elec', 19386.6),
+    ('2021', '1.0', 2040, 'SBUS', 'Gas', 15363.8),
+    ('2021', '1.0', 2040, 'SBUS', 'Dsl', 30700.8),
+    ('2021', '1.0', 2040, 'SBUS', 'Elec', 21612.6),
+    ('2021', '1.0', 2040, 'SBUS', 'NG', 632.386),
+    ('2021', '1.0', 2040, 'T6 CAIRP Class 4', 'Dsl', 353.454),
+    ('2021', '1.0', 2040, 'T6 CAIRP Class 4', 'Elec', 373.023),
+    ('2021', '1.0', 2040, 'T6 CAIRP Class 5', 'Dsl', 487.326),
+    ('2021', '1.0', 2040, 'T6 CAIRP Class 5', 'Elec', 509.269),
+    ('2021', '1.0', 2045, 'SBUS', 'NG', 569.449),
+    ('2021', '1.0', 2045, 'T6 CAIRP Class 4', 'Dsl', 332.999),
+    ('2021', '1.0', 2045, 'T6 CAIRP Class 4', 'Elec', 463.345),
+    ('2021', '1.0', 2045, 'T6 CAIRP Class 5', 'Dsl', 457.711),
+    ('2021', '1.0', 2045, 'T6 CAIRP Class 5', 'Elec', 634.729),
+    ('2021', '1.0', 2045, 'T6 CAIRP Class 6', 'Dsl', 1189.48),
+    ('2021', '1.0', 2045, 'T6 CAIRP Class 6', 'Elec', 1665.09),
+    ('2021', '1.0', 2045, 'T6 CAIRP Class 7', 'Dsl', 13635.9),
+    ('2021', '1.0', 2045, 'T6 CAIRP Class 7', 'Elec', 4269.42),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 4', 'Dsl', 21229.9),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 4', 'Elec', 22734.5),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 4', 'NG', 384.226),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 5', 'Dsl', 16109.9),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 5', 'Elec', 17235.1),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 5', 'NG', 304.748),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 6', 'Dsl', 48045.6),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 6', 'Elec', 51428.4),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 6', 'NG', 890.267),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 7', 'Dsl', 24986.3),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 7', 'Elec', 13975.9),
+    ('2021', '1.0', 2045, 'T6 Instate Delivery Class 7', 'NG', 233.805),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 4', 'Dsl', 53664.3),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 4', 'Elec', 60957.4),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 4', 'NG', 965.568),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 5', 'Dsl', 101367),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 5', 'Elec', 115101),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 5', 'NG', 1894.99),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 6', 'Dsl', 99900.4),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 6', 'Elec', 113363),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 6', 'NG', 1890.49),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 7', 'Dsl', 61445.5),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 7', 'Elec', 43090.4),
+    ('2021', '1.0', 2045, 'T6 Instate Other Class 7', 'NG', 489.815),
+    ('2021', '1.0', 2045, 'T6 Instate Tractor Class 6', 'Dsl', 583.207),
+    ('2021', '1.0', 2045, 'T6 Instate Tractor Class 6', 'Elec', 689.353),
+    ('2021', '1.0', 2045, 'T6 Instate Tractor Class 6', 'NG', 10.7889),
+    ('2021', '1.0', 2045, 'T6 Instate Tractor Class 7', 'Dsl', 31637.2),
+    ('2021', '1.0', 2045, 'T6 Instate Tractor Class 7', 'Elec', 7103.44),
+    ('2021', '1.0', 2045, 'T6 Instate Tractor Class 7', 'NG', 234.522),
+    ('2021', '1.0', 2045, 'T6 OOS Class 4', 'Dsl', 453.893),
+    ('2021', '1.0', 2045, 'T6 OOS Class 5', 'Dsl', 622.66),
+    ('2021', '1.0', 2045, 'T6 OOS Class 6', 'Dsl', 1627.03),
+    ('2021', '1.0', 2045, 'T6 OOS Class 7', 'Dsl', 11830.5),
+    ('2021', '1.0', 2045, 'T6 Public Class 4', 'Dsl', 5847.09),
+    ('2021', '1.0', 2045, 'T6 Public Class 4', 'Elec', 4949.33),
+    ('2021', '1.0', 2045, 'T6 Public Class 4', 'NG', 73.2243),
+    ('2021', '1.0', 2045, 'T6 Public Class 5', 'Dsl', 13054.3),
+    ('2021', '1.0', 2045, 'T6 Public Class 5', 'Elec', 11018),
+    ('2021', '1.0', 2045, 'T6 Public Class 5', 'NG', 179.395),
+    ('2021', '1.0', 2045, 'T6 Public Class 6', 'Dsl', 8774.59),
+    ('2021', '1.0', 2045, 'T6 Public Class 6', 'Elec', 7408.23),
+    ('2021', '1.0', 2045, 'T6 Public Class 6', 'NG', 110.552),
+    ('2021', '1.0', 2045, 'T6 Public Class 7', 'Dsl', 21394.7),
+    ('2021', '1.0', 2045, 'T6 Public Class 7', 'Elec', 14595),
+    ('2021', '1.0', 2045, 'T6 Public Class 7', 'NG', 279.926),
+    ('2021', '1.0', 2045, 'T6 Utility Class 5', 'Dsl', 3734.18),
+    ('2021', '1.0', 2045, 'T6 Utility Class 5', 'Elec', 5286.63),
+    ('2021', '1.0', 2045, 'T6 Utility Class 6', 'Dsl', 897.021),
+    ('2021', '1.0', 2045, 'T6 Utility Class 6', 'Elec', 1268.92),
+    ('2021', '1.0', 2045, 'T6 Utility Class 7', 'Dsl', 1071.37),
+    ('2021', '1.0', 2045, 'T6 Utility Class 7', 'Elec', 1556.75),
+    ('2021', '1.0', 2045, 'T6TS', 'Gas', 107544),
+    ('2021', '1.0', 2045, 'T6TS', 'Elec', 121146),
+    ('2021', '1.0', 2045, 'T7 CAIRP Class 8', 'Dsl', 609058),
+    ('2021', '1.0', 2045, 'T7 CAIRP Class 8', 'Elec', 178049),
+    ('2021', '1.0', 2045, 'T7 CAIRP Class 8', 'NG', 517.525),
+    ('2021', '1.0', 2050, 'T7 CAIRP Class 8', 'Dsl', 725522),
+    ('2021', '1.0', 2050, 'T7 CAIRP Class 8', 'Elec', 213204),
+    ('2021', '1.0', 2050, 'T7 CAIRP Class 8', 'NG', 616.004),
+    ('2021', '1.0', 2050, 'T7 NNOOS Class 8', 'Dsl', 1.11059e+006),
+    ('2021', '1.0', 2050, 'T7 NOOS Class 8', 'Dsl', 403458),
+    ('2021', '1.0', 2050, 'T7 Other Port Class 8', 'Dsl', 124365),
+    ('2021', '1.0', 2050, 'T7 Other Port Class 8', 'Elec', 31321.5),
+    ('2021', '1.0', 2050, 'T7 POLA Class 8', 'Dsl', 40455.6),
+    ('2021', '1.0', 2050, 'T7 POLA Class 8', 'Elec', 7768.68),
+    ('2021', '1.0', 2050, 'T7 Public Class 8', 'Dsl', 39064.7),
+    ('2021', '1.0', 2050, 'T7 Public Class 8', 'Elec', 32420.8),
+    ('2021', '1.0', 2050, 'T7 Public Class 8', 'NG', 352.721),
+    ('2021', '1.0', 2050, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 11861.8),
+    ('2021', '1.0', 2050, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 17895.7),
+    ('2021', '1.0', 2050, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 901.295),
+    ('2021', '1.0', 2050, 'T7 Single Dump Class 8', 'Dsl', 27757.9),
+    ('2021', '1.0', 2050, 'T7 Single Dump Class 8', 'Elec', 31215.4),
+    ('2021', '1.0', 2050, 'T7 Single Dump Class 8', 'NG', 2129.95),
+    ('2021', '1.0', 2050, 'T7 Single Other Class 8', 'Dsl', 95262),
+    ('2021', '1.0', 2050, 'T7 Single Other Class 8', 'Elec', 118249),
+    ('2021', '1.0', 2050, 'T7 Single Other Class 8', 'NG', 7269.63),
+    ('2021', '1.0', 2050, 'T7 SWCV Class 8', 'Dsl', 1933.15),
+    ('2021', '1.0', 2050, 'T7 SWCV Class 8', 'Elec', 44010.1),
+    ('2021', '1.0', 2050, 'T7 SWCV Class 8', 'NG', 49330.7),
+    ('2021', '1.0', 2050, 'T7 Tractor Class 8', 'Dsl', 581673),
+    ('2021', '1.0', 2050, 'T7 Tractor Class 8', 'Elec', 127565),
+    ('2021', '1.0', 2050, 'T7 Tractor Class 8', 'NG', 7832.61),
+    ('2021', '1.0', 2050, 'T7 Utility Class 8', 'Dsl', 3759.91),
+    ('2021', '1.0', 2050, 'T7 Utility Class 8', 'Elec', 3416.97),
+    ('2021', '1.0', 2050, 'T7IS', 'Gas', 341.607),
+    ('2021', '1.0', 2050, 'T7IS', 'Elec', 426.708),
+    ('2021', '1.0', 2050, 'UBUS', 'Gas', 24773.5),
+    ('2021', '1.0', 2050, 'UBUS', 'Elec', 215735),
+    ('2021', '1.0', 2016, 'T6 OOS Class 6', 'Dsl', 1059.55),
+    ('2021', '1.0', 2016, 'T6 OOS Class 7', 'Dsl', 7704.22),
+    ('2021', '1.0', 2016, 'T6 Public Class 4', 'Dsl', 9519.08),
+    ('2021', '1.0', 2016, 'T6 Public Class 4', 'NG', 13.168),
+    ('2021', '1.0', 2016, 'T6 Public Class 5', 'Dsl', 21189.9),
+    ('2021', '1.0', 2016, 'T6 Public Class 5', 'NG', 77.9289),
+    ('2021', '1.0', 2016, 'T6 Public Class 6', 'Dsl', 14267.4),
+    ('2021', '1.0', 2016, 'T6 Public Class 6', 'NG', 21.2318),
+    ('2021', '1.0', 2016, 'T6 Public Class 7', 'Dsl', 31761.7),
+    ('2021', '1.0', 2016, 'T6 Public Class 7', 'NG', 45.4307),
+    ('2021', '1.0', 2016, 'T6 Utility Class 5', 'Dsl', 7910.89),
+    ('2021', '1.0', 2016, 'T6 Utility Class 6', 'Dsl', 1899.44),
+    ('2021', '1.0', 2016, 'T6 Utility Class 7', 'Dsl', 2304.76),
+    ('2021', '1.0', 2016, 'T6TS', 'Gas', 188449),
+    ('2021', '1.0', 2016, 'T7 CAIRP Class 8', 'Dsl', 382234),
+    ('2021', '1.0', 2016, 'T7 NNOOS Class 8', 'Dsl', 451919),
+    ('2021', '1.0', 2016, 'T7 NOOS Class 8', 'Dsl', 164174),
+    ('2021', '1.0', 2016, 'T7 Other Port Class 8', 'Dsl', 79231.7),
+    ('2021', '1.0', 2016, 'T7 POLA Class 8', 'Dsl', 24559.1),
+    ('2021', '1.0', 2016, 'T7 Public Class 8', 'Dsl', 62422.1),
+    ('2021', '1.0', 2016, 'T7 Public Class 8', 'NG', 103.677),
+    ('2021', '1.0', 2016, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 24928.3),
+    ('2021', '1.0', 2016, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 799.254),
+    ('2021', '1.0', 2016, 'T7 Single Dump Class 8', 'Dsl', 49682.3),
+    ('2021', '1.0', 2016, 'T7 Single Dump Class 8', 'NG', 1593.06),
+    ('2021', '1.0', 2016, 'T7 Single Other Class 8', 'Dsl', 87057.9),
+    ('2021', '1.0', 2016, 'T7 Single Other Class 8', 'NG', 2781.64),
+    ('2021', '1.0', 2016, 'T7 SWCV Class 8', 'Dsl', 61181.8),
+    ('2021', '1.0', 2016, 'T7 SWCV Class 8', 'NG', 21741.7),
+    ('2021', '1.0', 2016, 'T7 Tractor Class 8', 'Dsl', 288971),
+    ('2021', '1.0', 2016, 'T7 Tractor Class 8', 'NG', 2817.6),
+    ('2021', '1.0', 2016, 'T7 Utility Class 8', 'Dsl', 6246.54),
+    ('2021', '1.0', 2016, 'T7IS', 'Gas', 1949.51),
+    ('2021', '1.0', 2016, 'UBUS', 'Gas', 31747.7),
+    ('2021', '1.0', 2016, 'UBUS', 'Dsl', 9368.61),
+    ('2021', '1.0', 2016, 'UBUS', 'NG', 77064.7),
+    ('2021', '1.0', 2017, 'All Other Buses', 'Dsl', 28138.1),
+    ('2021', '1.0', 2017, 'All Other Buses', 'NG', 1971.6),
+    ('2021', '1.0', 2017, 'LDA', 'Gas', 4.75758e+007),
+    ('2021', '1.0', 2017, 'LDA', 'Dsl', 268866),
+    ('2021', '1.0', 2017, 'LDA', 'Elec', 482134),
+    ('2021', '1.0', 2017, 'LDA', 'Phe', 578118),
+    ('2021', '1.0', 2017, 'LDT1', 'Gas', 5.25016e+006),
+    ('2021', '1.0', 2017, 'LDT1', 'Dsl', 3427.86),
+    ('2021', '1.0', 2017, 'LDT1', 'Elec', 4890.26),
+    ('2021', '1.0', 2017, 'LDT1', 'Phe', 91.043),
+    ('2021', '1.0', 2017, 'LDT2', 'Gas', 1.93042e+007),
+    ('2021', '1.0', 2017, 'LDT2', 'Dsl', 80635.9),
+    ('2021', '1.0', 2017, 'LDT2', 'Elec', 1106.2),
+    ('2021', '1.0', 2017, 'LDT2', 'Phe', 3505.97),
+    ('2021', '1.0', 2017, 'LHD1', 'Gas', 1.57212e+006),
+    ('2021', '1.0', 2017, 'LHD1', 'Dsl', 1.12064e+006),
+    ('2021', '1.0', 2017, 'LHD2', 'Gas', 209425),
+    ('2021', '1.0', 2017, 'LHD2', 'Dsl', 370636),
+    ('2021', '1.0', 2018, 'T6 CAIRP Class 6', 'Dsl', 1915.58),
+    ('2021', '1.0', 2018, 'T6 CAIRP Class 7', 'Dsl', 12015.5),
+    ('2021', '1.0', 2018, 'T6 Instate Delivery Class 4', 'Dsl', 29552.1),
+    ('2021', '1.0', 2018, 'T6 Instate Delivery Class 4', 'NG', 208.25),
+    ('2021', '1.0', 2018, 'T6 Instate Delivery Class 5', 'Dsl', 22157.4),
+    ('2021', '1.0', 2018, 'T6 Instate Delivery Class 5', 'NG', 423.418),
+    ('2021', '1.0', 2018, 'T6 Instate Delivery Class 6', 'Dsl', 66664.6),
+    ('2021', '1.0', 2018, 'T6 Instate Delivery Class 6', 'NG', 685.396),
+    ('2021', '1.0', 2018, 'T6 Instate Delivery Class 7', 'Dsl', 26227.5),
+    ('2021', '1.0', 2018, 'T6 Instate Delivery Class 7', 'NG', 75.114),
+    ('2021', '1.0', 2018, 'T6 Instate Other Class 4', 'Dsl', 77173.4),
+    ('2021', '1.0', 2018, 'T6 Instate Other Class 4', 'NG', 392.044),
+    ('2021', '1.0', 2018, 'T6 Instate Other Class 5', 'Dsl', 144232),
+    ('2021', '1.0', 2018, 'T6 Instate Other Class 5', 'NG', 2301.36),
+    ('2021', '1.0', 2018, 'T6 Instate Other Class 6', 'Dsl', 141836),
+    ('2021', '1.0', 2018, 'T6 Instate Other Class 6', 'NG', 2544.99),
+    ('2021', '1.0', 2018, 'T6 Instate Other Class 7', 'Dsl', 70214),
+    ('2021', '1.0', 2018, 'T6 Instate Other Class 7', 'NG', 264.045),
+    ('2021', '1.0', 2018, 'T6 Instate Tractor Class 6', 'Dsl', 848.412),
+    ('2021', '1.0', 2018, 'T6 Instate Tractor Class 6', 'NG', 12.7868),
+    ('2021', '1.0', 2018, 'T6 Instate Tractor Class 7', 'Dsl', 26118.5),
+    ('2021', '1.0', 2018, 'T6 Instate Tractor Class 7', 'NG', 36.0382),
+    ('2021', '1.0', 2018, 'T6 OOS Class 4', 'Dsl', 304.588),
+    ('2021', '1.0', 2018, 'T6 OOS Class 5', 'Dsl', 417.839),
+    ('2021', '1.0', 2018, 'T6 OOS Class 6', 'Dsl', 1091.83),
+    ('2021', '1.0', 2018, 'T6 OOS Class 7', 'Dsl', 7938.93),
+    ('2021', '1.0', 2018, 'T6 Public Class 4', 'Dsl', 9807.36),
+    ('2021', '1.0', 2018, 'T6 Public Class 4', 'NG', 15.2988),
+    ('2021', '1.0', 2018, 'T6 Public Class 5', 'Dsl', 21707.9),
+    ('2021', '1.0', 2018, 'T6 Public Class 5', 'NG', 207.84),
+    ('2021', '1.0', 2018, 'T6 Public Class 6', 'Dsl', 14679.8),
+    ('2021', '1.0', 2018, 'T6 Public Class 6', 'NG', 44.205),
+    ('2021', '1.0', 2018, 'T6 Public Class 7', 'Dsl', 32636.7),
+    ('2021', '1.0', 2018, 'T6 Public Class 7', 'NG', 139.392),
+    ('2021', '1.0', 2018, 'T6 Utility Class 5', 'Dsl', 8151.9),
+    ('2021', '1.0', 2018, 'T6 Utility Class 6', 'Dsl', 1957.31),
+    ('2021', '1.0', 2018, 'T6 Utility Class 7', 'Dsl', 2374.97),
+    ('2021', '1.0', 2018, 'T6TS', 'Gas', 182270),
+    ('2021', '1.0', 2018, 'T7 CAIRP Class 8', 'Dsl', 393568),
+    ('2021', '1.0', 2018, 'T7 CAIRP Class 8', 'NG', 311.259),
+    ('2021', '1.0', 2018, 'T7 NNOOS Class 8', 'Dsl', 465687),
+    ('2021', '1.0', 2018, 'T7 NOOS Class 8', 'Dsl', 169176),
+    ('2021', '1.0', 2018, 'T7 Other Port Class 8', 'Dsl', 81645.6),
+    ('2021', '1.0', 2018, 'T7 POLA Class 8', 'Dsl', 25307.3),
+    ('2021', '1.0', 2018, 'T7 Public Class 8', 'Dsl', 64188.8),
+    ('2021', '1.0', 2018, 'T7 Public Class 8', 'NG', 241.884),
+    ('2021', '1.0', 2018, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 25309.3),
+    ('2021', '1.0', 2018, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1202.1),
+    ('2021', '1.0', 2018, 'T7 Single Dump Class 8', 'Dsl', 49892.6),
+    ('2021', '1.0', 2018, 'T7 Single Dump Class 8', 'NG', 2944.93),
+    ('2021', '1.0', 2018, 'T7 Single Other Class 8', 'Dsl', 87231.5),
+    ('2021', '1.0', 2018, 'T7 Single Other Class 8', 'NG', 5345.08),
+    ('2021', '1.0', 2018, 'T7 SWCV Class 8', 'Dsl', 57267.3),
+    ('2021', '1.0', 2018, 'T7 SWCV Class 8', 'NG', 28182.6),
+    ('2021', '1.0', 2020, 'LDT2', 'Gas', 1.83834e+007),
+    ('2021', '1.0', 2020, 'LDT2', 'Dsl', 66426.7),
+    ('2021', '1.0', 2020, 'LDT2', 'Elec', 3517.1),
+    ('2021', '1.0', 2020, 'LDT2', 'Phe', 44094.3),
+    ('2021', '1.0', 2020, 'LHD1', 'Gas', 1.37998e+006),
+    ('2021', '1.0', 2020, 'LHD1', 'Dsl', 946304),
+    ('2021', '1.0', 2020, 'LHD2', 'Gas', 190440),
+    ('2021', '1.0', 2020, 'LHD2', 'Dsl', 353901),
+    ('2021', '1.0', 2020, 'MCY', 'Gas', 388227),
+    ('2021', '1.0', 2020, 'MDV', 'Gas', 1.0921e+007),
+    ('2021', '1.0', 2020, 'MDV', 'Dsl', 220391),
+    ('2021', '1.0', 2020, 'MDV', 'Elec', 5142.92),
+    ('2021', '1.0', 2020, 'MDV', 'Phe', 47503),
+    ('2021', '1.0', 2020, 'MH', 'Gas', 99681),
+    ('2021', '1.0', 2020, 'MH', 'Dsl', 35403.9),
+    ('2021', '1.0', 2020, 'Motor Coach', 'Dsl', 22614.4),
+    ('2021', '1.0', 2020, 'OBUS', 'Gas', 57947.5),
+    ('2021', '1.0', 2020, 'PTO', 'Dsl', 34463.5),
+    ('2021', '1.0', 2020, 'SBUS', 'Gas', 11579.8),
+    ('2021', '1.0', 2020, 'SBUS', 'Dsl', 45604.3),
+    ('2021', '1.0', 2020, 'SBUS', 'NG', 336.154),
+    ('2021', '1.0', 2020, 'T6 CAIRP Class 4', 'Dsl', 536.571),
+    ('2021', '1.0', 2020, 'T6 CAIRP Class 5', 'Dsl', 736.079),
+    ('2021', '1.0', 2020, 'T6 CAIRP Class 6', 'Dsl', 1923.4),
+    ('2021', '1.0', 2020, 'T6 CAIRP Class 7', 'Dsl', 12064.5),
+    ('2021', '1.0', 2020, 'T6 Instate Delivery Class 4', 'Dsl', 29578.5),
+    ('2021', '1.0', 2020, 'T6 Instate Delivery Class 4', 'NG', 303.27),
+    ('2021', '1.0', 2020, 'T6 Instate Delivery Class 5', 'Dsl', 22209.3),
+    ('2021', '1.0', 2020, 'T6 Instate Delivery Class 5', 'NG', 463.717),
+    ('2021', '1.0', 2020, 'T6 Instate Delivery Class 6', 'Dsl', 66681),
+    ('2021', '1.0', 2020, 'T6 Instate Delivery Class 6', 'NG', 943.791),
+    ('2021', '1.0', 2020, 'T6 Instate Delivery Class 7', 'Dsl', 26162.8),
+    ('2021', '1.0', 2020, 'T6 Instate Delivery Class 7', 'NG', 247.136),
+    ('2021', '1.0', 2020, 'T6 Instate Other Class 4', 'Dsl', 77247.8),
+    ('2021', '1.0', 2020, 'T6 Instate Other Class 4', 'NG', 634.115),
+    ('2021', '1.0', 2020, 'T6 Instate Other Class 5', 'Dsl', 144018),
+    ('2021', '1.0', 2020, 'T6 Instate Other Class 5', 'NG', 3113.7),
+    ('2021', '1.0', 2020, 'T6 Instate Other Class 6', 'Dsl', 141830),
+    ('2021', '1.0', 2020, 'T6 Instate Other Class 6', 'NG', 3139.83),
+    ('2021', '1.0', 2020, 'T6 Instate Other Class 7', 'Dsl', 70163.5),
+    ('2021', '1.0', 2020, 'T6 Instate Other Class 7', 'NG', 602.157),
+    ('2021', '1.0', 2020, 'T6 Instate Tractor Class 6', 'Dsl', 850.001),
+    ('2021', '1.0', 2020, 'T6 Instate Tractor Class 6', 'NG', 14.7114),
+    ('2021', '1.0', 2020, 'T6 Instate Tractor Class 7', 'Dsl', 26148.5),
+    ('2021', '1.0', 2020, 'T6 Instate Tractor Class 7', 'NG', 112.735),
+    ('2021', '1.0', 2020, 'T6 OOS Class 4', 'Dsl', 305.83),
+    ('2021', '1.0', 2020, 'T6 OOS Class 5', 'Dsl', 419.544),
+    ('2021', '1.0', 2020, 'T6 OOS Class 6', 'Dsl', 1096.28),
+    ('2021', '1.0', 2020, 'T6 OOS Class 7', 'Dsl', 7971.33),
+    ('2021', '1.0', 2020, 'T6 Public Class 4', 'Dsl', 9864.89),
+    ('2021', '1.0', 2020, 'T6 Public Class 4', 'NG', 30.38),
+    ('2021', '1.0', 2020, 'T6 Public Class 5', 'Dsl', 21812),
+    ('2021', '1.0', 2020, 'T6 Public Class 5', 'NG', 265.75),
+    ('2021', '1.0', 2020, 'T6 Public Class 6', 'Dsl', 14773.9),
+    ('2021', '1.0', 2020, 'T6 Public Class 6', 'NG', 58.9056),
+    ('2021', '1.0', 2020, 'T6 Public Class 7', 'Dsl', 32819.9),
+    ('2021', '1.0', 2021, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1979.07),
+    ('2021', '1.0', 2021, 'T7 Single Dump Class 8', 'Dsl', 49454.1),
+    ('2021', '1.0', 2021, 'T7 Single Dump Class 8', 'NG', 3688.62),
+    ('2021', '1.0', 2021, 'T7 Single Other Class 8', 'Dsl', 87978.5),
+    ('2021', '1.0', 2021, 'T7 Single Other Class 8', 'NG', 6665.29),
+    ('2021', '1.0', 2021, 'T7 SWCV Class 8', 'Dsl', 47399.8),
+    ('2021', '1.0', 2021, 'T7 SWCV Class 8', 'NG', 39032.3),
+    ('2021', '1.0', 2021, 'T7 Tractor Class 8', 'Dsl', 302623),
+    ('2021', '1.0', 2021, 'T7 Tractor Class 8', 'NG', 4769),
+    ('2021', '1.0', 2021, 'T7 Utility Class 8', 'Dsl', 6510.84),
+    ('2021', '1.0', 2021, 'T7IS', 'Gas', 633.832),
+    ('2021', '1.0', 2021, 'UBUS', 'Gas', 12157.6),
+    ('2021', '1.0', 2021, 'UBUS', 'Dsl', 2552.67),
+    ('2021', '1.0', 2021, 'UBUS', 'NG', 98773.6),
+    ('2021', '1.0', 2022, 'All Other Buses', 'Dsl', 24398.7),
+    ('2021', '1.0', 2022, 'All Other Buses', 'NG', 5491.32),
+    ('2021', '1.0', 2022, 'LDA', 'Gas', 4.66519e+007),
+    ('2021', '1.0', 2022, 'LDA', 'Dsl', 205722),
+    ('2021', '1.0', 2022, 'LDA', 'Elec', 2.09711e+006),
+    ('2021', '1.0', 2022, 'LDA', 'Phe', 1.24883e+006),
+    ('2021', '1.0', 2022, 'LDT1', 'Gas', 4.65132e+006),
+    ('2021', '1.0', 2022, 'LDT1', 'Dsl', 1118.12),
+    ('2021', '1.0', 2022, 'LDT1', 'Elec', 6613.86),
+    ('2021', '1.0', 2022, 'LDT1', 'Phe', 2525.07),
+    ('2021', '1.0', 2022, 'LDT2', 'Gas', 2.18179e+007),
+    ('2021', '1.0', 2022, 'LDT2', 'Dsl', 82881.7),
+    ('2021', '1.0', 2022, 'LDT2', 'Elec', 46668.6),
+    ('2021', '1.0', 2022, 'LDT2', 'Phe', 121164),
+    ('2021', '1.0', 2022, 'LHD1', 'Gas', 1.63217e+006),
+    ('2021', '1.0', 2022, 'LHD1', 'Dsl', 1.14792e+006),
+    ('2021', '1.0', 2022, 'LHD2', 'Gas', 225990),
+    ('2021', '1.0', 2022, 'LHD2', 'Dsl', 448079),
+    ('2021', '1.0', 2022, 'MCY', 'Gas', 436040),
+    ('2021', '1.0', 2022, 'MDV', 'Gas', 1.29073e+007),
+    ('2021', '1.0', 2022, 'MDV', 'Dsl', 245783),
+    ('2021', '1.0', 2022, 'MDV', 'Elec', 46899.5),
+    ('2021', '1.0', 2022, 'MDV', 'Phe', 79487.5),
+    ('2021', '1.0', 2022, 'MH', 'Gas', 103886),
+    ('2021', '1.0', 2022, 'MH', 'Dsl', 40359),
+    ('2021', '1.0', 2022, 'Motor Coach', 'Dsl', 22799.8),
+    ('2021', '1.0', 2022, 'OBUS', 'Gas', 61727.8),
+    ('2021', '1.0', 2022, 'PTO', 'Dsl', 35069.8),
+    ('2021', '1.0', 2022, 'SBUS', 'Gas', 14719.6),
+    ('2021', '1.0', 2022, 'SBUS', 'Dsl', 45543.5),
+    ('2021', '1.0', 2022, 'SBUS', 'NG', 396.94),
+    ('2021', '1.0', 2022, 'T6 CAIRP Class 4', 'Dsl', 549.534),
+    ('2021', '1.0', 2022, 'T6 CAIRP Class 5', 'Dsl', 753.862),
+    ('2021', '1.0', 2022, 'T6 CAIRP Class 6', 'Dsl', 1969.86),
+    ('2021', '1.0', 2022, 'T6 CAIRP Class 7', 'Dsl', 12356),
+    ('2021', '1.0', 2022, 'T6 Instate Delivery Class 4', 'Dsl', 30159.3),
+    ('2021', '1.0', 2022, 'T6 Instate Delivery Class 4', 'NG', 444.437),
+    ('2021', '1.0', 2022, 'T6 Instate Delivery Class 5', 'Dsl', 22707.8),
+    ('2021', '1.0', 2022, 'T6 Instate Delivery Class 5', 'NG', 512.947),
+    ('2021', '1.0', 2022, 'T6 Instate Delivery Class 6', 'Dsl', 68067.8),
+    ('2021', '1.0', 2022, 'T6 Instate Delivery Class 6', 'NG', 1190.72),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 7', 'Elec', 13.9832),
+    ('2021', '1.0', 2023, 'T6 Instate Other Class 7', 'NG', 629.8),
+    ('2021', '1.0', 2023, 'T6 Instate Tractor Class 6', 'Dsl', 875.533),
+    ('2021', '1.0', 2023, 'T6 Instate Tractor Class 6', 'Elec', 0.0246483),
+    ('2021', '1.0', 2023, 'T6 Instate Tractor Class 6', 'NG', 20.6792),
+    ('2021', '1.0', 2023, 'T6 Instate Tractor Class 7', 'Dsl', 27047.5),
+    ('2021', '1.0', 2023, 'T6 Instate Tractor Class 7', 'Elec', 1.23126),
+    ('2021', '1.0', 2023, 'T6 Instate Tractor Class 7', 'NG', 169.92),
+    ('2021', '1.0', 2023, 'T6 OOS Class 4', 'Dsl', 316.98),
+    ('2021', '1.0', 2023, 'T6 OOS Class 5', 'Dsl', 434.839),
+    ('2021', '1.0', 2023, 'T6 OOS Class 6', 'Dsl', 1136.25),
+    ('2021', '1.0', 2023, 'T6 OOS Class 7', 'Dsl', 8261.93),
+    ('2021', '1.0', 2023, 'T6 Public Class 4', 'Dsl', 9967.53),
+    ('2021', '1.0', 2023, 'T6 Public Class 4', 'Elec', 0.583836),
+    ('2021', '1.0', 2023, 'T6 Public Class 4', 'NG', 57.7563),
+    ('2021', '1.0', 2023, 'T6 Public Class 5', 'Dsl', 22076.7),
+    ('2021', '1.0', 2023, 'T6 Public Class 5', 'Elec', 1.09756),
+    ('2021', '1.0', 2023, 'T6 Public Class 5', 'NG', 291.407),
+    ('2021', '1.0', 2023, 'T6 Public Class 6', 'Dsl', 14927.9),
+    ('2021', '1.0', 2023, 'T6 Public Class 6', 'Elec', 5.59535),
+    ('2021', '1.0', 2023, 'T6 Public Class 6', 'NG', 95.0554),
+    ('2021', '1.0', 2023, 'T6 Public Class 7', 'Dsl', 33167.7),
+    ('2021', '1.0', 2023, 'T6 Public Class 7', 'Elec', 11.0769),
+    ('2021', '1.0', 2023, 'T6 Public Class 7', 'NG', 275.401),
+    ('2021', '1.0', 2023, 'T6 Utility Class 5', 'Dsl', 8320.55),
+    ('2021', '1.0', 2023, 'T6 Utility Class 6', 'Dsl', 1997.81),
+    ('2021', '1.0', 2023, 'T6 Utility Class 7', 'Dsl', 2421.88),
+    ('2021', '1.0', 2023, 'T6 Utility Class 7', 'Elec', 2.22876),
+    ('2021', '1.0', 2023, 'T6TS', 'Gas', 195472),
+    ('2021', '1.0', 2023, 'T7 CAIRP Class 8', 'Dsl', 414744),
+    ('2021', '1.0', 2023, 'T7 CAIRP Class 8', 'Elec', 466.078),
+    ('2021', '1.0', 2023, 'T7 CAIRP Class 8', 'NG', 412.666),
+    ('2021', '1.0', 2023, 'T7 NNOOS Class 8', 'Dsl', 491394),
+    ('2021', '1.0', 2023, 'T7 NOOS Class 8', 'Dsl', 178515),
+    ('2021', '1.0', 2023, 'T7 Other Port Class 8', 'Dsl', 96726.8),
+    ('2021', '1.0', 2023, 'T7 Other Port Class 8', 'Elec', 24.6377),
+    ('2021', '1.0', 2023, 'T7 POLA Class 8', 'Dsl', 30261.1),
+    ('2021', '1.0', 2023, 'T7 POLA Class 8', 'Elec', 3.49162),
+    ('2021', '1.0', 2023, 'T7 Public Class 8', 'Dsl', 65371.7),
+    ('2021', '1.0', 2023, 'T7 Public Class 8', 'Elec', 15.2507),
+    ('2021', '1.0', 2023, 'T7 Public Class 8', 'NG', 376.681),
+    ('2021', '1.0', 2023, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 24759.2),
+    ('2021', '1.0', 2023, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 5.58423),
+    ('2021', '1.0', 2023, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 2203.46),
+    ('2021', '1.0', 2023, 'T7 Single Dump Class 8', 'Dsl', 49754.6),
+    ('2021', '1.0', 2023, 'T7 Single Dump Class 8', 'NG', 3993.43),
+    ('2021', '1.0', 2023, 'T7 Single Other Class 8', 'Dsl', 90356.6),
+    ('2021', '1.0', 2023, 'T7 Single Other Class 8', 'Elec', 43.5785),
+    ('2021', '1.0', 2023, 'T7 Single Other Class 8', 'NG', 7286.89),
+    ('2021', '1.0', 2023, 'T7 SWCV Class 8', 'Dsl', 40453.1),
+    ('2021', '1.0', 2023, 'T7 SWCV Class 8', 'Elec', 18.3657),
+    ('2021', '1.0', 2023, 'T7 SWCV Class 8', 'NG', 46746.1),
+    ('2021', '1.0', 2023, 'T7 Tractor Class 8', 'Dsl', 312331),
+    ('2021', '1.0', 2023, 'T7 Tractor Class 8', 'Elec', 122.086),
+    ('2021', '1.0', 2023, 'T7 Tractor Class 8', 'NG', 4822.8),
+    ('2021', '1.0', 2023, 'T7 Utility Class 8', 'Dsl', 6568.81),
+    ('2021', '1.0', 2023, 'T7 Utility Class 8', 'Elec', 1.19972),
+    ('2021', '1.0', 2023, 'T7IS', 'Gas', 525.175),
+    ('2021', '1.0', 2023, 'UBUS', 'Gas', 13096.1),
+    ('2021', '1.0', 2023, 'UBUS', 'NG', 109148),
+    ('2021', '1.0', 2026, 'All Other Buses', 'Dsl', 24876.6),
+    ('2021', '1.0', 2026, 'All Other Buses', 'NG', 5615.76),
+    ('2021', '1.0', 2026, 'LDA', 'Gas', 4.64052e+007)
+INSERT INTO #tt_emfac_default_vmt VALUES
+    ('2021', '1.0', 2029, 'All Other Buses', 'Dsl', 25501),
+    ('2021', '1.0', 2029, 'All Other Buses', 'NG', 5420.85),
+    ('2021', '1.0', 2029, 'LDA', 'Gas', 4.62141e+007),
+    ('2021', '1.0', 2029, 'LDA', 'Dsl', 94251.4),
+    ('2021', '1.0', 2029, 'LDA', 'Elec', 4.85777e+006),
+    ('2021', '1.0', 2029, 'LDA', 'Phe', 1.98599e+006),
+    ('2021', '1.0', 2029, 'LDT1', 'Gas', 3.84295e+006),
+    ('2021', '1.0', 2029, 'LDT1', 'Dsl', 138.428),
+    ('2021', '1.0', 2029, 'LDT1', 'Elec', 32651.8),
+    ('2021', '1.0', 2029, 'LDT1', 'Phe', 24788.7),
+    ('2021', '1.0', 2029, 'LDT2', 'Gas', 2.30411e+007),
+    ('2021', '1.0', 2029, 'LDT2', 'Dsl', 90063.2),
+    ('2021', '1.0', 2029, 'LDT2', 'Elec', 303515),
+    ('2021', '1.0', 2029, 'LDT2', 'Phe', 365897),
+    ('2021', '1.0', 2029, 'LHD1', 'Gas', 1.62467e+006),
+    ('2021', '1.0', 2029, 'LHD1', 'Dsl', 1.18839e+006),
+    ('2021', '1.0', 2029, 'LHD1', 'Elec', 195435),
+    ('2021', '1.0', 2029, 'LHD2', 'Gas', 223393),
+    ('2021', '1.0', 2029, 'LHD2', 'Dsl', 512612),
+    ('2021', '1.0', 2029, 'LHD2', 'Elec', 48563.6),
+    ('2021', '1.0', 2029, 'MCY', 'Gas', 411441),
+    ('2021', '1.0', 2029, 'MDV', 'Gas', 1.32964e+007),
+    ('2021', '1.0', 2029, 'MDV', 'Dsl', 199976),
+    ('2021', '1.0', 2029, 'MDV', 'Elec', 308134),
+    ('2021', '1.0', 2029, 'MDV', 'Phe', 234482),
+    ('2021', '1.0', 2029, 'MH', 'Gas', 72743),
+    ('2021', '1.0', 2029, 'MH', 'Dsl', 36524),
+    ('2021', '1.0', 2029, 'Motor Coach', 'Dsl', 23609.7),
+    ('2021', '1.0', 2029, 'OBUS', 'Gas', 44284.9),
+    ('2021', '1.0', 2029, 'OBUS', 'Elec', 3217.22),
+    ('2021', '1.0', 2029, 'PTO', 'Dsl', 35077),
+    ('2021', '1.0', 2029, 'PTO', 'Elec', 2788.04),
+    ('2021', '1.0', 2029, 'SBUS', 'Gas', 17113.5),
+    ('2021', '1.0', 2029, 'SBUS', 'Dsl', 42942),
+    ('2021', '1.0', 2029, 'SBUS', 'Elec', 3376.47),
+    ('2021', '1.0', 2029, 'SBUS', 'NG', 596.288),
+    ('2021', '1.0', 2029, 'T6 CAIRP Class 4', 'Dsl', 541.498),
+    ('2021', '1.0', 2029, 'T6 CAIRP Class 4', 'Elec', 55.9235),
+    ('2021', '1.0', 2029, 'T6 CAIRP Class 5', 'Dsl', 747.275),
+    ('2021', '1.0', 2029, 'T6 CAIRP Class 5', 'Elec', 72.2789),
+    ('2021', '1.0', 2029, 'T6 CAIRP Class 6', 'Dsl', 1911.06),
+    ('2021', '1.0', 2029, 'T6 CAIRP Class 6', 'Elec', 230.455),
+    ('2021', '1.0', 2029, 'T6 CAIRP Class 7', 'Dsl', 12641.6),
+    ('2021', '1.0', 2029, 'T6 CAIRP Class 7', 'Elec', 791.072),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 4', 'Dsl', 30479.9),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 4', 'Elec', 2217.47),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 4', 'NG', 573.211),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 5', 'Dsl', 23102.7),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 5', 'Elec', 1593.79),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 5', 'NG', 547.748),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 6', 'Dsl', 68975.2),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 6', 'Elec', 4840.05),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 6', 'NG', 1478.52),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 7', 'Dsl', 28531.1),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 7', 'Elec', 610.41),
+    ('2021', '1.0', 2029, 'T6 Instate Delivery Class 7', 'NG', 263.484),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 4', 'Dsl', 78678.8),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 4', 'Elec', 6462.9),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 4', 'NG', 1572.47),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 5', 'Dsl', 148739),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 5', 'Elec', 11225),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 7', 'Dsl', 28571),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 7', 'Elec', 920.414),
+    ('2021', '1.0', 2030, 'T6 Instate Delivery Class 7', 'NG', 266.651),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 4', 'Dsl', 76929.6),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 4', 'Elec', 9279.6),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 4', 'NG', 1546.13),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 5', 'Dsl', 145676),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 5', 'Elec', 16392.6),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 5', 'NG', 3715.13),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 6', 'Dsl', 143355),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 6', 'Elec', 16124.1),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 6', 'NG', 3868.6),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 7', 'Dsl', 73116.4),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 7', 'Elec', 6065.1),
+    ('2021', '1.0', 2030, 'T6 Instate Other Class 7', 'NG', 555.346),
+    ('2021', '1.0', 2030, 'T6 Instate Tractor Class 6', 'Dsl', 846.937),
+    ('2021', '1.0', 2030, 'T6 Instate Tractor Class 6', 'Elec', 108.126),
+    ('2021', '1.0', 2030, 'T6 Instate Tractor Class 6', 'NG', 19.2732),
+    ('2021', '1.0', 2030, 'T6 Instate Tractor Class 7', 'Dsl', 28398.7),
+    ('2021', '1.0', 2030, 'T6 Instate Tractor Class 7', 'Elec', 1025.53),
+    ('2021', '1.0', 2030, 'T6 Instate Tractor Class 7', 'NG', 166.214),
+    ('2021', '1.0', 2030, 'T6 OOS Class 4', 'Dsl', 344.602),
+    ('2021', '1.0', 2030, 'T6 OOS Class 5', 'Dsl', 472.732),
+    ('2021', '1.0', 2030, 'T6 OOS Class 6', 'Dsl', 1235.26),
+    ('2021', '1.0', 2030, 'T6 OOS Class 7', 'Dsl', 8981.88),
+    ('2021', '1.0', 2030, 'T6 Public Class 4', 'Dsl', 9426.14),
+    ('2021', '1.0', 2030, 'T6 Public Class 4', 'Elec', 851.345),
+    ('2021', '1.0', 2030, 'T6 Public Class 4', 'NG', 91.501),
+    ('2021', '1.0', 2030, 'T6 Public Class 5', 'Dsl', 20973.2),
+    ('2021', '1.0', 2030, 'T6 Public Class 5', 'Elec', 1856.9),
+    ('2021', '1.0', 2030, 'T6 Public Class 5', 'NG', 304.656),
+    ('2021', '1.0', 2030, 'T6 Public Class 6', 'Dsl', 14111.1),
+    ('2021', '1.0', 2030, 'T6 Public Class 6', 'Elec', 1289.68),
+    ('2021', '1.0', 2030, 'T6 Public Class 6', 'NG', 142.14),
+    ('2021', '1.0', 2030, 'T6 Public Class 7', 'Dsl', 30984.4),
+    ('2021', '1.0', 2030, 'T6 Public Class 7', 'Elec', 3261.52),
+    ('2021', '1.0', 2030, 'T6 Public Class 7', 'NG', 353.238),
+    ('2021', '1.0', 2030, 'T6 Utility Class 5', 'Dsl', 7342.74),
+    ('2021', '1.0', 2030, 'T6 Utility Class 5', 'Elec', 1262.57),
+    ('2021', '1.0', 2030, 'T6 Utility Class 6', 'Dsl', 1760.77),
+    ('2021', '1.0', 2030, 'T6 Utility Class 6', 'Elec', 305.406),
+    ('2021', '1.0', 2030, 'T6 Utility Class 7', 'Dsl', 2100.55),
+    ('2021', '1.0', 2030, 'T6 Utility Class 7', 'Elec', 406.516),
+    ('2021', '1.0', 2030, 'T6TS', 'Gas', 185780),
+    ('2021', '1.0', 2030, 'T6TS', 'Elec', 23665.3),
+    ('2021', '1.0', 2030, 'T7 CAIRP Class 8', 'Dsl', 425674),
+    ('2021', '1.0', 2030, 'T7 CAIRP Class 8', 'Elec', 38235.3),
+    ('2021', '1.0', 2030, 'T7 CAIRP Class 8', 'NG', 397.716),
+    ('2021', '1.0', 2030, 'T7 NNOOS Class 8', 'Dsl', 548955),
+    ('2021', '1.0', 2030, 'T7 NOOS Class 8', 'Dsl', 199425),
+    ('2021', '1.0', 2030, 'T7 Other Port Class 8', 'Dsl', 116738),
+    ('2021', '1.0', 2030, 'T7 Other Port Class 8', 'Elec', 7921.98),
+    ('2021', '1.0', 2030, 'T7 POLA Class 8', 'Dsl', 39038.7),
+    ('2021', '1.0', 2030, 'T7 POLA Class 8', 'Elec', 722.653),
+    ('2021', '1.0', 2030, 'T7 Public Class 8', 'Dsl', 62103.9),
+    ('2021', '1.0', 2030, 'T7 Public Class 8', 'Elec', 5462.02),
+    ('2021', '1.0', 2030, 'T7 Public Class 8', 'NG', 448.368),
+    ('2021', '1.0', 2030, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 21849.2),
+    ('2021', '1.0', 2030, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 4334.34),
+    ('2021', '1.0', 2030, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1769.85),
+    ('2021', '1.0', 2030, 'T7 Single Dump Class 8', 'Dsl', 46837.4),
+    ('2021', '1.0', 2030, 'T7 Single Dump Class 8', 'Elec', 5117.6),
+    ('2021', '1.0', 2030, 'T7 Single Dump Class 8', 'NG', 3756.39),
+    ('2021', '1.0', 2030, 'T7 Single Other Class 8', 'Dsl', 91909.9),
+    ('2021', '1.0', 2030, 'T7 Single Other Class 8', 'Elec', 9951.45),
+    ('2021', '1.0', 2032, 'T7 Single Dump Class 8', 'Dsl', 44824.1),
+    ('2021', '1.0', 2032, 'T7 Single Dump Class 8', 'Elec', 7856.46),
+    ('2021', '1.0', 2032, 'T7 Single Dump Class 8', 'NG', 3547.91),
+    ('2021', '1.0', 2032, 'T7 Single Other Class 8', 'Dsl', 92402.3),
+    ('2021', '1.0', 2032, 'T7 Single Other Class 8', 'Elec', 17457.5),
+    ('2021', '1.0', 2032, 'T7 Single Other Class 8', 'NG', 7237.11),
+    ('2021', '1.0', 2032, 'T7 SWCV Class 8', 'Dsl', 17034.4),
+    ('2021', '1.0', 2032, 'T7 SWCV Class 8', 'Elec', 8704.29),
+    ('2021', '1.0', 2032, 'T7 SWCV Class 8', 'NG', 65192.8),
+    ('2021', '1.0', 2032, 'T7 Tractor Class 8', 'Dsl', 349933),
+    ('2021', '1.0', 2032, 'T7 Tractor Class 8', 'Elec', 25429.4),
+    ('2021', '1.0', 2032, 'T7 Tractor Class 8', 'NG', 4954.86),
+    ('2021', '1.0', 2032, 'T7 Utility Class 8', 'Dsl', 5938.48),
+    ('2021', '1.0', 2032, 'T7 Utility Class 8', 'Elec', 911.287),
+    ('2021', '1.0', 2032, 'T7IS', 'Gas', 489.798),
+    ('2021', '1.0', 2032, 'T7IS', 'Elec', 109.118),
+    ('2021', '1.0', 2032, 'UBUS', 'Gas', 17201.6),
+    ('2021', '1.0', 2032, 'UBUS', 'Elec', 64518),
+    ('2021', '1.0', 2032, 'UBUS', 'NG', 79946),
+    ('2021', '1.0', 2035, 'All Other Buses', 'Dsl', 26445.7),
+    ('2021', '1.0', 2035, 'All Other Buses', 'NG', 5213.39),
+    ('2021', '1.0', 2035, 'LDA', 'Gas', 4.63479e+007),
+    ('2021', '1.0', 2035, 'LDA', 'Dsl', 45149.6),
+    ('2021', '1.0', 2035, 'LDA', 'Elec', 6.13802e+006),
+    ('2021', '1.0', 2035, 'LDA', 'Phe', 2.1838e+006),
+    ('2021', '1.0', 2035, 'LDT1', 'Gas', 3.39e+006),
+    ('2021', '1.0', 2035, 'LDT1', 'Dsl', 29.06),
+    ('2021', '1.0', 2035, 'LDT1', 'Elec', 67210.2),
+    ('2021', '1.0', 2035, 'LDT1', 'Phe', 49528.8),
+    ('2021', '1.0', 2035, 'LDT2', 'Gas', 2.33734e+007),
+    ('2021', '1.0', 2035, 'LDT2', 'Dsl', 88897.5),
+    ('2021', '1.0', 2035, 'LDT2', 'Elec', 531116),
+    ('2021', '1.0', 2035, 'LDT2', 'Phe', 534719),
+    ('2021', '1.0', 2035, 'LHD1', 'Gas', 1.38283e+006),
+    ('2021', '1.0', 2035, 'LHD1', 'Dsl', 1.03915e+006),
+    ('2021', '1.0', 2035, 'LHD1', 'Elec', 735138),
+    ('2021', '1.0', 2035, 'LHD2', 'Gas', 188890),
+    ('2021', '1.0', 2035, 'LHD2', 'Dsl', 468652),
+    ('2021', '1.0', 2035, 'LHD2', 'Elec', 185715),
+    ('2021', '1.0', 2035, 'MCY', 'Gas', 400555),
+    ('2021', '1.0', 2035, 'MDV', 'Gas', 1.34925e+007),
+    ('2021', '1.0', 2035, 'MDV', 'Dsl', 168660),
+    ('2021', '1.0', 2035, 'MDV', 'Elec', 495120),
+    ('2021', '1.0', 2035, 'MDV', 'Phe', 337827),
+    ('2021', '1.0', 2035, 'MH', 'Gas', 58799.1),
+    ('2021', '1.0', 2035, 'MH', 'Dsl', 33466.8),
+    ('2021', '1.0', 2035, 'Motor Coach', 'Dsl', 24395.2),
+    ('2021', '1.0', 2035, 'OBUS', 'Gas', 30803.8),
+    ('2021', '1.0', 2035, 'OBUS', 'Elec', 11904.7),
+    ('2021', '1.0', 2035, 'PTO', 'Dsl', 31790.1),
+    ('2021', '1.0', 2035, 'PTO', 'Elec', 11053.8),
+    ('2021', '1.0', 2035, 'SBUS', 'Gas', 16522.8),
+    ('2021', '1.0', 2035, 'SBUS', 'Dsl', 35557.8),
+    ('2021', '1.0', 2035, 'SBUS', 'Elec', 13718.9),
+    ('2021', '1.0', 2035, 'SBUS', 'NG', 659.172),
+    ('2021', '1.0', 2035, 'T6 CAIRP Class 4', 'Dsl', 429.145),
+    ('2021', '1.0', 2035, 'T6 CAIRP Class 4', 'Elec', 233.594),
+    ('2021', '1.0', 2035, 'T6 CAIRP Class 5', 'Dsl', 593.46),
+    ('2021', '1.0', 2035, 'T6 CAIRP Class 5', 'Elec', 315.7),
+    ('2021', '1.0', 2035, 'T6 CAIRP Class 6', 'Dsl', 1512.06),
+    ('2021', '1.0', 2035, 'T6 CAIRP Class 6', 'Elec', 863.597),
+    ('2021', '1.0', 2035, 'T6 CAIRP Class 7', 'Dsl', 12298.2),
+    ('2021', '1.0', 2035, 'T6 CAIRP Class 7', 'Elec', 2603.11),
+    ('2021', '1.0', 2040, 'T6 CAIRP Class 6', 'Dsl', 1254.62),
+    ('2021', '1.0', 2040, 'T6 CAIRP Class 6', 'Elec', 1349.51),
+    ('2021', '1.0', 2040, 'T6 CAIRP Class 7', 'Dsl', 12745.5),
+    ('2021', '1.0', 2040, 'T6 CAIRP Class 7', 'Elec', 3588.89),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 4', 'Dsl', 23168.9),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 4', 'Elec', 16859.9),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 4', 'NG', 428.95),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 5', 'Dsl', 17585.4),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 5', 'Elec', 12755.6),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 5', 'NG', 356.501),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 6', 'Dsl', 52439.1),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 6', 'Elec', 38099.9),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 6', 'NG', 1019.8),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 7', 'Dsl', 26127.1),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 7', 'Elec', 9364.04),
+    ('2021', '1.0', 2040, 'T6 Instate Delivery Class 7', 'NG', 265.982),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 4', 'Dsl', 59018.2),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 4', 'Elec', 45344.7),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 4', 'NG', 1083.39),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 5', 'Dsl', 111284),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 5', 'Elec', 85709.3),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 5', 'NG', 2211.23),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 6', 'Dsl', 109613),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 6', 'Elec', 84437),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 6', 'NG', 2228.29),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 7', 'Dsl', 63115.9),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 7', 'Elec', 32184.5),
+    ('2021', '1.0', 2040, 'T6 Instate Other Class 7', 'NG', 510.957),
+    ('2021', '1.0', 2040, 'T6 Instate Tractor Class 6', 'Dsl', 632.526),
+    ('2021', '1.0', 2040, 'T6 Instate Tractor Class 6', 'Elec', 525.974),
+    ('2021', '1.0', 2040, 'T6 Instate Tractor Class 6', 'NG', 12.2553),
+    ('2021', '1.0', 2040, 'T6 Instate Tractor Class 7', 'Dsl', 29951.2),
+    ('2021', '1.0', 2040, 'T6 Instate Tractor Class 7', 'Elec', 5388.62),
+    ('2021', '1.0', 2040, 'T6 Instate Tractor Class 7', 'NG', 215.88),
+    ('2021', '1.0', 2040, 'T6 OOS Class 4', 'Dsl', 414.071),
+    ('2021', '1.0', 2040, 'T6 OOS Class 5', 'Dsl', 568.031),
+    ('2021', '1.0', 2040, 'T6 OOS Class 6', 'Dsl', 1484.28),
+    ('2021', '1.0', 2040, 'T6 OOS Class 7', 'Dsl', 10792.6),
+    ('2021', '1.0', 2040, 'T6 Public Class 4', 'Dsl', 6865.53),
+    ('2021', '1.0', 2040, 'T6 Public Class 4', 'Elec', 3790.45),
+    ('2021', '1.0', 2040, 'T6 Public Class 4', 'NG', 81.7788),
+    ('2021', '1.0', 2040, 'T6 Public Class 5', 'Dsl', 15286.2),
+    ('2021', '1.0', 2040, 'T6 Public Class 5', 'Elec', 8456.79),
+    ('2021', '1.0', 2040, 'T6 Public Class 5', 'NG', 214.536),
+    ('2021', '1.0', 2040, 'T6 Public Class 6', 'Dsl', 10298.2),
+    ('2021', '1.0', 2040, 'T6 Public Class 6', 'Elec', 5673.18),
+    ('2021', '1.0', 2040, 'T6 Public Class 6', 'NG', 124.312),
+    ('2021', '1.0', 2040, 'T6 Public Class 7', 'Dsl', 23804.4),
+    ('2021', '1.0', 2040, 'T6 Public Class 7', 'Elec', 11717.5),
+    ('2021', '1.0', 2040, 'T6 Public Class 7', 'NG', 307.756),
+    ('2021', '1.0', 2040, 'T6 Utility Class 5', 'Dsl', 4297.94),
+    ('2021', '1.0', 2040, 'T6 Utility Class 5', 'Elec', 4613.41),
+    ('2021', '1.0', 2040, 'T6 Utility Class 6', 'Dsl', 1032.04),
+    ('2021', '1.0', 2040, 'T6 Utility Class 6', 'Elec', 1107.62),
+    ('2021', '1.0', 2040, 'T6 Utility Class 7', 'Dsl', 1207.99),
+    ('2021', '1.0', 2040, 'T6 Utility Class 7', 'Elec', 1388.24),
+    ('2021', '1.0', 2040, 'T6TS', 'Gas', 126036),
+    ('2021', '1.0', 2040, 'T6TS', 'Elec', 98746.8),
+    ('2021', '1.0', 2040, 'T7 CAIRP Class 8', 'Dsl', 518046),
+    ('2021', '1.0', 2040, 'T7 CAIRP Class 8', 'Elec', 141923),
+    ('2021', '1.0', 2040, 'T7 CAIRP Class 8', 'NG', 441.831),
+    ('2021', '1.0', 2040, 'T7 NNOOS Class 8', 'Dsl', 780810),
+    ('2021', '1.0', 2040, 'T7 NOOS Class 8', 'Dsl', 283655),
+    ('2021', '1.0', 2040, 'T7 Other Port Class 8', 'Dsl', 122660),
+    ('2021', '1.0', 2040, 'T7 Other Port Class 8', 'Elec', 29026.4),
+    ('2021', '1.0', 2045, 'T7 NNOOS Class 8', 'Dsl', 931215),
+    ('2021', '1.0', 2045, 'T7 NOOS Class 8', 'Dsl', 338294),
+    ('2021', '1.0', 2045, 'T7 Other Port Class 8', 'Dsl', 122656),
+    ('2021', '1.0', 2045, 'T7 Other Port Class 8', 'Elec', 31017.2),
+    ('2021', '1.0', 2045, 'T7 POLA Class 8', 'Dsl', 41077.2),
+    ('2021', '1.0', 2045, 'T7 POLA Class 8', 'Elec', 7147.05),
+    ('2021', '1.0', 2045, 'T7 Public Class 8', 'Dsl', 43342.6),
+    ('2021', '1.0', 2045, 'T7 Public Class 8', 'Elec', 27575.4),
+    ('2021', '1.0', 2045, 'T7 Public Class 8', 'NG', 380.201),
+    ('2021', '1.0', 2045, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 12036.1),
+    ('2021', '1.0', 2045, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 17007.2),
+    ('2021', '1.0', 2045, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 915.492),
+    ('2021', '1.0', 2045, 'T7 Single Dump Class 8', 'Dsl', 30075.2),
+    ('2021', '1.0', 2045, 'T7 Single Dump Class 8', 'Elec', 27310.7),
+    ('2021', '1.0', 2045, 'T7 Single Dump Class 8', 'NG', 2322.39),
+    ('2021', '1.0', 2045, 'T7 Single Other Class 8', 'Dsl', 87848.4),
+    ('2021', '1.0', 2045, 'T7 Single Other Class 8', 'Elec', 90540.1),
+    ('2021', '1.0', 2045, 'T7 Single Other Class 8', 'NG', 6733.03),
+    ('2021', '1.0', 2045, 'T7 SWCV Class 8', 'Dsl', 4128.68),
+    ('2021', '1.0', 2045, 'T7 SWCV Class 8', 'Elec', 37089.1),
+    ('2021', '1.0', 2045, 'T7 SWCV Class 8', 'NG', 53340.1),
+    ('2021', '1.0', 2045, 'T7 Tractor Class 8', 'Dsl', 494712),
+    ('2021', '1.0', 2045, 'T7 Tractor Class 8', 'Elec', 99853.5),
+    ('2021', '1.0', 2045, 'T7 Tractor Class 8', 'NG', 6688.13),
+    ('2021', '1.0', 2045, 'T7 Utility Class 8', 'Dsl', 4079.11),
+    ('2021', '1.0', 2045, 'T7 Utility Class 8', 'Elec', 3043.83),
+    ('2021', '1.0', 2045, 'T7IS', 'Gas', 368.854),
+    ('2021', '1.0', 2045, 'T7IS', 'Elec', 388.462),
+    ('2021', '1.0', 2045, 'UBUS', 'Gas', 22517.6),
+    ('2021', '1.0', 2045, 'UBUS', 'Elec', 196090),
+    ('2021', '1.0', 2050, 'All Other Buses', 'Dsl', 27491.6),
+    ('2021', '1.0', 2050, 'All Other Buses', 'NG', 5311.77),
+    ('2021', '1.0', 2050, 'LDA', 'Gas', 4.77556e+007),
+    ('2021', '1.0', 2050, 'LDA', 'Dsl', 28000.9),
+    ('2021', '1.0', 2050, 'LDA', 'Elec', 6.99671e+006),
+    ('2021', '1.0', 2050, 'LDA', 'Phe', 2.28121e+006),
+    ('2021', '1.0', 2050, 'LDT1', 'Gas', 3.06241e+006),
+    ('2021', '1.0', 2050, 'LDT1', 'Dsl', 36.2886),
+    ('2021', '1.0', 2050, 'LDT1', 'Elec', 104185),
+    ('2021', '1.0', 2050, 'LDT1', 'Phe', 76168.1),
+    ('2021', '1.0', 2050, 'LDT2', 'Gas', 2.39209e+007),
+    ('2021', '1.0', 2050, 'LDT2', 'Dsl', 91950.6),
+    ('2021', '1.0', 2050, 'LDT2', 'Elec', 723757),
+    ('2021', '1.0', 2050, 'LDT2', 'Phe', 667926),
+    ('2021', '1.0', 2050, 'LHD1', 'Gas', 954197),
+    ('2021', '1.0', 2050, 'LHD1', 'Dsl', 725721),
+    ('2021', '1.0', 2050, 'LHD1', 'Elec', 1.65941e+006),
+    ('2021', '1.0', 2050, 'LHD2', 'Gas', 128757),
+    ('2021', '1.0', 2050, 'LHD2', 'Dsl', 342734),
+    ('2021', '1.0', 2050, 'LHD2', 'Elec', 437064),
+    ('2021', '1.0', 2050, 'MCY', 'Gas', 391982),
+    ('2021', '1.0', 2050, 'MDV', 'Gas', 1.38484e+007),
+    ('2021', '1.0', 2050, 'MDV', 'Dsl', 150833),
+    ('2021', '1.0', 2050, 'MDV', 'Elec', 655563),
+    ('2021', '1.0', 2050, 'MDV', 'Phe', 425727),
+    ('2021', '1.0', 2050, 'MH', 'Gas', 48347.4),
+    ('2021', '1.0', 2050, 'MH', 'Dsl', 28038.5),
+    ('2021', '1.0', 2050, 'Motor Coach', 'Dsl', 26475.4),
+    ('2021', '1.0', 2050, 'OBUS', 'Gas', 17180.3),
+    ('2021', '1.0', 2050, 'OBUS', 'Elec', 23339.4),
+    ('2021', '1.0', 2050, 'PTO', 'Dsl', 28827.8),
+    ('2021', '1.0', 2050, 'PTO', 'Elec', 33231.5),
+    ('2021', '1.0', 2017, 'MCY', 'Gas', 486975),
+    ('2021', '1.0', 2017, 'MDV', 'Gas', 1.25417e+007),
+    ('2021', '1.0', 2017, 'MDV', 'Dsl', 210475),
+    ('2021', '1.0', 2017, 'MDV', 'Elec', 398.239),
+    ('2021', '1.0', 2017, 'MDV', 'Phe', 21065.3),
+    ('2021', '1.0', 2017, 'MH', 'Gas', 122288),
+    ('2021', '1.0', 2017, 'MH', 'Dsl', 39404.4),
+    ('2021', '1.0', 2017, 'Motor Coach', 'Dsl', 22960),
+    ('2021', '1.0', 2017, 'OBUS', 'Gas', 78709.8),
+    ('2021', '1.0', 2017, 'PTO', 'Dsl', 34937.2),
+    ('2021', '1.0', 2017, 'SBUS', 'Gas', 14597.7),
+    ('2021', '1.0', 2017, 'SBUS', 'Dsl', 46580.7),
+    ('2021', '1.0', 2017, 'SBUS', 'NG', 270.663),
+    ('2021', '1.0', 2017, 'T6 CAIRP Class 4', 'Dsl', 546.902),
+    ('2021', '1.0', 2017, 'T6 CAIRP Class 5', 'Dsl', 750.252),
+    ('2021', '1.0', 2017, 'T6 CAIRP Class 6', 'Dsl', 1960.43),
+    ('2021', '1.0', 2017, 'T6 CAIRP Class 7', 'Dsl', 12296.8),
+    ('2021', '1.0', 2017, 'T6 Instate Delivery Class 4', 'Dsl', 30389.1),
+    ('2021', '1.0', 2017, 'T6 Instate Delivery Class 4', 'NG', 68.0657),
+    ('2021', '1.0', 2017, 'T6 Instate Delivery Class 5', 'Dsl', 22956),
+    ('2021', '1.0', 2017, 'T6 Instate Delivery Class 5', 'NG', 153.504),
+    ('2021', '1.0', 2017, 'T6 Instate Delivery Class 6', 'Dsl', 68511.4),
+    ('2021', '1.0', 2017, 'T6 Instate Delivery Class 6', 'NG', 415.377),
+    ('2021', '1.0', 2017, 'T6 Instate Delivery Class 7', 'Dsl', 26900.1),
+    ('2021', '1.0', 2017, 'T6 Instate Delivery Class 7', 'NG', 18.3443),
+    ('2021', '1.0', 2017, 'T6 Instate Other Class 4', 'Dsl', 79268.7),
+    ('2021', '1.0', 2017, 'T6 Instate Other Class 4', 'NG', 112.735),
+    ('2021', '1.0', 2017, 'T6 Instate Other Class 5', 'Dsl', 148874),
+    ('2021', '1.0', 2017, 'T6 Instate Other Class 5', 'NG', 1090.42),
+    ('2021', '1.0', 2017, 'T6 Instate Other Class 6', 'Dsl', 146492),
+    ('2021', '1.0', 2017, 'T6 Instate Other Class 6', 'NG', 1268.31),
+    ('2021', '1.0', 2017, 'T6 Instate Other Class 7', 'Dsl', 72027.5),
+    ('2021', '1.0', 2017, 'T6 Instate Other Class 7', 'NG', 100.623),
+    ('2021', '1.0', 2017, 'T6 Instate Tractor Class 6', 'Dsl', 876.896),
+    ('2021', '1.0', 2017, 'T6 Instate Tractor Class 6', 'NG', 4.46524),
+    ('2021', '1.0', 2017, 'T6 Instate Tractor Class 7', 'Dsl', 26754.3),
+    ('2021', '1.0', 2017, 'T6 Instate Tractor Class 7', 'NG', 12.5186),
+    ('2021', '1.0', 2017, 'T6 OOS Class 4', 'Dsl', 311.719),
+    ('2021', '1.0', 2017, 'T6 OOS Class 5', 'Dsl', 427.622),
+    ('2021', '1.0', 2017, 'T6 OOS Class 6', 'Dsl', 1117.39),
+    ('2021', '1.0', 2017, 'T6 OOS Class 7', 'Dsl', 8124.8),
+    ('2021', '1.0', 2017, 'T6 Public Class 4', 'Dsl', 10036.6),
+    ('2021', '1.0', 2017, 'T6 Public Class 4', 'NG', 16.016),
+    ('2021', '1.0', 2017, 'T6 Public Class 5', 'Dsl', 22290.9),
+    ('2021', '1.0', 2017, 'T6 Public Class 5', 'NG', 137.941),
+    ('2021', '1.0', 2017, 'T6 Public Class 6', 'Dsl', 15027.5),
+    ('2021', '1.0', 2017, 'T6 Public Class 6', 'NG', 41.2206),
+    ('2021', '1.0', 2017, 'T6 Public Class 7', 'Dsl', 33407.6),
+    ('2021', '1.0', 2017, 'T6 Public Class 7', 'NG', 135.852),
+    ('2021', '1.0', 2017, 'T6 Utility Class 5', 'Dsl', 8342.76),
+    ('2021', '1.0', 2017, 'T6 Utility Class 6', 'Dsl', 2003.14),
+    ('2021', '1.0', 2017, 'T6 Utility Class 7', 'Dsl', 2430.58),
+    ('2021', '1.0', 2017, 'T6TS', 'Gas', 180820),
+    ('2021', '1.0', 2017, 'T7 CAIRP Class 8', 'Dsl', 403002),
+    ('2021', '1.0', 2017, 'T7 CAIRP Class 8', 'NG', 98.9808),
+    ('2021', '1.0', 2018, 'T7 Tractor Class 8', 'Dsl', 297319),
+    ('2021', '1.0', 2018, 'T7 Tractor Class 8', 'NG', 3359.06),
+    ('2021', '1.0', 2018, 'T7 Utility Class 8', 'Dsl', 6436.84),
+    ('2021', '1.0', 2018, 'T7IS', 'Gas', 2061.85),
+    ('2021', '1.0', 2018, 'UBUS', 'Gas', 16700.1),
+    ('2021', '1.0', 2018, 'UBUS', 'Dsl', 3226.93),
+    ('2021', '1.0', 2018, 'UBUS', 'NG', 96156.5),
+    ('2021', '1.0', 2019, 'All Other Buses', 'Dsl', 26020.3),
+    ('2021', '1.0', 2019, 'All Other Buses', 'NG', 3504.03),
+    ('2021', '1.0', 2019, 'LDA', 'Gas', 4.60026e+007),
+    ('2021', '1.0', 2019, 'LDA', 'Dsl', 247168),
+    ('2021', '1.0', 2019, 'LDA', 'Elec', 878338),
+    ('2021', '1.0', 2019, 'LDA', 'Phe', 822458),
+    ('2021', '1.0', 2019, 'LDT1', 'Gas', 4.95144e+006),
+    ('2021', '1.0', 2019, 'LDT1', 'Dsl', 1509.77),
+    ('2021', '1.0', 2019, 'LDT1', 'Elec', 4387.47),
+    ('2021', '1.0', 2019, 'LDT1', 'Phe', 59.5619),
+    ('2021', '1.0', 2019, 'LDT2', 'Gas', 2.09556e+007),
+    ('2021', '1.0', 2019, 'LDT2', 'Dsl', 74213.1),
+    ('2021', '1.0', 2019, 'LDT2', 'Elec', 2045.12),
+    ('2021', '1.0', 2019, 'LDT2', 'Phe', 32729.4),
+    ('2021', '1.0', 2019, 'LHD1', 'Gas', 1.5853e+006),
+    ('2021', '1.0', 2019, 'LHD1', 'Dsl', 1.06913e+006),
+    ('2021', '1.0', 2019, 'LHD2', 'Gas', 216597),
+    ('2021', '1.0', 2019, 'LHD2', 'Dsl', 390905),
+    ('2021', '1.0', 2019, 'MCY', 'Gas', 455820),
+    ('2021', '1.0', 2019, 'MDV', 'Gas', 1.24648e+007),
+    ('2021', '1.0', 2019, 'MDV', 'Dsl', 257044),
+    ('2021', '1.0', 2019, 'MDV', 'Elec', 128.489),
+    ('2021', '1.0', 2019, 'MDV', 'Phe', 49189),
+    ('2021', '1.0', 2019, 'MH', 'Gas', 119760),
+    ('2021', '1.0', 2019, 'MH', 'Dsl', 40566.1),
+    ('2021', '1.0', 2019, 'Motor Coach', 'Dsl', 22513.6),
+    ('2021', '1.0', 2019, 'OBUS', 'Gas', 69371.3),
+    ('2021', '1.0', 2019, 'PTO', 'Dsl', 34257.9),
+    ('2021', '1.0', 2019, 'SBUS', 'Gas', 18962.7),
+    ('2021', '1.0', 2019, 'SBUS', 'Dsl', 45612.5),
+    ('2021', '1.0', 2019, 'SBUS', 'NG', 327.923),
+    ('2021', '1.0', 2019, 'T6 CAIRP Class 4', 'Dsl', 536.269),
+    ('2021', '1.0', 2019, 'T6 CAIRP Class 5', 'Dsl', 735.664),
+    ('2021', '1.0', 2019, 'T6 CAIRP Class 6', 'Dsl', 1922.31),
+    ('2021', '1.0', 2019, 'T6 CAIRP Class 7', 'Dsl', 12057.7),
+    ('2021', '1.0', 2019, 'T6 Instate Delivery Class 4', 'Dsl', 29604.7),
+    ('2021', '1.0', 2019, 'T6 Instate Delivery Class 4', 'NG', 260.256),
+    ('2021', '1.0', 2019, 'T6 Instate Delivery Class 5', 'Dsl', 22217.3),
+    ('2021', '1.0', 2019, 'T6 Instate Delivery Class 5', 'NG', 442.888),
+    ('2021', '1.0', 2019, 'T6 Instate Delivery Class 6', 'Dsl', 66744.8),
+    ('2021', '1.0', 2019, 'T6 Instate Delivery Class 6', 'NG', 841.893),
+    ('2021', '1.0', 2019, 'T6 Instate Delivery Class 7', 'Dsl', 26199.9),
+    ('2021', '1.0', 2019, 'T6 Instate Delivery Class 7', 'NG', 195.185),
+    ('2021', '1.0', 2019, 'T6 Instate Other Class 4', 'Dsl', 77315.2),
+    ('2021', '1.0', 2019, 'T6 Instate Other Class 4', 'NG', 522.824),
+    ('2021', '1.0', 2019, 'T6 Instate Other Class 5', 'Dsl', 144025),
+    ('2021', '1.0', 2019, 'T6 Instate Other Class 5', 'NG', 3023.86),
+    ('2021', '1.0', 2019, 'T6 Instate Other Class 6', 'Dsl', 141936),
+    ('2021', '1.0', 2019, 'T6 Instate Other Class 6', 'NG', 2951.74),
+    ('2021', '1.0', 2020, 'T6 Public Class 7', 'NG', 198.533),
+    ('2021', '1.0', 2020, 'T6 Utility Class 5', 'Dsl', 8212.17),
+    ('2021', '1.0', 2020, 'T6 Utility Class 6', 'Dsl', 1971.78),
+    ('2021', '1.0', 2020, 'T6 Utility Class 7', 'Dsl', 2392.53),
+    ('2021', '1.0', 2020, 'T6TS', 'Gas', 164450),
+    ('2021', '1.0', 2020, 'T7 CAIRP Class 8', 'Dsl', 396038),
+    ('2021', '1.0', 2020, 'T7 CAIRP Class 8', 'NG', 315.506),
+    ('2021', '1.0', 2020, 'T7 NNOOS Class 8', 'Dsl', 468612),
+    ('2021', '1.0', 2020, 'T7 NOOS Class 8', 'Dsl', 170238),
+    ('2021', '1.0', 2020, 'T7 Other Port Class 8', 'Dsl', 85551.6),
+    ('2021', '1.0', 2020, 'T7 POLA Class 8', 'Dsl', 26584.8),
+    ('2021', '1.0', 2020, 'T7 Public Class 8', 'Dsl', 64589.8),
+    ('2021', '1.0', 2020, 'T7 Public Class 8', 'NG', 317.203),
+    ('2021', '1.0', 2020, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 25020),
+    ('2021', '1.0', 2020, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1845.02),
+    ('2021', '1.0', 2020, 'T7 Single Dump Class 8', 'Dsl', 50006.5),
+    ('2021', '1.0', 2020, 'T7 Single Dump Class 8', 'NG', 3535.73),
+    ('2021', '1.0', 2020, 'T7 Single Other Class 8', 'Dsl', 86870.6),
+    ('2021', '1.0', 2020, 'T7 Single Other Class 8', 'NG', 6287.39),
+    ('2021', '1.0', 2020, 'T7 SWCV Class 8', 'Dsl', 50608.6),
+    ('2021', '1.0', 2020, 'T7 SWCV Class 8', 'NG', 35473),
+    ('2021', '1.0', 2020, 'T7 Tractor Class 8', 'Dsl', 297956),
+    ('2021', '1.0', 2020, 'T7 Tractor Class 8', 'NG', 4610.02),
+    ('2021', '1.0', 2020, 'T7 Utility Class 8', 'Dsl', 6484.43),
+    ('2021', '1.0', 2020, 'T7IS', 'Gas', 622.503),
+    ('2021', '1.0', 2020, 'UBUS', 'Gas', 11688.3),
+    ('2021', '1.0', 2020, 'UBUS', 'Dsl', 2552.67),
+    ('2021', '1.0', 2020, 'UBUS', 'NG', 94862.7),
+    ('2021', '1.0', 2021, 'All Other Buses', 'Dsl', 24530.4),
+    ('2021', '1.0', 2021, 'All Other Buses', 'NG', 5228.75),
+    ('2021', '1.0', 2021, 'LDA', 'Gas', 4.62534e+007),
+    ('2021', '1.0', 2021, 'LDA', 'Dsl', 220806),
+    ('2021', '1.0', 2021, 'LDA', 'Elec', 1.64398e+006),
+    ('2021', '1.0', 2021, 'LDA', 'Phe', 1.08239e+006),
+    ('2021', '1.0', 2021, 'LDT1', 'Gas', 4.742e+006),
+    ('2021', '1.0', 2021, 'LDT1', 'Dsl', 1243.41),
+    ('2021', '1.0', 2021, 'LDT1', 'Elec', 5442.41),
+    ('2021', '1.0', 2021, 'LDT1', 'Phe', 1116.13),
+    ('2021', '1.0', 2021, 'LDT2', 'Gas', 2.13766e+007),
+    ('2021', '1.0', 2021, 'LDT2', 'Dsl', 79313.2),
+    ('2021', '1.0', 2021, 'LDT2', 'Elec', 18038.9),
+    ('2021', '1.0', 2021, 'LDT2', 'Phe', 82236.1),
+    ('2021', '1.0', 2021, 'LHD1', 'Gas', 1.59917e+006),
+    ('2021', '1.0', 2021, 'LHD1', 'Dsl', 1.11228e+006),
+    ('2021', '1.0', 2021, 'LHD2', 'Gas', 221316),
+    ('2021', '1.0', 2021, 'LHD2', 'Dsl', 424982),
+    ('2021', '1.0', 2021, 'MCY', 'Gas', 437705),
+    ('2021', '1.0', 2021, 'MDV', 'Gas', 1.26844e+007),
+    ('2021', '1.0', 2021, 'MDV', 'Dsl', 249280),
+    ('2021', '1.0', 2021, 'MDV', 'Elec', 18921.2),
+    ('2021', '1.0', 2021, 'MDV', 'Phe', 62533.6),
+    ('2021', '1.0', 2021, 'MH', 'Gas', 109106),
+    ('2021', '1.0', 2021, 'MH', 'Dsl', 40498.7),
+    ('2021', '1.0', 2021, 'Motor Coach', 'Dsl', 22696.2),
+    ('2021', '1.0', 2022, 'T6 Instate Delivery Class 7', 'Dsl', 26790.1),
+    ('2021', '1.0', 2022, 'T6 Instate Delivery Class 7', 'NG', 257.916),
+    ('2021', '1.0', 2022, 'T6 Instate Other Class 4', 'Dsl', 78783.9),
+    ('2021', '1.0', 2022, 'T6 Instate Other Class 4', 'NG', 979.598),
+    ('2021', '1.0', 2022, 'T6 Instate Other Class 5', 'Dsl', 147110),
+    ('2021', '1.0', 2022, 'T6 Instate Other Class 5', 'NG', 3576.32),
+    ('2021', '1.0', 2022, 'T6 Instate Other Class 6', 'Dsl', 144731),
+    ('2021', '1.0', 2022, 'T6 Instate Other Class 6', 'NG', 3740.92),
+    ('2021', '1.0', 2022, 'T6 Instate Other Class 7', 'Dsl', 71870.3),
+    ('2021', '1.0', 2022, 'T6 Instate Other Class 7', 'NG', 604.995),
+    ('2021', '1.0', 2022, 'T6 Instate Tractor Class 6', 'Dsl', 867.971),
+    ('2021', '1.0', 2022, 'T6 Instate Tractor Class 6', 'NG', 17.632),
+    ('2021', '1.0', 2022, 'T6 Instate Tractor Class 7', 'Dsl', 26763.5),
+    ('2021', '1.0', 2022, 'T6 Instate Tractor Class 7', 'NG', 132.192),
+    ('2021', '1.0', 2022, 'T6 OOS Class 4', 'Dsl', 313.219),
+    ('2021', '1.0', 2022, 'T6 OOS Class 5', 'Dsl', 429.68),
+    ('2021', '1.0', 2022, 'T6 OOS Class 6', 'Dsl', 1122.77),
+    ('2021', '1.0', 2022, 'T6 OOS Class 7', 'Dsl', 8163.91),
+    ('2021', '1.0', 2022, 'T6 Public Class 4', 'Dsl', 9930.23),
+    ('2021', '1.0', 2022, 'T6 Public Class 4', 'NG', 49.0564),
+    ('2021', '1.0', 2022, 'T6 Public Class 5', 'Dsl', 21982.5),
+    ('2021', '1.0', 2022, 'T6 Public Class 5', 'NG', 282.691),
+    ('2021', '1.0', 2022, 'T6 Public Class 6', 'Dsl', 14875.2),
+    ('2021', '1.0', 2022, 'T6 Public Class 6', 'NG', 83.5287),
+    ('2021', '1.0', 2022, 'T6 Public Class 7', 'Dsl', 33046.6),
+    ('2021', '1.0', 2022, 'T6 Public Class 7', 'NG', 252.163),
+    ('2021', '1.0', 2022, 'T6 Utility Class 5', 'Dsl', 8281.89),
+    ('2021', '1.0', 2022, 'T6 Utility Class 6', 'Dsl', 1988.52),
+    ('2021', '1.0', 2022, 'T6 Utility Class 7', 'Dsl', 2412.85),
+    ('2021', '1.0', 2022, 'T6TS', 'Gas', 192778),
+    ('2021', '1.0', 2022, 'T7 CAIRP Class 8', 'Dsl', 408728),
+    ('2021', '1.0', 2022, 'T7 CAIRP Class 8', 'NG', 369.53),
+    ('2021', '1.0', 2022, 'T7 NNOOS Class 8', 'Dsl', 483679),
+    ('2021', '1.0', 2022, 'T7 NOOS Class 8', 'Dsl', 175712),
+    ('2021', '1.0', 2022, 'T7 Other Port Class 8', 'Dsl', 92967.1),
+    ('2021', '1.0', 2022, 'T7 POLA Class 8', 'Dsl', 29021.3),
+    ('2021', '1.0', 2022, 'T7 Public Class 8', 'Dsl', 65100.3),
+    ('2021', '1.0', 2022, 'T7 Public Class 8', 'NG', 357.801),
+    ('2021', '1.0', 2022, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 24686.8),
+    ('2021', '1.0', 2022, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 2197.51),
+    ('2021', '1.0', 2022, 'T7 Single Dump Class 8', 'Dsl', 49688.3),
+    ('2021', '1.0', 2022, 'T7 Single Dump Class 8', 'NG', 3892.54),
+    ('2021', '1.0', 2022, 'T7 Single Other Class 8', 'Dsl', 89110.8),
+    ('2021', '1.0', 2022, 'T7 Single Other Class 8', 'NG', 7042.6),
+    ('2021', '1.0', 2022, 'T7 SWCV Class 8', 'Dsl', 44044.1),
+    ('2021', '1.0', 2022, 'T7 SWCV Class 8', 'NG', 42768.3),
+    ('2021', '1.0', 2022, 'T7 Tractor Class 8', 'Dsl', 307466),
+    ('2021', '1.0', 2022, 'T7 Tractor Class 8', 'NG', 4829.09),
+    ('2021', '1.0', 2022, 'T7 Utility Class 8', 'Dsl', 6539.48),
+    ('2021', '1.0', 2022, 'T7IS', 'Gas', 577.747),
+    ('2021', '1.0', 2022, 'UBUS', 'Gas', 12626.8),
+    ('2021', '1.0', 2022, 'UBUS', 'NG', 105237),
+    ('2021', '1.0', 2023, 'All Other Buses', 'Dsl', 24220.7),
+    ('2021', '1.0', 2026, 'LDA', 'Dsl', 137704),
+    ('2021', '1.0', 2026, 'LDA', 'Elec', 3.95977e+006),
+    ('2021', '1.0', 2026, 'LDA', 'Phe', 1.77177e+006),
+    ('2021', '1.0', 2026, 'LDT1', 'Gas', 4.1656e+006),
+    ('2021', '1.0', 2026, 'LDT1', 'Dsl', 661.827),
+    ('2021', '1.0', 2026, 'LDT1', 'Elec', 17688.2),
+    ('2021', '1.0', 2026, 'LDT1', 'Phe', 13025.1),
+    ('2021', '1.0', 2026, 'LDT2', 'Gas', 2.26849e+007),
+    ('2021', '1.0', 2026, 'LDT2', 'Dsl', 89302.4),
+    ('2021', '1.0', 2026, 'LDT2', 'Elec', 184924),
+    ('2021', '1.0', 2026, 'LDT2', 'Phe', 264862),
+    ('2021', '1.0', 2026, 'LHD1', 'Gas', 1.6686e+006),
+    ('2021', '1.0', 2026, 'LHD1', 'Dsl', 1.2066e+006),
+    ('2021', '1.0', 2026, 'LHD1', 'Elec', 53715.6),
+    ('2021', '1.0', 2026, 'LHD2', 'Gas', 230603),
+    ('2021', '1.0', 2026, 'LHD2', 'Dsl', 502331),
+    ('2021', '1.0', 2026, 'LHD2', 'Elec', 13217.3),
+    ('2021', '1.0', 2026, 'MCY', 'Gas', 421049),
+    ('2021', '1.0', 2026, 'MDV', 'Gas', 1.31917e+007),
+    ('2021', '1.0', 2026, 'MDV', 'Dsl', 220738),
+    ('2021', '1.0', 2026, 'MDV', 'Elec', 198662),
+    ('2021', '1.0', 2026, 'MDV', 'Phe', 169869),
+    ('2021', '1.0', 2026, 'MH', 'Gas', 83714.9),
+    ('2021', '1.0', 2026, 'MH', 'Dsl', 38352.8),
+    ('2021', '1.0', 2026, 'Motor Coach', 'Dsl', 23220.7),
+    ('2021', '1.0', 2026, 'OBUS', 'Gas', 51596.6),
+    ('2021', '1.0', 2026, 'OBUS', 'Elec', 882.658),
+    ('2021', '1.0', 2026, 'PTO', 'Dsl', 35912.9),
+    ('2021', '1.0', 2026, 'PTO', 'Elec', 751.89),
+    ('2021', '1.0', 2026, 'SBUS', 'Gas', 15865.5),
+    ('2021', '1.0', 2026, 'SBUS', 'Dsl', 44841.9),
+    ('2021', '1.0', 2026, 'SBUS', 'Elec', 836.2),
+    ('2021', '1.0', 2026, 'SBUS', 'NG', 517.858),
+    ('2021', '1.0', 2026, 'T6 CAIRP Class 4', 'Dsl', 561.727),
+    ('2021', '1.0', 2026, 'T6 CAIRP Class 4', 'Elec', 14.6804),
+    ('2021', '1.0', 2026, 'T6 CAIRP Class 5', 'Dsl', 772.518),
+    ('2021', '1.0', 2026, 'T6 CAIRP Class 5', 'Elec', 18.2097),
+    ('2021', '1.0', 2026, 'T6 CAIRP Class 6', 'Dsl', 1998.76),
+    ('2021', '1.0', 2026, 'T6 CAIRP Class 6', 'Elec', 67.4359),
+    ('2021', '1.0', 2026, 'T6 CAIRP Class 7', 'Dsl', 12735.2),
+    ('2021', '1.0', 2026, 'T6 CAIRP Class 7', 'Elec', 224.966),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 4', 'Dsl', 30974.2),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 4', 'Elec', 555.764),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 4', 'NG', 570.329),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 5', 'Dsl', 23398.5),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 5', 'Elec', 383.057),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 5', 'NG', 574.732),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 6', 'Dsl', 69959.8),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 6', 'Elec', 1165.56),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 6', 'NG', 1520),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 7', 'Dsl', 27957.2),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 7', 'Elec', 151.354),
+    ('2021', '1.0', 2026, 'T6 Instate Delivery Class 7', 'NG', 262.187),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 4', 'Dsl', 80557.2),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 4', 'Elec', 1540.44),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 4', 'NG', 1566.41),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 5', 'Dsl', 151525),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 5', 'Elec', 2422.81),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 5', 'NG', 4106.59),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 6', 'Dsl', 149006),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 6', 'Elec', 2415.89),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 6', 'NG', 4310.89),
+    ('2021', '1.0', 2026, 'T6 Instate Other Class 7', 'Dsl', 74305.9),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 5', 'NG', 3852.94),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 6', 'Dsl', 146321),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 6', 'Elec', 11066.4),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 6', 'NG', 4022.32),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 7', 'Dsl', 73976.8),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 7', 'Elec', 4256.99),
+    ('2021', '1.0', 2029, 'T6 Instate Other Class 7', 'NG', 556.991),
+    ('2021', '1.0', 2029, 'T6 Instate Tractor Class 6', 'Dsl', 863.594),
+    ('2021', '1.0', 2029, 'T6 Instate Tractor Class 6', 'Elec', 79.0747),
+    ('2021', '1.0', 2029, 'T6 Instate Tractor Class 6', 'NG', 20.1061),
+    ('2021', '1.0', 2029, 'T6 Instate Tractor Class 7', 'Dsl', 28300.1),
+    ('2021', '1.0', 2029, 'T6 Instate Tractor Class 7', 'Elec', 775.112),
+    ('2021', '1.0', 2029, 'T6 Instate Tractor Class 7', 'NG', 164.139),
+    ('2021', '1.0', 2029, 'T6 OOS Class 4', 'Dsl', 340.513),
+    ('2021', '1.0', 2029, 'T6 OOS Class 5', 'Dsl', 467.123),
+    ('2021', '1.0', 2029, 'T6 OOS Class 6', 'Dsl', 1220.6),
+    ('2021', '1.0', 2029, 'T6 OOS Class 7', 'Dsl', 8875.31),
+    ('2021', '1.0', 2029, 'T6 Public Class 4', 'Dsl', 9609.78),
+    ('2021', '1.0', 2029, 'T6 Public Class 4', 'Elec', 624.276),
+    ('2021', '1.0', 2029, 'T6 Public Class 4', 'NG', 89.7058),
+    ('2021', '1.0', 2029, 'T6 Public Class 5', 'Dsl', 21415.4),
+    ('2021', '1.0', 2029, 'T6 Public Class 5', 'Elec', 1308.19),
+    ('2021', '1.0', 2029, 'T6 Public Class 5', 'NG', 310.247),
+    ('2021', '1.0', 2029, 'T6 Public Class 6', 'Dsl', 14399.2),
+    ('2021', '1.0', 2029, 'T6 Public Class 6', 'Elec', 936.198),
+    ('2021', '1.0', 2029, 'T6 Public Class 6', 'NG', 139.688),
+    ('2021', '1.0', 2029, 'T6 Public Class 7', 'Dsl', 31700),
+    ('2021', '1.0', 2029, 'T6 Public Class 7', 'Elec', 2396.27),
+    ('2021', '1.0', 2029, 'T6 Public Class 7', 'NG', 351.906),
+    ('2021', '1.0', 2029, 'T6 Utility Class 5', 'Dsl', 7654.66),
+    ('2021', '1.0', 2029, 'T6 Utility Class 5', 'Elec', 913.115),
+    ('2021', '1.0', 2029, 'T6 Utility Class 6', 'Dsl', 1836.02),
+    ('2021', '1.0', 2029, 'T6 Utility Class 6', 'Elec', 221.15),
+    ('2021', '1.0', 2029, 'T6 Utility Class 7', 'Dsl', 2200.26),
+    ('2021', '1.0', 2029, 'T6 Utility Class 7', 'Elec', 295.87),
+    ('2021', '1.0', 2029, 'T6TS', 'Gas', 190418),
+    ('2021', '1.0', 2029, 'T6TS', 'Elec', 16889),
+    ('2021', '1.0', 2029, 'T7 CAIRP Class 8', 'Dsl', 427698),
+    ('2021', '1.0', 2029, 'T7 CAIRP Class 8', 'Elec', 28907.8),
+    ('2021', '1.0', 2029, 'T7 CAIRP Class 8', 'NG', 412.219),
+    ('2021', '1.0', 2029, 'T7 NNOOS Class 8', 'Dsl', 540336),
+    ('2021', '1.0', 2029, 'T7 NOOS Class 8', 'Dsl', 196295),
+    ('2021', '1.0', 2029, 'T7 Other Port Class 8', 'Dsl', 114935),
+    ('2021', '1.0', 2029, 'T7 Other Port Class 8', 'Elec', 5426.47),
+    ('2021', '1.0', 2029, 'T7 POLA Class 8', 'Dsl', 37797.2),
+    ('2021', '1.0', 2029, 'T7 POLA Class 8', 'Elec', 481.58),
+    ('2021', '1.0', 2029, 'T7 Public Class 8', 'Dsl', 63350.7),
+    ('2021', '1.0', 2029, 'T7 Public Class 8', 'Elec', 3921.1),
+    ('2021', '1.0', 2029, 'T7 Public Class 8', 'NG', 445.804),
+    ('2021', '1.0', 2029, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 22795.4),
+    ('2021', '1.0', 2029, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 3160.92),
+    ('2021', '1.0', 2029, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1868.28),
+    ('2021', '1.0', 2029, 'T7 Single Dump Class 8', 'Dsl', 47780.3),
+    ('2021', '1.0', 2029, 'T7 Single Dump Class 8', 'Elec', 3818.05),
+    ('2021', '1.0', 2029, 'T7 Single Dump Class 8', 'NG', 3856.27),
+    ('2021', '1.0', 2029, 'T7 Single Other Class 8', 'Dsl', 92969.5),
+    ('2021', '1.0', 2029, 'T7 Single Other Class 8', 'Elec', 7062.17),
+    ('2021', '1.0', 2029, 'T7 Single Other Class 8', 'NG', 7384.81),
+    ('2021', '1.0', 2029, 'T7 SWCV Class 8', 'Dsl', 23074.2),
+    ('2021', '1.0', 2029, 'T7 SWCV Class 8', 'Elec', 3717.35),
+    ('2021', '1.0', 2029, 'T7 SWCV Class 8', 'NG', 63017.5),
+    ('2021', '1.0', 2029, 'T7 Tractor Class 8', 'Dsl', 332662),
+    ('2021', '1.0', 2030, 'T7 Single Other Class 8', 'NG', 7268.39),
+    ('2021', '1.0', 2030, 'T7 SWCV Class 8', 'Dsl', 20693),
+    ('2021', '1.0', 2030, 'T7 SWCV Class 8', 'Elec', 5292.96),
+    ('2021', '1.0', 2030, 'T7 SWCV Class 8', 'NG', 64216.6),
+    ('2021', '1.0', 2030, 'T7 Tractor Class 8', 'Dsl', 334445),
+    ('2021', '1.0', 2030, 'T7 Tractor Class 8', 'Elec', 15207.6),
+    ('2021', '1.0', 2030, 'T7 Tractor Class 8', 'NG', 4788.05),
+    ('2021', '1.0', 2030, 'T7 Utility Class 8', 'Dsl', 6249.71),
+    ('2021', '1.0', 2030, 'T7 Utility Class 8', 'Elec', 545.15),
+    ('2021', '1.0', 2030, 'T7IS', 'Gas', 487.826),
+    ('2021', '1.0', 2030, 'T7IS', 'Elec', 66.356),
+    ('2021', '1.0', 2030, 'UBUS', 'Gas', 16333.2),
+    ('2021', '1.0', 2030, 'UBUS', 'Elec', 39331.7),
+    ('2021', '1.0', 2030, 'UBUS', 'NG', 97240.4),
+    ('2021', '1.0', 2032, 'All Other Buses', 'Dsl', 26075.3),
+    ('2021', '1.0', 2032, 'All Other Buses', 'NG', 5232.99),
+    ('2021', '1.0', 2032, 'LDA', 'Gas', 4.61724e+007),
+    ('2021', '1.0', 2032, 'LDA', 'Dsl', 63650.7),
+    ('2021', '1.0', 2032, 'LDA', 'Elec', 5.6077e+006),
+    ('2021', '1.0', 2032, 'LDA', 'Phe', 2.11163e+006),
+    ('2021', '1.0', 2032, 'LDT1', 'Gas', 3.5821e+006),
+    ('2021', '1.0', 2032, 'LDT1', 'Dsl', 25.5617),
+    ('2021', '1.0', 2032, 'LDT1', 'Elec', 51498.9),
+    ('2021', '1.0', 2032, 'LDT1', 'Phe', 38307.5),
+    ('2021', '1.0', 2032, 'LDT2', 'Gas', 2.32481e+007),
+    ('2021', '1.0', 2032, 'LDT2', 'Dsl', 89579.7),
+    ('2021', '1.0', 2032, 'LDT2', 'Elec', 430489),
+    ('2021', '1.0', 2032, 'LDT2', 'Phe', 461709),
+    ('2021', '1.0', 2032, 'LHD1', 'Gas', 1.52733e+006),
+    ('2021', '1.0', 2032, 'LHD1', 'Dsl', 1.13102e+006),
+    ('2021', '1.0', 2032, 'LHD1', 'Elec', 428332),
+    ('2021', '1.0', 2032, 'LHD2', 'Gas', 209189),
+    ('2021', '1.0', 2032, 'LHD2', 'Dsl', 500247),
+    ('2021', '1.0', 2032, 'LHD2', 'Elec', 107393),
+    ('2021', '1.0', 2032, 'MCY', 'Gas', 404607),
+    ('2021', '1.0', 2032, 'MDV', 'Gas', 1.33906e+007),
+    ('2021', '1.0', 2032, 'MDV', 'Dsl', 182110),
+    ('2021', '1.0', 2032, 'MDV', 'Elec', 413154),
+    ('2021', '1.0', 2032, 'MDV', 'Phe', 292936),
+    ('2021', '1.0', 2032, 'MH', 'Gas', 64574.1),
+    ('2021', '1.0', 2032, 'MH', 'Dsl', 34901.7),
+    ('2021', '1.0', 2032, 'Motor Coach', 'Dsl', 23999.2),
+    ('2021', '1.0', 2032, 'OBUS', 'Gas', 37141.1),
+    ('2021', '1.0', 2032, 'OBUS', 'Elec', 7318.84),
+    ('2021', '1.0', 2032, 'PTO', 'Dsl', 33646.8),
+    ('2021', '1.0', 2032, 'PTO', 'Elec', 6371.13),
+    ('2021', '1.0', 2032, 'SBUS', 'Gas', 17319.1),
+    ('2021', '1.0', 2032, 'SBUS', 'Dsl', 39401.4),
+    ('2021', '1.0', 2032, 'SBUS', 'Elec', 8196.88),
+    ('2021', '1.0', 2032, 'SBUS', 'NG', 643.192),
+    ('2021', '1.0', 2032, 'T6 CAIRP Class 4', 'Dsl', 490.544),
+    ('2021', '1.0', 2032, 'T6 CAIRP Class 4', 'Elec', 136.67),
+    ('2021', '1.0', 2032, 'T6 CAIRP Class 5', 'Dsl', 679.003),
+    ('2021', '1.0', 2032, 'T6 CAIRP Class 5', 'Elec', 181.421),
+    ('2021', '1.0', 2032, 'T6 CAIRP Class 6', 'Dsl', 1725.31),
+    ('2021', '1.0', 2032, 'T6 CAIRP Class 6', 'Elec', 523.008),
+    ('2021', '1.0', 2032, 'T6 CAIRP Class 7', 'Dsl', 12397.3),
+    ('2021', '1.0', 2032, 'T6 CAIRP Class 7', 'Elec', 1705.25),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 4', 'Dsl', 28808.3),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 4', 'Elec', 5574.93),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 4', 'NG', 546.499),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 5', 'Dsl', 21885),
+    ('2021', '1.0', 2032, 'T6 Instate Delivery Class 5', 'Elec', 4117.37),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 4', 'Dsl', 26557.5),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 4', 'Elec', 9848.84),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 4', 'NG', 501.848),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 5', 'Dsl', 20177.4),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 5', 'Elec', 7384.54),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 5', 'NG', 442.338),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 6', 'Dsl', 60173.9),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 6', 'Elec', 22118.1),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 6', 'NG', 1233.95),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 7', 'Dsl', 28084.1),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 7', 'Elec', 4263.56),
+    ('2021', '1.0', 2035, 'T6 Instate Delivery Class 7', 'NG', 272.32),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 4', 'Dsl', 67418),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 4', 'Elec', 27482.7),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 4', 'NG', 1294.34),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 5', 'Dsl', 127068),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 5', 'Elec', 51840.3),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 5', 'NG', 2819.01),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 6', 'Dsl', 125399),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 6', 'Elec', 50765.9),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 6', 'NG', 2892.64),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 7', 'Dsl', 67568.2),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 7', 'Elec', 19298.6),
+    ('2021', '1.0', 2035, 'T6 Instate Other Class 7', 'NG', 538.564),
+    ('2021', '1.0', 2035, 'T6 Instate Tractor Class 6', 'Dsl', 741.043),
+    ('2021', '1.0', 2035, 'T6 Instate Tractor Class 6', 'Elec', 311.969),
+    ('2021', '1.0', 2035, 'T6 Instate Tractor Class 6', 'NG', 15.0271),
+    ('2021', '1.0', 2035, 'T6 Instate Tractor Class 7', 'Dsl', 29004.9),
+    ('2021', '1.0', 2035, 'T6 Instate Tractor Class 7', 'Elec', 3245.77),
+    ('2021', '1.0', 2035, 'T6 Instate Tractor Class 7', 'NG', 185.546),
+    ('2021', '1.0', 2035, 'T6 OOS Class 4', 'Dsl', 377.743),
+    ('2021', '1.0', 2035, 'T6 OOS Class 5', 'Dsl', 518.195),
+    ('2021', '1.0', 2035, 'T6 OOS Class 6', 'Dsl', 1354.06),
+    ('2021', '1.0', 2035, 'T6 OOS Class 7', 'Dsl', 9845.69),
+    ('2021', '1.0', 2035, 'T6 Public Class 4', 'Dsl', 8216),
+    ('2021', '1.0', 2035, 'T6 Public Class 4', 'Elec', 2262.98),
+    ('2021', '1.0', 2035, 'T6 Public Class 4', 'NG', 90.9376),
+    ('2021', '1.0', 2035, 'T6 Public Class 5', 'Dsl', 18100.4),
+    ('2021', '1.0', 2035, 'T6 Public Class 5', 'Elec', 5226.64),
+    ('2021', '1.0', 2035, 'T6 Public Class 5', 'NG', 256.01),
+    ('2021', '1.0', 2035, 'T6 Public Class 6', 'Dsl', 12284.8),
+    ('2021', '1.0', 2035, 'T6 Public Class 6', 'Elec', 3420.75),
+    ('2021', '1.0', 2035, 'T6 Public Class 6', 'NG', 138.581),
+    ('2021', '1.0', 2035, 'T6 Public Class 7', 'Dsl', 27038),
+    ('2021', '1.0', 2035, 'T6 Public Class 7', 'Elec', 7894.08),
+    ('2021', '1.0', 2035, 'T6 Public Class 7', 'NG', 337.546),
+    ('2021', '1.0', 2035, 'T6 Utility Class 5', 'Dsl', 5596.31),
+    ('2021', '1.0', 2035, 'T6 Utility Class 5', 'Elec', 3175.76),
+    ('2021', '1.0', 2035, 'T6 Utility Class 6', 'Dsl', 1344.61),
+    ('2021', '1.0', 2035, 'T6 Utility Class 6', 'Elec', 761.609),
+    ('2021', '1.0', 2035, 'T6 Utility Class 7', 'Dsl', 1559.66),
+    ('2021', '1.0', 2035, 'T6 Utility Class 7', 'Elec', 995.996),
+    ('2021', '1.0', 2035, 'T6TS', 'Gas', 154954),
+    ('2021', '1.0', 2035, 'T6TS', 'Elec', 63565.6),
+    ('2021', '1.0', 2035, 'T7 CAIRP Class 8', 'Dsl', 456146),
+    ('2021', '1.0', 2035, 'T7 CAIRP Class 8', 'Elec', 97204),
+    ('2021', '1.0', 2035, 'T7 CAIRP Class 8', 'NG', 395.714),
+    ('2021', '1.0', 2035, 'T7 NNOOS Class 8', 'Dsl', 654698),
+    ('2021', '1.0', 2035, 'T7 NOOS Class 8', 'Dsl', 237840),
+    ('2021', '1.0', 2035, 'T7 Other Port Class 8', 'Dsl', 126582),
+    ('2021', '1.0', 2035, 'T7 Other Port Class 8', 'Elec', 23056),
+    ('2021', '1.0', 2035, 'T7 POLA Class 8', 'Dsl', 45017.4),
+    ('2021', '1.0', 2035, 'T7 POLA Class 8', 'Elec', 3206.81),
+    ('2021', '1.0', 2035, 'T7 Public Class 8', 'Dsl', 54669.6),
+    ('2021', '1.0', 2035, 'T7 Public Class 8', 'Elec', 14223.5),
+    ('2021', '1.0', 2040, 'T7 POLA Class 8', 'Dsl', 42521.1),
+    ('2021', '1.0', 2040, 'T7 POLA Class 8', 'Elec', 5703.12),
+    ('2021', '1.0', 2040, 'T7 Public Class 8', 'Dsl', 48391.6),
+    ('2021', '1.0', 2040, 'T7 Public Class 8', 'Elec', 21629.9),
+    ('2021', '1.0', 2040, 'T7 Public Class 8', 'NG', 411.682),
+    ('2021', '1.0', 2040, 'T7 Single Concrete/Transit Mix Class 8', 'Dsl', 13314.3),
+    ('2021', '1.0', 2040, 'T7 Single Concrete/Transit Mix Class 8', 'Elec', 14942.6),
+    ('2021', '1.0', 2040, 'T7 Single Concrete/Transit Mix Class 8', 'NG', 1017.94),
+    ('2021', '1.0', 2040, 'T7 Single Dump Class 8', 'Dsl', 34588.5),
+    ('2021', '1.0', 2040, 'T7 Single Dump Class 8', 'Elec', 21063),
+    ('2021', '1.0', 2040, 'T7 Single Dump Class 8', 'NG', 2693.64),
+    ('2021', '1.0', 2040, 'T7 Single Other Class 8', 'Dsl', 86886.7),
+    ('2021', '1.0', 2040, 'T7 Single Other Class 8', 'Elec', 61629.3),
+    ('2021', '1.0', 2040, 'T7 Single Other Class 8', 'NG', 6705.79),
+    ('2021', '1.0', 2040, 'T7 SWCV Class 8', 'Dsl', 7752.56),
+    ('2021', '1.0', 2040, 'T7 SWCV Class 8', 'Elec', 26914.9),
+    ('2021', '1.0', 2040, 'T7 SWCV Class 8', 'NG', 58743),
+    ('2021', '1.0', 2040, 'T7 Tractor Class 8', 'Dsl', 427671),
+    ('2021', '1.0', 2040, 'T7 Tractor Class 8', 'Elec', 70622.7),
+    ('2021', '1.0', 2040, 'T7 Tractor Class 8', 'NG', 5848.47),
+    ('2021', '1.0', 2040, 'T7 Utility Class 8', 'Dsl', 4598.52),
+    ('2021', '1.0', 2040, 'T7 Utility Class 8', 'Elec', 2437.99),
+    ('2021', '1.0', 2040, 'T7IS', 'Gas', 422.884),
+    ('2021', '1.0', 2040, 'T7IS', 'Elec', 307.16),
+    ('2021', '1.0', 2040, 'UBUS', 'Gas', 20267.1),
+    ('2021', '1.0', 2040, 'UBUS', 'Elec', 149104),
+    ('2021', '1.0', 2040, 'UBUS', 'NG', 27336),
+    ('2021', '1.0', 2045, 'All Other Buses', 'Dsl', 27309.1),
+    ('2021', '1.0', 2045, 'All Other Buses', 'NG', 5247.72),
+    ('2021', '1.0', 2045, 'LDA', 'Gas', 4.73951e+007),
+    ('2021', '1.0', 2045, 'LDA', 'Dsl', 28914.1),
+    ('2021', '1.0', 2045, 'LDA', 'Elec', 6.88334e+006),
+    ('2021', '1.0', 2045, 'LDA', 'Phe', 2.26361e+006),
+    ('2021', '1.0', 2045, 'LDT1', 'Gas', 3.09002e+006),
+    ('2021', '1.0', 2045, 'LDT1', 'Dsl', 35.131),
+    ('2021', '1.0', 2045, 'LDT1', 'Elec', 98001.2),
+    ('2021', '1.0', 2045, 'LDT1', 'Phe', 71551.6),
+    ('2021', '1.0', 2045, 'LDT2', 'Gas', 2.37786e+007),
+    ('2021', '1.0', 2045, 'LDT2', 'Dsl', 91120.5),
+    ('2021', '1.0', 2045, 'LDT2', 'Elec', 699548),
+    ('2021', '1.0', 2045, 'LDT2', 'Phe', 649593),
+    ('2021', '1.0', 2045, 'LHD1', 'Gas', 1.03964e+006),
+    ('2021', '1.0', 2045, 'LHD1', 'Dsl', 793406),
+    ('2021', '1.0', 2045, 'LHD1', 'Elec', 1.47324e+006),
+    ('2021', '1.0', 2045, 'LHD2', 'Gas', 141035),
+    ('2021', '1.0', 2045, 'LHD2', 'Dsl', 372725),
+    ('2021', '1.0', 2045, 'LHD2', 'Elec', 383122),
+    ('2021', '1.0', 2045, 'MCY', 'Gas', 394965),
+    ('2021', '1.0', 2045, 'MDV', 'Gas', 1.3779e+007),
+    ('2021', '1.0', 2045, 'MDV', 'Dsl', 151680),
+    ('2021', '1.0', 2045, 'MDV', 'Elec', 633512),
+    ('2021', '1.0', 2045, 'MDV', 'Phe', 413101),
+    ('2021', '1.0', 2045, 'MH', 'Gas', 49653.4),
+    ('2021', '1.0', 2045, 'MH', 'Dsl', 29326.2),
+    ('2021', '1.0', 2045, 'Motor Coach', 'Dsl', 25763),
+    ('2021', '1.0', 2045, 'OBUS', 'Gas', 19590.2),
+    ('2021', '1.0', 2045, 'OBUS', 'Elec', 21537),
+    ('2021', '1.0', 2045, 'PTO', 'Dsl', 27785),
+    ('2021', '1.0', 2045, 'PTO', 'Elec', 26777.7),
+    ('2021', '1.0', 2045, 'SBUS', 'Gas', 14855.6),
+    ('2021', '1.0', 2045, 'SBUS', 'Dsl', 26056.8),
+    ('2021', '1.0', 2045, 'SBUS', 'Elec', 29396.6),
+    ('2021', '1.0', 2050, 'SBUS', 'Gas', 13139.8),
+    ('2021', '1.0', 2050, 'SBUS', 'Dsl', 21642.1),
+    ('2021', '1.0', 2050, 'SBUS', 'Elec', 37036.6),
+    ('2021', '1.0', 2050, 'SBUS', 'NG', 448.253),
+    ('2021', '1.0', 2050, 'T6 CAIRP Class 4', 'Dsl', 345.852),
+    ('2021', '1.0', 2050, 'T6 CAIRP Class 4', 'Elec', 527.078),
+    ('2021', '1.0', 2050, 'T6 CAIRP Class 5', 'Dsl', 474.735),
+    ('2021', '1.0', 2050, 'T6 CAIRP Class 5', 'Elec', 722.767),
+    ('2021', '1.0', 2050, 'T6 CAIRP Class 6', 'Dsl', 1238.61),
+    ('2021', '1.0', 2050, 'T6 CAIRP Class 6', 'Elec', 1890.5),
+    ('2021', '1.0', 2050, 'T6 CAIRP Class 7', 'Dsl', 14833.4),
+    ('2021', '1.0', 2050, 'T6 CAIRP Class 7', 'Elec', 4793.93),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 4', 'Dsl', 20815.3),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 4', 'Elec', 27430.4),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 4', 'NG', 367.981),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 5', 'Dsl', 15777.4),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 5', 'Elec', 20825.2),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 5', 'NG', 283.276),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 6', 'Dsl', 47086.5),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 6', 'Elec', 62090.7),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 6', 'NG', 839.201),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 7', 'Dsl', 24537.1),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 7', 'Elec', 18211),
+    ('2021', '1.0', 2050, 'T6 Instate Delivery Class 7', 'NG', 217.313),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 4', 'Dsl', 53152.3),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 4', 'Elec', 72613.7),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 4', 'NG', 937.48),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 5', 'Dsl', 100331),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 5', 'Elec', 137239),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 5', 'NG', 1792.82),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 6', 'Dsl', 98882.7),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 6', 'Elec', 135189),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 6', 'NG', 1774.77),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 7', 'Dsl', 61512),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 7', 'Elec', 53126.3),
+    ('2021', '1.0', 2050, 'T6 Instate Other Class 7', 'NG', 487.985),
+    ('2021', '1.0', 2050, 'T6 Instate Tractor Class 6', 'Dsl', 584.681),
+    ('2021', '1.0', 2050, 'T6 Instate Tractor Class 6', 'Elec', 811.683),
+    ('2021', '1.0', 2050, 'T6 Instate Tractor Class 6', 'NG', 10.4074),
+    ('2021', '1.0', 2050, 'T6 Instate Tractor Class 7', 'Dsl', 33831.1),
+    ('2021', '1.0', 2050, 'T6 Instate Tractor Class 7', 'Elec', 8635.88),
+    ('2021', '1.0', 2050, 'T6 Instate Tractor Class 7', 'NG', 256.579),
+    ('2021', '1.0', 2050, 'T6 OOS Class 4', 'Dsl', 497.545),
+    ('2021', '1.0', 2050, 'T6 OOS Class 5', 'Dsl', 682.542),
+    ('2021', '1.0', 2050, 'T6 OOS Class 6', 'Dsl', 1783.5),
+    ('2021', '1.0', 2050, 'T6 OOS Class 7', 'Dsl', 12968.3),
+    ('2021', '1.0', 2050, 'T6 Public Class 4', 'Dsl', 5176.07),
+    ('2021', '1.0', 2050, 'T6 Public Class 4', 'Elec', 5708.93),
+    ('2021', '1.0', 2050, 'T6 Public Class 4', 'NG', 66.9558),
+    ('2021', '1.0', 2050, 'T6 Public Class 5', 'Dsl', 11622),
+    ('2021', '1.0', 2050, 'T6 Public Class 5', 'Elec', 12656.2),
+    ('2021', '1.0', 2050, 'T6 Public Class 5', 'NG', 157.288),
+    ('2021', '1.0', 2050, 'T6 Public Class 6', 'Dsl', 7802.79),
+    ('2021', '1.0', 2050, 'T6 Public Class 6', 'Elec', 8513.41),
+    ('2021', '1.0', 2050, 'T6 Public Class 6', 'NG', 100.575),
+    ('2021', '1.0', 2050, 'T6 Public Class 7', 'Dsl', 19619.1),
+    ('2021', '1.0', 2050, 'T6 Public Class 7', 'Elec', 16667.1),
+    ('2021', '1.0', 2050, 'T6 Public Class 7', 'NG', 258.181),
+    ('2021', '1.0', 2050, 'T6 Utility Class 5', 'Dsl', 3565.79),
+    ('2021', '1.0', 2050, 'T6 Utility Class 5', 'Elec', 5523.34),
+    ('2021', '1.0', 2050, 'T6 Utility Class 6', 'Dsl', 856.173),
+    ('2021', '1.0', 2050, 'T6 Utility Class 6', 'Elec', 1326.17),
+    ('2021', '1.0', 2050, 'T6 Utility Class 7', 'Dsl', 1028.32),
+    ('2021', '1.0', 2050, 'T6 Utility Class 7', 'Elec', 1619.71),
+    ('2021', '1.0', 2050, 'T6TS', 'Gas', 98058.4),
+    ('2021', '1.0', 2050, 'T6TS', 'Elec', 133033)
 GO
 
 -- get the emfac vehicle class surrogate key
@@ -2119,7 +4086,10 @@ LEFT OUTER JOIN -- if no matches a NULL value will return insert error
 ON
 	#tt_emfac_default_vmt.[major_version] = [emfac_vehicle_class].[major_version]
 	AND #tt_emfac_default_vmt.[minor_version] = [emfac_vehicle_class].[minor_version]
-	AND CONCAT(#tt_emfac_default_vmt.[vehicle_class], ' - ', #tt_emfac_default_vmt.[fuel]) = [emfac_vehicle_class].[emfac_vehicle_class]
+	AND CASE WHEN #tt_emfac_default_vmt.[major_version] = '2021'
+             THEN CONCAT(#tt_emfac_default_vmt.[vehicle_class], '-', #tt_emfac_default_vmt.[fuel])
+             ELSE CONCAT(#tt_emfac_default_vmt.[vehicle_class], ' - ', #tt_emfac_default_vmt.[fuel])
+             END = [emfac_vehicle_class].[emfac_vehicle_class]
 
 -- drop temporary emfac_default_vmt table
 DROP TABLE #tt_emfac_default_vmt
@@ -2141,7 +4111,7 @@ CREATE TABLE [emfac].[emfac_vehicle_map](
 	[sandag_vehicle_class_id] tinyint NOT NULL,
 	[emfac_vehicle_class_id] smallint NOT NULL,
 	CONSTRAINT [pk_emfac_vehicle_map]
-        PRIMARY KEY ([emfac_vehicle_map_id]),	
+        PRIMARY KEY ([emfac_vehicle_map_id]),
 	CONSTRAINT [ixuq_emfac_vehicle_map]
         UNIQUE ([sandag_vehicle_class_id],[emfac_vehicle_class_id])
         WITH (DATA_COMPRESSION = PAGE),
@@ -2151,8 +4121,8 @@ CREATE TABLE [emfac].[emfac_vehicle_map](
 	CONSTRAINT [fk_emfac_vehicle_map_sandag_vehicle_class]
         FOREIGN KEY ([sandag_vehicle_class_id])
         REFERENCES [emfac].[sandag_vehicle_class] ([sandag_vehicle_class_id])
-	) 
-WITH 
+	)
+WITH
 	(DATA_COMPRESSION = PAGE)
 GO
 
@@ -2200,7 +4170,7 @@ INSERT INTO #tt_emfac_vehicle_map VALUES
 	('Shared Ride 3+', 'LDT1 - Gas', '2014', '1.0'),
 	('Shared Ride 3+', 'LDT2 - Dsl', '2014', '1.0'),
 	('Shared Ride 3+', 'LDT2 - Gas', '2014', '1.0'),
-	('Shared Ride 3+', 'MCY - Gas', '2014', '1.0'),
+	--('Shared Ride 3+', 'MCY - Gas', '2014', '1.0'),
 	('Shared Ride 3+', 'MDV - Dsl', '2014', '1.0'),
 	('Shared Ride 3+', 'MDV - Gas', '2014', '1.0'),
 	('Shared Ride 3+', 'MH - Dsl', '2014', '1.0'),
@@ -2278,7 +4248,7 @@ INSERT INTO #tt_emfac_vehicle_map VALUES
 	('Shared Ride 3+', 'LDT2 - Dsl', '2017', '1.0'),
 	('Shared Ride 3+', 'LDT2 - Elec', '2017', '1.0'),
 	('Shared Ride 3+', 'LDT2 - Gas', '2017', '1.0'),
-	('Shared Ride 3+', 'MCY - Gas', '2017', '1.0'),
+	--('Shared Ride 3+', 'MCY - Gas', '2017', '1.0'),
 	('Shared Ride 3+', 'MDV - Dsl', '2017', '1.0'),
 	('Shared Ride 3+', 'MDV - Elec', '2017', '1.0'),
 	('Shared Ride 3+', 'MDV - Gas', '2017', '1.0'),
@@ -2319,7 +4289,187 @@ INSERT INTO #tt_emfac_vehicle_map VALUES
 	('Heavy Heavy Duty Truck', 'PTO - Dsl', '2017', '1.0'),
 	('Highway Network Preload - Bus', 'UBUS - Dsl', '2017', '1.0'),
 	('Highway Network Preload - Bus', 'UBUS - Gas', '2017', '1.0'),
-	('Highway Network Preload - Bus', 'UBUS - NG', '2017', '1.0')
+	('Highway Network Preload - Bus', 'UBUS - NG', '2017', '1.0'),
+    ('Drive Alone', 'LDA-Dsl', '2021', '1.0'),
+    ('Drive Alone', 'LDA-Elec', '2021', '1.0'),
+    ('Drive Alone', 'LDA-Gas', '2021', '1.0'),
+    ('Drive Alone', 'LDA-Phe', '2021', '1.0'),
+    ('Drive Alone', 'LDT1-Dsl', '2021', '1.0'),
+    ('Drive Alone', 'LDT1-Elec', '2021', '1.0'),
+    ('Drive Alone', 'LDT1-Gas', '2021', '1.0'),
+    ('Drive Alone', 'LDT1-Phe', '2021', '1.0'),
+    ('Drive Alone', 'LDT2-Dsl', '2021', '1.0'),
+    ('Drive Alone', 'LDT2-Elec', '2021', '1.0'),
+    ('Drive Alone', 'LDT2-Gas', '2021', '1.0'),
+    ('Drive Alone', 'LDT2-Phe', '2021', '1.0'),
+    ('Drive Alone', 'LHD1-Dsl', '2021', '1.0'),
+    ('Drive Alone', 'LHD1-Elec', '2021', '1.0'),
+    ('Drive Alone', 'LHD1-Gas', '2021', '1.0'),
+    ('Drive Alone', 'LHD2-Dsl', '2021', '1.0'),
+    ('Drive Alone', 'LHD2-Elec', '2021', '1.0'),
+    ('Drive Alone', 'LHD2-Gas', '2021', '1.0'),
+    ('Drive Alone', 'MCY-Gas', '2021', '1.0'),
+    ('Drive Alone', 'MDV-Dsl', '2021', '1.0'),
+    ('Drive Alone', 'MDV-Elec', '2021', '1.0'),
+    ('Drive Alone', 'MDV-Gas', '2021', '1.0'),
+    ('Drive Alone', 'MDV-Phe', '2021', '1.0'),
+    ('Drive Alone', 'MH-Dsl', '2021', '1.0'),
+    ('Drive Alone', 'MH-Gas', '2021', '1.0'),
+    ('Shared Ride 2', 'LDA-Dsl', '2021', '1.0'),
+    ('Shared Ride 2', 'LDA-Elec', '2021', '1.0'),
+    ('Shared Ride 2', 'LDA-Gas', '2021', '1.0'),
+    ('Shared Ride 2', 'LDA-Phe', '2021', '1.0'),
+    ('Shared Ride 2', 'LDT1-Dsl', '2021', '1.0'),
+    ('Shared Ride 2', 'LDT1-Elec', '2021', '1.0'),
+    ('Shared Ride 2', 'LDT1-Gas', '2021', '1.0'),
+    ('Shared Ride 2', 'LDT1-Phe', '2021', '1.0'),
+    ('Shared Ride 2', 'LDT2-Dsl', '2021', '1.0'),
+    ('Shared Ride 2', 'LDT2-Elec', '2021', '1.0'),
+    ('Shared Ride 2', 'LDT2-Gas', '2021', '1.0'),
+    ('Shared Ride 2', 'LDT2-Phe', '2021', '1.0'),
+    ('Shared Ride 2', 'LHD1-Dsl', '2021', '1.0'),
+    ('Shared Ride 2', 'LHD1-Elec', '2021', '1.0'),
+    ('Shared Ride 2', 'LHD1-Gas', '2021', '1.0'),
+    ('Shared Ride 2', 'LHD2-Dsl', '2021', '1.0'),
+    ('Shared Ride 2', 'LHD2-Elec', '2021', '1.0'),
+    ('Shared Ride 2', 'LHD2-Gas', '2021', '1.0'),
+    ('Shared Ride 2', 'MCY-Gas', '2021', '1.0'),
+    ('Shared Ride 2', 'MDV-Dsl', '2021', '1.0'),
+    ('Shared Ride 2', 'MDV-Elec', '2021', '1.0'),
+    ('Shared Ride 2', 'MDV-Gas', '2021', '1.0'),
+    ('Shared Ride 2', 'MDV-Phe', '2021', '1.0'),
+    ('Shared Ride 2', 'MH-Dsl', '2021', '1.0'),
+    ('Shared Ride 2', 'MH-Gas', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDA-Dsl', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDA-Elec', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDA-Gas', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDA-Phe', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDT1-Dsl', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDT1-Elec', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDT1-Gas', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDT1-Phe', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDT2-Dsl', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDT2-Elec', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDT2-Gas', '2021', '1.0'),
+    ('Shared Ride 3+', 'LDT2-Phe', '2021', '1.0'),
+    ('Shared Ride 3+', 'LHD1-Dsl', '2021', '1.0'),
+    ('Shared Ride 3+', 'LHD1-Elec', '2021', '1.0'),
+    ('Shared Ride 3+', 'LHD1-Gas', '2021', '1.0'),
+    ('Shared Ride 3+', 'LHD2-Dsl', '2021', '1.0'),
+    ('Shared Ride 3+', 'LHD2-Elec', '2021', '1.0'),
+    ('Shared Ride 3+', 'LHD2-Gas', '2021', '1.0'),
+    --('Shared Ride 3+', 'MCY-Gas', '2021', '1.0'),
+    ('Shared Ride 3+', 'MDV-Dsl', '2021', '1.0'),
+    ('Shared Ride 3+', 'MDV-Elec', '2021', '1.0'),
+    ('Shared Ride 3+', 'MDV-Gas', '2021', '1.0'),
+    ('Shared Ride 3+', 'MDV-Phe', '2021', '1.0'),
+    ('Shared Ride 3+', 'MH-Dsl', '2021', '1.0'),
+    ('Shared Ride 3+', 'MH-Gas', '2021', '1.0'),
+    ('Light Heavy Duty Truck', 'LHD1-Dsl', '2021', '1.0'),
+    ('Light Heavy Duty Truck', 'LHD1-Elec', '2021', '1.0'),
+    ('Light Heavy Duty Truck', 'LHD1-Gas', '2021', '1.0'),
+    ('Light Heavy Duty Truck', 'LHD2-Dsl', '2021', '1.0'),
+    ('Light Heavy Duty Truck', 'LHD2-Elec', '2021', '1.0'),
+    ('Light Heavy Duty Truck', 'LHD2-Gas', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'PTO-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'PTO-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 CAIRP Class 4-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 CAIRP Class 4-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 CAIRP Class 5-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 CAIRP Class 5-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 CAIRP Class 6-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 CAIRP Class 6-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 CAIRP Class 7-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 CAIRP Class 7-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 4-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 4-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 4-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 5-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 5-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 5-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 6-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 6-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 6-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 7-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 7-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Delivery Class 7-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 4-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 4-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 4-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 5-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 5-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 5-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 6-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 6-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 6-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 7-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 7-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Other Class 7-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Tractor Class 6-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Tractor Class 6-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Tractor Class 6-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Tractor Class 7-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Tractor Class 7-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Instate Tractor Class 7-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 OOS Class 4-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 OOS Class 5-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 OOS Class 6-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 OOS Class 7-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 4-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 4-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 4-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 5-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 5-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 5-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 6-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 6-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 6-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 7-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 7-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Public Class 7-NG', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Utility Class 5-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Utility Class 5-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Utility Class 6-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Utility Class 6-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Utility Class 7-Dsl', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6 Utility Class 7-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6TS-Elec', '2021', '1.0'),
+    ('Medium Heavy Duty Truck', 'T6TS-Gas', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 CAIRP Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 CAIRP Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 CAIRP Class 8-NG', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 NNOOS Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 NOOS Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Other Port Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Other Port Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 POLA Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 POLA Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Public Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Public Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Public Class 8-NG', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Concrete/Transit Mix Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Concrete/Transit Mix Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Concrete/Transit Mix Class 8-NG', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Dump Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Dump Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Dump Class 8-NG', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Other Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Other Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Single Other Class 8-NG', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 SWCV Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 SWCV Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 SWCV Class 8-NG', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Tractor Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Tractor Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Tractor Class 8-NG', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Utility Class 8-Dsl', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7 Utility Class 8-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7IS-Elec', '2021', '1.0'),
+    ('Heavy Heavy Duty Truck', 'T7IS-Gas', '2021', '1.0'),
+    ('Highway Network Preload - Bus', 'UBUS-Dsl', '2021', '1.0'),
+    ('Highway Network Preload - Bus', 'UBUS-Elec', '2021', '1.0'),
+    ('Highway Network Preload - Bus', 'UBUS-Gas', '2021', '1.0'),
+    ('Highway Network Preload - Bus', 'UBUS-NG', '2021', '1.0')
 GO
 
 -- get the sandag and emfac vehicle class surrogate keys
@@ -2361,7 +4511,7 @@ CREATE FUNCTION [emfac].[fn_emfac_2014_vmt_map]
 (
 	@year integer
 )
-RETURNS @tbl_emfac_2014_vmt_map TABLE 
+RETURNS @tbl_emfac_2014_vmt_map TABLE
 (
 	[sandag_vehicle_class] varchar(50) NOT NULL
 	,[emfac_vehicle_class] varchar(50) NOT NULL
@@ -2370,7 +4520,7 @@ RETURNS @tbl_emfac_2014_vmt_map TABLE
 )
 AS
 
-/**	
+/**
 summary:   >
     Take the EMFAC 2014 sandag to emfac vehicle class map and the default
     vmt for a given year to create the percentage split of emfac vehicle
@@ -2388,7 +4538,7 @@ BEGIN
         -- nof the emfac_vehicle_class
 		,[vmt] / (SUM([vmt]) OVER (PARTITION BY [sandag_vehicle_class])) AS [value]
 	FROM (
-		SELECT 
+		SELECT
 			[sandag_vehicle_class].[sandag_vehicle_class]
             -- EMFAC 2014 contains these two modes in the default vmt report
             -- but does not allow them in the custom input file
@@ -2428,7 +4578,7 @@ BEGIN
 					ELSE [emfac_vehicle_class].[emfac_vehicle_class]
 					END) AS [tt]
 
-	RETURN 
+	RETURN
 END
 GO
 
@@ -2447,7 +4597,7 @@ CREATE FUNCTION [emfac].[fn_emfac_2017_vmt_map]
 (
 	@year integer
 )
-RETURNS @tbl_emfac_2017_vmt_map TABLE 
+RETURNS @tbl_emfac_2017_vmt_map TABLE
 (
 	[sandag_vehicle_class] varchar(50) NOT NULL
 	,[emfac_vehicle_class] varchar(50) NOT NULL
@@ -2456,7 +4606,7 @@ RETURNS @tbl_emfac_2017_vmt_map TABLE
 )
 AS
 
-/**	
+/**
 summary:   >
     Take the EMFAC 2017 sandag to emfac vehicle class map and the default
     vmt for a given year to create the percentage split of emfac vehicle
@@ -2473,7 +4623,7 @@ BEGIN
         -- of the emfac_vehicle_class
 		,[vmt] / (SUM([vmt]) OVER (PARTITION BY [sandag_vehicle_class])) AS [value]
 	FROM (
-		SELECT 
+		SELECT
 			[sandag_vehicle_class].[sandag_vehicle_class]
             -- EMFAC 2017 contains these six modes in the default vmt report
             -- but does not allow them in the custom input file
@@ -2528,12 +4678,82 @@ BEGIN
                     THEN 'T7 SWCV - Dsl'
 					ELSE [emfac_vehicle_class].[emfac_vehicle_class]
 					END) AS [tt]
-	RETURN 
+	RETURN
 END
 GO
 
 -- add metadata for [emfac].[fn_emfac_2017_vmt_map]
 EXECUTE [db_meta].[add_xp] 'emfac.fn_emfac_2017_vmt_map', 'MS_Description', 'emfac 2017 function mapping sandag vehicle classes to emfac vehicle classes using the emfac vehicle class default vmt for a given year'
+GO
+
+
+
+
+-- create fn_emfac_2021_vmt_map table valued function ------------------------
+DROP FUNCTION IF EXISTS [emfac].[fn_emfac_2021_vmt_map]
+GO
+
+CREATE FUNCTION [emfac].[fn_emfac_2021_vmt_map]
+(
+	@year integer
+)
+RETURNS @tbl_emfac_2021_vmt_map TABLE
+(
+	[sandag_vehicle_class] varchar(50) NOT NULL
+	,[emfac_vehicle_class] varchar(50) NOT NULL
+	,[value] float NOT NULL
+	,PRIMARY KEY ([sandag_vehicle_class], [emfac_vehicle_class])
+)
+AS
+
+/**
+summary:   >
+    Take the EMFAC 2021 sandag to emfac vehicle class map and the default
+    vmt for a given year to create the percentage split of emfac vehicle
+    classes into sandag vehicle classes.
+**/
+
+BEGIN
+	INSERT INTO @tbl_emfac_2021_vmt_map
+	SELECT
+		[sandag_vehicle_class]
+		,[emfac_vehicle_class]
+        -- calculate pct of sandag_vehicle_class that is made up of
+        -- emfac_vehicle_class weighted by the default vmt
+        -- of the emfac_vehicle_class
+		,[vmt] / (SUM([vmt]) OVER (PARTITION BY [sandag_vehicle_class])) AS [value]
+	FROM (
+		SELECT
+			[sandag_vehicle_class].[sandag_vehicle_class]
+			,[emfac_vehicle_class].[emfac_vehicle_class]
+			,SUM([emfac_default_vmt].[vmt]) AS [vmt]
+		FROM
+			[emfac].[emfac_default_vmt]
+		INNER JOIN
+			[emfac].[emfac_vehicle_class]
+		ON
+			[emfac_default_vmt].[emfac_vehicle_class_id] = [emfac_vehicle_class].[emfac_vehicle_class_id]
+		INNER JOIN
+			[emfac].[emfac_vehicle_map]
+		ON
+			[emfac_default_vmt].[emfac_vehicle_class_id] = [emfac_vehicle_map].[emfac_vehicle_class_id]
+		INNER JOIN
+			[emfac].[sandag_vehicle_class]
+		ON
+			[emfac_vehicle_map].[sandag_vehicle_class_id] = [sandag_vehicle_class].[sandag_vehicle_class_id]
+		WHERE
+			[emfac_default_vmt].[year] = @year
+			AND [emfac_vehicle_class].[major_version] = '2021'
+			AND [emfac_vehicle_class].[minor_version] = '1.0'
+		GROUP BY
+			[sandag_vehicle_class].[sandag_vehicle_class]
+			,[emfac_vehicle_class].[emfac_vehicle_class]) AS [tt]
+	RETURN
+END
+GO
+
+-- add metadata for [emfac].[fn_emfac_2021_vmt_map]
+EXECUTE [db_meta].[add_xp] 'emfac.fn_emfac_2021_vmt_map', 'MS_Description', 'emfac 2021 function mapping sandag vehicle classes to emfac vehicle classes using the emfac vehicle class default vmt for a given year'
 GO
 
 
@@ -2549,7 +4769,7 @@ CREATE FUNCTION [emfac].[fn_get_unassigned_vmt]
 	@minor_version varchar(5),
 	@year integer
 )
-RETURNS @tbl_unassigned_vmt TABLE 
+RETURNS @tbl_unassigned_vmt TABLE
 (
 	[emfac_vehicle_class] varchar(50) NOT NULL
 	,[vmt] float NOT NULL
@@ -2589,7 +4809,7 @@ BEGIN
         -- return unassigned emfac vehicle classes
 		AND [emfac_vehicle_map].[emfac_vehicle_map_id] IS NULL
 
-	RETURN 
+	RETURN
 END
 GO
 
@@ -2619,7 +4839,7 @@ BEGIN
 	-- get the scenario year
 	DECLARE @year integer;
 	SET @year = (
-		SELECT 
+		SELECT
 			[year]
 		FROM
 			[dimension].[scenario]
@@ -2636,9 +4856,9 @@ BEGIN
 		,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2014_vmt_map].[value]) AS [New Total VMT]
 	FROM
 		[fact].[hwy_flow_mode]
-	INNER JOIN 
+	INNER JOIN
 		[dimension].[hwy_link]
-	ON 
+	ON
 		[hwy_flow_mode].[scenario_id] = [hwy_link].[scenario_id]
 		AND [hwy_flow_mode].[hwy_link_id] = [hwy_link].[hwy_link_id]
 	INNER JOIN
@@ -2648,12 +4868,12 @@ BEGIN
     -- left outer join keeps NULL records if no matches and throws insert error
 	LEFT OUTER JOIN
 		[emfac].[fn_emfac_2014_vmt_map](@year)
-	ON 
+	ON
 		[mode].[mode_description] = [fn_emfac_2014_vmt_map].[sandag_vehicle_class]
 	WHERE
 		[hwy_flow_mode].[scenario_id] = @scenario_id
 		AND [hwy_link].[scenario_id] = @scenario_id
-	GROUP BY 
+	GROUP BY
 		[fn_emfac_2014_vmt_map].[emfac_vehicle_class]
 
 	UNION ALL
@@ -2700,7 +4920,7 @@ BEGIN
 	-- get the scenario year
 	DECLARE @year integer;
 	SET @year = (
-		SELECT 
+		SELECT
 			[year]
 		FROM
 			[dimension].[scenario]
@@ -2717,9 +4937,9 @@ BEGIN
 		,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2017_vmt_map].[value]) AS [New Total VMT]
 	FROM
 		[fact].[hwy_flow_mode]
-	INNER JOIN 
+	INNER JOIN
 		[dimension].[hwy_link]
-	ON 
+	ON
 		[hwy_flow_mode].[scenario_id] = [hwy_link].[scenario_id]
 		AND [hwy_flow_mode].[hwy_link_id] = [hwy_link].[hwy_link_id]
 	INNER JOIN
@@ -2727,14 +4947,14 @@ BEGIN
 	ON
 		[hwy_flow_mode].[mode_id] = [mode].[mode_id]
     -- left outer join keeps NULL records if no matches and throws insert error
-	LEFT OUTER JOIN 
+	LEFT OUTER JOIN
 		[emfac].[fn_emfac_2017_vmt_map](@year)
-	ON 
+	ON
 		[mode].[mode_description] = [fn_emfac_2017_vmt_map].[sandag_vehicle_class]
 	WHERE
 		[hwy_flow_mode].[scenario_id] = @scenario_id
 		AND [hwy_link].[scenario_id] = @scenario_id
-	GROUP BY 
+	GROUP BY
 		[fn_emfac_2017_vmt_map].[emfac_vehicle_class]
 
 	UNION ALL
@@ -2762,6 +4982,87 @@ GO
 
 
 
+-- create sp_emfac_2021_vmt stored procedure ---------------------------------
+DROP PROCEDURE IF EXISTS [emfac].[sp_emfac_2021_vmt]
+GO
+
+CREATE PROCEDURE [emfac].[sp_emfac_2021_vmt]
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+AS
+
+/**
+summary:   >
+    VMT function for EMFAC 2021 program.
+**/
+
+BEGIN
+	SET NOCOUNT ON;
+
+	-- get the scenario year
+	DECLARE @year integer;
+	SET @year = (
+		SELECT
+			[year]
+		FROM
+			[dimension].[scenario]
+		WHERE
+			[scenario_id] = @scenario_id)
+
+	-- get model vmt by emfac vehicle class
+	SELECT
+		'SANDAG' AS [MPO]
+		,38 AS [GAI]
+		,'San Diego (SD)' AS [Sub-Area]
+		,@year AS [Cal_Year]
+		,[fn_emfac_2021_vmt_map].[emfac_vehicle_class] AS [Veh_Tech]
+		,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2021_vmt_map].[value]) AS [New Total VMT]
+	FROM
+		[fact].[hwy_flow_mode]
+	INNER JOIN
+		[dimension].[hwy_link]
+	ON
+		[hwy_flow_mode].[scenario_id] = [hwy_link].[scenario_id]
+		AND [hwy_flow_mode].[hwy_link_id] = [hwy_link].[hwy_link_id]
+	INNER JOIN
+		[dimension].[mode]
+	ON
+		[hwy_flow_mode].[mode_id] = [mode].[mode_id]
+    -- left outer join keeps NULL records if no matches and will result in ERROR
+	LEFT OUTER JOIN
+		[emfac].[fn_emfac_2021_vmt_map](@year)
+	ON
+		[mode].[mode_description] = [fn_emfac_2021_vmt_map].[sandag_vehicle_class]
+	WHERE
+		[hwy_flow_mode].[scenario_id] = @scenario_id
+		AND [hwy_link].[scenario_id] = @scenario_id
+	GROUP BY
+		[fn_emfac_2021_vmt_map].[emfac_vehicle_class]
+
+	UNION ALL
+
+	-- get non-assigned classes (e.g., school bus) vmt
+	SELECT
+		'SANDAG' AS [MPO]
+		,38 AS [GAI]
+		,'San Diego (SD)' AS [Sub-Area]
+		,@year AS [Cal_Year]
+		,[emfac_vehicle_class] AS [Veh_Tech]
+		,[vmt] AS [New Total VMT]
+	FROM
+		[emfac].[fn_get_unassigned_vmt]('2021', '1.0', @year)
+	ORDER BY
+		[emfac_vehicle_class]
+OPTION(MAXDOP 1)
+END
+GO
+
+-- add metadata for [emfac].[sp_emfac_2021_vmt]
+EXECUTE [db_meta].[add_xp] 'emfac.sp_emfac_2021_vmt', 'MS_Description', 'emfac 2021 vmt stored procedure for emfac program'
+GO
+
+
+
+
 -- create sp_emfac_2014_vmt_speed stored procedure ---------------------------
 DROP PROCEDURE IF EXISTS [emfac].[sp_emfac_2014_vmt_speed]
 GO
@@ -2781,7 +5082,7 @@ BEGIN
 	-- get the scenario year
 	DECLARE @year integer;
 	SET @year = (
-		SELECT 
+		SELECT
 			[year]
 		FROM
 			[dimension].[scenario]
@@ -2826,7 +5127,7 @@ BEGIN
 
 
 	-- calculate model vmt by emfac vehicle class, hour of day, and speed bin
-	--Get the ABM assigned VMT by vehicle type and speed  
+	--Get the ABM assigned VMT by vehicle type and speed
 	with [vmt_speed] AS (
 		SELECT
 			[fn_emfac_2014_vmt_map].[emfac_vehicle_class]
@@ -2835,9 +5136,9 @@ BEGIN
 			,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2014_vmt_map].[value]) AS [vmt]
 		FROM
 			[fact].[hwy_flow_mode]
-		INNER JOIN 
+		INNER JOIN
 			[dimension].[hwy_link]
-		ON 
+		ON
 			[hwy_flow_mode].[scenario_id] = [hwy_link].[scenario_id]
 			AND [hwy_flow_mode].[hwy_link_id] = [hwy_link].[hwy_link_id]
 		INNER JOIN
@@ -2858,7 +5159,7 @@ BEGIN
 			AND [hwy_link].[scenario_id] = @scenario_id
 			AND [hwy_flow].[scenario_id] = @scenario_id
 			AND [hwy_flow_mode].[flow] > 0
-		GROUP BY 
+		GROUP BY
 			[fn_emfac_2014_vmt_map].[emfac_vehicle_class]
 			,[hwy_flow_mode].[time_id]
 			,CEILING([hwy_flow].[speed] / 5) * 5),
@@ -2883,7 +5184,7 @@ BEGIN
 			,[emfac_hours]
 			,[speed_bin]
             -- note CASE statements stop execution when first true is evaluated
-			,CASE	WHEN [emfac_vehicle_class] = 'PTO - Dsl' 
+			,CASE	WHEN [emfac_vehicle_class] = 'PTO - Dsl'
 						 AND [speed_bin] = 20
 					THEN 1 -- assign all PTO - Dsl pct vmt to the 20mph speed bin
 					WHEN [emfac_vehicle_class] = 'PTO - Dsl'
@@ -2984,8 +5285,8 @@ BEGIN
 											   'T7IS - Gas',
 											   'UBUS - Dsl',
 											   'UBUS - Gas')
-				THEN ISNULL([65],0)  + ISNULL([70],0)  + ISNULL([75],0)  + ISNULL([80],0)  + ISNULL([85],0)  + ISNULL([90],0) 
-				ELSE ISNULL([65],0) 
+				THEN ISNULL([65],0)  + ISNULL([70],0)  + ISNULL([75],0)  + ISNULL([80],0)  + ISNULL([85],0)  + ISNULL([90],0)
+				ELSE ISNULL([65],0)
 				END AS [65mph]
 		,CASE	WHEN [emfac_vehicle_class] IN ('LHD1 - Dsl',
 											   'LHD1 - Gas',
@@ -3243,14 +5544,14 @@ BEGIN
 	-- get the scenario year
 	DECLARE @year integer;
 	SET @year = (
-		SELECT 
+		SELECT
 			[year]
 		FROM
 			[dimension].[scenario]
 		WHERE
 			[scenario_id] = @scenario_id);
 
-	-- declare table to hold mapping of 
+	-- declare table to hold mapping of
     -- abm assignment five time of day to hour based representation
 	DECLARE @tbl_emfac_time TABLE
 	(
@@ -3287,7 +5588,7 @@ BEGIN
 		(4,19);
 
 	-- calculate model vmt by emfac vehicle class, hour of day, and speed bin
-	-- Get the ABM assigned VMT by vehicle type and speed  
+	-- Get the ABM assigned VMT by vehicle type and speed
 	with [vmt_speed] AS (
 		SELECT
 			[fn_emfac_2017_vmt_map].[emfac_vehicle_class]
@@ -3296,9 +5597,9 @@ BEGIN
 			,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2017_vmt_map].[value]) AS [vmt]
 		FROM
 			[fact].[hwy_flow_mode]
-		INNER JOIN 
+		INNER JOIN
 			[dimension].[hwy_link]
-		ON 
+		ON
 			[hwy_flow_mode].[scenario_id] = [hwy_link].[scenario_id]
 			AND [hwy_flow_mode].[hwy_link_id] = [hwy_link].[hwy_link_id]
 		INNER JOIN
@@ -3319,7 +5620,7 @@ BEGIN
 			AND [hwy_link].[scenario_id] = @scenario_id
 			AND [hwy_flow].[scenario_id] = @scenario_id
 			AND [hwy_flow_mode].[flow] > 0
-		GROUP BY 
+		GROUP BY
 			[fn_emfac_2017_vmt_map].[emfac_vehicle_class]
 			,[hwy_flow_mode].[time_id]
 			,CEILING([hwy_flow].[speed] / 5) * 5),
@@ -3344,7 +5645,7 @@ BEGIN
 			,[emfac_hours]
 			,[speed_bin]
             -- CASE statements stop execution when first true is evaluated
-			,CASE	WHEN [emfac_vehicle_class] = 'PTO - Dsl' 
+			,CASE	WHEN [emfac_vehicle_class] = 'PTO - Dsl'
 						 AND [speed_bin] = 20
 					THEN 1 -- assign all PTO - Dsl pct vmt to the 20mph speed bin
 					WHEN [emfac_vehicle_class] = 'PTO - Dsl'
@@ -3445,8 +5746,8 @@ BEGIN
 											   'T7IS - Gas',
 											   'UBUS - Dsl',
 											   'UBUS - Gas')
-				THEN ISNULL([65],0)  + ISNULL([70],0)  + ISNULL([75],0)  + ISNULL([80],0)  + ISNULL([85],0)  + ISNULL([90],0) 
-				ELSE ISNULL([65],0) 
+				THEN ISNULL([65],0)  + ISNULL([70],0)  + ISNULL([75],0)  + ISNULL([80],0)  + ISNULL([85],0)  + ISNULL([90],0)
+				ELSE ISNULL([65],0)
 				END AS [65mph]
 		,CASE	WHEN [emfac_vehicle_class] IN ('LHD1 - Dsl',
 											   'LHD1 - Gas',
@@ -3685,6 +5986,917 @@ GO
 
 
 
+-- create sp_emfac_2021_vmt_speed stored procedure ---------------------------
+DROP PROCEDURE IF EXISTS [emfac].[sp_emfac_2021_vmt_speed]
+GO
+
+CREATE PROCEDURE [emfac].[sp_emfac_2021_vmt_speed]
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+AS
+
+/**
+summary:   >
+    VMT by speed bin function for EMFAC 2021 program.
+**/
+
+BEGIN
+	SET NOCOUNT ON;
+
+	-- get the scenario year
+	DECLARE @year integer;
+	SET @year = (
+		SELECT
+			[year]
+		FROM
+			[dimension].[scenario]
+		WHERE
+			[scenario_id] = @scenario_id);
+
+	-- declare table to hold mapping of
+    -- abm assignment five time of day to hour based representation
+	DECLARE @tbl_emfac_time TABLE
+	(
+		[abm_5_tod] int NOT NULL
+		,[emfac_hours] int NOT NULL
+	)
+
+	-- define mapping of abm assignment five time of day to hour based
+    -- representation
+	INSERT INTO @tbl_emfac_time VALUES
+		(5,1),
+		(5,2),
+		(5,3),
+		(5,20),
+		(5,21),
+		(5,22),
+		(5,23),
+		(5,24),
+		(1,4),
+		(1,5),
+		(1,6),
+		(2,7),
+		(2,8),
+		(2,9),
+		(3,10),
+		(3,11),
+		(3,12),
+		(3,13),
+		(3,14),
+		(3,15),
+		(3,16),
+		(4,17),
+		(4,18),
+		(4,19);
+
+	-- calculate model vmt by emfac vehicle class, hour of day, and speed bin
+	-- Get the ABM assigned VMT by vehicle type and speed
+	with [vmt_speed] AS (
+		SELECT
+			[fn_emfac_2021_vmt_map].[emfac_vehicle_class]
+			,[hwy_flow_mode].[time_id]
+			,CEILING([hwy_flow].[speed] / 5) * 5 AS [speed_bin]
+			,SUM([hwy_flow_mode].[flow] * [hwy_link].[length_mile] * [fn_emfac_2021_vmt_map].[value]) AS [vmt]
+		FROM
+			[fact].[hwy_flow_mode]
+		INNER JOIN
+			[dimension].[hwy_link]
+		ON
+			[hwy_flow_mode].[scenario_id] = [hwy_link].[scenario_id]
+			AND [hwy_flow_mode].[hwy_link_id] = [hwy_link].[hwy_link_id]
+		INNER JOIN
+			[fact].[hwy_flow]
+		ON
+			[hwy_flow_mode].[scenario_id] = [hwy_flow].[scenario_id]
+			AND [hwy_flow_mode].[hwy_link_ab_tod_id] = [hwy_flow].[hwy_link_ab_tod_id]
+		INNER JOIN
+			[dimension].[mode]
+		ON
+			[hwy_flow_mode].[mode_id] = [mode].[mode_id]
+		INNER JOIN
+			[emfac].[fn_emfac_2021_vmt_map](@year)
+		ON
+			[mode].[mode_description] = [fn_emfac_2021_vmt_map].[sandag_vehicle_class]
+		WHERE
+			[hwy_flow_mode].[scenario_id] = @scenario_id
+			AND [hwy_link].[scenario_id] = @scenario_id
+			AND [hwy_flow].[scenario_id] = @scenario_id
+			AND [hwy_flow_mode].[flow] > 0
+		GROUP BY
+			[fn_emfac_2021_vmt_map].[emfac_vehicle_class]
+			,[hwy_flow_mode].[time_id]
+			,CEILING([hwy_flow].[speed] / 5) * 5),
+	[unassigned_vmt_speed] AS (
+	-- get non-assigned classes (e.g., school bus) vmt by hour and speed bin
+	-- use LDA-Gas from model vmt, this is ok as it is just used to
+    -- create percentage of vmt by speed bin
+		SELECT
+			[fn_get_unassigned_vmt].[emfac_vehicle_class]
+			,[vmt_speed].[time_id]
+			,[vmt_speed].[speed_bin]
+			,[vmt_speed].[vmt]
+		FROM
+			[vmt_speed]
+		CROSS JOIN
+			[emfac].[fn_get_unassigned_vmt]('2021', '1.0', @year)
+		WHERE
+			[vmt_speed].[emfac_vehicle_class] = 'LDA-Gas'),
+	[vmt_speed_pct] AS (
+		SELECT
+			[emfac_vehicle_class]
+			,[emfac_hours]
+			,[speed_bin]
+            -- CASE statements stop execution when first true is evaluated
+			,CASE	WHEN [emfac_vehicle_class] = 'PTO-Dsl'
+						 AND [speed_bin] = 20
+					THEN 1 -- assign all PTO-Dsl pct vmt to the 20mph speed bin
+					WHEN [emfac_vehicle_class] = 'PTO-Dsl'
+					THEN 0 -- all other PTO-Dsl pct vmt by speed bin is set to 0
+                    -- create pct of vmt by speed bin
+					ELSE [vmt] / SUM([vmt]) OVER (PARTITION BY [emfac_vehicle_class], [emfac_hours])
+					END AS [class_hr_vmt_pct]
+		FROM (
+			SELECT
+				[emfac_vehicle_class]
+				,[emfac_hours]
+				,[speed_bin]
+				,[vmt]
+			FROM
+				[vmt_speed]
+			INNER JOIN
+				[dimension].[time]
+			ON
+				[vmt_speed].[time_id] = [time].[time_id]
+			RIGHT JOIN -- TODO does this make sense?
+            --assigns same vmt to every hour within each assignment period
+				@tbl_emfac_time AS [tbl_emfac_time]
+			ON
+				[time].[abm_5_tod] = CONVERT(varchar, [tbl_emfac_time].[abm_5_tod])
+
+			UNION ALL
+
+			SELECT
+				[emfac_vehicle_class]
+				,[emfac_hours]
+				,[speed_bin]
+				,[vmt]
+			FROM
+				[unassigned_vmt_speed]
+			INNER JOIN
+				[dimension].[time]
+			ON
+				[unassigned_vmt_speed].[time_id] = [time].[time_id]
+			RIGHT JOIN -- TODO does this make sense?
+            --assigns same vmt to every hour within each assignment period
+				@tbl_emfac_time AS [tbl_emfac_time]
+			ON
+				[time].[abm_5_tod] = CONVERT(varchar, [tbl_emfac_time].[abm_5_tod])) AS [tt])
+	-- pivot results for final return table
+	SELECT
+		'SANDAG' AS [MPO]
+		,38 AS [GAI]
+		,'San Diego (SD)' AS [Sub-Area]
+		,@year AS [Cal_Year]
+		,[emfac_vehicle_class] AS [Veh_Tech]
+		,[emfac_hours] AS [Hour]
+		,ISNULL([0],0) + ISNULL([5],0) AS [5mph]
+		,ISNULL([10],0) AS [10mph]
+		,ISNULL([15],0) AS [15mph]
+		,ISNULL([20],0) AS [20mph]
+		,ISNULL([25],0) AS [25mph]
+		,ISNULL([30],0) AS [30mph]
+		,ISNULL([35],0) AS [35mph]
+		,ISNULL([40],0) AS [40mph]
+		,ISNULL([45],0) AS [45mph]
+		,ISNULL([50],0) AS [50mph]
+		,ISNULL([55],0) AS [55mph]
+		,ISNULL([60],0) AS [60mph]
+		,CASE WHEN [emfac_vehicle_class] IN (-- 'Motor Coach-Dsl',  INCLUDE????
+                                             -- 'PTO-Dsl',  INCLUDE????
+                                             -- 'PTO-Elec',  INCLUDE????
+                                                'LHD1-Dsl',
+                                                'LHD1-Elec',
+                                                'LHD1-Gas',
+                                                'LHD2-Dsl',
+                                                'LHD2-Elec',
+                                                'LHD2-Gas',
+                                                'OBUS-Elec',
+                                                'OBUS-Gas',
+                                                'SBUS-Dsl',
+                                                'SBUS-Elec',
+                                                'SBUS-Gas',
+                                                'SBUS-NG',
+                                                'T6 CAIRP Class 4-Dsl',
+                                                'T6 CAIRP Class 4-Elec',
+                                                'T6 CAIRP Class 5-Dsl',
+                                                'T6 CAIRP Class 5-Elec',
+                                                'T6 CAIRP Class 6-Dsl',
+                                                'T6 CAIRP Class 6-Elec',
+                                                'T6 CAIRP Class 7-Dsl',
+                                                'T6 CAIRP Class 7-Elec',
+                                                'T6 Instate Delivery Class 4-Dsl',
+                                                'T6 Instate Delivery Class 4-Elec',
+                                                'T6 Instate Delivery Class 4-NG',
+                                                'T6 Instate Delivery Class 5-Dsl',
+                                                'T6 Instate Delivery Class 5-Elec',
+                                                'T6 Instate Delivery Class 5-NG',
+                                                'T6 Instate Delivery Class 6-Dsl',
+                                                'T6 Instate Delivery Class 6-Elec',
+                                                'T6 Instate Delivery Class 6-NG',
+                                                'T6 Instate Delivery Class 7-Dsl',
+                                                'T6 Instate Delivery Class 7-Elec',
+                                                'T6 Instate Delivery Class 7-NG',
+                                                'T6 Instate Other Class 4-Dsl',
+                                                'T6 Instate Other Class 4-Elec',
+                                                'T6 Instate Other Class 4-NG',
+                                                'T6 Instate Other Class 5-Dsl',
+                                                'T6 Instate Other Class 5-Elec',
+                                                'T6 Instate Other Class 5-NG',
+                                                'T6 Instate Other Class 6-Dsl',
+                                                'T6 Instate Other Class 6-Elec',
+                                                'T6 Instate Other Class 6-NG',
+                                                'T6 Instate Other Class 7-Dsl',
+                                                'T6 Instate Other Class 7-Elec',
+                                                'T6 Instate Other Class 7-NG',
+                                                'T6 Instate Tractor Class 6-Dsl',
+                                                'T6 Instate Tractor Class 6-Elec',
+                                                'T6 Instate Tractor Class 6-NG',
+                                                'T6 Instate Tractor Class 7-Dsl',
+                                                'T6 Instate Tractor Class 7-Elec',
+                                                'T6 Instate Tractor Class 7-NG',
+                                                'T6 OOS Class 4-Dsl',
+                                                'T6 OOS Class 5-Dsl',
+                                                'T6 OOS Class 6-Dsl',
+                                                'T6 OOS Class 7-Dsl',
+                                                'T6 Public Class 4-Dsl',
+                                                'T6 Public Class 4-Elec',
+                                                'T6 Public Class 4-NG',
+                                                'T6 Public Class 5-Dsl',
+                                                'T6 Public Class 5-Elec',
+                                                'T6 Public Class 5-NG',
+                                                'T6 Public Class 6-Dsl',
+                                                'T6 Public Class 6-Elec',
+                                                'T6 Public Class 6-NG',
+                                                'T6 Public Class 7-Dsl',
+                                                'T6 Public Class 7-Elec',
+                                                'T6 Public Class 7-NG',
+                                                'T6 Utility Class 5-Dsl',
+                                                'T6 Utility Class 5-Elec',
+                                                'T6 Utility Class 6-Dsl',
+                                                'T6 Utility Class 6-Elec',
+                                                'T6 Utility Class 7-Dsl',
+                                                'T6 Utility Class 7-Elec',
+                                                'T6TS-Elec',
+                                                'T6TS-Gas',
+                                                'T7 CAIRP Class 8-Dsl',
+                                                'T7 CAIRP Class 8-Elec',
+                                                'T7 CAIRP Class 8-NG',
+                                                'T7 NNOOS Class 8-Dsl',
+                                                'T7 NOOS Class 8-Dsl',
+                                                'T7 Other Port Class 8-Dsl',
+                                                'T7 Other Port Class 8-Elec',
+                                                'T7 POLA Class 8-Dsl',
+                                                'T7 POLA Class 8-Elec',
+                                                'T7 Public Class 8-Dsl',
+                                                'T7 Public Class 8-Elec',
+                                                'T7 Public Class 8-NG',
+                                                'T7 Single Concrete/Transit Mix Class 8-Dsl',
+                                                'T7 Single Concrete/Transit Mix Class 8-Elec',
+                                                'T7 Single Concrete/Transit Mix Class 8-NG',
+                                                'T7 Single Dump Class 8-Dsl',
+                                                'T7 Single Dump Class 8-Elec',
+                                                'T7 Single Dump Class 8-NG',
+                                                'T7 Single Other Class 8-Dsl',
+                                                'T7 Single Other Class 8-Elec',
+                                                'T7 Single Other Class 8-NG',
+                                                'T7 SWCV Class 8-Dsl',
+                                                'T7 SWCV Class 8-Elec',
+                                                'T7 SWCV Class 8-NG',
+                                                'T7 Tractor Class 8-Dsl',
+                                                'T7 Tractor Class 8-Elec',
+                                                'T7 Tractor Class 8-NG',
+                                                'T7 Utility Class 8-Dsl',
+                                                'T7 Utility Class 8-Elec',
+                                                'T7IS-Elec',
+                                                'T7IS-Gas',
+                                                'UBUS-Dsl',
+                                                'UBUS-Elec',
+                                                'UBUS-Gas',
+                                                'UBUS-NG')
+				THEN ISNULL([65],0)  + ISNULL([70],0)  + ISNULL([75],0)  + ISNULL([80],0)  + ISNULL([85],0)  + ISNULL([90],0)
+				ELSE ISNULL([65],0)
+				END AS [65mph]
+		,CASE WHEN [emfac_vehicle_class] IN (-- 'Motor Coach-Dsl',  INCLUDE????
+                                             -- 'PTO-Dsl',  INCLUDE????
+                                             -- 'PTO-Elec',  INCLUDE????
+                                                'LHD1-Dsl',
+                                                'LHD1-Elec',
+                                                'LHD1-Gas',
+                                                'LHD2-Dsl',
+                                                'LHD2-Elec',
+                                                'LHD2-Gas',
+                                                'OBUS-Elec',
+                                                'OBUS-Gas',
+                                                'SBUS-Dsl',
+                                                'SBUS-Elec',
+                                                'SBUS-Gas',
+                                                'SBUS-NG',
+                                                'T6 CAIRP Class 4-Dsl',
+                                                'T6 CAIRP Class 4-Elec',
+                                                'T6 CAIRP Class 5-Dsl',
+                                                'T6 CAIRP Class 5-Elec',
+                                                'T6 CAIRP Class 6-Dsl',
+                                                'T6 CAIRP Class 6-Elec',
+                                                'T6 CAIRP Class 7-Dsl',
+                                                'T6 CAIRP Class 7-Elec',
+                                                'T6 Instate Delivery Class 4-Dsl',
+                                                'T6 Instate Delivery Class 4-Elec',
+                                                'T6 Instate Delivery Class 4-NG',
+                                                'T6 Instate Delivery Class 5-Dsl',
+                                                'T6 Instate Delivery Class 5-Elec',
+                                                'T6 Instate Delivery Class 5-NG',
+                                                'T6 Instate Delivery Class 6-Dsl',
+                                                'T6 Instate Delivery Class 6-Elec',
+                                                'T6 Instate Delivery Class 6-NG',
+                                                'T6 Instate Delivery Class 7-Dsl',
+                                                'T6 Instate Delivery Class 7-Elec',
+                                                'T6 Instate Delivery Class 7-NG',
+                                                'T6 Instate Other Class 4-Dsl',
+                                                'T6 Instate Other Class 4-Elec',
+                                                'T6 Instate Other Class 4-NG',
+                                                'T6 Instate Other Class 5-Dsl',
+                                                'T6 Instate Other Class 5-Elec',
+                                                'T6 Instate Other Class 5-NG',
+                                                'T6 Instate Other Class 6-Dsl',
+                                                'T6 Instate Other Class 6-Elec',
+                                                'T6 Instate Other Class 6-NG',
+                                                'T6 Instate Other Class 7-Dsl',
+                                                'T6 Instate Other Class 7-Elec',
+                                                'T6 Instate Other Class 7-NG',
+                                                'T6 Instate Tractor Class 6-Dsl',
+                                                'T6 Instate Tractor Class 6-Elec',
+                                                'T6 Instate Tractor Class 6-NG',
+                                                'T6 Instate Tractor Class 7-Dsl',
+                                                'T6 Instate Tractor Class 7-Elec',
+                                                'T6 Instate Tractor Class 7-NG',
+                                                'T6 OOS Class 4-Dsl',
+                                                'T6 OOS Class 5-Dsl',
+                                                'T6 OOS Class 6-Dsl',
+                                                'T6 OOS Class 7-Dsl',
+                                                'T6 Public Class 4-Dsl',
+                                                'T6 Public Class 4-Elec',
+                                                'T6 Public Class 4-NG',
+                                                'T6 Public Class 5-Dsl',
+                                                'T6 Public Class 5-Elec',
+                                                'T6 Public Class 5-NG',
+                                                'T6 Public Class 6-Dsl',
+                                                'T6 Public Class 6-Elec',
+                                                'T6 Public Class 6-NG',
+                                                'T6 Public Class 7-Dsl',
+                                                'T6 Public Class 7-Elec',
+                                                'T6 Public Class 7-NG',
+                                                'T6 Utility Class 5-Dsl',
+                                                'T6 Utility Class 5-Elec',
+                                                'T6 Utility Class 6-Dsl',
+                                                'T6 Utility Class 6-Elec',
+                                                'T6 Utility Class 7-Dsl',
+                                                'T6 Utility Class 7-Elec',
+                                                'T6TS-Elec',
+                                                'T6TS-Gas',
+                                                'T7 CAIRP Class 8-Dsl',
+                                                'T7 CAIRP Class 8-Elec',
+                                                'T7 CAIRP Class 8-NG',
+                                                'T7 NNOOS Class 8-Dsl',
+                                                'T7 NOOS Class 8-Dsl',
+                                                'T7 Other Port Class 8-Dsl',
+                                                'T7 Other Port Class 8-Elec',
+                                                'T7 POLA Class 8-Dsl',
+                                                'T7 POLA Class 8-Elec',
+                                                'T7 Public Class 8-Dsl',
+                                                'T7 Public Class 8-Elec',
+                                                'T7 Public Class 8-NG',
+                                                'T7 Single Concrete/Transit Mix Class 8-Dsl',
+                                                'T7 Single Concrete/Transit Mix Class 8-Elec',
+                                                'T7 Single Concrete/Transit Mix Class 8-NG',
+                                                'T7 Single Dump Class 8-Dsl',
+                                                'T7 Single Dump Class 8-Elec',
+                                                'T7 Single Dump Class 8-NG',
+                                                'T7 Single Other Class 8-Dsl',
+                                                'T7 Single Other Class 8-Elec',
+                                                'T7 Single Other Class 8-NG',
+                                                'T7 SWCV Class 8-Dsl',
+                                                'T7 SWCV Class 8-Elec',
+                                                'T7 SWCV Class 8-NG',
+                                                'T7 Tractor Class 8-Dsl',
+                                                'T7 Tractor Class 8-Elec',
+                                                'T7 Tractor Class 8-NG',
+                                                'T7 Utility Class 8-Dsl',
+                                                'T7 Utility Class 8-Elec',
+                                                'T7IS-Elec',
+                                                'T7IS-Gas',
+                                                'UBUS-Dsl',
+                                                'UBUS-Elec',
+                                                'UBUS-Gas',
+                                                'UBUS-NG')
+				THEN 0
+				ELSE ISNULL([70],0)
+				END AS [70mph]
+		,CASE WHEN [emfac_vehicle_class] IN (-- 'Motor Coach-Dsl',  INCLUDE????
+                                             -- 'PTO-Dsl',  INCLUDE????
+                                             -- 'PTO-Elec',  INCLUDE????
+                                                'LHD1-Dsl',
+                                                'LHD1-Elec',
+                                                'LHD1-Gas',
+                                                'LHD2-Dsl',
+                                                'LHD2-Elec',
+                                                'LHD2-Gas',
+                                                'OBUS-Elec',
+                                                'OBUS-Gas',
+                                                'SBUS-Dsl',
+                                                'SBUS-Elec',
+                                                'SBUS-Gas',
+                                                'SBUS-NG',
+                                                'T6 CAIRP Class 4-Dsl',
+                                                'T6 CAIRP Class 4-Elec',
+                                                'T6 CAIRP Class 5-Dsl',
+                                                'T6 CAIRP Class 5-Elec',
+                                                'T6 CAIRP Class 6-Dsl',
+                                                'T6 CAIRP Class 6-Elec',
+                                                'T6 CAIRP Class 7-Dsl',
+                                                'T6 CAIRP Class 7-Elec',
+                                                'T6 Instate Delivery Class 4-Dsl',
+                                                'T6 Instate Delivery Class 4-Elec',
+                                                'T6 Instate Delivery Class 4-NG',
+                                                'T6 Instate Delivery Class 5-Dsl',
+                                                'T6 Instate Delivery Class 5-Elec',
+                                                'T6 Instate Delivery Class 5-NG',
+                                                'T6 Instate Delivery Class 6-Dsl',
+                                                'T6 Instate Delivery Class 6-Elec',
+                                                'T6 Instate Delivery Class 6-NG',
+                                                'T6 Instate Delivery Class 7-Dsl',
+                                                'T6 Instate Delivery Class 7-Elec',
+                                                'T6 Instate Delivery Class 7-NG',
+                                                'T6 Instate Other Class 4-Dsl',
+                                                'T6 Instate Other Class 4-Elec',
+                                                'T6 Instate Other Class 4-NG',
+                                                'T6 Instate Other Class 5-Dsl',
+                                                'T6 Instate Other Class 5-Elec',
+                                                'T6 Instate Other Class 5-NG',
+                                                'T6 Instate Other Class 6-Dsl',
+                                                'T6 Instate Other Class 6-Elec',
+                                                'T6 Instate Other Class 6-NG',
+                                                'T6 Instate Other Class 7-Dsl',
+                                                'T6 Instate Other Class 7-Elec',
+                                                'T6 Instate Other Class 7-NG',
+                                                'T6 Instate Tractor Class 6-Dsl',
+                                                'T6 Instate Tractor Class 6-Elec',
+                                                'T6 Instate Tractor Class 6-NG',
+                                                'T6 Instate Tractor Class 7-Dsl',
+                                                'T6 Instate Tractor Class 7-Elec',
+                                                'T6 Instate Tractor Class 7-NG',
+                                                'T6 OOS Class 4-Dsl',
+                                                'T6 OOS Class 5-Dsl',
+                                                'T6 OOS Class 6-Dsl',
+                                                'T6 OOS Class 7-Dsl',
+                                                'T6 Public Class 4-Dsl',
+                                                'T6 Public Class 4-Elec',
+                                                'T6 Public Class 4-NG',
+                                                'T6 Public Class 5-Dsl',
+                                                'T6 Public Class 5-Elec',
+                                                'T6 Public Class 5-NG',
+                                                'T6 Public Class 6-Dsl',
+                                                'T6 Public Class 6-Elec',
+                                                'T6 Public Class 6-NG',
+                                                'T6 Public Class 7-Dsl',
+                                                'T6 Public Class 7-Elec',
+                                                'T6 Public Class 7-NG',
+                                                'T6 Utility Class 5-Dsl',
+                                                'T6 Utility Class 5-Elec',
+                                                'T6 Utility Class 6-Dsl',
+                                                'T6 Utility Class 6-Elec',
+                                                'T6 Utility Class 7-Dsl',
+                                                'T6 Utility Class 7-Elec',
+                                                'T6TS-Elec',
+                                                'T6TS-Gas',
+                                                'T7 CAIRP Class 8-Dsl',
+                                                'T7 CAIRP Class 8-Elec',
+                                                'T7 CAIRP Class 8-NG',
+                                                'T7 NNOOS Class 8-Dsl',
+                                                'T7 NOOS Class 8-Dsl',
+                                                'T7 Other Port Class 8-Dsl',
+                                                'T7 Other Port Class 8-Elec',
+                                                'T7 POLA Class 8-Dsl',
+                                                'T7 POLA Class 8-Elec',
+                                                'T7 Public Class 8-Dsl',
+                                                'T7 Public Class 8-Elec',
+                                                'T7 Public Class 8-NG',
+                                                'T7 Single Concrete/Transit Mix Class 8-Dsl',
+                                                'T7 Single Concrete/Transit Mix Class 8-Elec',
+                                                'T7 Single Concrete/Transit Mix Class 8-NG',
+                                                'T7 Single Dump Class 8-Dsl',
+                                                'T7 Single Dump Class 8-Elec',
+                                                'T7 Single Dump Class 8-NG',
+                                                'T7 Single Other Class 8-Dsl',
+                                                'T7 Single Other Class 8-Elec',
+                                                'T7 Single Other Class 8-NG',
+                                                'T7 SWCV Class 8-Dsl',
+                                                'T7 SWCV Class 8-Elec',
+                                                'T7 SWCV Class 8-NG',
+                                                'T7 Tractor Class 8-Dsl',
+                                                'T7 Tractor Class 8-Elec',
+                                                'T7 Tractor Class 8-NG',
+                                                'T7 Utility Class 8-Dsl',
+                                                'T7 Utility Class 8-Elec',
+                                                'T7IS-Elec',
+                                                'T7IS-Gas',
+                                                'UBUS-Dsl',
+                                                'UBUS-Elec',
+                                                'UBUS-Gas',
+                                                'UBUS-NG')
+				THEN 0
+				ELSE ISNULL([75],0)
+				END AS [75mph]
+		,CASE WHEN [emfac_vehicle_class] IN (-- 'Motor Coach-Dsl',  INCLUDE????
+                                             -- 'PTO-Dsl',  INCLUDE????
+                                             -- 'PTO-Elec',  INCLUDE????
+                                                'LHD1-Dsl',
+                                                'LHD1-Elec',
+                                                'LHD1-Gas',
+                                                'LHD2-Dsl',
+                                                'LHD2-Elec',
+                                                'LHD2-Gas',
+                                                'OBUS-Elec',
+                                                'OBUS-Gas',
+                                                'SBUS-Dsl',
+                                                'SBUS-Elec',
+                                                'SBUS-Gas',
+                                                'SBUS-NG',
+                                                'T6 CAIRP Class 4-Dsl',
+                                                'T6 CAIRP Class 4-Elec',
+                                                'T6 CAIRP Class 5-Dsl',
+                                                'T6 CAIRP Class 5-Elec',
+                                                'T6 CAIRP Class 6-Dsl',
+                                                'T6 CAIRP Class 6-Elec',
+                                                'T6 CAIRP Class 7-Dsl',
+                                                'T6 CAIRP Class 7-Elec',
+                                                'T6 Instate Delivery Class 4-Dsl',
+                                                'T6 Instate Delivery Class 4-Elec',
+                                                'T6 Instate Delivery Class 4-NG',
+                                                'T6 Instate Delivery Class 5-Dsl',
+                                                'T6 Instate Delivery Class 5-Elec',
+                                                'T6 Instate Delivery Class 5-NG',
+                                                'T6 Instate Delivery Class 6-Dsl',
+                                                'T6 Instate Delivery Class 6-Elec',
+                                                'T6 Instate Delivery Class 6-NG',
+                                                'T6 Instate Delivery Class 7-Dsl',
+                                                'T6 Instate Delivery Class 7-Elec',
+                                                'T6 Instate Delivery Class 7-NG',
+                                                'T6 Instate Other Class 4-Dsl',
+                                                'T6 Instate Other Class 4-Elec',
+                                                'T6 Instate Other Class 4-NG',
+                                                'T6 Instate Other Class 5-Dsl',
+                                                'T6 Instate Other Class 5-Elec',
+                                                'T6 Instate Other Class 5-NG',
+                                                'T6 Instate Other Class 6-Dsl',
+                                                'T6 Instate Other Class 6-Elec',
+                                                'T6 Instate Other Class 6-NG',
+                                                'T6 Instate Other Class 7-Dsl',
+                                                'T6 Instate Other Class 7-Elec',
+                                                'T6 Instate Other Class 7-NG',
+                                                'T6 Instate Tractor Class 6-Dsl',
+                                                'T6 Instate Tractor Class 6-Elec',
+                                                'T6 Instate Tractor Class 6-NG',
+                                                'T6 Instate Tractor Class 7-Dsl',
+                                                'T6 Instate Tractor Class 7-Elec',
+                                                'T6 Instate Tractor Class 7-NG',
+                                                'T6 OOS Class 4-Dsl',
+                                                'T6 OOS Class 5-Dsl',
+                                                'T6 OOS Class 6-Dsl',
+                                                'T6 OOS Class 7-Dsl',
+                                                'T6 Public Class 4-Dsl',
+                                                'T6 Public Class 4-Elec',
+                                                'T6 Public Class 4-NG',
+                                                'T6 Public Class 5-Dsl',
+                                                'T6 Public Class 5-Elec',
+                                                'T6 Public Class 5-NG',
+                                                'T6 Public Class 6-Dsl',
+                                                'T6 Public Class 6-Elec',
+                                                'T6 Public Class 6-NG',
+                                                'T6 Public Class 7-Dsl',
+                                                'T6 Public Class 7-Elec',
+                                                'T6 Public Class 7-NG',
+                                                'T6 Utility Class 5-Dsl',
+                                                'T6 Utility Class 5-Elec',
+                                                'T6 Utility Class 6-Dsl',
+                                                'T6 Utility Class 6-Elec',
+                                                'T6 Utility Class 7-Dsl',
+                                                'T6 Utility Class 7-Elec',
+                                                'T6TS-Elec',
+                                                'T6TS-Gas',
+                                                'T7 CAIRP Class 8-Dsl',
+                                                'T7 CAIRP Class 8-Elec',
+                                                'T7 CAIRP Class 8-NG',
+                                                'T7 NNOOS Class 8-Dsl',
+                                                'T7 NOOS Class 8-Dsl',
+                                                'T7 Other Port Class 8-Dsl',
+                                                'T7 Other Port Class 8-Elec',
+                                                'T7 POLA Class 8-Dsl',
+                                                'T7 POLA Class 8-Elec',
+                                                'T7 Public Class 8-Dsl',
+                                                'T7 Public Class 8-Elec',
+                                                'T7 Public Class 8-NG',
+                                                'T7 Single Concrete/Transit Mix Class 8-Dsl',
+                                                'T7 Single Concrete/Transit Mix Class 8-Elec',
+                                                'T7 Single Concrete/Transit Mix Class 8-NG',
+                                                'T7 Single Dump Class 8-Dsl',
+                                                'T7 Single Dump Class 8-Elec',
+                                                'T7 Single Dump Class 8-NG',
+                                                'T7 Single Other Class 8-Dsl',
+                                                'T7 Single Other Class 8-Elec',
+                                                'T7 Single Other Class 8-NG',
+                                                'T7 SWCV Class 8-Dsl',
+                                                'T7 SWCV Class 8-Elec',
+                                                'T7 SWCV Class 8-NG',
+                                                'T7 Tractor Class 8-Dsl',
+                                                'T7 Tractor Class 8-Elec',
+                                                'T7 Tractor Class 8-NG',
+                                                'T7 Utility Class 8-Dsl',
+                                                'T7 Utility Class 8-Elec',
+                                                'T7IS-Elec',
+                                                'T7IS-Gas',
+                                                'UBUS-Dsl',
+                                                'UBUS-Elec',
+                                                'UBUS-Gas',
+                                                'UBUS-NG')
+				THEN 0
+				ELSE ISNULL([80],0)
+				END AS [80mph]
+		,CASE WHEN [emfac_vehicle_class] IN (-- 'Motor Coach-Dsl',  INCLUDE????
+                                             -- 'PTO-Dsl',  INCLUDE????
+                                             -- 'PTO-Elec',  INCLUDE????
+                                                'LHD1-Dsl',
+                                                'LHD1-Elec',
+                                                'LHD1-Gas',
+                                                'LHD2-Dsl',
+                                                'LHD2-Elec',
+                                                'LHD2-Gas',
+                                                'OBUS-Elec',
+                                                'OBUS-Gas',
+                                                'SBUS-Dsl',
+                                                'SBUS-Elec',
+                                                'SBUS-Gas',
+                                                'SBUS-NG',
+                                                'T6 CAIRP Class 4-Dsl',
+                                                'T6 CAIRP Class 4-Elec',
+                                                'T6 CAIRP Class 5-Dsl',
+                                                'T6 CAIRP Class 5-Elec',
+                                                'T6 CAIRP Class 6-Dsl',
+                                                'T6 CAIRP Class 6-Elec',
+                                                'T6 CAIRP Class 7-Dsl',
+                                                'T6 CAIRP Class 7-Elec',
+                                                'T6 Instate Delivery Class 4-Dsl',
+                                                'T6 Instate Delivery Class 4-Elec',
+                                                'T6 Instate Delivery Class 4-NG',
+                                                'T6 Instate Delivery Class 5-Dsl',
+                                                'T6 Instate Delivery Class 5-Elec',
+                                                'T6 Instate Delivery Class 5-NG',
+                                                'T6 Instate Delivery Class 6-Dsl',
+                                                'T6 Instate Delivery Class 6-Elec',
+                                                'T6 Instate Delivery Class 6-NG',
+                                                'T6 Instate Delivery Class 7-Dsl',
+                                                'T6 Instate Delivery Class 7-Elec',
+                                                'T6 Instate Delivery Class 7-NG',
+                                                'T6 Instate Other Class 4-Dsl',
+                                                'T6 Instate Other Class 4-Elec',
+                                                'T6 Instate Other Class 4-NG',
+                                                'T6 Instate Other Class 5-Dsl',
+                                                'T6 Instate Other Class 5-Elec',
+                                                'T6 Instate Other Class 5-NG',
+                                                'T6 Instate Other Class 6-Dsl',
+                                                'T6 Instate Other Class 6-Elec',
+                                                'T6 Instate Other Class 6-NG',
+                                                'T6 Instate Other Class 7-Dsl',
+                                                'T6 Instate Other Class 7-Elec',
+                                                'T6 Instate Other Class 7-NG',
+                                                'T6 Instate Tractor Class 6-Dsl',
+                                                'T6 Instate Tractor Class 6-Elec',
+                                                'T6 Instate Tractor Class 6-NG',
+                                                'T6 Instate Tractor Class 7-Dsl',
+                                                'T6 Instate Tractor Class 7-Elec',
+                                                'T6 Instate Tractor Class 7-NG',
+                                                'T6 OOS Class 4-Dsl',
+                                                'T6 OOS Class 5-Dsl',
+                                                'T6 OOS Class 6-Dsl',
+                                                'T6 OOS Class 7-Dsl',
+                                                'T6 Public Class 4-Dsl',
+                                                'T6 Public Class 4-Elec',
+                                                'T6 Public Class 4-NG',
+                                                'T6 Public Class 5-Dsl',
+                                                'T6 Public Class 5-Elec',
+                                                'T6 Public Class 5-NG',
+                                                'T6 Public Class 6-Dsl',
+                                                'T6 Public Class 6-Elec',
+                                                'T6 Public Class 6-NG',
+                                                'T6 Public Class 7-Dsl',
+                                                'T6 Public Class 7-Elec',
+                                                'T6 Public Class 7-NG',
+                                                'T6 Utility Class 5-Dsl',
+                                                'T6 Utility Class 5-Elec',
+                                                'T6 Utility Class 6-Dsl',
+                                                'T6 Utility Class 6-Elec',
+                                                'T6 Utility Class 7-Dsl',
+                                                'T6 Utility Class 7-Elec',
+                                                'T6TS-Elec',
+                                                'T6TS-Gas',
+                                                'T7 CAIRP Class 8-Dsl',
+                                                'T7 CAIRP Class 8-Elec',
+                                                'T7 CAIRP Class 8-NG',
+                                                'T7 NNOOS Class 8-Dsl',
+                                                'T7 NOOS Class 8-Dsl',
+                                                'T7 Other Port Class 8-Dsl',
+                                                'T7 Other Port Class 8-Elec',
+                                                'T7 POLA Class 8-Dsl',
+                                                'T7 POLA Class 8-Elec',
+                                                'T7 Public Class 8-Dsl',
+                                                'T7 Public Class 8-Elec',
+                                                'T7 Public Class 8-NG',
+                                                'T7 Single Concrete/Transit Mix Class 8-Dsl',
+                                                'T7 Single Concrete/Transit Mix Class 8-Elec',
+                                                'T7 Single Concrete/Transit Mix Class 8-NG',
+                                                'T7 Single Dump Class 8-Dsl',
+                                                'T7 Single Dump Class 8-Elec',
+                                                'T7 Single Dump Class 8-NG',
+                                                'T7 Single Other Class 8-Dsl',
+                                                'T7 Single Other Class 8-Elec',
+                                                'T7 Single Other Class 8-NG',
+                                                'T7 SWCV Class 8-Dsl',
+                                                'T7 SWCV Class 8-Elec',
+                                                'T7 SWCV Class 8-NG',
+                                                'T7 Tractor Class 8-Dsl',
+                                                'T7 Tractor Class 8-Elec',
+                                                'T7 Tractor Class 8-NG',
+                                                'T7 Utility Class 8-Dsl',
+                                                'T7 Utility Class 8-Elec',
+                                                'T7IS-Elec',
+                                                'T7IS-Gas',
+                                                'UBUS-Dsl',
+                                                'UBUS-Elec',
+                                                'UBUS-Gas',
+                                                'UBUS-NG')
+				THEN 0
+				ELSE ISNULL([85],0)
+				END AS [85mph]
+		,CASE WHEN [emfac_vehicle_class] IN (-- 'Motor Coach-Dsl',  INCLUDE????
+                                             -- 'PTO-Dsl',  INCLUDE????
+                                             -- 'PTO-Elec',  INCLUDE????
+                                                'LHD1-Dsl',
+                                                'LHD1-Elec',
+                                                'LHD1-Gas',
+                                                'LHD2-Dsl',
+                                                'LHD2-Elec',
+                                                'LHD2-Gas',
+                                                'OBUS-Elec',
+                                                'OBUS-Gas',
+                                                'SBUS-Dsl',
+                                                'SBUS-Elec',
+                                                'SBUS-Gas',
+                                                'SBUS-NG',
+                                                'T6 CAIRP Class 4-Dsl',
+                                                'T6 CAIRP Class 4-Elec',
+                                                'T6 CAIRP Class 5-Dsl',
+                                                'T6 CAIRP Class 5-Elec',
+                                                'T6 CAIRP Class 6-Dsl',
+                                                'T6 CAIRP Class 6-Elec',
+                                                'T6 CAIRP Class 7-Dsl',
+                                                'T6 CAIRP Class 7-Elec',
+                                                'T6 Instate Delivery Class 4-Dsl',
+                                                'T6 Instate Delivery Class 4-Elec',
+                                                'T6 Instate Delivery Class 4-NG',
+                                                'T6 Instate Delivery Class 5-Dsl',
+                                                'T6 Instate Delivery Class 5-Elec',
+                                                'T6 Instate Delivery Class 5-NG',
+                                                'T6 Instate Delivery Class 6-Dsl',
+                                                'T6 Instate Delivery Class 6-Elec',
+                                                'T6 Instate Delivery Class 6-NG',
+                                                'T6 Instate Delivery Class 7-Dsl',
+                                                'T6 Instate Delivery Class 7-Elec',
+                                                'T6 Instate Delivery Class 7-NG',
+                                                'T6 Instate Other Class 4-Dsl',
+                                                'T6 Instate Other Class 4-Elec',
+                                                'T6 Instate Other Class 4-NG',
+                                                'T6 Instate Other Class 5-Dsl',
+                                                'T6 Instate Other Class 5-Elec',
+                                                'T6 Instate Other Class 5-NG',
+                                                'T6 Instate Other Class 6-Dsl',
+                                                'T6 Instate Other Class 6-Elec',
+                                                'T6 Instate Other Class 6-NG',
+                                                'T6 Instate Other Class 7-Dsl',
+                                                'T6 Instate Other Class 7-Elec',
+                                                'T6 Instate Other Class 7-NG',
+                                                'T6 Instate Tractor Class 6-Dsl',
+                                                'T6 Instate Tractor Class 6-Elec',
+                                                'T6 Instate Tractor Class 6-NG',
+                                                'T6 Instate Tractor Class 7-Dsl',
+                                                'T6 Instate Tractor Class 7-Elec',
+                                                'T6 Instate Tractor Class 7-NG',
+                                                'T6 OOS Class 4-Dsl',
+                                                'T6 OOS Class 5-Dsl',
+                                                'T6 OOS Class 6-Dsl',
+                                                'T6 OOS Class 7-Dsl',
+                                                'T6 Public Class 4-Dsl',
+                                                'T6 Public Class 4-Elec',
+                                                'T6 Public Class 4-NG',
+                                                'T6 Public Class 5-Dsl',
+                                                'T6 Public Class 5-Elec',
+                                                'T6 Public Class 5-NG',
+                                                'T6 Public Class 6-Dsl',
+                                                'T6 Public Class 6-Elec',
+                                                'T6 Public Class 6-NG',
+                                                'T6 Public Class 7-Dsl',
+                                                'T6 Public Class 7-Elec',
+                                                'T6 Public Class 7-NG',
+                                                'T6 Utility Class 5-Dsl',
+                                                'T6 Utility Class 5-Elec',
+                                                'T6 Utility Class 6-Dsl',
+                                                'T6 Utility Class 6-Elec',
+                                                'T6 Utility Class 7-Dsl',
+                                                'T6 Utility Class 7-Elec',
+                                                'T6TS-Elec',
+                                                'T6TS-Gas',
+                                                'T7 CAIRP Class 8-Dsl',
+                                                'T7 CAIRP Class 8-Elec',
+                                                'T7 CAIRP Class 8-NG',
+                                                'T7 NNOOS Class 8-Dsl',
+                                                'T7 NOOS Class 8-Dsl',
+                                                'T7 Other Port Class 8-Dsl',
+                                                'T7 Other Port Class 8-Elec',
+                                                'T7 POLA Class 8-Dsl',
+                                                'T7 POLA Class 8-Elec',
+                                                'T7 Public Class 8-Dsl',
+                                                'T7 Public Class 8-Elec',
+                                                'T7 Public Class 8-NG',
+                                                'T7 Single Concrete/Transit Mix Class 8-Dsl',
+                                                'T7 Single Concrete/Transit Mix Class 8-Elec',
+                                                'T7 Single Concrete/Transit Mix Class 8-NG',
+                                                'T7 Single Dump Class 8-Dsl',
+                                                'T7 Single Dump Class 8-Elec',
+                                                'T7 Single Dump Class 8-NG',
+                                                'T7 Single Other Class 8-Dsl',
+                                                'T7 Single Other Class 8-Elec',
+                                                'T7 Single Other Class 8-NG',
+                                                'T7 SWCV Class 8-Dsl',
+                                                'T7 SWCV Class 8-Elec',
+                                                'T7 SWCV Class 8-NG',
+                                                'T7 Tractor Class 8-Dsl',
+                                                'T7 Tractor Class 8-Elec',
+                                                'T7 Tractor Class 8-NG',
+                                                'T7 Utility Class 8-Dsl',
+                                                'T7 Utility Class 8-Elec',
+                                                'T7IS-Elec',
+                                                'T7IS-Gas',
+                                                'UBUS-Dsl',
+                                                'UBUS-Elec',
+                                                'UBUS-Gas',
+                                                'UBUS-NG')
+				THEN 0
+				ELSE ISNULL([90],0)
+				END AS [90mph]
+	FROM
+		[vmt_speed_pct]
+	PIVOT
+		(SUM([class_hr_vmt_pct]) FOR [speed_bin] IN ([0],
+													 [5],
+													 [10],
+													 [15],
+													 [20],
+													 [25],
+													 [30],
+													 [35],
+													 [40],
+													 [45],
+													 [50],
+													 [55],
+													 [60],
+													 [65],
+													 [70],
+													 [75],
+													 [80],
+													 [85],
+													 [90])) AS [pvt]
+	 ORDER BY
+		[emfac_vehicle_class]
+		,[emfac_hours]
+
+	RETURN
+END
+GO
+
+-- add metadata for [emfac].[sp_emfac_2021_vmt_speed]
+EXECUTE [db_meta].[add_xp] 'emfac.sp_emfac_2021_vmt_speed', 'MS_Description', 'emfac 2021 vmt by hour and speed bin stored procedure for emfac program'
+GO
+
+
+
+
 -- define [emfac] schema permissions -----------------------------------------
 -- drop [emfac] role if it exists
 DECLARE @RoleName sysname
@@ -3695,8 +6907,8 @@ BEGIN
     DECLARE @RoleMemberName sysname
     DECLARE Member_Cursor CURSOR FOR
     select [name]
-    from sys.database_principals 
-    where principal_id in ( 
+    from sys.database_principals
+    where principal_id in (
         select member_principal_id
         from sys.database_role_members
         where role_principal_id in (
@@ -3707,15 +6919,15 @@ BEGIN
 
     FETCH NEXT FROM Member_Cursor
     into @RoleMemberName
-    
+
     DECLARE @SQL NVARCHAR(4000)
 
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        
+
         SET @SQL = 'ALTER ROLE '+ QUOTENAME(@RoleName,'[') +' DROP MEMBER '+ QUOTENAME(@RoleMemberName,'[')
         EXEC(@SQL)
-        
+
         FETCH NEXT FROM Member_Cursor
         into @RoleMemberName
     END;
