@@ -11563,6 +11563,7 @@ SELECT
 	,[parkactive] AS [parkActive]  -- used in pm M-1-b, indicator > .5
 	,[emp_retail] AS [empRetail]  -- used in pm M-1-a
     ,[collegeenroll] + [othercollegeenroll] AS [higherLearningEnrollment]  -- used in pm M-5-c
+    ,[othercollegeenroll] AS [otherCollegeEnrollment]
 FROM
 	[fact].[mgra_based_input]
 INNER JOIN

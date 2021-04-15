@@ -70,6 +70,7 @@ class PerformanceMeasuresM1M5(object):
                 empRetail - number of retail activity employees
                 higherLearningEnrollment - total university and other college
                     enrollment
+                otherCollegeEnrollment - total other college enrollment
         """
         with self.conn.connect() as conn:
             dest = pd.read_sql(
@@ -83,7 +84,8 @@ class PerformanceMeasuresM1M5(object):
                      "empHealth",
                      "parkActive",
                      "empRetail",
-                     "higherLearningEnrollment"]]
+                     "higherLearningEnrollment",
+                     "otherCollegeEnrollment"]]
 
     @lru_cache(maxsize=1)
     def populations(self, mobility_hub_name: str = None) -> pd.DataFrame:
