@@ -833,6 +833,68 @@ GO
 
 
 
+-- create destination stored procedure for performance measures M1 and M5 ----
+DROP PROCEDURE IF EXISTS [report].[sp_vehicle_delay_per_capita]
+GO
+
+CREATE PROCEDURE [report].[sp_vehicle_delay_per_capita]
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+AS
+/**
+summary:   >
+    Re-creation of Federal RTP 2020 Performance Measure 1A, Daily vehicle
+	delay per capita (minutes). Formerly Performance Measure 1B in the 2015
+	rp, this is the sum of link level vehicle flows multiplied by the
+	difference between congested and free flow travel time and then divided
+	by the total synthetic population for a given ABM scenario.
+
+filters:   >
+    ([time] - ([tm] + [tx])) >= 0
+        remove 0 values from vehicle delay
+    [hwy_flow].[tm] != 999
+        remove missing values for the loaded highway travel time
+**/
+SET NOCOUNT ON;
+
+
+    -- subquery for total synthetic population within a given abm scenario
+    DECLARE @population integer = (
+        SELECT
+            COUNT([person_id])
+        FROM
+            [dimension].[person]
+        WHERE
+            [scenario_id] = @scenario_id
+			AND [person_id] > 0  -- remove Not Applicable record
+    )
+
+
+    -- calculate vehicle delay per capita
+    SELECT
+	    @scenario_id AS [scenario_id]
+        ,'Vehicle Delay per Capita' AS [metric]
+	    ,SUM(([time] - ([tm] + [tx])) * [flow]) / @population AS [value]  -- per capita delay in minutes
+    FROM
+	    [fact].[hwy_flow]
+    INNER JOIN
+	    [dimension].[hwy_link_ab_tod]
+    ON
+	    [hwy_flow].[scenario_id] = [hwy_link_ab_tod].[scenario_id]
+	    AND [hwy_flow].[hwy_link_ab_tod_id] = [hwy_link_ab_tod].[hwy_link_ab_tod_id]
+    WHERE
+	    [hwy_flow].[scenario_id] = @scenario_id
+	    AND [hwy_link_ab_tod].[scenario_id] = @scenario_id
+	    AND ([time] - ([tm] + [tx])) >= 0  -- remove 0 values from vehicle delay
+	    AND [tm] != 999  -- remove missing values for the loaded highway travel time
+GO
+
+-- add metadata for [report].[sp_vehicle_delay_per_capita]
+EXECUTE [db_meta].[add_xp] 'report.sp_vehicle_delay_per_capita', 'MS_Description', 'vehicle delay (minutes) per capita'
+GO
+
+
+
+
 -- define [report] schema permissions -----------------------------------------
 -- drop [report] role if it exists
 DECLARE @RoleName sysname
