@@ -13374,6 +13374,214 @@ GO
 
 
 
+-- create stored procedure for San Diego resident VMT ------------------------
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_resident_vmt]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_resident_vmt]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+	@geography_column nvarchar(max),  -- column in [dimension].[geography]
+    -- table used to aggregate activity location to user-specified geography resolution
+	@workers bit = 0,  -- select workers only, includes telecommuters but filters to work purpose tours
+	@home_location bit = 0,  -- assign activity to home location
+	@work_location bit = 0  -- assign activity to workplace location, includes telecommuters
+AS
+
+/**
+summary:   >
+    San Diego resident vehicle miles traveled (VMT) at a user-determined geographic
+    resolution. VMT is assigned to either the resident's home or work location.
+    Optional filter to select workers only and their work purpose tour VMT.
+	Available at any geographic resolution present in the ABM database.
+
+filters:   >
+    [model_trip].[model_trip_description] IN ('Individual', 'Internal-External','Joint')
+        ABM resident sub-models
+    [person].[work_segment] != 'Not Applicable' AND [purpose_tour].[purpose_tour_description] = 'Work'
+        if @workers parameter is specified, select only workers and trips on work purpose tours
+**/
+
+BEGIN
+	-- input parameter checking ----
+
+	-- ensure at least one indicator to assign activity to home or work location is selected
+	IF CONVERT(int, @home_location) + CONVERT(int, @work_location) = 0
+		RAISERROR ('Select to assign activity to either home or work location.', 16, 1)
+	 -- ensure only one of indicator to assign activity to home or work location is selected
+	ELSE IF CONVERT(int, @home_location) + CONVERT(int, @work_location) > 1
+		RAISERROR ('Select only one indicator to assign activity to either home or work location.', 16, 1)
+	-- if activity is assigned to work location then the workers only filter must be selected
+	ELSE IF CONVERT(int, @workers) = 0 AND CONVERT(int, @work_location) >= 1
+		RAISERROR ('Assigning activity to work location requires selection of workers only filter.', 16, 1)
+
+
+	-- geography column stored procedure ----
+	ELSE IF LEN(@geography_column) > 0
+	BEGIN
+		-- ensure the input geography column exists
+		-- in the [dimension].[geography] table
+		-- stop execution if it does not and throw error
+		IF COL_LENGTH((SELECT [base_object_name] from sys.synonyms where name = 'geography'), @geography_column) IS NULL
+		BEGIN
+			RAISERROR ('The column %s does not exist in the [dimension].[geography] table.', 16, 1, @geography_column)
+		END
+		-- if it does exist then continue execution
+		ELSE
+		BEGIN
+			SET NOCOUNT ON;
+
+			-- if all input parameters are valid execute the stored procedure
+			-- build dynamic SQL string
+			-- note the use of nvarchar(max) throughout to avoid implicit conversion to varchar(8000)
+			DECLARE @sql nvarchar(max) = '
+			SELECT
+				' + CONVERT(nvarchar(max), @scenario_id) + ' AS [scenario_id]
+				,CASE	WHEN ' + CONVERT(nvarchar(max), @workers) + ' = 0
+						THEN ''All Residents''
+						WHEN ' + CONVERT(nvarchar(max), @workers) + ' = 1
+						THEN ''Workers Only''
+						ELSE NULL END AS [population]
+				,CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+						THEN ''Activity Assigned to Home Location''
+						WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+						THEN ''Activity Assigned to Workplace Location''
+						ELSE NULL END AS [activity_location]
+				,[persons].' + @geography_column + '
+				,[persons].[persons]
+				,ROUND(ISNULL([trips].[trips], 0), 2) AS [trips]
+				,ROUND(ISNULL([trips].[trips], 0) /
+					[persons].[persons], 2) AS [trips_per_capita]
+				,ROUND(ISNULL([trips].[vmt], 0), 2) AS [vmt]
+				,ROUND(ISNULL([trips].[vmt], 0) /
+					[persons].[persons], 2) AS [vmt_per_capita]
+			FROM ( -- get total population within assigned activity location
+				SELECT DISTINCT -- distinct here when only total is wanted
+				-- avoids duplicate Total column caused by ROLLUP
+					ISNULL(CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+								THEN [geography_household_location].household_location_' + @geography_column + '
+								WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+								THEN  [geography_work_location].work_location_' + @geography_column + '
+								ELSE NULL
+								END, ''Total'') AS ' + @geography_column + '
+					,COUNT([person_id]) AS [persons]
+				FROM
+					[dimension].[person]
+				INNER JOIN
+					[dimension].[household]
+				ON
+					[person].[scenario_id] = [household].[scenario_id]
+					AND [person].[household_id] = [household].[household_id]
+				INNER JOIN
+					[dimension].[geography_household_location]
+				ON
+					[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+				INNER JOIN
+					[dimension].[geography_work_location]
+				ON
+					[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+				WHERE
+					[person].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					AND [household].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					AND [person].[person_id] > 0  -- remove Not Applicable records
+					-- exclude non-workers if worker filter is selected
+					AND (' + CONVERT(nvarchar(max), @workers) + ' = 0
+						 OR (' + CONVERT(nvarchar(max), @workers) + ' = 1
+							 AND [person].[work_segment] != ''Not Applicable''))
+				GROUP BY
+					CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+							THEN [geography_household_location].household_location_' + @geography_column + '
+							WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+							THEN  [geography_work_location].work_location_' + @geography_column + '
+							ELSE NULL END
+				WITH ROLLUP) AS [persons]
+			LEFT OUTER JOIN ( -- get trips and vmt for each person and assign to activity location
+				-- left join keeps zones with residents/employees even if 0 trips/vmt
+				SELECT DISTINCT -- distinct here for case when only total is wanted
+				-- avoids duplicate Total column caused by ROLLUP
+					ISNULL(CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+								THEN [geography_household_location].household_location_' + @geography_column + '
+								WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+								THEN  [geography_work_location].work_location_' + @geography_column + '
+								ELSE NULL
+								END, ''Total'') AS ' + @geography_column + '
+					,SUM([person_trip].[weight_trip]) AS [trips]
+					,SUM([person_trip].[weight_trip] * [person_trip].[distance_drive]) AS [vmt]
+				FROM
+					[fact].[person_trip]
+				INNER JOIN
+					[dimension].[model_trip]
+				ON
+					[person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+				INNER JOIN
+					[dimension].[tour]
+				ON
+					[person_trip].[scenario_id] = [tour].[scenario_id]
+					AND [person_trip].[tour_id] = [tour].[tour_id]
+				INNER JOIN
+					[dimension].[purpose_tour]
+				ON
+					[tour].[purpose_tour_id] = [purpose_tour].[purpose_tour_id]
+				INNER JOIN
+					[dimension].[household]
+				ON
+					[person_trip].[scenario_id] = [household].[scenario_id]
+					AND [person_trip].[household_id] = [household].[household_id]
+				INNER JOIN
+					[dimension].[person]
+				ON
+					[person_trip].[scenario_id] = [person].[scenario_id]
+					AND [person_trip].[person_id] = [person].[person_id]
+				INNER JOIN
+					[dimension].[geography_household_location]
+				ON
+					[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+				INNER JOIN
+					[dimension].[geography_work_location]
+				ON
+					[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+				WHERE
+					[person_trip].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					AND [person].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					AND [household].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					-- only resident models use synthetic population
+					AND [model_trip].[model_trip_description] IN (''Individual'',
+																  ''Internal-External'',
+																  ''Joint'')
+					-- exclude non-workers if worker filter is selected
+					-- only select work tours if worker filter is selected
+					AND (' + CONVERT(nvarchar(max), @workers) + ' = 0
+						 OR (' + CONVERT(nvarchar(max), @workers) + ' = 1
+							 AND [person].[work_segment] != ''Not Applicable''
+							 AND [purpose_tour].[purpose_tour_description] = ''Work''))
+				GROUP BY
+					CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+							THEN [geography_household_location].household_location_' + @geography_column + '
+							WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+							THEN  [geography_work_location].work_location_' + @geography_column + '
+							ELSE NULL END
+				WITH ROLLUP) AS [trips]
+			ON
+				[persons].' + @geography_column + ' = [trips].' + @geography_column + '
+			ORDER BY -- keep sort order of alphabetical with Total at bottom
+				CASE WHEN [persons].' + @geography_column + ' = ''Total'' THEN ''ZZ''
+				ELSE [persons].' + @geography_column + ' END ASC
+				OPTION(MAXDOP 1)'
+
+
+			-- execute dynamic SQL string
+			EXECUTE (@sql)
+		END
+	END
+END
+GO
+
+-- add metadata for [rp_2021].[sp_resident_vmt]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_resident_vmt', 'MS_Description', 'trips and vehicle miles travelled by residents and/or resident workers on work tours assigned to their home or workplace location'
+GO
+
+
+
+
 -- create stored procedure for sb375 auto ownership --------------------------
 DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_auto_ownership]
 GO
