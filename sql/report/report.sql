@@ -440,10 +440,10 @@ BEGIN
 				,[persons].[persons]
 				,ROUND(ISNULL([trips].[trips], 0), 2) AS [trips]
 				,ROUND(ISNULL([trips].[trips], 0) /
-					[persons].[persons], 2) AS [trips_per_capita]
+					NULLIF([persons].[persons], 0), 2) AS [trips_per_capita]
 				,ROUND(ISNULL([trips].[vmt], 0), 2) AS [vmt]
 				,ROUND(ISNULL([trips].[vmt], 0) /
-					[persons].[persons], 2) AS [vmt_per_capita]
+					NULLIF([persons].[persons], 0), 2) AS [vmt_per_capita]
 			FROM ( -- get total population within assigned activity location
 				SELECT DISTINCT -- distinct here when only total is wanted
 				-- avoids duplicate Total column caused by ROLLUP
@@ -691,9 +691,9 @@ BEGIN
 					ELSE NULL END AS [activity_location]
 			,[persons].[persons] AS [persons]
 			,[trips]
-			,ROUND([trips] / [persons].[persons], 2) AS [trips_per_capita]
+			,ROUND([trips] / NULLIF([persons].[persons], 0), 2) AS [trips_per_capita]
 			,[vmt]
-			,ROUND([vmt] / [persons].[persons], 2) AS [vmt_per_capita]
+			,ROUND([vmt] / NULLIF([persons].[persons], 0), 2) AS [vmt_per_capita]
 		FROM
 			[trips]
 		CROSS JOIN
