@@ -108,6 +108,54 @@ END
 GO
 
 
+-- create destinations table valued function for access measures destinations ----
+DROP FUNCTION IF EXISTS [cmcp_2021].[fn_destinations]
+GO
+
+CREATE FUNCTION [cmcp_2021].[fn_destinations] (
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+)
+RETURNS TABLE
+AS
+RETURN
+/**
+summary:   >
+    Destinations at the MGRA level used in calculations for the CMCP 2021
+	Access Measures. These measures mirror the 2021 Regional Plan Main
+    Performance Measures M1 and M5. Allows aggregation to MGRA or TAZ level
+	for both transit and auto accessibility.
+**/
+SELECT
+    CONVERT(integer, [geography].[mgra_13]) AS [mgra]
+	,CONVERT(integer, [geography].[taz_13]) AS [taz]
+    ,ISNULL([mgra_tiers].[tier], 0) AS [employmentCenterTier]
+	,[emp_health] AS [empHealth]
+	,[parkactive] AS [parkActive]
+	,[emp_retail] AS [empRetail]
+    ,[collegeenroll] + [othercollegeenroll] AS [higherLearningEnrollment]
+    ,[othercollegeenroll] AS [otherCollegeEnrollment]
+FROM
+	[fact].[mgra_based_input]
+INNER JOIN
+	[dimension].[geography]
+ON
+	[mgra_based_input].[geography_id] = [geography].[geography_id]
+LEFT OUTER JOIN (  -- get indicators if MGRAs in Tier 1-4 employment centers
+	SELECT
+		[mgra_13]
+		,[tier]
+	FROM OPENQUERY(DDAMWSQL16, 'SELECT [mgra_13], [tier] FROM [employment].[employment_centers].[fn_get_mgra_xref](1) WHERE [tier] IN (1,2,3,4)')) AS [mgra_tiers]
+ON
+	[geography].[mgra_13] = CONVERT(nvarchar, [mgra_tiers].[mgra_13])
+WHERE
+	[mgra_based_input].[scenario_id] = @scenario_id
+GO
+
+-- add metadata for [cmcp_2021].[fn_destinations]
+EXECUTE [db_meta].[add_xp] 'cmcp_2021.fn_destinations', 'MS_Description', 'access measures destinations'
+GO
+
+
 -- high-frequency transit stops by CMCP corridor -----------------------------
 DROP FUNCTION IF EXISTS [cmcp_2021].[fn_hf_transit_stops]
 GO
@@ -293,7 +341,8 @@ GO
 
 CREATE FUNCTION [cmcp_2021].[fn_person_coc]
 (
-	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+	@age_18_plus bit = 0  -- optional 1/0 switch to limit population to aged 18+
 )
 RETURNS TABLE
 AS
@@ -305,9 +354,11 @@ summary:   >
 SELECT
     @scenario_id AS [scenario_id]
 	,[cmcp_name]
-    ,CONVERT(integer, [geography].[mgra_13]) AS [mgra_13]
-	,SUM(CASE WHEN [person].[age] >= 75 THEN [weight_person] ELSE 0 END) AS [senior_pop]
-    ,SUM(CASE WHEN [person].[age] >= 75 THEN 0 ELSE [weight_person] END) AS [non_senior_pop]
+    ,CONVERT(integer, [geography].[mgra_13]) AS [mgra]
+	,CONVERT(integer, [geography].[taz_13]) AS [taz]
+	,SUM([weight_person]) AS [pop]
+	,SUM(CASE WHEN [person].[age] >= 75 THEN [weight_person] ELSE 0 END) AS [popSenior]
+    ,SUM(CASE WHEN [person].[age] >= 75 THEN 0 ELSE [weight_person] END) AS [popNonSenior]
 	,SUM(CASE WHEN [person].[race] IN ('Some Other Race Alone',
 									   'Asian Alone',
 									   'Black or African American Alone',
@@ -315,7 +366,7 @@ SELECT
 									   'Native Hawaiian and Other Pacific Islander Alone',
 									   'American Indian and Alaska Native Tribes specified; or American Indian or Alaska Native, not specified and no other races')
                    OR [person].[hispanic] = 'Hispanic'
-            THEN [weight_person] ELSE 0 END) AS [minority_pop]
+            THEN [weight_person] ELSE 0 END) AS [popMinority]
     ,SUM(CASE WHEN [person].[race] IN ('Some Other Race Alone',
 									   'Asian Alone',
 									   'Black or African American Alone',
@@ -323,9 +374,9 @@ SELECT
 									   'Native Hawaiian and Other Pacific Islander Alone',
 									   'American Indian and Alaska Native Tribes specified; or American Indian or Alaska Native, not specified and no other races')
                    OR [person].[hispanic] = 'Hispanic'
-            THEN 0 ELSE [weight_person] END) AS [non_minority_pop]
-	,SUM(CASE WHEN [household].[poverty] <= 2 THEN [weight_person] ELSE 0 END) AS [low_income_pop]
-    ,SUM(CASE WHEN [household].[poverty] <= 2 THEN 0 ELSE [weight_person] END) AS [non_low_income_pop]
+            THEN 0 ELSE [weight_person] END) AS [popNonMinority]
+	,SUM(CASE WHEN [household].[poverty] <= 2 THEN [weight_person] ELSE 0 END) AS [popLowIncome]
+    ,SUM(CASE WHEN [household].[poverty] <= 2 THEN 0 ELSE [weight_person] END) AS [popNonLowIncome]
     ,SUM(CASE WHEN [person].[age] >= 75
               OR ([person].[race] IN ('Some Other Race Alone',
 									  'Asian Alone',
@@ -335,7 +386,7 @@ SELECT
 									  'American Indian and Alaska Native Tribes specified; or American Indian or Alaska Native, not specified and no other races')
                   OR [person].[hispanic] = 'Hispanic')
               OR [household].[poverty] <= 2
-              THEN [weight_person] ELSE 0 END) AS [coc_pop]
+              THEN [weight_person] ELSE 0 END) AS [popCoC]
     ,SUM(CASE WHEN [person].[age] >= 75
               OR ([person].[race] IN ('Some Other Race Alone',
 									  'Asian Alone',
@@ -345,8 +396,7 @@ SELECT
 									  'American Indian and Alaska Native Tribes specified; or American Indian or Alaska Native, not specified and no other races')
                   OR [person].[hispanic] = 'Hispanic')
               OR [household].[poverty] <= 2
-              THEN 0 ELSE [weight_person] END) AS [non_coc_pop]
-    ,SUM([weight_person]) AS [pop]
+              THEN 0 ELSE [weight_person] END) AS [popNonCoC]
 FROM
 	[dimension].[person]
 INNER JOIN
@@ -356,17 +406,19 @@ ON
 	AND [person].[household_id] = [household].[household_id]
 INNER JOIN
     [dimension].[geography]
-ON 
-	[household].[geography_household_location_id] = [geography].[mgra_13]
-INNER JOIN 
+ON
+	[household].[geography_household_location_id] = [geography].[geography_id]
+INNER JOIN
     [cmcp_2021].[fn_mgra_cmcp_xref]() AS [xref]
-	ON
-		[geography].[mgra_13] = [xref].[mgra_13]
+ON
+    [geography].[mgra_13] = [xref].[mgra_13]
 WHERE
 	[person].[scenario_id] = @scenario_id
 	AND [household].[scenario_id] = @scenario_id
+	AND ((@age_18_plus = 1 AND [person].[age] >= 18) OR @age_18_plus = 0)  -- if age 18+ option is selected restrict population to individuals age 18 or older
 GROUP BY
     [geography].[mgra_13]
+	,[geography].[taz_13]
     ,[cmcp_name]
 GO
 

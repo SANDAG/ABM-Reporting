@@ -122,5 +122,61 @@ sql_measures = {
     }
 }
 
-
-
+# dictionary of Python-based performance measures
+# Measure: Metric: (method, args: (specific arguments))
+python_measures = {
+    "Tier 1 Employment Center - 30 Minutes": {
+        "Transit":
+            {"method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier == 1",
+                 "max_time": 30,
+                 "age_18_plus": 1}
+             }
+    },
+    "Tier 2 Employment Center - 30 Minutes": {
+        "Transit":
+            {"method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier == 2",
+                 "max_time": 30,
+                 "age_18_plus": 1}
+             }
+    },
+    "Higher Education - 30 Minutes": {
+        "Transit":
+            {"method": "calc_transit_access",
+             "args": {
+                 "criteria": "higherLearningEnrollment > 0",
+                 "max_time": 30,
+                 "age_18_plus": 1}
+             }
+    },
+    "Tier 1 Employment Center - 45 Minutes": {
+        "Transit":
+            {"method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier == 1",
+                 "max_time": 45,
+                 "age_18_plus": 1}
+             }
+    },
+    "Tier 2 Employment Center - 45 Minutes": {
+        "Transit":
+            {"method": "calc_transit_access",
+             "args": {
+                 "criteria": "employmentCenterTier == 2",
+                 "max_time": 45,
+                 "age_18_plus": 1}
+             }
+    },
+    "Higher Education - 45 Minutes": {
+        "Transit":
+            {"method": "calc_transit_access",
+             "args": {
+                 "criteria": "higherLearningEnrollment > 0",
+                 "max_time": 45,
+                 "age_18_plus": 1}
+             }
+    }
+}

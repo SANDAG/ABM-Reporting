@@ -1,3 +1,4 @@
+from accessMeasures import AccessMeasures
 import datetime
 from performanceMeasuresGIS import PerformanceMeasuresGIS
 import settings
@@ -30,6 +31,66 @@ for scenario in settings.scenarios:
         with settings.engines["ABM-Reporting"].begin() as conn:
             sql = "EXECUTE " + measureDict["sp"] + " " + measureDict["args"]
             conn.execute(sql.format(scenario))
+
+
+# run Python-based Performance Measures and populate SQL Server results table
+print("---- Running Python-based Performance Measures ----")
+for scenario in settings.scenarios:
+    print("Scenario: " + str(scenario))
+
+    # initialize access measure class object
+    access = AccessMeasures(
+        scenario_id=scenario,
+        conn=settings.engines["ABM-Reporting"]
+    )
+
+    # for each performance measure
+    for measureKey in settings.python_measures:
+        print("Measure: " + measureKey)
+
+        # for each corridor
+        for corridor in settings.cmcp_corridor:
+
+            # delete old results from the results table if they exist
+            with settings.engines["ABM-Reporting"].begin() as conn:
+                conn.execute(
+                    "DELETE FROM [cmcp_2021].[results] WHERE [scenario_id] = " +
+                    str(scenario) + " AND [measure] = '" + measureKey +
+                    "' AND [cmcp_name] = '" + corridor + "'"
+                )
+
+            # for each metric within the performance measure
+            for metricKey in settings.python_measures[measureKey]:
+                metricDict = settings.python_measures[measureKey][metricKey]
+
+                # add corridor name to dictionary of arguments
+                args = metricDict["args"]
+                args["cmcp_name"] = corridor
+
+                # run the appropriate class method and write results to results table
+                func = getattr(access, metricDict["method"])(**args)
+                result = func.to_frame(name="value")
+                result["scenario_id"] = scenario
+                result["cmcp_name"] = corridor
+                result["measure"] = measureKey
+                result["metric"] = result.index + " - " + metricKey
+                result["updated_by"] = os.environ["userdomain"] + "\\" + os.getenv("username")
+                result["updated_date"] = datetime.datetime.now()
+
+                result = result[["scenario_id",
+                                 "cmcp_name",
+                                 "measure",
+                                 "metric",
+                                 "value",
+                                 "updated_by",
+                                 "updated_date"]]
+
+                result.to_sql(name="results",
+                              schema="cmcp_2021",
+                              con=settings.engines["ABM-Reporting"],
+                              if_exists="append",
+                              index=False,
+                              method="multi")
 
 
 # populate Excel Workbook template with performance measure results
