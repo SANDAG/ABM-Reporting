@@ -1152,13 +1152,15 @@ BEGIN
 			    ON
 				    [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
 			    LEFT JOIN
-				    [#mgra_cmcp_xref_all] [origin_xref] 
+				    [#mgra_cmcp_xref_all] AS [origin_xref]
 			    ON
-				    [geography_trip_origin].[trip_origin_mgra_13] = [origin_xref].[mgra_13]
+					[origin_xref].[cmcp_name] = @cmcp_name
+				    AND [geography_trip_origin].[trip_origin_mgra_13] = [origin_xref].[mgra_13]
 			    LEFT JOIN
 				    [#mgra_cmcp_xref_all] [destination_xref]
 			    ON
-				    [geography_trip_destination].[trip_destination_mgra_13] = [destination_xref].[mgra_13]
+					[destination_xref].[cmcp_name] = @cmcp_name
+				    AND [geography_trip_destination].[trip_destination_mgra_13] = [destination_xref].[mgra_13]
 			    WHERE
 				    [person_trip].[scenario_id] = @scenario_id
 				    AND [model_trip].[model_trip_description] IN ('Individual', 'Internal-External', 'Joint')     
@@ -1259,11 +1261,13 @@ BEGIN
                LEFT JOIN
 	                [#mgra_cmcp_xref_all] AS [origin_xref] 
 		        ON
-			        [geography_tour_origin].[tour_origin_mgra_13] = [origin_xref].[mgra_13]
+					[origin_xref].[cmcp_name] = @cmcp_name
+			        AND [geography_tour_origin].[tour_origin_mgra_13] = [origin_xref].[mgra_13]
                 LEFT JOIN
 			        [#mgra_cmcp_xref_all] AS [destination_xref]
                 ON
-	                [geography_tour_destination].[tour_destination_mgra_13] = [destination_xref].[mgra_13]
+	                [destination_xref].[cmcp_name] = @cmcp_name
+			        AND [geography_tour_destination].[tour_destination_mgra_13] = [destination_xref].[mgra_13]
                 WHERE
 	                [person_trip].[scenario_id] = @scenario_id
                     AND [tour].[scenario_id] = @scenario_id
