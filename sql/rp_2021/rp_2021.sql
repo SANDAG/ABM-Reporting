@@ -11403,7 +11403,7 @@ SELECT
             THEN 'Minority'
             ELSE 'Non-Minority'
             END AS [minority]
-	,CASE   WHEN [household].[poverty] <= 2
+	,CASE   WHEN [household].[poverty] < 2
             THEN 'Low Income'
             ELSE 'Non-Low Income'
             END AS [low_income]
@@ -11415,7 +11415,7 @@ SELECT
 									    'Native Hawaiian and Other Pacific Islander Alone',
 									    'American Indian and Alaska Native Tribes specified; or American Indian or Alaska Native, not specified and no other races')
                         OR [person].[hispanic] = 'Hispanic')
-                OR [household].[poverty] <= 2
+                OR [household].[poverty] < 2
             THEN 'CoC'
             ELSE 'Non-CoC'
             END AS [coc]
@@ -14149,7 +14149,7 @@ BEGIN
         WHERE
             [person_trip].[scenario_id] = @scenario_id
             AND [household].[scenario_id] = @scenario_id
-            AND (@low_income = 0 OR (@low_income = 1 AND [household].[poverty] <= 2))  -- restrict to low income populaton if indicated
+            AND (@low_income = 0 OR (@low_income = 1 AND [household].[poverty] < 2))  -- restrict to low income populaton if indicated
             AND [model_trip].[model_trip_aggregate_description] = 'Resident Models'  -- Resident Models only
         GROUP BY
             CASE   WHEN [mode_trip].[mode_trip_description] IN ('Drive Alone',
