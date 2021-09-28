@@ -13668,6 +13668,61 @@ GO
 
 
 
+-- create stored procedure for sb375 average headways by transit tier peak and off peak periods ----
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_avg_headways_tier]
+GO
+
+CREATE PROCEDURE [rp_2021].[sp_sb375_avg_headways_tier]
+	@scenario_id integer  -- ABM scenario in [dimension].[scenario]
+AS
+/**
+summary:   >
+    Average headways by transit tier and peak and off peak period. The average
+	is computed using the harmonic mean excluding records where headways = 0.
+**/
+BEGIN
+	SELECT
+		@scenario_id AS [scenario_id]
+		,CASE WHEN [transit_route].[config] / 1000 IN (581, 582, 583)
+				OR [mode_transit_route_description] = 'Commuter Rail'
+			  THEN 'Tier 1'
+			  WHEN [transit_route].[config] / 1000 NOT IN (581, 582, 583)
+				AND [mode_transit_route_description] = 'Light Rail'
+			  THEN 'Tier 2'
+			  WHEN [mode_transit_route_description] IN ('Freeway Rapid', 'Arterial Rapid')
+			  THEN 'Tier 3'
+			  ELSE 'Tier 4' END AS [tier]
+		,( SUM(CASE WHEN [am_headway] > 0 THEN 1 ELSE 0 END) + SUM(CASE WHEN [pm_headway] > 0 THEN 1 ELSE 0 END) ) /
+		   ( SUM(CASE WHEN [am_headway] > 0 THEN 1/[am_headway] ELSE 0 END) + SUM(CASE WHEN [pm_headway] > 0 THEN 1/[pm_headway] ELSE 0 END) ) [avg_peak_headway]
+		,SUM(CASE WHEN [op_headway] > 0 THEN 1 ELSE 0 END) / SUM(CASE WHEN [op_headway] > 0 THEN 1/[op_headway] ELSE 0 END) AS [avg_offpeak_headway]
+	FROM
+		[dimension].[transit_route]
+	INNER JOIN
+		[dimension].[mode_transit_route]
+	ON
+		[transit_route].[mode_transit_route_id] = [mode_transit_route].[mode_transit_route_id]
+	WHERE
+		[transit_route].[scenario_id] = @scenario_id
+	GROUP BY
+		CASE WHEN [transit_route].[config] / 1000 IN (581, 582, 583)
+			   OR [mode_transit_route_description] = 'Commuter Rail'
+			 THEN 'Tier 1'
+			 WHEN [transit_route].[config] / 1000 NOT IN (581, 582, 583)
+			   AND [mode_transit_route_description] = 'Light Rail'
+			 THEN 'Tier 2'
+			 WHEN [mode_transit_route_description] IN ('Freeway Rapid', 'Arterial Rapid')
+			 THEN 'Tier 3'
+			 ELSE 'Tier 4' END
+END
+GO
+
+-- add metadata for [rp_2021].[sp_sb375_avg_headways_tier]
+EXECUTE [db_meta].[add_xp] 'rp_2021.sp_sb375_avg_headways_tier', 'MS_Description', 'sb375 average headways by trainsit tier and peak/off-peak period'
+GO
+
+
+
+
 -- create stored procedure for sb375 housing structures ----------------------
 DROP PROCEDURE IF EXISTS [rp_2021].[sp_sb375_housing_structures]
 GO
