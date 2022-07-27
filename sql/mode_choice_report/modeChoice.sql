@@ -28,12 +28,21 @@ WITH RECOMPILE
 AS
 BEGIN
 	SET NOCOUNT ON;
+	
+	DECLARE @geo_set_id integer;
+	-- get geography set id based on scenario id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
 
     -- read CSV file containg project-area MGRAs, insert to temporary table
     -- assumed format is one-column [mgra] field with headers
+	DROP TABLE IF EXISTS #projectMGRAs;
     CREATE TABLE #projectMGRAs 
         ([mgra] char(20) NOT NULL,
-            CONSTRAINT pk_demographicsProjectMGRAs PRIMARY KEY CLUSTERED ([mgra]))
+         CONSTRAINT pk_demographicsProjectMGRAs PRIMARY KEY CLUSTERED ([mgra]))
     DECLARE @sqlBI nvarchar(max) = '
         BULK INSERT #projectMGRAs
         FROM ''' + @mgraPath + '''
@@ -47,8 +56,8 @@ BEGIN
         -- includes non-institutionalized group quarters
         SELECT
             1 AS [order]
-            ,'Population' AS [metric]
-            ,COUNT([person_id]) AS [value]
+            ,'Population' AS [Metric]
+            ,ROUND(SUM([person_sample_weight]),0) AS [Amount]
         FROM
             [dimension].[person]
         INNER JOIN
@@ -60,6 +69,7 @@ BEGIN
             [dimension].[geography]
         ON
             [household].[geography_household_location_id] = [geography].[geography_id]
+			AND [geography].[geography_set_id] = @geo_set_id
         INNER JOIN  -- restrict to MGRAs within project area
             #projectMGRAs
         ON
@@ -69,6 +79,7 @@ BEGIN
             AND [household].[scenario_id] = @scenario_id
             AND [person].[person_id] > 0  -- remove Not Applicable records
             AND [household].[household_id] > 0  -- remove Not Applicable records
+		
 
         UNION ALL
 
@@ -76,14 +87,15 @@ BEGIN
         -- includes non-institutionalized group quarters
         SELECT
             2 AS [order]
-            ,'Households' AS [metric]
-            ,COUNT([household_id]) AS [value]
+            ,'Households' AS [Metric]
+             ,ROUND(SUM([household_sample_weight]),0) AS [Amount]
         FROM
             [dimension].[household]
         INNER JOIN
             [dimension].[geography]
         ON
             [household].[geography_household_location_id] = [geography].[geography_id]
+			AND [geography].[geography_set_id] = @geo_set_id
         INNER JOIN  -- restrict to MGRAs within project area
             #projectMGRAs
         ON
@@ -96,12 +108,10 @@ BEGIN
 
         -- synthetic population based persons who live in the project area and are employed
         -- includes non-institutionalized group quarters
-        SELECT
-            4 AS [order]
-            ,'Employed Residents' AS [metric]
-            ,SUM(CASE WHEN [person].[abm_person_type] IN ('Full-Time Worker',
-                                                          'Part-Time Worker')
-                      THEN 1 ELSE 0 END) AS [value]
+		SELECT
+            3 AS [order]
+            ,'Employed Residents' AS [Metric]
+            ,ROUND(SUM([person_sample_weight]),0) AS [Amount]
         FROM
             [dimension].[person]
         INNER JOIN
@@ -113,6 +123,7 @@ BEGIN
             [dimension].[geography]
         ON
             [household].[geography_household_location_id] = [geography].[geography_id]
+			AND [geography].[geography_set_id] = @geo_set_id
         INNER JOIN  -- restrict to MGRAs within project area
             #projectMGRAs
         ON
@@ -122,42 +133,43 @@ BEGIN
             AND [household].[scenario_id] = @scenario_id
             AND [person].[person_id] > 0  -- remove Not Applicable records
             AND [household].[household_id] > 0  -- remove Not Applicable records
+			AND [person].[employment_status] IN ('Employed Full-Time', 'Employed Part-Time')	
+		
+		
 
         UNION ALL
 
         -- synthetic population based persons who are employed in the project area
         -- includes non-institutionalized group quarters
         -- includes full-time telecommuters who reside in the project area (work from home)
-        SELECT
-            5 AS [order]
-            ,'Employees' AS [metric]
-            ,COUNT([person_id]) AS [value]
-        FROM
-            [dimension].[person]
-        INNER JOIN
-            [dimension].[geography]
-        ON
-            [person].[geography_work_location_id] = [geography].[geography_id]
-        INNER JOIN  -- restrict to MGRAs within project area
-            #projectMGRAs
-        ON
-            [geography].[mgra_13] = #projectMGRAs.[mgra]
-        WHERE
-            [person].[scenario_id] = @scenario_id
-            AND [person].[person_id] > 0  -- remove Not Applicable records
-            AND [person].[abm_person_type] IN ('Full-Time Worker', 'Part-Time Worker')
+		SELECT
+			4 AS [order]
+			,'Employees' AS [Metric]
+			,ROUND(SUM([person_sample_weight]),0) AS [Amount]
+		FROM
+			[dimension].[person]
+		INNER JOIN
+			[dimension].[geography]
+		ON
+			[person].[geography_work_location_id] = [geography].[geography_id]
+			AND [geography].[geography_set_id] = @geo_set_id
+		INNER JOIN  -- restrict to MGRAs within project area
+			#projectMGRAs
+		ON
+			[geography].[mgra_13] = #projectMGRAs.[mgra]
+		WHERE
+			[person].[scenario_id] = @scenario_id
+			AND [person].[person_id] > 0  -- remove Not Applicable records
+			AND [person].[employment_status] IN ('Employed Full-Time', 'Employed Part-Time')
     )
+
+
     -- get all results from the CTE and calculate household size
-    SELECT * FROM [results]
-    UNION ALL
-    SELECT
-        3 AS [order]
-        ,'Household Size' AS [metric]
-        ,1.0 * (SELECT [value] FROM [results] WHERE [metric] = 'Population') /
-         NULLIF((SELECT [value] FROM [results] WHERE [metric] = 'Households'), 0) AS [value]
+    SELECT * FROM [results] OPTION(MAXDOP 1)
 
     DROP TABLE #projectMGRAs
 
+ 
 END
 GO
 
@@ -165,9 +177,10 @@ GO
 
 
 -- create mgra inter/intra-zonal query ---------------------------------------
-DROP PROCEDURE IF EXISTS [mode_choice_report].[mgra_intrazonals]
+DROP PROCEDURE IF EXISTS [mode_choice_report].[study_area_trips]
 GO
-CREATE PROCEDURE [mode_choice_report].[mgra_intrazonals]
+
+CREATE PROCEDURE [mode_choice_report].[study_area_trips]
     @scenario_id integer,
     @mgraPath nvarchar(max)
 WITH RECOMPILE
@@ -175,11 +188,20 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+	
+	DECLARE @geo_set_id integer;
+	
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+
     -- read CSV file containg project-area MGRAs, insert to temporary table
     -- assumed format is one-column [mgra] field with headers
     CREATE TABLE #projectMGRAs 
-        ([mgra] char(20) NOT NULL,
-            CONSTRAINT pk_mgraIntrazonalsProjectMGRAs PRIMARY KEY CLUSTERED ([mgra]))
+        ([mgra] char(20) NOT NULL)
+           -- CONSTRAINT pk_mgraIntrazonalsProjectMGRAs4 PRIMARY KEY CLUSTERED ([mgra]))
     DECLARE @sqlBI nvarchar(max) = '
         BULK INSERT #projectMGRAs
         FROM ''' + @mgraPath + '''
@@ -191,8 +213,8 @@ BEGIN
     with [results] AS (
         SELECT
             1 AS [order]
-            ,'MGRA Intra-zonal' AS [metric]
-            ,SUM([weight_person_trip]) AS [value]
+            ,'Intra-zonal' AS [Metric]
+            ,SUM([weight_person_trip]) AS [Person Trips]
         FROM
             [fact].[person_trip]
         INNER JOIN
@@ -203,6 +225,7 @@ BEGIN
             [dimension].[geography_trip_origin]
         ON
             [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+			AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id 
         LEFT OUTER JOIN
             #projectMGRAs AS [originProjectMGRAs]
         ON
@@ -211,6 +234,7 @@ BEGIN
             [dimension].[geography_trip_destination]
         ON
             [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+			AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
         LEFT OUTER JOIN
             #projectMGRAs AS [destinationProjectMGRAs]
         ON
@@ -227,8 +251,8 @@ BEGIN
 
         SELECT
             2 AS [order]
-            ,'MGRA Inter-zonal' AS [metric]
-            ,SUM([weight_person_trip]) AS [value]
+            ,'Inter-zonal' AS [Metric]
+            ,SUM([weight_person_trip]) AS [Person Trips]
         FROM
             [fact].[person_trip]
         INNER JOIN
@@ -239,6 +263,7 @@ BEGIN
             [dimension].[geography_trip_origin]
         ON
             [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+			AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id 
         LEFT OUTER JOIN
             #projectMGRAs AS [originProjectMGRAs]
         ON
@@ -247,6 +272,7 @@ BEGIN
             [dimension].[geography_trip_destination]
         ON
             [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+			AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
         LEFT OUTER JOIN
             #projectMGRAs AS [destinationProjectMGRAs]
         ON
@@ -261,47 +287,43 @@ BEGIN
 
         UNION ALL
 
-        SELECT
-            3 AS [order]
-            ,'Total Trips' AS [metric]
-            ,SUM([weight_person_trip]) AS [value]
-        FROM
-            [fact].[person_trip]
-        INNER JOIN
-            [dimension].[model]
-        ON
-            [person_trip].[model_trip_id] = [model].[model_id]
-        INNER JOIN
-            [dimension].[geography_trip_origin]
-        ON
-            [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
-        LEFT OUTER JOIN
-            #projectMGRAs AS [originProjectMGRAs]
-        ON
-            [geography_trip_origin].[trip_origin_mgra_13] = [originProjectMGRAs].[mgra]
-        INNER JOIN
-            [dimension].[geography_trip_destination]
-        ON
-            [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
-        LEFT OUTER JOIN
-            #projectMGRAs AS [destinationProjectMGRAs]
-        ON
-            [geography_trip_destination].[trip_destination_mgra_13] = [destinationProjectMGRAs].[mgra]
-        WHERE
-            [person_trip].[scenario_id] = @scenario_id
-            AND [model].[model_aggregate_description] = 'Resident Models'
-            -- restrict to trips where origin OR destination MGRAs within project area
-            AND ([originProjectMGRAs].[mgra] IS NOT NULL OR [destinationProjectMGRAs].[mgra] IS NOT NULL)
-    )
+		SELECT
+			3 AS [order]
+			,'Inter-Study Area' AS [Metric]
+			,SUM([weight_person_trip]) AS [Person Trips]
+		FROM
+			[fact].[person_trip]
+		INNER JOIN
+			[dimension].[model]
+		ON
+			[person_trip].[model_trip_id] = [model].[model_id]
+		INNER JOIN
+			[dimension].[geography_trip_origin]
+		ON
+			[person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+			AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id
+		LEFT OUTER JOIN
+			#projectMGRAs AS [originProjectMGRAs]
+		ON
+			[geography_trip_origin].[trip_origin_mgra_13] = [originProjectMGRAs].[mgra]
+		INNER JOIN
+			[dimension].[geography_trip_destination]
+		ON
+			[person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+			AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
+		LEFT OUTER JOIN
+			#projectMGRAs AS [destinationProjectMGRAs]
+		ON
+			[geography_trip_destination].[trip_destination_mgra_13] = [destinationProjectMGRAs].[mgra]
+		WHERE
+			[person_trip].[scenario_id] = @scenario_id
+			AND [model].[model_aggregate_description] = 'Resident Models'
+			-- restrict to trips where trips originate or are destined to project area but there are no intra-/inter-zonal trips
+			AND (([originProjectMGRAs].[mgra] IS NOT NULL AND [destinationProjectMGRAs].[mgra] IS NULL) OR 
+				 ([originProjectMGRAs].[mgra] IS NULL AND [destinationProjectMGRAs].[mgra] IS NOT NULL))
+				 
     -- get all results from the CTE and calculate MGRA Intra-zonal percentage
     SELECT * FROM [results]
-    UNION ALL
-    SELECT
-        4 AS [order]
-        ,'MGRA Intra-zonal Pct.' AS [metric]
-        ,ROUND(100.0 * (SELECT [value] FROM [results] WHERE [metric] = 'MGRA Intra-zonal') /
-         (SELECT [value] FROM [results] WHERE [metric] = 'Total Trips'), 2) AS [value]
-
 
     DROP TABLE #projectMGRAs
 
@@ -314,13 +336,21 @@ GO
 -- create internal capture query ---------------------------------------------
 DROP PROCEDURE IF EXISTS [mode_choice_report].[internal_capture]
 GO
-CREATE PROCEDURE [mode_choice_report].[internal_capture]
+CREATE PROCEDURE[mode_choice_report].[internal_capture]
     @scenario_id integer,
     @mgraPath nvarchar(max)
 WITH RECOMPILE
 AS
 BEGIN
 	SET NOCOUNT ON;
+	
+	DECLARE @geo_set_id integer;
+	
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
 
     -- read CSV file containg project-area MGRAs, insert to temporary table
     -- assumed format is one-column [mgra] field with headers
@@ -346,7 +376,7 @@ BEGIN
         ON
             [geography].[mgra_13] != 'Not Applicable'
             AND #projectMGRAs.[mgra] = [geography].[mgra_13]
-
+			AND [geography].[geography_set_id] = @geo_set_id
         UNION ALL
 
         SELECT DISTINCT
@@ -358,11 +388,13 @@ BEGIN
         ON
             [mgra_geography].[mgra_13] != 'Not Applicable'
             AND #projectMGRAs.[mgra] = [mgra_geography].[mgra_13]
+			AND [mgra_geography].[geography_set_id] = @geo_set_id
         INNER JOIN
             [dimension].[geography] AS [taz_geography]
         ON
             [taz_geography].[mgra_13] = 'Not Applicable'
             AND [taz_geography].[taz_13] != 'Not Applicable'
+			AND [taz_geography].[geography_set_id] = @geo_set_id
             AND [mgra_geography].[taz_13] = [taz_geography].[taz_13]),
     [results] AS (
         SELECT
@@ -435,9 +467,9 @@ BEGIN
     )
     -- get results from the CTE and calculate study area internal capture rate
     SELECT
-        'Study Area Internal Vehicle Capture Rate' AS [metric]
-        ,ROUND(100.0 * (SELECT [value] FROM [results] WHERE [metric] = 'Study Area Intra-zonal Vehicle Trips') /
-         (SELECT [value] FROM [results] WHERE [metric] = 'Total Vehicle Trips'), 2) AS [value]
+        'Study Area Internal Vehicle Capture Rate' AS [Metric]
+        ,((SELECT [value] FROM [results] WHERE [Metric] = 'Study Area Intra-zonal Vehicle Trips') /
+         (SELECT [value] FROM [results] WHERE [Metric] = 'Total Vehicle Trips')) AS [Percentage]
 
 
     DROP TABLE #projectMGRAs
@@ -460,6 +492,15 @@ WITH RECOMPILE
 AS
 BEGIN
 	SET NOCOUNT ON;
+
+	DECLARE @geo_set_id integer;
+	
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+
 
 	-- ensure one of geography column or MGRA project list is specified
 	IF LEN(@mgraPath) = 0 AND LEN(@geography_column) = 0
@@ -526,10 +567,12 @@ BEGIN
 				[dimension].[geography] AS [origin_geography]
 			ON
 				[person_trip].[geography_trip_origin_id] = [origin_geography].[geography_id]
+				AND [origin_geography].[geography_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 			INNER JOIN
 				[dimension].[geography] AS [destination_geography]
 			ON
 				[person_trip].[geography_trip_destination_id] = [destination_geography].[geography_id]
+				AND [destination_geography].[geography_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 			WHERE
 				[person_trip].[scenario_id] = ' +CONVERT(nvarchar, @scenario_id) + '
 				AND [model].[model_aggregate_description] = ''Resident Models''
@@ -595,6 +638,7 @@ BEGIN
 					[dimension].[geography]
 				WHERE
 					[' + @geography_column + '] != ''Not Applicable''
+					AND [geography].[geography_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 			) AS [geographies]) AS [combos]
 		ON
 			#mode_choice_report_mode_share.[' + @geography_column + '] = [combos].[' + @geography_column + ']
@@ -625,7 +669,8 @@ BEGIN
 		-- return person-trip mode share within project-area MGRAs
 		SELECT
 			[Modes].[Mode]
-			,ISNULL(100.0 * [Person Trips] / SUM([Person Trips]) OVER (), 0) AS [Percentage]
+			,ISNULL(1.0 * [Person Trips] / SUM([Person Trips]) OVER (), 0) AS [Percentage]
+			,[Person Trips]
 		FROM (
 			SELECT
 				CASE WHEN [mode].[mode_aggregate_description] IN ('Drive Alone',
@@ -658,6 +703,7 @@ BEGIN
 				[dimension].[geography_trip_origin]
 			ON
 				[person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+				AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id  
 			LEFT OUTER JOIN
 				#projectMGRAs AS [originProjectMGRAs]
 			ON
@@ -666,6 +712,7 @@ BEGIN
 				[dimension].[geography_trip_destination]
 			ON
 				[person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+				AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
 			LEFT OUTER JOIN
 				#projectMGRAs AS [destinationProjectMGRAs]
 			ON
@@ -737,6 +784,14 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+	DECLARE @geo_set_id integer;
+	
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+
 		-- ensure one of geography column or MGRA project list is specified
 	IF LEN(@mgraPath) = 0 AND LEN(@geography_column) = 0
 		RAISERROR('User must specify either a column in [dimension].[geography] or path to MGRA project list', 16, 1)
@@ -777,8 +832,7 @@ BEGIN
 																   ''Shared Ride 3+'',
 																   ''Walk'',
 																   ''Bike'',
-																   ''Transit'',
-																   ''School Bus'')
+																   ''Transit'')
 					  THEN [mode].[mode_aggregate_description]
 					  WHEN [mode].[mode_aggregate_description] = ''Super-Walk''
 					  THEN ''Micromobility & Microtransit''
@@ -814,10 +868,12 @@ BEGIN
 				[dimension].[geography] AS [origin_geography]
 			ON
 				[person_trip].[geography_trip_origin_id] = [origin_geography].[geography_id]
+				AND [origin_geography].[geography_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 			INNER JOIN
 				[dimension].[geography] AS [destination_geography]
 			ON
 				[person_trip].[geography_trip_destination_id] = [destination_geography].[geography_id]
+				AND [destination_geography].[geography_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 			WHERE
 				[person_trip].[scenario_id] = ' + CONVERT(nvarchar, @scenario_id) + '
 				AND [model].[model_aggregate_description] = ''Resident Models''
@@ -833,8 +889,7 @@ BEGIN
 																  ''Shared Ride 3+'',
 																  ''Walk'',
 																  ''Bike'',
-																  ''Transit'',
-																  ''School Bus'')
+																  ''Transit'')
 					 THEN [mode].[mode_aggregate_description]
 					 WHEN [mode].[mode_aggregate_description] = ''Super-Walk''
 					 THEN ''Micromobility & Microtransit''
@@ -867,8 +922,7 @@ BEGIN
 																   ''Shared Ride 3+'',
 																   ''Walk'',
 																   ''Bike'',
-																   ''Transit'',
-																   ''School Bus'')
+																   ''Transit'')
 						THEN [mode].[mode_aggregate_description]
 						WHEN [mode].[mode_aggregate_description] = ''Super-Walk''
 						THEN ''Micromobility & Microtransit''
@@ -887,6 +941,7 @@ BEGIN
 					[dimension].[geography]
 				WHERE
 					[' + @geography_column + '] != ''Not Applicable''
+					AND [geography].[geography_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 			) AS [geographies]) AS [combos]
 		ON
 			#mode_choice_report_mode_share.[' + @geography_column + '] = [combos].[' + @geography_column + ']
@@ -918,7 +973,8 @@ BEGIN
 		-- for trips that are direct home-work or work-home trips
 		SELECT
 			[Modes].[Mode]
-			,ISNULL(100.0 * [Person Trips] / SUM([Person Trips]) OVER (), 0) AS [Percentage]
+			,ISNULL(1.0 * [Person Trips] / SUM([Person Trips]) OVER (), 0) AS [Percentage]
+			,[Person Trips]
 		FROM (
 			SELECT
 				CASE WHEN [mode].[mode_aggregate_description] IN ('Drive Alone',
@@ -926,8 +982,7 @@ BEGIN
 																  'Shared Ride 3+',
 																  'Walk',
 																  'Bike',
-																  'Transit',
-																  'School Bus')
+																  'Transit')
 					 THEN [mode].[mode_aggregate_description]
 					 WHEN [mode].[mode_aggregate_description] = 'Super-Walk'
 					 THEN 'Micromobility & Microtransit'
@@ -959,6 +1014,8 @@ BEGIN
 				[dimension].[geography_trip_origin]
 			ON
 				[person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+				AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id   
+
 			LEFT OUTER JOIN
 				#projectMGRAs AS [originProjectMGRAs]
 			ON
@@ -967,6 +1024,8 @@ BEGIN
 				[dimension].[geography_trip_destination]
 			ON
 				[person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+				AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
+
 			LEFT OUTER JOIN
 				#projectMGRAs AS [destinationProjectMGRAs]
 			ON
@@ -985,8 +1044,7 @@ BEGIN
 																  'Shared Ride 3+',
 																  'Walk',
 																  'Bike',
-																  'Transit',
-																  'School Bus')
+																  'Transit')
 					 THEN [mode].[mode_aggregate_description]
 					 WHEN [mode].[mode_aggregate_description] = 'Super-Walk'
 					 THEN 'Micromobility & Microtransit'
@@ -1003,8 +1061,7 @@ BEGIN
 																  'Shared Ride 3+',
 																  'Walk',
 																  'Bike',
-																  'Transit',
-																  'School Bus')
+																  'Transit')
 						THEN [mode].[mode_aggregate_description]
 						WHEN [mode].[mode_aggregate_description] = 'Super-Walk'
 						THEN 'Micromobility & Microtransit'
@@ -1031,6 +1088,7 @@ GO
 -- create trip length query --------------------------------------------------
 DROP PROCEDURE IF EXISTS [mode_choice_report].[trip_lengths]
 GO
+
 CREATE PROCEDURE [mode_choice_report].[trip_lengths]
     @scenario_id integer,
     @mgraPath nvarchar(max)
@@ -1038,6 +1096,14 @@ WITH RECOMPILE
 AS
 BEGIN
 	SET NOCOUNT ON;
+
+	DECLARE @geo_set_id integer;
+	-- get geography set id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
 
     -- read CSV file containg project-area MGRAs, insert to temporary table
     -- assumed format is one-column [mgra] field with headers
@@ -1056,8 +1122,8 @@ BEGIN
     -- originate or destinate within the project study area
     SELECT
         1 AS [order]
-        ,'Resident Person Trip Length' AS [metric]
-        ,SUM([weight_person_trip] * [distance_total]) / SUM([weight_person_trip]) AS [value]
+        ,'Resident Person Trip Length' AS [Metric]
+        ,SUM([weight_person_trip] * [distance_total]) / SUM([weight_person_trip]) AS [Miles]
     FROM
         [fact].[person_trip]
     INNER JOIN
@@ -1068,6 +1134,7 @@ BEGIN
         [dimension].[geography_trip_origin]
     ON
         [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+		AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id
     LEFT OUTER JOIN
         #projectMGRAs AS [originProjectMGRAs]
     ON
@@ -1076,6 +1143,7 @@ BEGIN
         [dimension].[geography_trip_destination]
     ON
         [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+		AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
     LEFT OUTER JOIN
         #projectMGRAs AS [destinationProjectMGRAs]
     ON
@@ -1092,8 +1160,8 @@ BEGIN
     -- originate or destinate within the project study area that use personal auto modes
     SELECT
         2 AS [order]
-        ,'Resident Auto-Trip Vehicle Trip Length' AS [metric]
-        ,SUM([weight_trip] * [distance_total]) / SUM([weight_trip]) AS [value]
+        ,'Resident Vehicle Trip Length' AS [Metric]
+        ,SUM([weight_trip] * [distance_total]) / SUM([weight_trip]) AS [Miles]
     FROM
         [fact].[person_trip]
     INNER JOIN
@@ -1108,6 +1176,7 @@ BEGIN
         [dimension].[geography_trip_origin]
     ON
         [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+		AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id
     LEFT OUTER JOIN
         #projectMGRAs AS [originProjectMGRAs]
     ON
@@ -1116,6 +1185,7 @@ BEGIN
         [dimension].[geography_trip_destination]
     ON
         [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+		AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
     LEFT OUTER JOIN
         #projectMGRAs AS [destinationProjectMGRAs]
     ON
@@ -1133,14 +1203,15 @@ BEGIN
     -- originate or destinate within the project study area
     SELECT
         3 AS [order]
-        ,'All Model Person Trip Length' AS [metric]
-        ,SUM([weight_person_trip] * [distance_total]) / SUM([weight_person_trip]) AS [value]
+        ,'All Model Person Trip Length' AS [Metric]
+        ,SUM([weight_person_trip] * [distance_total]) / SUM([weight_person_trip]) AS [Miles]
     FROM
         [fact].[person_trip]
     INNER JOIN
         [dimension].[geography_trip_origin]
     ON
         [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+		AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id
     LEFT OUTER JOIN
         #projectMGRAs AS [originProjectMGRAs]
     ON
@@ -1149,6 +1220,7 @@ BEGIN
         [dimension].[geography_trip_destination]
     ON
         [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+		AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
     LEFT OUTER JOIN
         #projectMGRAs AS [destinationProjectMGRAs]
     ON
@@ -1164,8 +1236,8 @@ BEGIN
     -- originate or destinate within the project study area that use personal auto modes
     SELECT
         4 AS [order]
-        ,'All Model Vehicle Trip Length' AS [metric]
-        ,SUM([weight_trip] * [distance_total]) / SUM([weight_trip]) AS [value]
+        ,'All Model Vehicle Trip Length' AS [Metric]
+        ,SUM([weight_trip] * [distance_total]) / SUM([weight_trip]) AS [Miles]
     FROM
         [fact].[person_trip]
     INNER JOIN
@@ -1176,6 +1248,7 @@ BEGIN
         [dimension].[geography_trip_origin]
     ON
         [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+		AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id
     LEFT OUTER JOIN
         #projectMGRAs AS [originProjectMGRAs]
     ON
@@ -1184,6 +1257,7 @@ BEGIN
         [dimension].[geography_trip_destination]
     ON
         [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+		AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
     LEFT OUTER JOIN
         #projectMGRAs AS [destinationProjectMGRAs]
     ON
@@ -1200,8 +1274,8 @@ BEGIN
     -- originate within the project study area by persons who reside in the project study area
     SELECT
         5 AS [order]
-        ,'Resident Round-Trip Commuter Tour Length' AS [metric]
-        ,SUM([weight_person_tour] * [distance_total]) / SUM([weight_person_tour]) AS [value]
+        ,'Resident Round-Trip Commuter Tour Length' AS [Metric]
+        ,SUM([weight_person_tour] * [distance_total]) / SUM([weight_person_tour]) AS [Miles]
     FROM (
         SELECT
             [tour].[tour_id]
@@ -1218,6 +1292,7 @@ BEGIN
             [dimension].[geography_tour_origin]
         ON
             [tour].[geography_tour_origin_id] = [geography_tour_origin].[geography_tour_origin_id]
+			AND [geography_tour_origin].[geography_tour_origin_set_id] = @geo_set_id
         INNER JOIN  -- only use trips on tours originating in study-area
             #projectMGRAs AS [tourOriginProjectMGRAs]
         ON
@@ -1239,6 +1314,7 @@ BEGIN
             [dimension].[geography_household_location]
         ON
             [household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+			AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
         INNER JOIN  -- only use trips made by residents of study-area
             #projectMGRAs AS [homeProjectMGRAs]
         ON
@@ -1259,8 +1335,8 @@ BEGIN
     -- destinate within the project study area by persons who work in the project study area
     SELECT
         6 AS [order]
-        ,'Employee Round-Trip Commuter Tour Length' AS [metric]
-        ,SUM([weight_person_tour] * [distance_total]) / SUM([weight_person_tour]) AS [value]
+        ,'Employee Round-Trip Commuter Tour Length' AS [Metric]
+        ,SUM([weight_person_tour] * [distance_total]) / SUM([weight_person_tour]) AS [Miles]
     FROM (
         SELECT
             [tour].[tour_id]
@@ -1277,6 +1353,7 @@ BEGIN
             [dimension].[geography_tour_destination]
         ON
             [tour].[geography_tour_destination_id] = [geography_tour_destination].[geography_tour_destination_id]
+			AND [geography_tour_destination].[geography_tour_destination_set_id] = @geo_set_id
         INNER JOIN  -- only use trips on tours destinating in study-area
             #projectMGRAs AS [tourDestinationProjectMGRAs]
         ON
@@ -1298,6 +1375,7 @@ BEGIN
             [dimension].[geography_work_location]
         ON
             [person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+			AND [geography_work_location].[geography_work_location_set_id] = @geo_set_id
         INNER JOIN  -- only use trips made by employees of study-area
             #projectMGRAs AS [workProjectMGRAs]
         ON
@@ -1317,3 +1395,4 @@ BEGIN
 
 END
 GO
+
