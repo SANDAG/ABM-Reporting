@@ -5,7 +5,15 @@ import settings
 import openpyxl
 import os
 import pandas as pd
+import numpy as np
 
+# Template for how SimWrapper inputs will be formatted
+simwrapper_template = pd.read_csv(settings.simWrapperTemplate, index_col = 0)
+
+# Data frame for keeping track of measures to use in SimWrapper
+simwrapper_measures = pd.DataFrame(
+    index = settings.scenarios.keys()
+)
 
 # get GIS Performance Measures and populate SQL Server results table
 print("---- Getting GIS Performance Measures ----")
@@ -135,6 +143,18 @@ for scenario in settings.scenarios:
                 params=[scenario, measureKey, metricKey]
             )
 
+            # If a metric is to be visualized in SimWrapper, add it to the `simwrapper_measures` data frame
+            if "visualize" in settings.template_locations[measureKey][metricKey] and settings.template_locations[measureKey][metricKey]["visualize"]:
+                colname = measureKey + '--' + metricKey
+                try:
+                    simwrapper_measures.loc[scenario, colname] = result.values[0, 0]
+                except KeyError: #Column not there yet
+                    simwrapper_measures[colname] = np.empty_like(simwrapper_measures.index)
+                    simwrapper_measures.loc[scenario, colname] = result.values[0, 0]
+
+                if colname not in simwrapper_metrics:
+                    simwrapper_metrics.append(colname)
+
             # set template write column based on scenario label and template sheet
             # and write results to specified Excel template sheet and row
             # if none is specified for the given scenario label and template sheet
@@ -157,3 +177,10 @@ for scenario in settings.scenarios:
 
 # save the completed template
 templateWriter.save()
+
+# Write SimWrapper inputs
+for metric in simwrapper_measures.columns:
+    df = simwrapper_template.copy()
+    for col in df.columns:
+        df[col] = df[col].map(simwrapper_measures[metric])
+    df.to_csv(metric + '.csv') #Need to specify correct file location
