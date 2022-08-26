@@ -15,6 +15,19 @@ simwrapper_measures = pd.DataFrame(
     index = settings.scenarios.keys()
 )
 
+# Indicate folder to write SimWrapper files
+simwrapper_path = os.path.join(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(
+                os.path.abspath(__file__)
+                )
+            )
+        ),
+    'resources',
+    'simwrapper'
+    )
+
 # get GIS Performance Measures and populate SQL Server results table
 print("---- Getting GIS Performance Measures ----")
 for scenario in settings.scenarios:
@@ -183,4 +196,4 @@ for metric in simwrapper_measures.columns:
     df = simwrapper_template.copy()
     for col in df.columns:
         df[col] = df[col].map(simwrapper_measures[metric])
-    df.to_csv(metric + '.csv') #Need to specify correct file location
+    df.to_csv(os.path.join(simwrapper_path, metric + '.csv'))
