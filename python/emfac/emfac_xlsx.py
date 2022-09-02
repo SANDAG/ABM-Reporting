@@ -30,7 +30,7 @@ else:
 if emfac_version == "2017":
     emfac_version_for_settings = "EMFAC2017 v1.0.3"
 elif emfac_version == "2021":
-    emfac_version_for_settings = "EMFAC2021 v1.0.0"
+    emfac_version_for_settings = "EMFAC2021 v1.0.1"
 else:
     emfac_version_for_settings = "EMFAC2014"
 
@@ -72,7 +72,7 @@ scenario = pd.read_sql_query(
 )
 
 # build the output xlsx save location file path
-output_path = output_folder + "/EMFAC" + emfac_version + "-SANDAG-" + \
+output_path = output_folder + "\EMFAC" + emfac_version + "-SANDAG-" + \
               str(scenario.at[0, "name"]) + "-" + str(scenario_id) + "-" + \
               season + "-" + str(scenario.at[0, "year"])
 
