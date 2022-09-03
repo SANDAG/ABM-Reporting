@@ -3,31 +3,35 @@ channels:
   - defaults
 dependencies:
   - blas=1.0=mkl
-  - ca-certificates=2020.7.22=0
-  - certifi=2020.6.20=py38_0
-  - et_xmlfile=1.0.1=py_1001
-  - intel-openmp=2020.2=254
+  - ca-certificates=2019.11.27=0
+  - certifi=2019.11.28=py37_0
+  - et_xmlfile=1.0.1=py37_0
+  - icc_rt=2019.0.0=h0cc432a_1
+  - intel-openmp=2019.4=245
   - jdcal=1.4.1=py_0
-  - mkl=2020.2=256
-  - mkl-service=2.3.0=py38hb782905_0
-  - mkl_fft=1.1.0=py38h45dec08_0
-  - mkl_random=1.1.1=py38h47e9c7a_0
-  - numpy=1.19.1=py38h5510c5b_0
-  - numpy-base=1.19.1=py38ha3acd2a_0
-  - openpyxl=3.0.5=py_0
-  - openssl=1.1.1g=he774522_1
-  - pandas=1.1.1=py38ha925a31_0
-  - pip=20.2.2=py38_0
-  - pyodbc=4.0.30=py38ha925a31_0
-  - python=3.8.5=h5fd99cc_1
+  - mkl=2019.4=245
+  - mkl-service=2.3.0=py37hb782905_0
+  - mkl_fft=1.0.15=py37h14836fe_0
+  - mkl_random=1.1.0=py37h675688f_0
+  - numpy=1.17.4=py37h4320e6b_0
+  - numpy-base=1.17.4=py37hc3f5095_0
+  - openpyxl=3.0.2=py_0
+  - openssl=1.1.1d=he774522_3
+  - pandas=0.25.3=py37ha925a31_0
+  - pip=19.3.1=py37_0
+  - python=3.7.5=h8c8aaf0_0
   - python-dateutil=2.8.1=py_0
-  - pytz=2020.1=py_0
-  - setuptools=49.6.0=py38_0
-  - six=1.15.0=py_0
-  - sqlite=3.33.0=h2a8f88b_0
+  - pytz=2019.3=py_0
+  - setuptools=42.0.2=py37_0
+  - six=1.13.0=py37_0
+  - sqlite=3.30.1=he774522_0
   - vc=14.1=h0510ff6_4
-  - vs2015_runtime=14.16.27012=hf0eaf9b_3
-  - wheel=0.35.1=py_0
-  - wincertstore=0.2=py38_0
-  - zlib=1.2.11=h62dcd97_4
+  - vs2015_runtime=14.16.27012=hf0eaf9b_1
+  - wheel=0.33.6=py37_0
+  - wincertstore=0.2=py37_0
+  - pip:
+    - numexpr==2.7.1
+    - openmatrix==0.3.5.0
+    - pyodbc==4.0.28
+    - tables==3.6.1
 
