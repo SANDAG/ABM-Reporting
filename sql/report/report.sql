@@ -241,7 +241,14 @@ BEGIN
 	ELSE
 	BEGIN
 	    SET NOCOUNT ON;
-
+		
+		DECLARE @geo_set_id integer;
+	
+		SET @geo_set_id = 
+		(
+			SELECT [geography_set_id] FROM [dimension].[scenario]
+			WHERE scenario_id = @scenario_id
+		)
 	    -- build dynamic SQL string
 	    DECLARE @sql nvarchar(max) = '
 		    SELECT
@@ -274,6 +281,7 @@ BEGIN
 			    [dimension].[geography]
 		    ON
 			    [household].[geography_household_location_id] = [geography].[geography_id]
+				AND [geography].[geography_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + '
 		    WHERE
 			    [person_trip].[scenario_id] = ' + CONVERT(varchar, @scenario_id) + '
 			    AND [household].[scenario_id] = ' + CONVERT(varchar,  @scenario_id) + '
@@ -419,6 +427,15 @@ BEGIN
 		ELSE
 		BEGIN
 			SET NOCOUNT ON;
+			
+					
+			DECLARE @geo_set_id integer;
+	
+			SET @geo_set_id = 
+			(
+				SELECT [geography_set_id] FROM [dimension].[scenario]
+				WHERE scenario_id = @scenario_id
+			)
 
 			-- if all input parameters are valid execute the stored procedure
 			-- build dynamic SQL string
@@ -465,10 +482,12 @@ BEGIN
 					[dimension].[geography_household_location]
 				ON
 					[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+					AND [geography_household_location].[geography_household_location_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 				INNER JOIN
 					[dimension].[geography_work_location]
 				ON
 					[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+					AND [geography_work_location].[geography_work_location_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 				WHERE
 					[person].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
 					AND [household].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
@@ -525,10 +544,13 @@ BEGIN
 					[dimension].[geography_household_location]
 				ON
 					[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+					AND [geography_household_location].[geography_household_location_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
+
 				INNER JOIN
 					[dimension].[geography_work_location]
 				ON
 					[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+					AND [geography_work_location].[geography_work_location_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
 				WHERE
 					[person_trip].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
 					AND [person].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
@@ -597,6 +619,7 @@ BEGIN
 				[dimension].[geography_household_location]
 			ON
 				[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+				AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
 			LEFT OUTER JOIN
 				#projectTAZs AS [homeProjectTAZs]
 			ON
@@ -605,6 +628,7 @@ BEGIN
 				[dimension].[geography_work_location]
 			ON
 				[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+				AND [geography_work_location].[geography_work_location_set_id] = @geo_set_id
 			LEFT OUTER JOIN
 				#projectTAZs AS [workProjectTAZs]
 			ON
@@ -653,6 +677,7 @@ BEGIN
 				[dimension].[geography_household_location]
 			ON
 				[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+				AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
 			LEFT OUTER JOIN
 				#projectTAZs AS [homeProjectTAZs]
 			ON
@@ -661,6 +686,7 @@ BEGIN
 				[dimension].[geography_work_location]
 			ON
 				[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+				AND [geography_work_location].[geography_work_location_set_id] = @geo_set_id
 			LEFT OUTER JOIN
 				#projectTAZs AS [workProjectTAZs]
 			ON
@@ -753,6 +779,14 @@ BEGIN
 	ELSE
 	BEGIN
 	    SET NOCOUNT ON;
+		
+		DECLARE @geo_set_id integer;
+	
+		SET @geo_set_id = 
+		(
+			SELECT [geography_set_id] FROM [dimension].[scenario]
+			WHERE scenario_id = @scenario_id
+		)
 
 	    -- build dynamic SQL string
 	    DECLARE @sql nvarchar(max) = '
@@ -787,6 +821,7 @@ BEGIN
 	        [dimension].[geography]
         ON
 	        [person_trip].[geography_trip_destination_id] = [geography].[geography_id]
+			AND [geography].[geography_set_id] = @geo_set_id	
         WHERE
 	        [person_trip].[scenario_id] = ' + CONVERT(nvarchar, @scenario_id) + '
 	        AND [tour].[scenario_id] = ' + CONVERT(nvarchar, @scenario_id) + '
