@@ -37,7 +37,7 @@ if(sql_access){
   sort(unique(odbcListDrivers()[[1]]))
   con1 <- dbConnect(odbc(), 
                     Driver = "SQL Server", 
-                    Server = "DDAMWSQL16", 
+                    Server = "", 
                     Database = "travel_data", 
                     Trusted_Connection = "True")
   
