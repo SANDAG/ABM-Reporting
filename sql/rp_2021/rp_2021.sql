@@ -9992,7 +9992,7 @@ revisions:
 		FROM
 			[dimension].[geography]
 		WHERE
-			[mgra_13] != 'Not Applicable') AS [mgras]
+			[mgra_13] != 'Not Applicable' AND geography_set_id = 1) AS [mgras]
 	ON
 		[particulate_matter_grid].[centroid].STWithin([mgra_13_shape]) = 1
 
