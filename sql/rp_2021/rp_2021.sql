@@ -11711,7 +11711,83 @@ GO
 EXECUTE [db_meta].[add_xp] 'rp_2021.sp_m1_m5_populations', 'MS_Description', 'main performance measures M-1 and M-5 populations'
 GO
 
+DROP PROCEDURE IF EXISTS [rp_2021].[sp_m1_m5_populations_18to24]
+GO
 
+CREATE PROCEDURE [rp_2021].[sp_m1_m5_populations_18to24]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+	@age_18_plus bit = 0  -- 1/0 switch to limit population to aged between 18+ and 24
+AS
+/**
+summary:   >
+    Population at the MGRA level used in calculations for the 2021 Regional
+    Plan Main Performance Measures M1 and M5. Allows aggregation to MGRA
+	or TAZ level for both transit and auto accessibility, optional restriction
+	to 18+ for employment and education metrics. Also includes Community of
+    Concern designations and Series 13 MGRA Mobility Hub indicator.
+**/
+SET NOCOUNT ON;
+
+DECLARE @geo_set_id integer;
+	-- get geography set id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+
+SELECT
+	CONVERT(integer, [geography_household_location].[household_location_mgra_13]) AS [mgra]
+	,CONVERT(integer, [geography_household_location].[household_location_taz_13]) AS [taz]
+	,MAX(CASE WHEN [mobility_hubs].[mgra_13] IS NOT NULL THEN [person_sample_weight] ELSE 0 END) AS [mobilityHub]
+	,mobility_hub_name
+	,COUNT([fn_person_coc].[person_id]) AS [pop]
+	,SUM(CASE   WHEN [fn_person_coc].[senior] = 'Senior'
+                THEN [person_sample_weight] ELSE 0 END) AS [popSenior]
+    ,SUM(CASE   WHEN [fn_person_coc].[senior] = 'Non-Senior'
+                THEN [person_sample_weight] ELSE 0 END) AS [popNonSenior]
+    ,SUM(CASE   WHEN [fn_person_coc].[minority] = 'Minority'
+                THEN [person_sample_weight] ELSE 0 END) AS [popMinority]
+    ,SUM(CASE   WHEN [fn_person_coc].[minority] = 'Non-Minority'
+                THEN [person_sample_weight] ELSE 0 END) AS [popNonMinority]
+    ,SUM(CASE   WHEN [fn_person_coc].[low_income] = 'Low Income'
+                THEN [person_sample_weight] ELSE 0 END) AS [popLowIncome]
+    ,SUM(CASE   WHEN [fn_person_coc].[low_income] = 'Non-Low Income'
+                THEN [person_sample_weight] ELSE 0 END) AS [popNonLowIncome]
+FROM
+	[rp_2021].[fn_person_coc] (@scenario_id)
+INNER JOIN
+    [dimension].[person]
+ON
+    [fn_person_coc].[scenario_id] = [person].[scenario_id]
+	AND [fn_person_coc].[person_id] = [person].[person_id]
+INNER JOIN
+	[dimension].[household]
+ON
+	[fn_person_coc].[scenario_id] = [household].[scenario_id]
+	AND [fn_person_coc].[household_id] = [household].[household_id]
+INNER JOIN
+	[dimension].[geography_household_location]
+ON
+	[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+	AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
+LEFT OUTER JOIN
+    [rp_2021].[mobility_hubs]
+ON
+    [geography_household_location].[household_location_mgra_13] = CAST([mobility_hubs].[mgra_13] AS NVARCHAR)
+WHERE
+    [person].[scenario_id] = @scenario_id
+	AND [household].[scenario_id] = @scenario_id
+	AND [person].[person_id] > 0  -- remove Not Applicable values
+	AND [household].[household_id] > 0  -- remove Not Applicable values
+	AND ((@age_18_plus = 1 AND [person].[age] between 18 and 24)
+		OR @age_18_plus = 0)  -- if age 18+ option is selected restrict population to individuals age 18 or older
+GROUP BY
+	[geography_household_location].[household_location_mgra_13]
+	,[geography_household_location].[household_location_taz_13]
+    ,mobility_hub_name
+OPTION (MAXDOP 1)
+GO
 
 
 -- create stored procedure for performance measure SM-1 ----------------------
