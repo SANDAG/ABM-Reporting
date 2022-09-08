@@ -10921,6 +10921,14 @@ revisions:
 **/
 SET NOCOUNT ON;
 
+DECLARE @geo_set_id integer;
+	-- get geography set id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+
 -- create temporary table of the xref between the highway network and the
 -- 100x100 square grid representation of San Diego County
 SELECT
@@ -11029,13 +11037,13 @@ with [grid_particulate_matter] AS (
 [population] AS (
     SELECT
 	    [geography_household_location].[household_location_mgra_13]
-	    ,SUM(CASE WHEN [fn_person_coc].[person_id] > 0 THEN 1 ELSE 0 END) AS [persons]  -- remove not applicable records
-	    ,SUM(CASE WHEN [fn_person_coc].[senior] = 'Senior' THEN 1 ELSE 0 END) AS [senior]
-	    ,SUM(CASE WHEN [fn_person_coc].[senior] = 'Non-Senior' THEN 1 ELSE 0 END) AS [non_senior]
-        ,SUM(CASE WHEN [fn_person_coc].[minority] = 'Minority' THEN 1 ELSE 0 END) AS [minority]
-	    ,SUM(CASE WHEN [fn_person_coc].[minority] = 'Non-Minority' THEN 1 ELSE 0 END) AS [non_minority]
-        ,SUM(CASE WHEN [fn_person_coc].[low_income] = 'Low Income' THEN 1 ELSE 0 END) AS [low_income]
-	    ,SUM(CASE WHEN [fn_person_coc].[low_income] = 'Non-Low Income' THEN 1 ELSE 0 END) AS [non_low_income]
+	    ,SUM(CASE WHEN [fn_person_coc].[person_id] > 0 THEN [household_sample_weight] ELSE 0 END) AS [persons]  -- remove not applicable records
+	    ,SUM(CASE WHEN [fn_person_coc].[senior] = 'Senior' THEN [household_sample_weight] ELSE 0 END) AS [senior]
+	    ,SUM(CASE WHEN [fn_person_coc].[senior] = 'Non-Senior' THEN [household_sample_weight] ELSE 0 END) AS [non_senior]
+        ,SUM(CASE WHEN [fn_person_coc].[minority] = 'Minority' THEN [household_sample_weight] ELSE 0 END) AS [minority]
+	    ,SUM(CASE WHEN [fn_person_coc].[minority] = 'Non-Minority' THEN [household_sample_weight] ELSE 0 END) AS [non_minority]
+        ,SUM(CASE WHEN [fn_person_coc].[low_income] = 'Low Income' THEN [household_sample_weight] ELSE 0 END) AS [low_income]
+	    ,SUM(CASE WHEN [fn_person_coc].[low_income] = 'Non-Low Income' THEN [household_sample_weight] ELSE 0 END) AS [non_low_income]
     FROM
 	    [rp_2021].[fn_person_coc] (@scenario_id)
     INNER JOIN
@@ -11047,6 +11055,7 @@ with [grid_particulate_matter] AS (
 	    [dimension].[geography_household_location] -- this is at the mgra_13 level
     ON
 	    [household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+		AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
     WHERE
 	    [fn_person_coc].[scenario_id] = @scenario_id
 	    AND [household].[scenario_id] = @scenario_id
@@ -11165,6 +11174,14 @@ revisions:
       date: 12 July 2018
 **/
 SET NOCOUNT ON;
+
+DECLARE @geo_set_id integer;
+	-- get geography set id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
 
 -- create temporary table of the xref between the highway network and the
 -- 100x100 square grid representation of San Diego County
@@ -11292,6 +11309,7 @@ with [grid_particulate_matter] AS (
 	    [dimension].[geography_household_location] -- this is at the mgra_13 level
     ON
 	    [household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+		AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
     WHERE
 	    [fn_person_coc].[scenario_id] = @scenario_id
 	    AND [household].[scenario_id] = @scenario_id
@@ -11555,6 +11573,14 @@ summary:   >
 **/
 SET NOCOUNT ON;
 
+DECLARE @geo_set_id integer;
+	-- get geography set id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+
 SELECT
     CONVERT(integer, [geography].[mgra_13]) AS [mgra]
 	,CONVERT(integer, [geography].[taz_13]) AS [taz]
@@ -11570,6 +11596,7 @@ INNER JOIN
 	[dimension].[geography]
 ON
 	[mgra_based_input].[geography_id] = [geography].[geography_id]
+	AND [geography].[geography_set_id] = @geo_set_id
 LEFT OUTER JOIN (  -- get indicators if MGRAs in Tier 1-4 employment centers
     SELECT
         [mgra_13],
@@ -11595,9 +11622,11 @@ GO
 DROP PROCEDURE IF EXISTS [rp_2021].[sp_m1_m5_populations]
 GO
 
+
 CREATE PROCEDURE [rp_2021].[sp_m1_m5_populations]
 	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
-	@age_18_plus bit = 0  -- 1/0 switch to limit population to aged 18+
+	@age_18_plus bit = 0,  -- 1/0 switch to limit population to aged 18+
+	@age_18_24 bit = 0 -- 1/0 switch to limit population to age between 18 and 24. These two arguments should be mutually exclusive
 AS
 /**
 summary:   >
@@ -11609,25 +11638,39 @@ summary:   >
 **/
 SET NOCOUNT ON;
 
+DECLARE @geo_set_id integer;
+	-- get geography set id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+
+IF @age_18_plus =1 AND @age_18_24 = 1
+BEGIN
+    RAISERROR('Invalid parameter: The two age arguments can not both be 1',60,0)
+    RETURN	 
+END
+
 SELECT
 	CONVERT(integer, [geography_household_location].[household_location_mgra_13]) AS [mgra]
 	,CONVERT(integer, [geography_household_location].[household_location_taz_13]) AS [taz]
-	,MAX(CASE WHEN [mobility_hubs].[mgra_13] IS NOT NULL THEN 1 ELSE 0 END) AS [mobilityHub]
+	,MAX(CASE WHEN [mobility_hubs].[mgra_13] IS NOT NULL THEN [person_sample_weight] ELSE 0 END) AS [mobilityHub]
 	,ISNULL(MAX([mobility_hubs].[mobility_hub_name]), 'Not Applicable') AS [mobilityHubName]
     ,ISNULL(MAX([mobility_hubs].[mobility_hub_type]), 'Not Applicable') AS [mobilityHubType]
 	,COUNT([fn_person_coc].[person_id]) AS [pop]
 	,SUM(CASE   WHEN [fn_person_coc].[senior] = 'Senior'
-                THEN 1 ELSE 0 END) AS [popSenior]
+                THEN [person_sample_weight] ELSE 0 END) AS [popSenior]
     ,SUM(CASE   WHEN [fn_person_coc].[senior] = 'Non-Senior'
-                THEN 1 ELSE 0 END) AS [popNonSenior]
+                THEN [person_sample_weight] ELSE 0 END) AS [popNonSenior]
     ,SUM(CASE   WHEN [fn_person_coc].[minority] = 'Minority'
-                THEN 1 ELSE 0 END) AS [popMinority]
+                THEN [person_sample_weight] ELSE 0 END) AS [popMinority]
     ,SUM(CASE   WHEN [fn_person_coc].[minority] = 'Non-Minority'
-                THEN 1 ELSE 0 END) AS [popNonMinority]
+                THEN [person_sample_weight] ELSE 0 END) AS [popNonMinority]
     ,SUM(CASE   WHEN [fn_person_coc].[low_income] = 'Low Income'
-                THEN 1 ELSE 0 END) AS [popLowIncome]
+                THEN [person_sample_weight] ELSE 0 END) AS [popLowIncome]
     ,SUM(CASE   WHEN [fn_person_coc].[low_income] = 'Non-Low Income'
-                THEN 1 ELSE 0 END) AS [popNonLowIncome]
+                THEN [person_sample_weight] ELSE 0 END) AS [popNonLowIncome]
 FROM
 	[rp_2021].[fn_person_coc] (@scenario_id)
 INNER JOIN
@@ -11644,6 +11687,7 @@ INNER JOIN
 	[dimension].[geography_household_location]
 ON
 	[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+	AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
 LEFT OUTER JOIN
     [rp_2021].[mobility_hubs]
 ON
@@ -11653,8 +11697,10 @@ WHERE
 	AND [household].[scenario_id] = @scenario_id
 	AND [person].[person_id] > 0  -- remove Not Applicable values
 	AND [household].[household_id] > 0  -- remove Not Applicable values
-	AND ((@age_18_plus = 1 AND [person].[age] >= 18)
+	AND ((@age_18_plus = 1 AND [person].[age] >= 18)		
 		OR @age_18_plus = 0)  -- if age 18+ option is selected restrict population to individuals age 18 or older
+	AND ((@age_18_24 = 1 AND [person].[age] between 18 and 24)
+		OR @age_18_24 = 0) -- if age 18_24 option is selected restrict population to individuals age between 18 and 24
 GROUP BY
 	[geography_household_location].[household_location_mgra_13]
 	,[geography_household_location].[household_location_taz_13]
@@ -12052,6 +12098,14 @@ revisions:
 BEGIN
 SET NOCOUNT ON;
 
+DECLARE @geo_set_id integer;
+	-- get geography set id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+
 -- set measure name based on mobility hubs switch
 DECLARE @measure nvarchar(20)
 IF @mobilityHubs = 1 SET @measure = 'SM-5 Mobility Hubs'
@@ -12091,7 +12145,9 @@ BEGIN
             INNER JOIN
                 [dimension].[geography]
             ON
-                [mobility_hubs].[mgra_13] = [geography].[mgra_13]) AS [moHubs]
+                [mobility_hubs].[mgra_13] = [geography].[mgra_13]
+				AND [geography].[geography_set_id] = @geo_set_id
+				) AS [moHubs]
         ON
             [transit_stop].[transit_stop_shape].STIntersects([moHubs].[mgra_13_shape]) = 1
         WHERE
@@ -12583,6 +12639,14 @@ filters:   >
 **/
 SET NOCOUNT ON;
 
+DECLARE @geo_set_id integer;
+	-- get geography set id
+	SET @geo_set_id = 
+	(
+		SELECT [geography_set_id] FROM [dimension].[scenario]
+		WHERE scenario_id = @scenario_id
+	)
+	
 -- if update switch is selected then run the performance measure and replace
 -- the value of the result set in the [fed_rtp_20].[pm_results] table
 IF(@update = 1)
@@ -12623,10 +12687,12 @@ BEGIN
         [dimension].[geography_trip_origin]
     ON
         [person_trip].[geography_trip_origin_id] = [geography_trip_origin].[geography_trip_origin_id]
+		AND [geography_trip_origin].[geography_trip_origin_set_id] = @geo_set_id
     INNER JOIN
         [dimension].[geography_trip_destination]
     ON
         [person_trip].[geography_trip_destination_id] = [geography_trip_destination].[geography_trip_destination_id]
+		AND [geography_trip_destination].[geography_trip_destination_set_id] = @geo_set_id
     LEFT OUTER JOIN  -- left outer join for later OR condition
         [rp_2021].[freight_distribution_hubs] AS [hub_origin]
     ON
