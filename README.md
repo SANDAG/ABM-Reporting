@@ -22,7 +22,7 @@ All Python and SQL objects necessary to create inputs to EMFAC from the Activity
 
 ### mode_choice_report
 
-A set of stored procedures and a PowerBI template file used to create the automated Service Bureau Mode Choice report.
+A set of stored procedures used to create the automated Service Bureau Mode Choice report.
 
 ### rp_2021
 
@@ -36,4 +36,4 @@ All Excel, Python, and SQL objects necessary to output reporting metrics for sen
 
 ### report
 
-General ABM reporting metrics that do not necessarily fall within a single project are kept under the report project/schema. Currently this only includes SQL objects found in **sql\report** and built to the ABM general reporting database.
+General ABM reporting metrics that do not necessarily fall within a single project are kept under the report project/schema. This includes the SB 743 VMT stored procedure used to create the Power BI report. Currently this only includes SQL objects found in **sql\report** and built to the ABM general reporting database.
