@@ -904,8 +904,376 @@ GO
 EXECUTE [db_meta].[add_xp] 'report.sp_residentworker_worklocation_tourjourneymode_share', 'MS_Description', 'San Diego resident person tour journey mode share of work purpose tour journeys'
 GO
 
+-- create stored procedure for resident  vmt ----------------------
+DROP PROCEDURE IF EXISTS [report].[sp_sb743_vmt]
+GO
+
+CREATE PROCEDURE [report].[sp_sb743_vmt]
+	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
+	@geography_column nvarchar(max) = '',  -- optional column in [dimension].[geography]
+    -- table used to aggregate activity location to user-specified geography resolution
+	@tazPath nvarchar(max) = '',  -- optional path to TAZ project list in lieu of geography column
+	@workers bit = 0,  -- select workers only, includes telecommuters but filters to work purpose tours
+	@home_location bit = 0,  -- assign activity to home location
+	@work_location bit = 0  -- assign activity to workplace location, includes telecommuters
+AS
+
+/**
+summary:   >
+    San Diego resident vehicle miles traveled (VMT) at a user-determined geographic
+    resolution. VMT is assigned to either the resident's home or work location.
+    Optional filter to select workers only and their work purpose tour VMT.
+	Available at any geographic resolution present in the ABM database or can
+	input a custom geography TAZ list.
+
+filters:   >
+    [model_trip].[model_trip_description] IN ('Individual', 'Internal-External','Joint')
+        ABM resident sub-models
+    [person].[work_segment] != 'Not Applicable' AND [purpose_tour].[purpose_tour_description] = 'Work'
+        if @workers parameter is specified, select only workers and trips on work purpose tours
+**/
+
+BEGIN
+	-- get geography set id
+	DECLARE @geo_set_id integer;
+	
+	SET @geo_set_id = 
+		(
+			SELECT [geography_set_id] FROM [dimension].[scenario]
+			WHERE scenario_id = @scenario_id
+		)
+
+	-- input parameter checking ----
+
+	-- ensure one of geography column or TAZ project list is specified
+	IF LEN(@tazPath) = 0 AND LEN(@geography_column) = 0
+		RAISERROR('User must specify either a column in [dimension].[geography] or path to TAZ project list', 16, 1)
+	-- ensure only one of geography column or TAZ project list is specified
+	ELSE IF LEN(@tazPath) > 0 AND LEN(@geography_column) > 0
+		RAISERROR('User may only specify one of either a column in [dimension].[geography] or path to TAZ project list', 16, 1)
+	-- ensure at least one indicator to assign activity to home or work location is selected
+	ELSE IF CONVERT(int, @home_location) + CONVERT(int, @work_location) = 0
+		RAISERROR ('Select to assign activity to either home or work location.', 16, 1)
+	 -- ensure only one of indicator to assign activity to home or work location is selected
+	ELSE IF CONVERT(int, @home_location) + CONVERT(int, @work_location) > 1
+		RAISERROR ('Select only one indicator to assign activity to either home or work location.', 16, 1)
+	-- if activity is assigned to work location then the workers only filter must be selected
+	ELSE IF CONVERT(int, @workers) = 0 AND CONVERT(int, @work_location) >= 1
+		RAISERROR ('Assigning activity to work location requires selection of workers only filter.', 16, 1)
 
 
+	-- geography column stored procedure ----
+	ELSE IF LEN(@geography_column) > 0
+	BEGIN
+		-- ensure the input geography column exists
+		-- in the [dimension].[geography] table
+		-- stop execution if it does not and throw error
+		IF COL_LENGTH((SELECT [base_object_name] from [sys].[synonyms] where name = 'geography'), @geography_column) IS NULL
+		BEGIN
+			RAISERROR ('The column %s does not exist in the [dimension].[geography] table.', 16, 1, @geography_column)
+		END
+		-- if it does exist then continue execution
+		ELSE
+		BEGIN
+			SET NOCOUNT ON;
+
+
+
+			-- if all input parameters are valid execute the stored procedure
+			-- build dynamic SQL string
+			-- note the use of nvarchar(max) throughout to avoid implicit conversion to varchar(8000)
+			DECLARE @sql nvarchar(max) = '
+			SELECT
+				' + CONVERT(nvarchar(max), @scenario_id) + ' AS [scenario_id]
+				,CASE	WHEN ' + CONVERT(nvarchar(max), @workers) + ' = 0
+						THEN ''All Residents''
+						WHEN ' + CONVERT(nvarchar(max), @workers) + ' = 1
+						THEN ''Workers Only''
+						ELSE NULL END AS [population]
+				,CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+						THEN ''Activity Assigned to Home Location''
+						WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+						THEN ''Activity Assigned to Workplace Location''
+						ELSE NULL END AS [activity_location]
+				,[persons].' + @geography_column + '
+				,[persons].[total_persons] AS [persons]
+				,ROUND(ISNULL([trips].[trips], 0), 2) AS [trips]
+				,ROUND(ISNULL([trips].[trips], 0) /
+					NULLIF([persons].[total_persons], 0), 2) AS [trips_per_capita]
+				,ROUND(ISNULL([trips].[vmt], 0), 2) AS [vmt]
+				,ROUND(ISNULL([trips].[vmt], 0) /
+					NULLIF([persons].[total_persons], 0), 2) AS [vmt_per_capita]
+			FROM ( -- get total population within assigned activity location
+				SELECT DISTINCT -- distinct here when only total is wanted
+				-- avoids duplicate Total column caused by ROLLUP
+					ISNULL(CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+								THEN [geography_household_location].household_location_' + @geography_column + '
+								WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+								THEN  [geography_work_location].work_location_' + @geography_column + '
+								ELSE NULL
+								END, ''Total'') AS ' + @geography_column + '
+					,ROUND(SUM([person_sample_weight]),0) AS [total_persons]
+				FROM
+					[dimension].[person]
+				INNER JOIN
+					[dimension].[household]
+				ON
+					[person].[scenario_id] = [household].[scenario_id]
+					AND [person].[household_id] = [household].[household_id]
+				INNER JOIN
+					[dimension].[geography_household_location]
+				ON
+					[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+					AND [geography_household_location].[geography_household_location_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + '
+				INNER JOIN
+					[dimension].[geography_work_location]
+				ON
+					[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+					AND [geography_work_location].[geography_work_location_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
+				WHERE
+					[person].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					AND [household].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					AND [person].[person_id] > 0  -- remove Not Applicable records
+					-- exclude non-workers if worker filter is selected
+					AND (' + CONVERT(nvarchar(max), @workers) + ' = 0
+						 OR (' + CONVERT(nvarchar(max), @workers) + ' = 1
+							 AND [person].[work_segment] != ''Not Applicable''))
+				GROUP BY
+					CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+							THEN [geography_household_location].household_location_' + @geography_column + '
+							WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+							THEN  [geography_work_location].work_location_' + @geography_column + '
+							ELSE NULL END
+				WITH ROLLUP) AS [persons]
+			LEFT OUTER JOIN ( -- get trips and vmt for each person and assign to activity location
+				-- left join keeps zones with residents/employees even if 0 trips/vmt
+				SELECT DISTINCT -- distinct here for case when only total is wanted
+				-- avoids duplicate Total column caused by ROLLUP
+					ISNULL(CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+								THEN [geography_household_location].household_location_' + @geography_column + '
+								WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+								THEN  [geography_work_location].work_location_' + @geography_column + '
+								ELSE NULL
+								END, ''Total'') AS ' + @geography_column + '
+					,SUM([person_trip].[weight_trip]) AS [trips]
+					,SUM([person_trip].[weight_trip] * [person_trip].[distance_drive]) AS [vmt]
+				FROM
+					[fact].[person_trip]
+				INNER JOIN
+					[dimension].[model_trip]
+				ON
+					[person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+				INNER JOIN
+					[dimension].[tour]
+				ON
+					[person_trip].[scenario_id] = [tour].[scenario_id]
+					AND [person_trip].[tour_id] = [tour].[tour_id]
+				INNER JOIN
+					[dimension].[purpose_tour]
+				ON
+					[tour].[purpose_tour_id] = [purpose_tour].[purpose_tour_id]
+				INNER JOIN
+					[dimension].[household]
+				ON
+					[person_trip].[scenario_id] = [household].[scenario_id]
+					AND [person_trip].[household_id] = [household].[household_id]
+				INNER JOIN
+					[dimension].[person]
+				ON
+					[person_trip].[scenario_id] = [person].[scenario_id]
+					AND [person_trip].[person_id] = [person].[person_id]
+				INNER JOIN
+					[dimension].[geography_household_location]
+				ON
+					[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+					AND [geography_household_location].[geography_household_location_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
+				INNER JOIN
+					[dimension].[geography_work_location]
+				ON
+					[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+					AND [geography_work_location].[geography_work_location_set_id] = ' + CONVERT(nvarchar,@geo_set_id) + ' 
+
+				WHERE
+					[person_trip].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					AND [person].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					AND [household].[scenario_id] = ' + CONVERT(nvarchar(max), @scenario_id) + '
+					-- only resident models use synthetic population
+					AND [model_trip].[model_trip_description] IN (''Individual'',
+																  ''Internal-External'',
+																  ''Joint'')
+					-- exclude non-workers if worker filter is selected
+					-- only select work tours if worker filter is selected
+					AND (' + CONVERT(nvarchar(max), @workers) + ' = 0
+						 OR (' + CONVERT(nvarchar(max), @workers) + ' = 1
+							 AND [person].[work_segment] != ''Not Applicable''
+							 AND [purpose_tour].[purpose_tour_description] = ''Work''))
+				GROUP BY
+					CASE	WHEN ' + CONVERT(nvarchar(max), @home_location) + ' = 1
+							THEN [geography_household_location].household_location_' + @geography_column + '
+							WHEN ' + CONVERT(nvarchar(max), @work_location) + ' = 1
+							THEN  [geography_work_location].work_location_' + @geography_column + '
+							ELSE NULL END
+				WITH ROLLUP) AS [trips]
+			ON
+				[persons].' + @geography_column + ' = [trips].' + @geography_column + '
+			ORDER BY -- keep sort order of alphabetical with Total at bottom
+				CASE WHEN [persons].' + @geography_column + ' = ''Total'' THEN ''ZZ''
+				ELSE [persons].' + @geography_column + ' END ASC
+				OPTION(MAXDOP 1)'
+
+
+			-- execute dynamic SQL string
+			EXECUTE (@sql)
+		END
+	END
+
+
+	-- TAZ project list stored procedure ----
+	ELSE IF LEN(@tazPath) > 0
+	BEGIN
+		SET NOCOUNT ON;
+
+		-- read CSV file containg project-area TAZs, insert to temporary table
+		-- assumed format is one-column [taz] field with headers
+		DROP TABLE IF EXISTS #projectTAZs
+		CREATE TABLE #projectTAZs
+			([taz] char(20) NOT NULL--, CONSTRAINT pk_residentVmtProjectTazs2 PRIMARY KEY CLUSTERED ([taz])
+			)
+		DECLARE @sqlBI nvarchar(max) = '
+			BULK INSERT #projectTAZs
+			FROM ''' + @tazPath + '''
+			WITH (FIRSTROW = 2, TABLOCK,
+			FIELDTERMINATOR='','', ROWTERMINATOR=''\n'', MAXERRORS=1);'
+		EXECUTE(@sqlBI);
+
+		-- get total persons with home location in TAZ project list
+		-- or get total employees with work location in TAZ project list
+		with [persons] AS (
+			SELECT
+				ROUND(SUM([person_sample_weight]),0) AS [total_persons]
+			FROM 
+				[dimension].[person]
+			JOIN
+				[dimension].[household]
+			ON
+				[person].scenario_id = [household].scenario_id 
+				AND [person].household_id = [household].household_id 
+			INNER JOIN
+				[dimension].[geography_household_location]
+			ON
+				[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+				AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
+			LEFT OUTER JOIN
+				#projectTAZs AS [homeProjectTAZs]
+			ON
+				[geography_household_location].[household_location_taz_13] = [homeProjectTAZs].[taz]
+			INNER JOIN
+				[dimension].[geography_work_location]
+			ON
+				[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+				AND [geography_work_location].[geography_work_location_set_id] = @geo_set_id
+			LEFT OUTER JOIN
+				#projectTAZs AS [workProjectTAZs]
+			ON
+				[geography_work_location].[work_location_taz_13] = [workProjectTAZs].[taz]
+
+			WHERE
+				[person].[scenario_id] = @scenario_id
+				AND [household].[scenario_id] = @scenario_id
+				AND [person].[person_id] > 0  -- remove Not Applicable records
+				-- exclude non-workers if worker filter is selected
+				AND (@workers = 0 OR (@workers = 1 AND [person].[work_segment] != 'Not Applicable'))
+				-- only count residents with home location in project-area TAZs
+				-- or employees with work location in project-area TAZs depending on switch selected
+				AND ((@home_location = 1 AND [homeProjectTAZs].[taz] IS NOT NULL) OR (@work_location = 1 AND [workProjectTAZs].[taz] IS NOT NULL))
+				),
+		-- get trips and vmt for each person and assign to activity location
+		[trips] AS (
+			SELECT
+				ROUND(ISNULL(SUM([person_trip].[weight_trip]), 0), 2) AS [trips]
+				,ROUND(ISNULL(SUM([person_trip].[weight_trip] * [person_trip].[distance_drive]), 0), 2) AS [vmt]
+			FROM
+				[fact].[person_trip]
+			INNER JOIN
+				[dimension].[model_trip]
+			ON
+				[person_trip].[model_trip_id] = [model_trip].[model_trip_id]
+			INNER JOIN
+				[dimension].[tour]
+			ON
+				[person_trip].[scenario_id] = [tour].[scenario_id]
+				AND [person_trip].[tour_id] = [tour].[tour_id]
+			INNER JOIN
+				[dimension].[purpose_tour]
+			ON
+				[tour].[purpose_tour_id] = [purpose_tour].[purpose_tour_id]
+			INNER JOIN
+				[dimension].[household]
+			ON
+				[person_trip].[scenario_id] = [household].[scenario_id]
+				AND [person_trip].[household_id] = [household].[household_id]
+			INNER JOIN
+				[dimension].[person]
+			ON
+				[person_trip].[scenario_id] = [person].[scenario_id]
+				AND [person_trip].[person_id] = [person].[person_id]
+			INNER JOIN
+				[dimension].[geography_household_location]
+			ON
+				[household].[geography_household_location_id] = [geography_household_location].[geography_household_location_id]
+				AND [geography_household_location].[geography_household_location_set_id] = @geo_set_id
+			LEFT OUTER JOIN
+				#projectTAZs AS [homeProjectTAZs]
+			ON
+				[geography_household_location].[household_location_taz_13] = [homeProjectTAZs].[taz]
+			INNER JOIN
+				[dimension].[geography_work_location]
+			ON
+				[person].[geography_work_location_id] = [geography_work_location].[geography_work_location_id]
+				AND [geography_work_location].[geography_work_location_set_id] = @geo_set_id
+			LEFT OUTER JOIN
+				#projectTAZs AS [workProjectTAZs]
+			ON
+				[geography_work_location].[work_location_taz_13] = [workProjectTAZs].[taz]
+			WHERE
+				[person_trip].[scenario_id] = @scenario_id
+				AND [person].[scenario_id] = @scenario_id
+				AND [household].[scenario_id] = @scenario_id
+				AND [person].[person_id] > 0  -- remove Not Applicable records
+				-- only resident models use synthetic population
+				AND [model_trip].[model_trip_description] IN ('Individual',
+															  'Internal-External',
+															  'Joint')
+				-- exclude non-workers if worker filter is selected
+				-- only select work tours if worker filter is selected
+				AND (@workers = 0 OR (@workers = 1 AND [person].[work_segment] != 'Not Applicable' AND [purpose_tour].[purpose_tour_description] = 'Work'))
+				-- only count residents with home location in project-area TAZs
+				-- or employees with work location in project-area TAZs depending on switch selected
+				AND ((@home_location = 1 AND [homeProjectTAZs].[taz] IS NOT NULL) OR (@work_location = 1 AND [workProjectTAZs].[taz] IS NOT NULL))
+				)
+		SELECT
+			@scenario_id AS [scenario_id]
+			,CASE	WHEN @workers = 0 THEN 'All Residents'
+					WHEN @workers = 1 THEN 'Workers Only'
+					ELSE NULL END AS [population]
+			,CASE	WHEN @home_location = 1 THEN 'Activity Assigned to Home Location'
+					WHEN @work_location = 1 THEN 'Activity Assigned to Workplace Location'
+					ELSE NULL END AS [activity_location]
+			,[persons].[total_persons] AS [persons]
+			,[trips]
+			,ROUND([trips] / NULLIF([persons].[total_persons], 0), 2) AS [trips_per_capita]
+			,[vmt]
+			,ROUND([vmt] / NULLIF([persons].[total_persons], 0), 2) AS [vmt_per_capita]
+		FROM
+			[trips]
+		CROSS JOIN
+			[persons]
+		OPTION(MAXDOP 1)
+		DROP TABLE #projectTAZs
+	END
+
+END
+GO
 
 -- create stored procedure for ABM sub-model mode split ----------------------
 DROP PROCEDURE IF EXISTS [report].[sp_submodel_tripmode_share]
