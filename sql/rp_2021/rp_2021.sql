@@ -12460,20 +12460,26 @@ BEGIN
         [person_id] integer PRIMARY KEY NOT NULL,
         [senior] nvarchar(15) NOT NULL,
         [minority] nvarchar(15) NOT NULL,
-        [low_income] nvarchar(15) NOT NULL)
-
+        [low_income] nvarchar(15) NOT NULL,
+		[person_sample_weight] float NOT NULL)
 
     -- assign CoC attributes to each person and insert into a table variable
     INSERT INTO @coc_pop
     SELECT
-        [person_id]
+        [person].[person_id]
         ,[senior]
         ,[minority]
         ,[low_income]
+		,[person_sample_weight]
     FROM
         [rp_2021].[fn_person_coc] (@scenario_id)
+	JOIN 
+		[dimension].[person]
+	ON
+		[fn_person_coc].[person_id] = [person].[person_id]
+		AND [fn_person_coc].[scenario_id] = [person].[scenario_id]
     WHERE
-        [person_id] > 0;  -- remove Not Applicable record
+        [person].[person_id] > 0;  -- remove Not Applicable record
 
 
     with [agg_coc_pop] AS (
@@ -12500,8 +12506,8 @@ BEGIN
                             ELSE 0 END) AS [Low Income]
                 ,SUM(CASE   WHEN [low_income] = 'Non-Low Income'
                             THEN 1
-                            ELSE 0 END) AS [Non-Low Income]
-                ,COUNT([person_id]) AS [Total]
+                            ELSE 0 END) AS [Non-Low Income]				
+                ,CAST(ROUND(SUM([person_sample_weight]),0) AS INT) AS [Total]
             FROM
 	            @coc_pop) AS [to_unpvt]
         UNPIVOT (
@@ -12657,7 +12663,8 @@ BEGIN
         [senior] nvarchar(20) NOT NULL,
         [minority] nvarchar(20) NOT NULL,
         [low_income] nvarchar(20) NOT NULL,
-        [activity] float NOT NULL);
+        [activity] float NOT NULL,
+		[person_sample_weight] float NOT NULL);
 
 
     -- insert person result set into a temporary table
@@ -12668,16 +12675,23 @@ BEGIN
 	    ,[minority]
 	    ,[low_income]
 	    ,ISNULL([physical_activity].[activity], 0) AS [activity]
+		,[person_sample_weight]
     FROM (
 	    SELECT
-		    [person_id]
+		    [person].[person_id]
 		    ,[senior]
 		    ,[minority]
 		    ,[low_income]
+			,[person_sample_weight]
 	    FROM
 		    [rp_2021].[fn_person_coc] (@scenario_id)
+		JOIN 
+			[dimension].[person]
+		ON
+			[fn_person_coc].[person_id] = [person].[person_id]
+			AND [fn_person_coc].[scenario_id] = [person].[scenario_id]
          WHERE  -- remove Not Applicable records
-            [person_id] > 0) AS [person_coc]
+            [person].[person_id] > 0) AS [person_coc]
     LEFT OUTER JOIN ( -- keep persons who do not travel
 	    SELECT
 		    [person_id]
@@ -12724,7 +12738,7 @@ BEGIN
            SUM(CASE WHEN [low_income] = 'Low Income' THEN 1 ELSE 0 END) AS [Low Income]
         ,1.0 * SUM(CASE WHEN [low_income] = 'Non-Low Income' AND [activity] >= 20 THEN 1 ELSE 0 END) /
            SUM(CASE WHEN [low_income] = 'Non-Low Income' THEN 1 ELSE 0 END) AS [Non-Low Income]
-        ,1.0 * SUM(CASE WHEN [activity] >= 20 THEN 1 ELSE 0 END) / COUNT([person_id]) AS [Total]
+        ,1.0 * SUM(CASE WHEN [activity] >= 20 THEN 1 ELSE 0 END) / CAST(ROUND(SUM([person_sample_weight]),0) AS INT) AS [Total]
     FROM
         @person_results) AS [to_unpvt]
     UNPIVOT (
@@ -12898,7 +12912,7 @@ CREATE PROCEDURE [rp_2021].[sp_pm_sm9a]
 	@scenario_id integer,  -- ABM scenario in [dimension].[scenario]
     @update bit = 1,  -- 1/0 switch to actually run the ABM performance
         -- measure and update the [rp_2021].[results] table instead of
-        -- grabbing the results from the [rp_2021].[results] table
+        -- grabbing the results from the [rp_2021].[results] table       
     @silent bit = 0  -- 1/0 switch to suppress result set output so only the
         -- [rp_2021].[results] table is updated with no output
 AS
@@ -13047,7 +13061,7 @@ filters:   >
 SET NOCOUNT ON;
 
 -- if update switch is selected then run the performance measure and replace
--- the value of the result set in the [fed_rtp_20].[pm_results] table
+-- the value of the result set in the [rp_2021].[pm_results] table
 IF(@update = 1)
 BEGIN
     -- remove Performance Measure SM-9-b result for the given ABM scenario from the
@@ -13228,7 +13242,8 @@ BEGIN
         [minority] nvarchar(20) NOT NULL,
         [low_income] nvarchar(20) NOT NULL,
         [household_income] integer NOT NULL,
-        [annual_cost] float NOT NULL);
+        [annual_cost] float NOT NULL,
+		[household_sample_weight] float NOT NULL);
 
     -- sum costs to ([person_id], [household_id]) level
     with [costs] AS (
@@ -13340,6 +13355,7 @@ BEGIN
 	    ,[low_income]
 	    ,[household_income]
 	    ,[annual_cost]
+		,[household_sample_weight]
     FROM
 	    [total_costs]
     INNER JOIN (  -- only keep households that actually travelled
@@ -13352,6 +13368,7 @@ BEGIN
                     THEN 'Minority' ELSE 'Non-Minority' END AS [minority]
 	        ,CASE   WHEN MAX(CASE WHEN [low_income] = 'Low Income' THEN 1 ELSE 0 END) = 1
                     THEN 'Low Income' ELSE 'Non-Low Income' END AS [low_income]
+			,MAX([household_sample_weight]) [household_sample_weight]
         FROM
 	        [dimension].[household]
         INNER JOIN
@@ -13420,7 +13437,8 @@ BEGIN
 		     SUM(CASE    WHEN [low_income] = 'Non-Low Income' THEN 1  ELSE 0 END) AS [Non-Low Income]
             ,SUM(CASE   WHEN [household_income] = 0 OR [annual_cost] / [household_income] > 1
                         THEN 1 ELSE [annual_cost] / [household_income] END) /
-		     COUNT([household_id]) AS [Total]
+			SUM([household_sample_weight]) AS [Total]
+		    -- COUNT([household_id]) AS [Total]
         FROM
             @hh_results
         ) AS [to_unpvt]
@@ -13502,7 +13520,7 @@ BEGIN
     -- subquery for total synthetic population
     DECLARE @population integer = (
         SELECT
-            COUNT([person_id])
+            SUM([person_sample_weight])
         FROM
             [dimension].[person]
         WHERE
@@ -13851,7 +13869,7 @@ BEGIN
 	    @scenario_id AS [scenario_id]
         ,'SB375 - Auto Ownership' AS [measure]
         ,'Average Household Auto Ownership' AS [metric]
-        ,1.0 * SUM([autos]) / COUNT([household_id]) AS [value]
+        ,1.0 * SUM([autos]) / SUM([household_sample_weight]) AS [value]
         ,USER_NAME() AS [updated_by]
         ,SYSDATETIME() AS [updated_date]
     FROM
