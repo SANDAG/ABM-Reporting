@@ -13,6 +13,10 @@ scenarios = {
 # example format: C:/Users/gsc/Desktop/PerformanceMeasures.xlsx
 templateWritePath = ""  # TODO: set template write path
 
+# set path to SimWrapper input template
+# example format: C:/Users/jflo/Desktop/simwrapper_template.csv
+simWrapperTemplate = ""
+
 # set SQL Server connection attributes
 sqlAttributes = {
     "ABM-Reporting": {
