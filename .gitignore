@@ -131,3 +131,6 @@ dmypy.json
 # PyCharm generated file
 .bak
 .idea
+
+# File containing database information
+database-specs.yaml
