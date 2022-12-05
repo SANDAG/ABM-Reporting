@@ -24,7 +24,7 @@ The CMCP PM tool file path structure should be the same for different projects. 
 <br/>
 
 ## Initial Setup 
-In your Anaconda3 command prompt, navigate to your project's analsysis directory (eg,**T:\projects\sr14\OWP\CMCP\i805_purple_line\analysis**). Then, clone the repository by running:
+In your Anaconda3 command prompt, navigate to your project's analysis directory (eg,**T:\projects\sr14\OWP\CMCP\i805_purple_line\analysis**). Then, clone the repository by running:
 ```
 git clone https://github.com/SANDAG/ABM-Reporting.git
 ```
@@ -44,7 +44,7 @@ A list should appear with all your Anaconda virtual environments including the d
 <br/>
 
 ## Configuring Database Connections
-Database specifications are obscured from the public GitHub, so alterations to the database specifications file are required for the CMCP Python script from GitHub. The yaml file is here: ***[Project Path]*\analysis\ABM-Reporting-master\resources\cmcp\database-specs.yaml**, and the database information that needs to be added should be structured like:
+Database specifications are obscured from the public GitHub, so a database specifications file is required for the CMCP Python script from GitHub. The yaml file should be placed here: ***ABM-Reporting-master\resources\cmcp\database-specs.yaml** and be structured like:
 ```yaml
 server1:
   name: "INSERT_server_name1"
