@@ -99,12 +99,30 @@ This section will describe typical edits that can be done to the CMCP PM Python 
 
 ### Scenarios 
 
-If you want to specify which scenario will be run, open the settings.py script (under CMCP PM Python Scripts directory) and navigate to lines 10 through 22 (these line numbers are subject to change) where scenarios are listed. If you want to omit any of the listed scenarios, add a pound/hashtag (#) symbol just before the number, as shown in the image below. 
+If you want to specify which scenario will be run, open the settings.py script (under CMCP PM Python Scripts directory) and navigate to lines 10 through 22 (these line numbers are subject to change) where scenarios are listed. If you want to omit any of the listed scenarios, add a pound/hashtag (#) symbol just before the number, as shown below.
+```python
+scenarios: {
+  458: "2016",
+  461: "2025nb",
+  #469: "2035nb",
+  450: ""2050nb"
+}
+```
 
 Running the script with the above edit would run all scenarios except for scenarios 469 and 459.  
 
 ### CMCP Corridors 
 
-If you want to specify which CMCP corridors will be run, open the settings.py script and navigate to lines 43 through 50 (these line numbers are subject to change). If you want to omit any of the listed CMCP corridors, add a pound/hashtag (#) symbol just before the corridor name, as shown in the image below. 
+If you want to specify which CMCP corridors will be run, open the settings.py script and navigate to lines 43 through 50 (these line numbers are subject to change). If you want to omit any of the listed CMCP corridors, add a pound/hashtag (#) symbol just before the corridor name, as shown below. 
+```python
+ #list of CMCP corridors
+ cmcp_corridor = [
+  # "Coast, Canyons, and Trails",
+  "North County",
+  #"San Vicente",
+  #"South Bay to Sorrento",
+  "Region"
+  ]
+```
 
 Running the script with the above edit would only generate PMs for North County and Region. This would mean there would only be 2 PM summary Excel spreadsheets generated. 
