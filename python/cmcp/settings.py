@@ -60,13 +60,13 @@ cmcp_corridor = [
 
 # set path to write output Performance Measure workbook
 # example format: C:/Users/gsc/Desktop/PerformanceMeasures_{cmcp_corridor}.xlsx
-templateWritePath = r"T:\projects\sr14\OWP\CMCP\sr52\analysis\ABM-Reporting-master\CMCP_PerformanceMeasures_"
+templateWritePath = r"..\..\CMCP_PerformanceMeasures_"
 
 # set path to input Performance Measure workbook Template
-template_path = r"T:\projects\sr14\OWP\CMCP\sr52\analysis\ABM-Reporting-master\resources\cmcp\input\CMCP_PerformanceMeasures_Template.xlsx"
+template_path = r"..\..\resources\cmcp\input\CMCP_PerformanceMeasures_Template.xlsx"
 
 # set path to input list of performance measure outputs and locations to write into Excel template
-template_locations_path = r"T:\projects\sr14\OWP\CMCP\sr52\analysis\ABM-Reporting-master\resources\cmcp\input\template_location.csv"
+template_locations_path = r"..\..\resources\cmcp\input\template_location.csv"
 
 # get SQL server attributes from local file
 with open("database-specs.yaml", "r", encoding="utf8") as stream:
