@@ -1,0 +1,6 @@
+REM python T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac_xlsx.py 2017 714 Annual Off T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac2017\inputs
+REM python T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac_xlsx.py 2017 714 Summer Off T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac2017\inputs
+REM python T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac_xlsx.py 2017 714 Winter Off T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac2017\inputs
+python T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac_xlsx.py 2014 753 Annual On T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac2014\inputs
+python T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac_xlsx.py 2014 753 Summer On T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac2014\inputs
+python T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac_xlsx.py 2014 753 Winter On T:\projects\sr14\OWP\2021rp_followup_ruc\abm_runs\emfac\emfac2014\inputs
