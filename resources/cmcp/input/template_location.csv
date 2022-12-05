@@ -1,0 +1,138 @@
+measureKey,metricKey,sheet,row
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Drive Alone,Primary Measures,4
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Shared Ride 2,Primary Measures,5
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Shared Ride 3+,Primary Measures,6
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Transit,Primary Measures,7
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Bike,Primary Measures,8
+CMCP Mode Share - Work Trips,Percentage of Total Person Trips - Walk,Primary Measures,9
+CMCP Mode Share,Percentage of Total Person Trips - Drive Alone,Primary Measures,10
+CMCP Mode Share,Percentage of Total Person Trips - Shared Ride 2,Primary Measures,11
+CMCP Mode Share,Percentage of Total Person Trips - Shared Ride 3+,Primary Measures,12
+CMCP Mode Share,Percentage of Total Person Trips - Transit,Primary Measures,13
+CMCP Mode Share,Percentage of Total Person Trips - Bike,Primary Measures,14
+CMCP Mode Share,Percentage of Total Person Trips - Walk,Primary Measures,15
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Drive Alone,Primary Measures,28
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Shared Ride 2,Primary Measures,29
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Shared Ride 3+,Primary Measures,30
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Transit,Primary Measures,31
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Bike,Primary Measures,32
+CMCP Mode Share - Trips Under 3 Miles,Percentage of Total Person Trips - Walk,Primary Measures,33
+CMCP Mode Share - Work Trips,Total Person Trips - Drive Alone    ,Primary Measures,34
+CMCP Mode Share - Work Trips,Total Person Trips - Shared Ride 2  ,Primary Measures,35
+CMCP Mode Share - Work Trips,Total Person Trips - Shared Ride 3+ ,Primary Measures,36
+CMCP Mode Share - Work Trips,Total Person Trips - Transit        ,Primary Measures,37
+CMCP Mode Share - Work Trips,Total Person Trips - Bike           ,Primary Measures,38
+CMCP Mode Share - Work Trips,Total Person Trips - Walk           ,Primary Measures,39
+CMCP Mode Share - Work Trips,Total Person Trips - Total,Primary Measures,40
+CMCP Mode Share,Total Person Trips - Drive Alone    ,Primary Measures,41
+CMCP Mode Share,Total Person Trips - Shared Ride 2  ,Primary Measures,42
+CMCP Mode Share,Total Person Trips - Shared Ride 3+ ,Primary Measures,43
+CMCP Mode Share,Total Person Trips - Transit        ,Primary Measures,44
+CMCP Mode Share,Total Person Trips - Bike           ,Primary Measures,45
+CMCP Mode Share,Total Person Trips - Walk           ,Primary Measures,46
+CMCP Mode Share,Total Person Trips - Total,Primary Measures,47
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Drive Alone    ,Primary Measures,48
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Shared Ride 2  ,Primary Measures,49
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Shared Ride 3+ ,Primary Measures,50
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Transit        ,Primary Measures,51
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Bike           ,Primary Measures,52
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Walk           ,Primary Measures,53
+CMCP Mode Share - Trips Under 3 Miles,Total Person Trips - Total,Primary Measures,54
+Tier 1 Employment Center - 30 Minutes,Population Access Pct - Transit,Primary Measures,55
+Tier 1 Employment Center - 30 Minutes,Low Income Access Pct - Transit,Primary Measures,56
+Tier 1 Employment Center - 30 Minutes,Non-Low Income Access Pct - Transit,Primary Measures,57
+Tier 1 Employment Center - 30 Minutes,Minority Access Pct - Transit,Primary Measures,58
+Tier 1 Employment Center - 30 Minutes,Non-Minority Access Pct - Transit,Primary Measures,59
+Tier 1 Employment Center - 30 Minutes,Senior Access Pct - Transit,Primary Measures,60
+Tier 1 Employment Center - 30 Minutes,Non-Senior Access Pct - Transit,Primary Measures,61
+Tier 2 Employment Center - 30 Minutes,Population Access Pct - Transit,Primary Measures,62
+Tier 2 Employment Center - 30 Minutes,Low Income Access Pct - Transit,Primary Measures,63
+Tier 2 Employment Center - 30 Minutes,Non-Low Income Access Pct - Transit,Primary Measures,64
+Tier 2 Employment Center - 30 Minutes,Minority Access Pct - Transit,Primary Measures,65
+Tier 2 Employment Center - 30 Minutes,Non-Minority Access Pct - Transit,Primary Measures,66
+Tier 2 Employment Center - 30 Minutes,Senior Access Pct - Transit,Primary Measures,67
+Tier 2 Employment Center - 30 Minutes,Non-Senior Access Pct - Transit,Primary Measures,68
+Higher Education - 30 Minutes,Population Access Pct - Transit,Primary Measures,69
+Higher Education - 30 Minutes,Low Income Access Pct - Transit,Primary Measures,70
+Higher Education - 30 Minutes,Non-Low Income Access Pct - Transit,Primary Measures,71
+Higher Education - 30 Minutes,Minority Access Pct - Transit,Primary Measures,72
+Higher Education - 30 Minutes,Non-Minority Access Pct - Transit,Primary Measures,73
+Higher Education - 30 Minutes,Senior Access Pct - Transit,Primary Measures,74
+Higher Education - 30 Minutes,Non-Senior Access Pct - Transit,Primary Measures,75
+Tier 1 Employment Center - 45 Minutes,Population Access Pct - Transit,Primary Measures,76
+Tier 1 Employment Center - 45 Minutes,Low Income Access Pct - Transit,Primary Measures,77
+Tier 1 Employment Center - 45 Minutes,Non-Low Income Access Pct - Transit,Primary Measures,78
+Tier 1 Employment Center - 45 Minutes,Minority Access Pct - Transit,Primary Measures,79
+Tier 1 Employment Center - 45 Minutes,Non-Minority Access Pct - Transit,Primary Measures,80
+Tier 1 Employment Center - 45 Minutes,Senior Access Pct - Transit,Primary Measures,81
+Tier 1 Employment Center - 45 Minutes,Non-Senior Access Pct - Transit,Primary Measures,82
+Tier 2 Employment Center - 45 Minutes,Population Access Pct - Transit,Primary Measures,83
+Tier 2 Employment Center - 45 Minutes,Low Income Access Pct - Transit,Primary Measures,84
+Tier 2 Employment Center - 45 Minutes,Non-Low Income Access Pct - Transit,Primary Measures,85
+Tier 2 Employment Center - 45 Minutes,Minority Access Pct - Transit,Primary Measures,86
+Tier 2 Employment Center - 45 Minutes,Non-Minority Access Pct - Transit,Primary Measures,87
+Tier 2 Employment Center - 45 Minutes,Senior Access Pct - Transit,Primary Measures,88
+Tier 2 Employment Center - 45 Minutes,Non-Senior Access Pct - Transit,Primary Measures,89
+Higher Education - 45 Minutes,Population Access Pct - Transit,Primary Measures,90
+Higher Education - 45 Minutes,Low Income Access Pct - Transit,Primary Measures,91
+Higher Education - 45 Minutes,Non-Low Income Access Pct - Transit,Primary Measures,92
+Higher Education - 45 Minutes,Minority Access Pct - Transit,Primary Measures,93
+Higher Education - 45 Minutes,Non-Minority Access Pct - Transit,Primary Measures,94
+Higher Education - 45 Minutes,Senior Access Pct - Transit,Primary Measures,95
+Higher Education - 45 Minutes,Non-Senior Access Pct - Transit,Primary Measures,96
+Daily vehicle hours of delay,Heavy duty truck - Highway (SHS) - VHD,Primary Measures,97
+Daily vehicle hours of delay,Heavy duty truck - Arterial - VHD,Primary Measures,98
+Daily vehicle hours of delay,Heavy duty truck - All Facility - VHD,Primary Measures,99
+Daily vehicle hours of delay,Heavy duty truck - Highway (SHS) - VHD - Peak Period,Primary Measures,100
+Daily vehicle hours of delay,Heavy duty truck - Arterial - VHD - Peak Period,Primary Measures,101
+Daily vehicle hours of delay,Heavy duty truck - All Facility - VHD - Peak Period,Primary Measures,102
+Daily vehicle hours of delay,Drive Alone - All Facility - VHD,Primary Measures,103
+Daily vehicle hours of delay,Carpool - All Facility - VHD,Primary Measures,104
+Daily vehicle hours of delay,Transit - All Facility - VHD,Primary Measures,105
+Daily vehicle hours of delay,Drive Alone - All Facility - VHD - Peak Period,Primary Measures,106
+Daily vehicle hours of delay,Carpool - All Facility - VHD - Peak Period,Primary Measures,107
+Daily vehicle hours of delay,Transit - All Facility - VHD - Peak Period,Primary Measures,108
+Daily Vehicle Delay per Capita,Daily Vehicle Delay per Capita,Primary Measures,109
+Population Near High Frequency Transit,Population Access Pct,Primary Measures,110
+Population Near High Frequency Transit,Low Income Access Pct,Primary Measures,111
+Population Near High Frequency Transit,Non-Low Income Access Pct,Primary Measures,112
+Population Near High Frequency Transit,Minority Access Pct,Primary Measures,113
+Population Near High Frequency Transit,Non-Minority Access Pct,Primary Measures,114
+Population Near High Frequency Transit,Senior Access Pct,Primary Measures,115
+Population Near High Frequency Transit,Non-Senior Access Pct,Primary Measures,116
+VMT,VMT,Primary Measures,118
+VMT per Capita,All Residents - Activity Assigned to Home Location,Primary Measures,119
+VMT per Employee,Workers Only - Activity Assigned to Workplace Location,Primary Measures,120
+VMT per Lane Mile,VMT per Lane Mile,Primary Measures,121
+Near-Roadway Population Exposure,Population Access Pct,Primary Measures,126
+Near-Roadway Population Exposure,Low Income Access Pct,Primary Measures,127
+Near-Roadway Population Exposure,Non-Low Income Access Pct,Primary Measures,128
+Near-Roadway Population Exposure,Minority Access Pct,Primary Measures,129
+Near-Roadway Population Exposure,Non-Minority Access Pct,Primary Measures,130
+Near-Roadway Population Exposure,Senior Access Pct,Primary Measures,131
+Near-Roadway Population Exposure,Non-Senior Access Pct,Primary Measures,132
+Bicycle and Pedestrian Miles Traveled,Pedestrian Miles Traveled,Primary Measures,133
+Bicycle and Pedestrian Miles Traveled,Bicycle Miles Traveled,Primary Measures,134
+Percentage of Population With >= 20 Minutes of Physical Activity,Percentage of Population With >= 20 Minutes of Physical Activity,Primary Measures,135
+Multifamily Population Near Transit,Multifamily Population,Primary Measures,136
+Multifamily Population Near Transit,Multifamily Population Access Pct,Primary Measures,137
+Average Commute Time to Work,Peak Period - Drive Alone,Primary Measures,138
+Average Commute Time to Work,Peak Period - Shared Ride 2,Primary Measures,139
+Average Commute Time to Work,Peak Period - Shared Ride 3+,Primary Measures,140
+Average Commute Time to Work,Peak Period - Transit,Primary Measures,141
+Average Commute Time to Work,Peak Period - Bike,Primary Measures,142
+Average Commute Time to Work,Peak Period - Walk,Primary Measures,143
+Multifamily Housing Near High Frequency Transit,Multifamily Housing,Primary Measures,144
+Multifamily Housing Near High Frequency Transit,Multifamily Housing Pct,Primary Measures,145
+Person throughput by auto,Screenline 1,Primary Measures,146
+Person throughput by auto,Screenline 2,Primary Measures,147
+Person throughput by auto,Screenline 3,Primary Measures,148
+Person throughput by auto,Screenline 4,Primary Measures,149
+Person throughput by auto,Screenline 5,Primary Measures,150
+Person throughput by auto,Screenline 6,Primary Measures,151
+Person throughput by transit,Screenline 1,Primary Measures,152
+Person throughput by transit,Screenline 2,Primary Measures,153
+Person throughput by transit,Screenline 3,Primary Measures,154
+Person throughput by transit,Screenline 4,Primary Measures,155
+Person throughput by transit,Screenline 5,Primary Measures,156
+Person throughput by transit,Screenline 6,Primary Measures,157
