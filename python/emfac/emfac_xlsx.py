@@ -3,6 +3,7 @@ import pandas as pd
 import openpyxl  # necessary for pandas ExcelWriter
 import pyodbc
 import sys
+import yaml
 
 # error string to print if user inputs invalid parameters
 usage = ("Correct Usage: emfac_2014.py <EMFAC version: 2014 | 2017 | 2021> "
@@ -15,13 +16,13 @@ if len(sys.argv) != 6:
     sys.exit(-1)
 
 # user inputs
+
 emfac_version = sys.argv[1]
 if emfac_version not in ["2014", "2017", "2021"]:
     print(usage)
     sys.exit(-1)
 
-# "Created by" is needed for EMFAC2017 and EMFAC2021
-# to be able to work in the EMFAC web tool
+# "Created by" is needed for EMFAC2017 and EMFAC2021 to be able to work in the EMFAC web tool.
 if emfac_version in ["2017", "2021"]:
     first_parameter = "Created by"
 else:
@@ -30,7 +31,7 @@ else:
 if emfac_version == "2017":
     emfac_version_for_settings = "EMFAC2017 v1.0.3"
 elif emfac_version == "2021":
-    emfac_version_for_settings = "EMFAC2021 v1.0.1"
+    emfac_version_for_settings = "EMFAC2021 v1.0.2"
 else:
     emfac_version_for_settings = "EMFAC2014"
 
@@ -48,12 +49,6 @@ if sb375 not in ["On", "Off"]:
 
 output_folder = sys.argv[5]
 
-# set sql server connection string
-sql_con = pyodbc.connect(driver="{SQL Server}",
-                         server="",  # TODO: enter SQL server
-                         database="",  # TODO: enter SQL database
-                         trusted_connection="yes")
-
 # create emfac settings data frame
 emfac_settings = {"Parameter": [first_parameter, "Season/Month", "SB375 Run", "Date"],
                   "Value": [emfac_version_for_settings,
@@ -62,6 +57,20 @@ emfac_settings = {"Parameter": [first_parameter, "Season/Month", "SB375 Run", "D
                             datetime.now().strftime("%x %X")]}
 
 emfac_settings = pd.DataFrame(data=emfac_settings)
+
+# get SQL server attributes from local file
+with open("database-specs.yaml", "r", encoding="utf8") as stream:
+    try:
+        db_info = yaml.safe_load(stream)
+    except yaml.YAMLError as exc:
+        print(exc)
+
+# set sql server connection string
+# noinspection PyArgumentList
+sql_con = pyodbc.connect(driver='{SQL Server}',
+                         server=db_info['server1']['name'],
+                         database=db_info['server1']['db1_1'],
+                         trusted_connection='yes')
 
 # get scenario information for the given scenario_id
 scenario = pd.read_sql_query(
@@ -75,7 +84,6 @@ scenario = pd.read_sql_query(
 output_path = output_folder + "\EMFAC" + emfac_version + "-SANDAG-" + \
               str(scenario.at[0, "name"]) + "-" + str(scenario_id) + "-" + \
               season + "-" + str(scenario.at[0, "year"])
-
 if sb375 == "On":
     output_path = output_path + "-sb375"
 output_path = output_path + ".xlsx"
