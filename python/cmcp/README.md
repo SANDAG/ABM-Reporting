@@ -44,8 +44,7 @@ A list should appear with all your Anaconda virtual environments including the d
 <br/>
 
 ## Configuring Database Connections
-Database specifications are obscured from the public GitHub, so a database specifications file is required for the CMCP Python script from GitHub. This yaml file should be created here: ***[Project Path]*\analysis\ABM-Reporting-master\resources\cmcp\database-specs.yaml**, and is structured like:
-
+Database specifications are obscured from the public GitHub, so alterations to the database specifications file are required for the CMCP Python script from GitHub. The yaml file is here: ***[Project Path]*\analysis\ABM-Reporting-master\resources\cmcp\database-specs.yaml**, and the database information that needs to be added should be structured like:
 ```yaml
 server1:
   name: "INSERT_server_name1"
