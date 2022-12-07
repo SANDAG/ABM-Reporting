@@ -118,9 +118,9 @@ class HighwayNetwork(TravelNetwork):
             how="left")
 
         # calculate vehicle hours time by mode
-        vht["Auto"] = (vht.AB_Flow_Auto * vht.AB_Time) + (vht.BA_Flow_Auto * vht.BA_Time)
-        vht["Truck"] = (vht.AB_Flow_Truck * vht.AB_Time) + (vht.BA_Flow_Truck * vht.BA_Time)
-        vht["Bus"] = (vht.ABPRELOAD * vht.AB_Time) + (vht.BAPRELOAD * vht.BA_Time)
+        vht["Auto"] = (vht.AB_Flow_Auto * vht.AB_Time /60.0) + (vht.BA_Flow_Auto * vht.BA_Time /60.0)
+        vht["Truck"] = (vht.AB_Flow_Truck * vht.AB_Time /60.0) + (vht.BA_Flow_Truck * vht.BA_Time /60.0)
+        vht["Bus"] = (vht.ABPRELOAD * vht.AB_Time /60.0) + (vht.BAPRELOAD * vht.BA_Time/60.0)
         vht["Total"] = vht[['Auto', 'Truck', 'Bus']].sum(axis=1)
 
         # sum vehicle hours time by functional class

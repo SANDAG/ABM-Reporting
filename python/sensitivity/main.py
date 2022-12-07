@@ -111,7 +111,7 @@ if len(scenarios) == 1:
 
 # if more than one ABM scenario is entered then run sensitivity test measures
 # for up to five scenarios  --------------------------------------------------
-elif 1 < len(scenarios) <= 5:
+elif 1 < len(scenarios) <= 20:
 
     # initialize multiple scenario Sensitivity Measure Excel workbook template
     template = openpyxl.load_workbook(settings.templatePaths["multipleScenariosTemplate"])
