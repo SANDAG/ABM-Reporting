@@ -27,7 +27,7 @@ else:
 file_suffix = input("Enter output file name: ")
 
 # get the scenario metadata from the master scenario list
-scenarioMetadata = pd.read_csv("./resources/Scenario Metadata.csv",
+scenarioMetadata = pd.read_csv("../../resources/sensitivity/Scenario Metadata.csv",
                                usecols=["scenario_id",
                                         "description",
                                         "path"])
@@ -36,6 +36,8 @@ scenarioMetadata = pd.read_csv("./resources/Scenario Metadata.csv",
 # and reset the index
 scenarioMetadata = scenarioMetadata[scenarioMetadata["path"].isin(scenarios)].reset_index(drop=True)
 if len(scenarioMetadata.index) != len(scenarios):
+    scenario_series = pd.Series(scenarios)
+    print(f'\nscenarioMetaData csv Missing: \n{scenario_series[~scenario_series.isin(scenarioMetadata["path"])].values}\n')
     msg = "Not all input scenarios exist in resources/Scenario Metadata.csv"
     raise ValueError(msg)
 
