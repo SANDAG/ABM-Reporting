@@ -69,7 +69,7 @@ template_path = r"..\..\resources\cmcp\input\CMCP_PerformanceMeasures_Template.x
 template_locations_path = r"..\..\resources\cmcp\input\template_location.csv"
 
 # get SQL server attributes from local file
-with open("database-specs.yaml", "r", encoding="utf8") as stream:
+with open("../../resources/cmcp/database-specs.yaml", "r", encoding="utf8") as stream:
     try:
         db_info = yaml.safe_load(stream)
     except yaml.YAMLError as exc:
