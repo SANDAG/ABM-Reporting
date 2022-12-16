@@ -75,7 +75,7 @@ sql_con = pyodbc.connect(driver='{SQL Server}',
 # folder = 'T:\\RTP\\2021RP\\2021rp_final\\abm_runs\\emfac\\emfac2017\\outputs\\'
 folder = output_folder
 
-with open(output_folder+'/summary_emfac'+ str(emfac_version)+'_' + str(datetime.now().strftime("%Y-%m-%d")+'.csv'), 'w', newline='') as csvfile:
+with open(output_folder+'/summary_emfac'+ str(emfac_version)+'_' + str(datetime.now().strftime("%Y-%m-%d-%H")+'.csv'), 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     #writer.writerow(['Scenario','Scenario_ID','Vehicle Trips','VMT','ROG Budget','Summer ROG Total', 'Summer Adjusted ROG Total', 'NOx Budget', 'Summer NOx Total', 'Summer Adjusted NOx Total'])
                      #scenario,id, annual_vmt, annual_trips,annual_co2, annual_sox, summer_rog, summer_nox, winter_co, winter_pm10, winter_pm2_5, annual_gas, annual_diesel, sb375_VMT, sb375_CO2,SB375_co2_runex,SB375_co2_runEx,SB375_vehicle_trip])
@@ -93,10 +93,14 @@ with open(output_folder+'/summary_emfac'+ str(emfac_version)+'_' + str(datetime.
         #folder = scenario.at[0, "path"] + '\\output'
         
         file_name_pattern = f'EMFAC{emfac_version}-SANDAG-{scenario.at[0, "name"]}-{str(scenario_id)}-Annual-{str(scenario.at[0, "year"])}_planning'
-
         xlsx = find(file_name_pattern, folder)
-        wb = openpyxl.load_workbook(xlsx)
-        sheet = wb['Total SANDAG']
+        try:
+            wb = openpyxl.load_workbook(xlsx)
+            sheet = wb['Total SANDAG']
+        except TypeError as exc:
+             raise Exception(f"\nFailed to open: {file_name_pattern}.xlsx.\n If this is unexpected behavior, please re-verify if file exists.\n") from exc
+        except KeyError:
+            sheet = wb['Total Sandag']
         
         ### Start additions by NBE 10/19/2021
         #### If the Vehicle Type column has the string "GAS", sum the VMT for those values.
@@ -147,7 +151,7 @@ with open(output_folder+'/summary_emfac'+ str(emfac_version)+'_' + str(datetime.
             # winter_pm10 = sheet.cell(1,48).value
             # winter_pm2_5 = sheet.cell(2,56).value
         elif xlsx is None:
-            print(f"Failed to open: {file_name_pattern}.\n If this is unexpected behavior, please re-verify if file exists.\n")
+            print(f"Failed to open: {file_name_pattern}.xlsx.\n If this is unexpected behavior, please re-verify if file exists.\n")
         
         file_name_pattern = f'EMFAC{emfac_version}-SANDAG-{scenario.at[0, "name"]}-{str(scenario_id)}-Summer-{str(scenario.at[0, "year"])}_planning'
         summer_rog = None
@@ -161,7 +165,7 @@ with open(output_folder+'/summary_emfac'+ str(emfac_version)+'_' + str(datetime.
             #summer_vmt = sheet.cell(2,11).value
             #summer_trips = sheet.cell(2,12).value
         elif xlsx is None:
-            print(f"Failed to open: {file_name_pattern}.\n If this is unexpected behavior, please re-verify if file exists.\n")
+            print(f"Failed to open: {file_name_pattern}.xlsx.\n If this is unexpected behavior, please re-verify if file exists.\n")
 
 
         writer.writerow([scenario.at[0, "name"],scenario_id, annual_trips ,annual_vmt, annual_co2, round(annual_pm25,2), round(annual_pm10,2), annual_gas,annual_diesel, (summer_rog), (summer_nox), (winter_co), round(annual_gas_vmt_value), round(annual_diesel_vmt_value)])
