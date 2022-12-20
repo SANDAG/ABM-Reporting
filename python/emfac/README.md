@@ -50,14 +50,11 @@ server1:
  
 3.	Use EMFAC online web tool (for EMFAC2017 & EMFAC2021)\
     Open EMFAC Web Tool, located here: https://arb.ca.gov/emfac/scenario-analysis/process-templates
-    Drag the files that were generated in Step 2 into box indicated below. Set Report Type to “Planning Inventory (PI).\
-    ![alt text](../../resources/emfac/Picture1.png)
+    Drag the files that were generated in Step 2 into "Your Templates" box. Set Report Type to “Planning Inventory (PI).
  
-    When all files are uploaded, click “Process Templates” as indicated below. Note that more than one file can be entered at a time.\ 
-    ![alt text](../../resources/emfac/Picture1.png)
+    When all files are uploaded, click “Process Templates”. Note that more than one file can be entered at a time.
 
-    Select indicated button after file is processed to download zipped EMFAC data. Repeat for every file.\
-    ![alt text](../../resources/emfac/Picture1.png)
+    In the "Status / Output Download" column, press download button after file is processed to download zipped EMFAC data. Repeat for every file.
 
     *Then*, unzip downloaded zipped files and place in desired output folder. 
 <br/>
