@@ -48,7 +48,7 @@ server1:
     *Note*: User can enter multiple python commands, each on their own line, into .bat file\
 <br/>
  
-3.	Use EMFAC online web tool (for EMFAC2017 & EMFAC2021)\
+3.	**For EMFAC2017 & EMFAC2021**: Use EMFAC online web tool\
     Open EMFAC Web Tool, located here: https://arb.ca.gov/emfac/scenario-analysis/process-templates
     Drag the files that were generated in Step 2 into "Your Templates" box. Set Report Type to “Planning Inventory (PI).
  
@@ -56,8 +56,15 @@ server1:
 
     In the "Status / Output Download" column, press download button after file is processed to download zipped EMFAC data. Repeat for every file.
 
-    *Then*, unzip downloaded zipped files and place in desired output folder. 
+    Then, unzip downloaded zipped files and place in desired output folder. 
 <br/>
+
+    **For EMFAC2014**: Use EMFAC2014 desktop application\
+    Open the application. Keep the default *Run Mode* of "Emissions" and change the *Run Type* to "Custom Activity (SG)". Select "Load Custom Activity File" in the dropdown and then press "Start".\
+    With "EMFAC2014 Custom Activity File" selected, press "Load Custom Activity". Navigate to your EMFAC2014 input file location and select it. Wait for the file to load, then press "Next" on the bottom right of the application window.\
+    For *Report Types*, select "Planning Inventory". Navigate to your preferred output directory after pressing "Change Directory". Then, press "Run" in the bottom right corner of the application window. This run process may take some time. 
+
+
 
 4.	Summarize EMFAC tool outputs.\
     Open command prompt of user’s choice. Enter command to place summary file in output folder:
