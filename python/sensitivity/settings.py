@@ -1,8 +1,8 @@
 # set paths to Sensitivity Excel workbook templates
 templatePaths = {
-    "scenarioTemplate": ("./resources/templates/"
+    "scenarioTemplate": ("resources/sensitivity/templates/"
                          "Scenario Sensitivity_template.xlsx"),
-    "multipleScenariosTemplate": ("./resources/templates/"
+    "multipleScenariosTemplate": ("resources/sensitivity/templates/"
                                   "Multiple Scenarios Sensitivity_template.xlsx")
 }
 
@@ -12,6 +12,7 @@ templateWritePaths = {
     "scenarioTemplate": "./Scenario Sensitivity Measures",
     "multipleScenariosTemplate": "./Multiple Scenarios Sensitivity Measures"
 }
+
 
 # initialize dictionary to hold single scenario Sensitivity Measures
 # processes to run, their arguments, and the sheets+rows

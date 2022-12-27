@@ -27,7 +27,7 @@ else:
 file_suffix = input("Enter output file name: ")
 
 # get the scenario metadata from the master scenario list
-scenarioMetadata = pd.read_csv("../../resources/sensitivity/Scenario Metadata.csv",
+scenarioMetadata = pd.read_csv("resources/sensitivity/Scenario Metadata.csv",
                                usecols=["scenario_id",
                                         "description",
                                         "path"])
