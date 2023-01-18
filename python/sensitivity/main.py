@@ -11,20 +11,26 @@ import datetime
 # program timer initiated
 start_time_program = time.time()
 
+# error string to print if user inputs invalid parameters
+usage = ('Correct Usage: python [path]main.py "<list of scenario paths separated by pipes (|)>" <AV Switch> <output path>' 
+            ' also:      python [path]main.py "<path1|path2|etc>" <Y/N> <output folder path>'
+            ' example:   python sensitivity/main.py "path1|path2" Y output_folder')
+
+# if too few/many arguments passed raise error
+if len(sys.argv) != 4:
+    print(usage)
+    sys.exit(-1)
+
 # user inputs a list of ABM scenario folders
-input_string = input(("Enter a list of ABM scenario folder paths separated "
-                      "by pipes (|): "))
+input_string = sys.argv[1]
 scenarios = input_string.split("|")
 
 # user chooses whether to run AV/TNC summaries
-input_av_switch = input("Include AV/TNC summaries? Enter Yes (y) or No (n): ")
-if input_av_switch in ["Yes", "yes", "Y", "y"]:
-    input_av_switch = True
-else:
-    input_av_switch = False
+input_av_switch = sys.argv[2] == ["Yes", "yes", "Y", "y"]
 
-# user inputs output file name
-file_suffix = input("Enter output file name: ")
+# output file directory
+file_suffix = sys.argv[3]
+
 
 # get the scenario metadata from the master scenario list
 scenarioMetadata = pd.read_csv("../../resources/sensitivity/Scenario Metadata.csv",
@@ -38,7 +44,7 @@ scenarioMetadata = scenarioMetadata[scenarioMetadata["path"].isin(scenarios)].re
 if len(scenarioMetadata.index) != len(scenarios):
     scenario_series = pd.Series(scenarios)
     print(f'\nscenarioMetaData csv Missing: \n{scenario_series[~scenario_series.isin(scenarioMetadata["path"])].values}\n')
-    msg = "Not all input scenarios exist in resources/Scenario Metadata.csv"
+    msg = "Not all input scenarios exist in resources/sensitivity/Scenario Metadata.csv"
     raise ValueError(msg)
 
 # set ordering to user-input order
