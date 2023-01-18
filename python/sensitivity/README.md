@@ -7,10 +7,10 @@
 4. Activate the Python environment by typing
 	"conda activate sensitivity"
 5. Add the scenario project folder path to the file: 
-	"..\..\resources\sensitivity\Scenario Metadata.csv" (if not already in the file)
+	"resources\sensitivity\Scenario Metadata.csv" (if not already in the file)
 	Note: each row represents one scenario project folder. 
 6. Run the Python process by typing
-	"python main.py"
+	"python python/sensitivity/main.py"
 7. The process prompts you to specify scenario project folders
   separated by pipe (|) characters. You can choose to run the process
   for a single scenario with more detail or for up to twenty scenarios.
