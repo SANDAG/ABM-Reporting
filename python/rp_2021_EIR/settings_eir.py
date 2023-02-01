@@ -3,6 +3,7 @@ import sqlalchemy
 import urllib
 import pandas as pd
 import yaml
+from datetime import datetime
 
 # create dictionary of ABM SQL database scenario ids and the corresponding
 # scenario label they map to within the Performance Measure template
@@ -36,15 +37,16 @@ template_columns = {
 
 # set path to write Performance Measure workbook
 # example format: C:/Users/gsc/Desktop/PerformanceMeasures.xlsx
-templateWritePath = #r"T:\projects\sr14\OWP\2021rp_followup_ruc\analysis\ABM-Reporting-master\2021RP_final_EIR_data_summary_121922"
+now = datetime.now()
+templateWritePath = f"python/rp_final_EIR/2021RP_final_EIR_data_summary_{now.strftime('%Y%m%d-%H%M')}"
 
 # set path to Performance Measure workbook Template
-template_path = #r"T:\projects\sr14\OWP\2021rp_followup_ruc\analysis\ABM-Reporting-master\resources\rp_2021\2021RP_final_EIR_data.xlsx"
+template_path = "resources/rp_2021/2021RP_final_EIR_data.xlsx"
 
 # list of performance measure outputs
 # and locations to write into Excel template
 # Measure, Metric, sheet, row
-template_locations_path = #r"T:\projects\sr14\OWP\2021rp_followup_ruc\analysis\ABM-Reporting-master\resources\rp_2021\2021RP_final_EIR_template_location.csv"
+template_locations_path = "resources/rp_2021/2021RP_final_EIR_template_location.csv"
 
 # get SQL server attributes from local file
 try:
