@@ -81,9 +81,7 @@ scenario = pd.read_sql_query(
 )
 
 # build the output xlsx save location file path
-output_path = output_folder + "\EMFAC" + emfac_version + "-SANDAG-" + \
-              str(scenario.at[0, "name"]) + "-" + str(scenario_id) + "-" + \
-              season + "-" + str(scenario.at[0, "year"])
+output_path = f"{output_folder}\EMFAC{emfac_version}-SANDAG-{str(scenario.at[0, 'name'])}-{str(scenario_id)}-{season}-{str(scenario.at[0, 'year'])}"
 if sb375 == "On":
     output_path = output_path + "-sb375"
 output_path = output_path + ".xlsx"
