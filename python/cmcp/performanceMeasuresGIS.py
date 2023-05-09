@@ -114,12 +114,12 @@ class PerformanceMeasuresGIS(object):
             # delete old results from the results table if they exist
             with settings.engines["ABM-Reporting"].begin() as conn:
                 conn.execute(
-                    "DELETE FROM [dbo].[cmcp2021_results_NBE_TEST] WHERE [scenario_id] = " +
+                    "DELETE FROM [cmcp].[cmcp2021_results] WHERE [scenario_id] = " +
                     str(self.scenario_id) + " AND [measure] IN ('Near-Roadway Population Exposure', 'Population Near High Frequency Transit', 'Multifamily Housing Near High Frequency Transit', 'Multifamily Population Near Transit')")
 
                 # insert new results into the results table
-                data.to_sql(name="cmcp2021_results_NBE_TEST",
-                            schema="dbo",
+                data.to_sql(name="cmcp2021_results",
+                            schema="cmcp",
                             con=conn,
                             if_exists="append",
                             index=False,

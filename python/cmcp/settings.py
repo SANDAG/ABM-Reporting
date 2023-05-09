@@ -8,21 +8,19 @@ import yaml
 # possible labels: 2016, 2025nb, 2035nb, 2050nb, 2025build, 2035build, 2050build
 
 scenarios = {
-    458: "2016",                   # Regional Plan Base Year - 2016
-    #xxx: "2021_rp_nb_2025nb",     # Regional Plan No Build (DS39) - 2025
-    #xxx: "2021_rp_nb_2035nb",     # Regional Plan No Build (DS39) - 2035
-    460: "2021_rp_nb_2050nb",      # Regional Plan No Build (DS39) - 2050
-    #xxx: "2021_rp_b_2025b",       # Regional Plan Build (DS38) - 2025
+    #186: "2016_Base",                   # 2016 Base
+    142: "2050_nb",                     # 2050 No Build
+    267: "2050_Vision",                 # 2050 Vision
+    261: "2050_i8_nb",                  # 2050 i8 nb
+    266: "2050_i8_alt1",                # 2050 i8 alt1
+    265: "2050_i8_alt2",                # 2050 i8 alt2
     #xxx: "2021_rp_b_2035b",       # Regional Plan Build (DS38) - 2035
-    459: "2021_rp_b_2050b",        # Regional Plan Build (DS38) - 2050
+    #459: "2021_rp_b_2050b",        # Regional Plan Build (DS38) - 2050
     #631: "nc_nb_ds39_2050",        # North County CMCP No Build DS39 - 2050
     #630: "nc_nb_ds38_2050",        # North County CMCP No Build DS38 - 2050
     #668: "nc_alt1_ds39_2050",      # North County CMCP Alt 1 DS39 - 2050
     #667: "nc_alt1_ds38_2050",       # North County CMCP Alt 1 DS38 - 2050
     #736: "nc_alt1_ds38_2050_mod"    # North County CMCP Alt 1 DS38 - 2050 Modified
-    749: "2050NB",           #CCT CMCM No Build DS38 2050
-    752: "2050_Alt2",        #CCT CMCM Alt 2 DS38 2050
-    754: "2050_Alt3"         #CCT CMCM Alt 3 DS38 2050
     
 }
 
@@ -31,15 +29,12 @@ scenarios = {
 # scenario label needs to be consistent with those in the scenarios dictionary
 template_columns = {
     "Primary Measures": {
-        "2016":  5,
-        "2021_rp_nb_2050nb":  8,
-        "2021_rp_b_2050b":  11,
-        "2050NB": 17,
-        "2050_Alt2": 20,
-        "2050_Alt3": 23
-        #"2021_rp_nb_2050nb": 8,
-        #"2021_rp_b_2025b": 9,
-        #"2021_rp_b_2035b": 10,
+        #"2016": 5,
+        "2050_nb": 6,
+        "2050_Vision": 7,
+        "2050_i8_nb": 8,
+        "2050_i8_alt1": 9,
+        "2050_i8_alt2": 10,
         #"2021_rp_b_2050b": 11,
 		#"nc_nb_ds39_2050": 14,
         #"nc_nb_ds38_2050": 17,
@@ -51,11 +46,12 @@ template_columns = {
 
 # List of CMCP corridors
 cmcp_corridor = [
-    "Coast, Canyons, and Trails",
+    #"Coast, Canyons, and Trails",
     #"North County"
     #"San Vicente",
-    #"South Bay to Sorrento",
-    #"Region"
+    #"South Bay to Sorrento"
+    "Kumeyaay",
+    "Region"
     ]
 
 # set path to write output Performance Measure workbook
@@ -99,6 +95,8 @@ connStrings = {
                      + ";Trusted_Connection=yes;"
 }
 
+database = db_info['server1']['db1_1']
+
 # create SQL alchemy engines using pyodbc sql server connection
 pyodbc.pooling = False
 engines = {
@@ -114,55 +112,55 @@ engines = {
 # Measure: (sp, args)
 sql_measures = {
     "CMCP Mode Share": {
-        "sp": "[dbo].[cmcp_sp_mode_share_NBE_TEST]",
+        "sp": "[cmcp].[sp_mode_share]",
         "args": "@scenario_id={},@update=1,@silent=1,@work=0,@distance_threshold=0"
     },
     "CMCP Mode Share - Work Trips": {
-        "sp": "[dbo].[cmcp_sp_mode_share_NBE_TEST]",
+        "sp": "[cmcp].[sp_mode_share]",
         "args": "@scenario_id={},@update=1,@silent=1,@work=1,@distance_threshold=0"
     },
     "CMCP Mode Share - Trips Under 3 Miles": {
-        "sp": "[dbo].[cmcp_sp_mode_share_NBE_TEST]",
+        "sp": "[cmcp].[sp_mode_share]",
         "args": "@scenario_id={},@update=1,@silent=1,@work=0,@distance_threshold=3"
     },
     "Bike and pedestrian miles travelled": {
-        "sp": "[dbo].[cmcp_sp_bmt_pmt_NBE_TEST]",
+        "sp": "[cmcp].[sp_bmt_pmt]",
         "args": "@scenario_id={},@update=1,@silent=1"
     },
     "Daily vehicle hours of delay": {
-        "sp": "[dbo].[cmcp_sp_vhd_NBE_TEST]",
+        "sp": "[cmcp].[sp_vhd]",
         "args": "@scenario_id={},@update=1,@silent=1"
     },
     "Link VMT": {
-        "sp": "[dbo].[cmcp_sp_link_vmt_NBE_TEST]",
+        "sp": "[cmcp].[sp_link_vmt]",
         "args": "@scenario_id={},@update=1,@silent=1"
     },
     "Daily all vehicle delay per capita": {
-        "sp": "[dbo].[cmcp_sp_vehicle_delay_per_capita_NBE_TEST]",
+        "sp": "[cmcp].[sp_vehicle_delay_per_capita]",
         "args": "@scenario_id={},@update=1,@silent=1"
     },
     "Average Commute Time to Work": {
-        "sp": "[dbo].[cmcp_sp_commute_time_NBE_TEST]",
+        "sp": "[cmcp].[sp_commute_time]",
         "args": "@scenario_id={},@peak_period=1,@update=1,@silent=1"
     },
     "Percent of pop with 20 mins of transport": {
-        "sp": "[dbo].[cmcp_sp_physical_activity_NBE_TEST]",
+        "sp": "[cmcp].[sp_physical_activity]",
         "args": "@scenario_id={},@update=1,@silent=1"
     },
     "VMT per employee": {
-        "sp": "[dbo].[cmcp_sp_resident_vmt_NBE_TEST]",
+        "sp": "[cmcp].[sp_resident_vmt]",
         "args": "@scenario_id={},@workers=1, @home_location=0, @work_location=1, @update=1,@silent=1"
     },
     "VMT per capita": {
-        "sp": "[dbo].[cmcp_sp_resident_vmt_NBE_TEST]",
+        "sp": "[cmcp].[sp_resident_vmt]",
         "args": "@scenario_id={},@workers=0, @home_location=1, @work_location=0, @update=1,@silent=1"
     },
     "Screenline person throughput by Auto": {
-        "sp": "[dbo].[cmcp_sp_screenline_auto_personThroughput_ZOU_TEST]",
+        "sp": "[cmcp].[sp_screenline_auto_personThroughput]",
         "args": "@scenario_id={},@peak_period=0, @update=1, @silent=1"
     },
     "Screenline person throughput by Transit": {
-        "sp": "[dbo].[cmcp_sp_screenline_transit_personThroughput_ZOU_TEST]",
+        "sp": "[cmcp].[sp_screenline_transit_personThroughput]",
         "args": "@scenario_id={},@peak_period=0, @update=1, @silent=1"
     }
 }

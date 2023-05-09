@@ -7,6 +7,8 @@ import openpyxl
 import os
 import pandas as pd
 
+print(f"Using {settings.database} database")
+
 # get GIS Performance Measures and populate SQL Server results table
 print("---- Getting GIS Performance Measures ----")
 for scenario in settings.scenarios:
@@ -58,7 +60,7 @@ for scenario in settings.scenarios:
             # delete old results from the results table if they exist
             with settings.engines["ABM-Reporting"].begin() as conn:
                 conn.execute(
-                    "DELETE FROM [dbo].[cmcp2021_results_NBE_TEST] WHERE [scenario_id] = " +
+                    "DELETE FROM [cmcp].[cmcp2021_results] WHERE [scenario_id] = " +
                     str(scenario) + " AND [measure] = '" + measureKey + 
                     "' AND [cmcp_name] = '" + corridor + "'"
                 )
@@ -89,8 +91,8 @@ for scenario in settings.scenarios:
                                  "updated_by",
                                  "updated_date"]]
 
-                result.to_sql(name="cmcp2021_results_NBE_TEST",
-                              schema="dbo",
+                result.to_sql(name="cmcp2021_results",
+                              schema="cmcp",
                               con=settings.engines["ABM-Reporting"],
                               if_exists="append",
                               index=False,
@@ -171,7 +173,7 @@ for corridor in settings.cmcp_corridor:
 
             # get Performance Measure metric from SQL results table
             result = pd.read_sql_query(
-                sql=("SELECT [value] FROM [dbo].[cmcp2021_results_NBE_Test] WHERE"
+                sql=("SELECT [value] FROM [cmcp].[cmcp2021_results] WHERE"
                      "[scenario_id] = ? AND [measure] = ? AND [metric] = ? AND [cmcp_name] = ?"),
                 con=settings.engines["ABM-Reporting"],
                 params=[scenario, measureKey, metricKey, corridor]

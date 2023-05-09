@@ -63,7 +63,7 @@ class AccessMeasures(object):
         """
         with self.conn.connect() as conn:
             destinations = pd.read_sql(
-                sql="SELECT * FROM [dbo].[fn_cmcp_destinations_NBE_TEST] (" +
+                sql="SELECT * FROM [cmcp].[fn_cmcp_destinations] (" +
                     str(self.scenario_id) + ")",
                 con=conn)
 
@@ -100,13 +100,13 @@ class AccessMeasures(object):
         with self.conn.connect() as conn:
             if cmcp_name == 'Region':
                 pop = pd.read_sql(
-                    sql="SELECT DISTINCT * FROM [dbo].[fn_cmcp_person_coc_NBE_TEST] (" +
+                    sql="SELECT DISTINCT * FROM [cmcp].[fn_cmcp_person_coc_by_mgra] (" +
                     str(self.scenario_id) + "," + str(age_18_plus) +
                     ") OPTION(MAXDOP 1)",
                     con=conn)
             else:
                 pop = pd.read_sql(
-                    sql="SELECT * FROM [dbo].[fn_cmcp_person_coc_NBE_TEST] (" +
+                    sql="SELECT * FROM [cmcp].[fn_cmcp_person_coc_by_mgra] (" +
                         str(self.scenario_id) + "," + str(age_18_plus) +
                         ") WHERE [Name] = '" + cmcp_name +
                         "' OPTION(MAXDOP 1)",
