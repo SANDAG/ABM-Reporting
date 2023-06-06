@@ -37,6 +37,8 @@ scenarioMetadata = pd.read_csv("./resources/Scenario Metadata.csv",
 scenarioMetadata = scenarioMetadata[scenarioMetadata["path"].isin(scenarios)].reset_index(drop=True)
 if len(scenarioMetadata.index) != len(scenarios):
     msg = "Not all input scenarios exist in resources/Scenario Metadata.csv"
+    scenario_series = pd.Series(scenarios)
+    print(f'\nscenarioMetaData csv Missing: \n{scenario_series[~scenario_series.isin(scenarioMetadata["path"])].values}\n')
     raise ValueError(msg)
 
 # set ordering to user-input order
@@ -111,7 +113,7 @@ if len(scenarios) == 1:
 
 # if more than one ABM scenario is entered then run sensitivity test measures
 # for up to five scenarios  --------------------------------------------------
-elif 1 < len(scenarios) <= 5:
+elif 1 < len(scenarios) <= 20:
 
     # initialize multiple scenario Sensitivity Measure Excel workbook template
     template = openpyxl.load_workbook(settings.templatePaths["multipleScenariosTemplate"])
