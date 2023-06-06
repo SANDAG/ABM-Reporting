@@ -324,7 +324,7 @@ class TripLists:
         non_dups = pd.DataFrame()
 
         for submodel, trips in trip_lists:
-            data = trips
+            data = trips.copy()
             data["model"] = submodel
 
             # remove non-workers
@@ -467,7 +467,7 @@ class TripLists:
         # build DataFrame of weights/metrics by ABM sub-model and mode
         result = pd.DataFrame()
         for submodel, trips in trip_lists:
-            data = trips
+            data = trips.copy()
             data["model"] = submodel
 
             # remove non-workers
@@ -639,7 +639,7 @@ class TripLists:
 
         for submodel, trips in trip_lists:
 
-            data = trips
+            data = trips.copy()
             data["model"] = submodel
 
             # remove workers from the universe
@@ -994,7 +994,7 @@ class TripLists:
 
         for submodel, trips in trip_lists:
 
-            data = trips
+            data = trips.copy()
             data["model"] = submodel
 
             # select user-specified weight
@@ -1113,7 +1113,7 @@ class TripLists:
         weighting criteria by ABM sub-model. The function allows
         for either a trip or person-trip weighting scheme to calculate either
         the trip-based travel distance, mode share, trip-based travel time,
-        or count of trips.
+        , or count of trips.
 
         Args:
             metric: Metric of interest to calculate. Possible values are
@@ -1155,6 +1155,8 @@ class TripLists:
                 data["metric"] = data.timeTotal * data.weight
             elif metric in ["share", "trips"]:
                 data["metric"] = data["weight"]
+            elif metric == "vmt":
+                data["metric"] = data.vmt * data.weightTrip
             else:
                 msg = ("Invalid parameter: metric must be one of "
                        "('distance', 'share', 'time', 'trips')")
@@ -1221,6 +1223,107 @@ class TripLists:
 
         # return the result set
         return result[cols]
+    def calculate_model_vmt(self, metric, weight) -> pd.DataFrame:
+        """ Calculate a trip-based metric of interest using a user-specified
+        weighting criteria by ABM sub-model. The function allows
+        for a trip weighting scheme to calculate vmt.
+
+        Args:
+            metric: Metric of interest to calculate. Possible values are
+                ("vmt").
+            weight: Weighting scheme to use in outputting metric of
+                interest. Possible values are ("trips"). """
+
+        trip_lists = [("Airport - CBX", self.airport_cbx),
+                      ("Airport - SAN", self.airport_san),
+                      ("Commercial Vehicle", self.commercial_vehicle),
+                      ("Cross Border", self.cross_border),
+                      ("External-External", self.external_external),
+                      ("External-Internal", self.external_internal),
+                      ("Individual", self.individual),
+                      ("Internal-External", self.internal_external),
+                      ("Joint", self.joint),
+                      ("Truck", self.truck),
+                      ("Visitor", self.visitor),
+                      ("TNC 0-Passenger", self.zombie_tnc)]
+
+        # build DataFrame of weights/metrics by ABM sub-model and mode
+        result = pd.DataFrame()
+        for submodel, trips in trip_lists:
+            data = trips.copy()
+            data = data[(data["tripMode"] == "Drive Alone")|(data["tripMode"] == "Shared Ride 2")|\
+            (data["tripMode"] == "Shared Ride 3+")|(data["tripMode"] == "Light Heavy Duty Truck")|\
+            (data["tripMode"] == "Medium Heavy Duty Truck")|(data["tripMode"] == "Heavy Heavy Duty Truck")|\
+            (data["tripMode"] == "Non-Pooled TNC")|(data["tripMode"] == "Pooled TNC")|\
+            (data["tripMode"] == "Taxi")|(data["tripMode"] == "Park and Ride to Transit - Local Bus and Premium Transit")|\
+            (data["tripMode"] == "Park and Ride to Transit - Premium Transit")|\
+            (data["tripMode"] == "Park and Ride to Transit - Local Bus")|\
+            (data["tripMode"] == "Kiss and Ride to Transit - Local Bus and Premium Transit")|\
+            (data["tripMode"] == "Kiss and Ride to Transit - Premium Transit")|\
+            (data["tripMode"] == "Kiss and Ride to Transit - Local Bus")|\
+            (data["tripMode"] == "TNC to Transit - Local Bus and Premium Transit")|\
+            (data["tripMode"] == "TNC to Transit - Premium Transit")|\
+            (data["tripMode"] == "TNC to Transit - Local Bus")]
+
+            # calculate user-specified metric
+            if submodel == "Airport - SAN":
+                data["metric"] = data.vmt
+            elif submodel in ["Airport - CBX", "Internal-External", "Individual", "Joint"]:
+                data["metric"] = data.vmt * data.weightTrip
+            else:
+                data["metric"] = data.distanceTotal * data.weightTrip
+            # aggregate weight and metric to ABM sub-model
+            data = data[["weightTrip", "metric"]].sum()
+            data["model"] = submodel
+
+            # add to result set
+            result = result.append(data, ignore_index=True)
+
+        # append weights/metrics for Resident Models and All Models
+        resident = result.loc[result["model"].isin(["Individual",
+                                                    "Joint",
+                                                    "Internal-External"])]
+        resident = resident.sum()
+        resident["model"] = "Resident Models"
+
+        all_models = result.sum()
+        all_models["model"] = "All Models"
+
+        result = result.append(resident, ignore_index=True, sort=True)
+        result = result.append(all_models, ignore_index=True, sort=True)
+
+        # calculate the metric of interest
+        result["weighted_metric"] = result.metric
+
+        # pivot the result set by model
+        result = result.pivot_table(values="weighted_metric",
+                                    columns=["model"],
+                                    aggfunc=np.sum,
+                                    fill_value=0)
+
+        # order the result set columns
+        # add columns if they do not exist
+        cols = ["Airport - CBX",
+                "Airport - SAN",
+                "Commercial Vehicle",
+                "Cross Border",
+                "External-External",
+                "External-Internal",
+                "Individual",
+                "Internal-External",
+                "Joint",
+                "Truck",
+                "Visitor",
+                "TNC 0-Passenger",
+                "Resident Models",
+                "All Models"]
+
+        for col in cols:
+            if col not in result:
+                result[col] = np.NaN
+
+        # return the result set
+        return result[cols]
 
     def calculate_passenger_metric(self, metric, switch=True):
         """ Calculate a trip-based metric of interest for the TNC and AV trip
@@ -1272,7 +1375,7 @@ class TripLists:
         # build DataFrame of weights/metrics by ABM sub-model and mode
         result = pd.DataFrame()
         for submodel, trips in trip_lists:
-            data = trips
+            data = trips.copy()
             data["model"] = submodel
 
             # use trip-based weight
@@ -1958,11 +2061,17 @@ class TripLists:
                      "weightTrip",  # trip weight
                      "weightPersonTrip",  # person trip weight
                      "timeTotal",  # total trip time
+                     "distanceDrive",  # driven distance
+                     "distanceDriveTransit",  # driven distance to transit
                      "distanceTotal",  # total trip distance
                      "costTotal",  # total trip cost
                      "tripPurpose"])  # trip purpose
 
         trips["purpose"] = trips["tripPurpose"]
+
+        # create trip vmt
+        trips["vmt"] = (trips["distanceDrive"].fillna(0) +
+                        trips["distanceDriveTransit"].fillna(0))
 
         # return fields of interest
         return trips[["tripID",
@@ -1972,7 +2081,8 @@ class TripLists:
                       "timeTotal",
                       "distanceTotal",
                       "costTotal",
-                      "purpose"]]
+                      "purpose",
+                      "vmt"]]
 
     @property
     @lru_cache(maxsize=1)
@@ -1988,14 +2098,35 @@ class TripLists:
                          "airportSANTrips.csv"),
             usecols=["tripID",  # unique trip id
                      "tripMode",  # trip mode
+                     "arrivalMode",
                      "weightTrip",  # trip weight
                      "weightPersonTrip",  # person trip weight
                      "timeTotal",  # total trip time
+                     "distanceDrive",  # driven distance
+                     "distanceDriveTransit",  # driven distance to transit
                      "distanceTotal",  # total trip distance
                      "costTotal",  # total trip cost
                      "tripPurpose"])  # trip purpose
 
         trips["purpose"] = trips["tripPurpose"]
+
+        # adjust tripMode
+        trips.drop(trips[(trips["tripMode"] == "Walk") & (trips["weightTrip"] == 0.5)].index, inplace = True)
+        trips.drop(trips[(trips["tripMode"] == "Not Applicable") & (trips["weightTrip"] == 0.5)].index, inplace = True)
+        trips.drop(trips[(trips["tripMode"] == "Walk to Transit - Premium Transit") & (trips["weightTrip"] == 0.5)].index, inplace = True)
+        trips.drop(trips[(trips["tripMode"] == "Walk to Transit - Local Bus and Premium Transit") & (trips["weightTrip"] == 0.5)].index, inplace = True)
+
+        trips.loc[trips["weightTrip"] == 0.5, "weightPersonTrip"] = trips["weightPersonTrip"] / 0.5
+        trips.loc[trips["weightTrip"] == 0.5, "weightTrip"] = 1
+
+        #remove employee access
+        trips.drop(trips[(trips["arrivalMode"] == "Employee/Airport access point to terminal") & (trips["weightTrip"] == 1.0)].index, inplace = True)
+
+        # create trip vmt
+        trips["vmt"] = (trips["distanceDrive"].fillna(0) +
+                        trips["distanceDriveTransit"].fillna(0))
+
+        #trips.to_csv(self.scenario_path + '/report/airportSAN_test.csv')
 
         # return fields of interest
         return trips[["tripID",
@@ -2005,7 +2136,8 @@ class TripLists:
                       "timeTotal",
                       "distanceTotal",
                       "costTotal",
-                      "purpose"]]
+                      "purpose",
+                      "vmt"]]
 
     @property
     @lru_cache(maxsize=1)
@@ -2045,6 +2177,7 @@ class TripLists:
                                          "occupants"])  # occupants in vehicle (0-8)
 
             # read in mgra-based input file to get mgra-taz lookup
+            # updated to mgra15...for Series 15 tests
             mgra_input = pd.read_csv(self.scenario_path + "/input/mgra13_based_input" + str(self.year) + ".csv",
                                      usecols=["mgra",  # MGRA geography number
                                               "taz"])  # TAZ geography number
