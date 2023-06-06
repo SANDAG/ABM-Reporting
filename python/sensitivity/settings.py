@@ -338,6 +338,26 @@ singleScenarioMeasures = [
      "sheet": "tripRatePurposeTele",
      "row": 13},
     #################################################################
+    # Total Trips and VMT by Market Models
+    # Total Person Trips
+    {"class": "TripLists",
+     "fn": "calculate_model_metric",
+     "args": {"metric": "trips", "weight": "persons"},
+     "sheet": "Trip&VMTbyModel",
+     "row": 2},
+    # Total Trips
+    {"class": "TripLists",
+     "fn": "calculate_model_metric",
+     "args": {"metric": "trips", "weight": "trips"},
+     "sheet": "Trip&VMTbyModel",
+     "row": 8},
+    # VMT by Market Model
+    {"class": "TripLists",
+     "fn": "calculate_model_vmt",
+     "args": {"metric": None, "weight": None},
+     "sheet": "Trip&VMTbyModel",
+     "row": 14},
+    #################################################################
     # VMT by IFC and Mode
     {"class": "HighwayNetwork",
      "fn": "calculate_vmt",
@@ -404,18 +424,6 @@ singleScenarioMeasures = [
      "args": None,
      "sheet": "autoOwnership",
      "row": 2},
-    # Total Person Trips
-    {"class": "TripLists",
-     "fn": "calculate_model_metric",
-     "args": {"metric": "trips", "weight": "persons"},
-     "sheet": "totalTrips",
-     "row": 2},
-    # Total Trips
-    {"class": "TripLists",
-     "fn": "calculate_model_metric",
-     "args": {"metric": "trips", "weight": "trips"},
-     "sheet": "totalTrips",
-     "row": 8},
     #################################################################
     # Micro transit summary
     {"class": "TripLists",
@@ -531,6 +539,30 @@ multipleScenarioMeasures = [
      "drop": None,
      "sheet": "tripLengthPurpose",
      "row": 126},
+    # Total Person Trips
+    {"class": "TripLists",
+     "fn": "calculate_model_metric",
+     "args": {"metric": "trips", "weight": "persons"},
+     "filter": None,
+     "drop": None,
+     "sheet": "Trip&VMTbyModel",
+     "row": 3},
+    # Total Trips
+    {"class": "TripLists",
+     "fn": "calculate_model_metric",
+     "args": {"metric": "trips", "weight": "trips"},
+     "filter": None,
+     "drop": None,
+     "sheet": "Trip&VMTbyModel",
+     "row": 35},
+    # VMT by Market Model
+    {"class": "TripLists",
+     "fn": "calculate_model_vmt",
+     "args": {"metric": None, "weight": None},
+     "filter": None,
+     "drop": None,
+     "sheet": "Trip&VMTbyModel",
+     "row": 66},
     # VMT by IFC and Mode
     {"class": "HighwayNetwork",
      "fn": "calculate_vmt",
@@ -546,7 +578,7 @@ multipleScenarioMeasures = [
      "filter": "ifc_desc == 'Total'",
      "drop": ["ifc_desc"],
      "sheet": "highwayNetwork",
-     "row": 44},
+     "row": 37},
     # VHD by IFC and Mode
     {"class": "HighwayNetwork",
      "fn": "calculate_vhd",
@@ -554,7 +586,7 @@ multipleScenarioMeasures = [
      "filter": "ifc_desc == 'Total'",
      "drop": ["ifc_desc"],
      "sheet": "highwayNetwork",
-     "row": 85},
+     "row": 71},
     # Transit Boardings by Mode
     {"class": "TransitNetwork",
      "fn": "calculate_boardings",
@@ -586,7 +618,7 @@ multipleScenarioMeasures = [
      "filter": "model == 'AVs and TNCs'",
      "drop": None,
      "sheet": "AVsTNCs",
-     "row": 23},
+     "row": 51},
     # AV Passengers Category trips
     {"class": "TripLists",
      "fn": "calculate_passenger_metric",
@@ -594,7 +626,7 @@ multipleScenarioMeasures = [
      "filter": "model == 'AVs'",
      "drop": None,
      "sheet": "AVsTNCs",
-     "row": 64},
+     "row": 75},
     # AV Passengers Category trip share
     {"class": "TripLists",
      "fn": "calculate_passenger_metric",
@@ -602,7 +634,7 @@ multipleScenarioMeasures = [
      "filter": "model == 'AVs'",
      "drop": None,
      "sheet": "AVsTNCs",
-     "row": 84},
+     "row": 123},
     # TNC Passengers Category trips
     {"class": "TripLists",
      "fn": "calculate_passenger_metric",
@@ -610,7 +642,7 @@ multipleScenarioMeasures = [
      "filter": "model == 'TNCs'",
      "drop": None,
      "sheet": "AVsTNCs",
-     "row": 125},
+     "row": 148},
     # TNC Passengers Category trip share
     {"class": "TripLists",
      "fn": "calculate_passenger_metric",
@@ -618,7 +650,7 @@ multipleScenarioMeasures = [
      "filter": "model == 'TNCs'",
      "drop": None,
      "sheet": "AVsTNCs",
-     "row": 145},
+     "row": 196},
     # AV and TNC VMT by Passengers
     {"class": "TripLists",
      "fn": "calculate_passenger_metric",
@@ -626,7 +658,7 @@ multipleScenarioMeasures = [
      "filter": "model == 'AVs and TNCs'",
      "drop": None,
      "sheet": "AVsTNCs",
-     "row": 187},
+     "row": 220},
      # AV VMT by Passengers
     {"class": "TripLists",
      "fn": "calculate_passenger_metric",
@@ -634,23 +666,7 @@ multipleScenarioMeasures = [
      "filter": "model == 'AVs'",
      "drop": None,
      "sheet": "AVsTNCs",
-     "row": 247},
-    # Total Person Trips
-    {"class": "TripLists",
-     "fn": "calculate_model_metric",
-     "args": {"metric": "trips", "weight": "persons"},
-     "filter": None,
-     "drop": None,
-     "sheet": "totalTrips",
-     "row": 3},
-    # Total Trips
-    {"class": "TripLists",
-     "fn": "calculate_model_metric",
-     "args": {"metric": "trips", "weight": "trips"},
-     "filter": None,
-     "drop": None,
-     "sheet": "totalTrips",
-     "row": 35},
+     "row": 268},
     # Auto Ownership - Average by Category
     {"class": "LandUse",
      "fn": "calculate_ao_metric",
