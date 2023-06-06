@@ -59,17 +59,29 @@ class LandUse:
         :returns: Household Data """
 
         # load the output folder household data
-        hh = pd.read_csv(self.scenario_path + "/output/householdData_" + str(self.iteration) + ".csv",
-                         usecols=["hh_id",  # unique household id
-                                  "autos",  # number of autos owned
-                                  "HVs",  # number of non-autonomous autos owned
-                                  "AVs"])  # number of autonomous autos owned
+        use_sampleRate = False
+        try:
+            hh = pd.read_csv(self.scenario_path + "/output/householdData_" + str(self.iteration) + ".csv",usecols=["hh_id",  # unique household id
+                                         "autos",  # number of autos owned
+                                         "HVs",  # number of non-autonomous autos owned
+                                         "AVs", # number of autonomous autos owned
+                                         "sampleRate"]) #sample rate by household
+            hh['weight'] = 1/hh['sampleRate']
+            use_sampleRate = True
+        except:
+            hh = pd.read_csv(self.scenario_path + "/output/householdData_" + str(self.iteration) + ".csv", usecols=["hh_id",  # unique household id
+                                          "autos",  # number of autos owned
+                                          "HVs",  # number of non-autonomous autos owned
+                                          "AVs"]) # number of autonomous autos owned
+            # assumes household weight of 1 for every household
+            hh['weight'] = 1
 
         # return fields of interest
         return hh[["hh_id",
                    "autos",
                    "HVs",
-                   "AVs"]]
+                   "AVs",
+                   "weight"]]
 
     def calculate_ao_metric(self):
         """ Calculate household auto-ownership by auto ownership
@@ -81,11 +93,16 @@ class LandUse:
 
         data = self.household_data[["autos",
                                     "HVs",
-                                    "AVs"]]
+                                    "AVs",
+                                    "weight"]]
+        def weighted_average(df,data_col,weight_col):
+            df_data = df[data_col].multiply(df[weight_col], axis='index')
+            df_weight = pd.notnull(df[data_col]).multiply(df[weight_col], axis='index')
+            result = df_data.sum() / df_weight.sum()
+            return result
 
         # calculate mean within each variable
-        # assumes household weight of 1 for every household
-        data = data.mean(axis=0).reset_index(name="mean")
+        data = weighted_average(data, ['autos','HVs','AVs'],'weight').reset_index(name="mean")
         data["households"] = "all"
 
         # pivot the result set by mode
