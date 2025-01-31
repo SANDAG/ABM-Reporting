@@ -1,0 +1,38 @@
+measureKey,metricKey,sheet,row
+Total daily transit - Total Commuter Rail,vmt,Stats 2016 Build and No Build,3
+Total daily transit - Light Rail,vmt,Stats 2016 Build and No Build,4
+Total daily transit - Rapid,vmt,Stats 2016 Build and No Build,5
+Total daily transit - Bus,vmt,Stats 2016 Build and No Build,6
+Lane Miles of Roadways,Freeway Total,Stats 2016 Build and No Build,7
+Lane Miles of Roadways,Freeway General Purpose,Stats 2016 Build and No Build,8
+Lane Miles of Roadways,Freeway Carpool/ ML,Stats 2016 Build and No Build,9
+Lane Miles of Roadways,Tollway,Stats 2016 Build and No Build,10
+Lane Miles of Roadways,State Highway,Stats 2016 Build and No Build,11
+Lane Miles of Roadways,Regional Arterial,Stats 2016 Build and No Build,12
+SM-1 - All Trips All Day All Simulated Models,person trips - Auto,Stats 2016 Build and No Build,19
+SM-1 - All Trips All Day All Simulated Models,person trips - Carpool,Stats 2016 Build and No Build,20
+SM-1 - All Trips All Day All Simulated Models,person trips - Transit,Stats 2016 Build and No Build,21
+SM-1 - All Trips All Day All Simulated Models,person trips - Bike,Stats 2016 Build and No Build,22
+SM-1 - All Trips All Day All Simulated Models,person trips - Walk,Stats 2016 Build and No Build,23
+SM-1 - All Trips All Day All Simulated Models,mode share - Auto,Stats 2016 Build and No Build,24
+SM-1 - All Trips All Day All Simulated Models,mode share - Transit,Stats 2016 Build and No Build,25
+SM-1 - All Trips All Day All Simulated Models,mode share - Bike,Stats 2016 Build and No Build,26
+SM-1 - All Trips All Day All Simulated Models,mode share - Walk,Stats 2016 Build and No Build,27
+SM-1 - All Trips All Simulated Models,Average trip length - Auto,Stats 2016 Build and No Build,28
+SM-1 - All Trips All Simulated Models,Average trip length - Transit,Stats 2016 Build and No Build,29
+SM-1 - All Trips All Simulated Models,Average trip length - Bike,Stats 2016 Build and No Build,30
+SM-1 - All Trips All Simulated Models,Average trip length - Walk,Stats 2016 Build and No Build,31
+SM-1 - All Trips All Simulated Models,Average travel time - Auto,Stats 2016 Build and No Build,32
+SM-1 - All Trips All Simulated Models,Average travel time - Transit,Stats 2016 Build and No Build,33
+SM-1 - All Trips All Simulated Models,Average travel time - Bike,Stats 2016 Build and No Build,34
+SM-1 - All Trips All Simulated Models,Average travel time - Walk,Stats 2016 Build and No Build,35
+Population Region Wide,Total Population,Stats 2016 Build and No Build,36
+Employment Region Wide,Total Employment,Stats 2016 Build and No Build,37
+M-4,VMT,Stats 2016 Build and No Build,38
+All Residents,San Diego County,Stats 2016 Build and No Build,39
+All Residents,Activity Assigned to Home Location,Stats 2016 Build and No Build,40
+Workers Only,Activity Assigned to Workplace Location,Stats 2016 Build and No Build,41
+VMT per service population,region wide,Stats 2016 Build and No Build,42
+Population within TPAs,Total Population,Stats 2016 Build and No Build,43
+Employment within TPAs,Total Employment,Stats 2016 Build and No Build,44
+Total Service Population,within TPA,Stats 2016 Build and No Build,45
